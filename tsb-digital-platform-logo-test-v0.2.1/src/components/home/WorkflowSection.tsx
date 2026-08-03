@@ -1,0 +1,2 @@
+const steps=["Demande","Analyse","Proposition","Validation","Réalisation","Suivi"];
+export default function WorkflowSection(){return <section id="ecosysteme" className="section section-dark"><div className="container"><div className="section-heading centered"><span className="eyebrow">Notre méthode</span><h2>Un parcours clair, du besoin au résultat</h2></div><div className="steps">{steps.map((step,index)=><div className="step" key={step}><span>{String(index+1).padStart(2,"0")}</span><strong>{step}</strong></div>)}</div></div></section>}
