@@ -1,0 +1,238 @@
+/*
+ * TSB Digital Platform — Responsive Admin + Client
+ * IMPORTANT : aucune règle visuelle n'est appliquée au-dessus de 1024px.
+ * Le rendu PC/Desktop reste donc celui d'origine.
+ */
+
+/* TABLETTE + APPLICATION / WEBVIEW */
+@media (max-width: 1024px) {
+  .tsb-portal-responsive {
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    padding-bottom: max(26px, env(safe-area-inset-bottom));
+  }
+
+  .tsb-portal-responsive,
+  .tsb-portal-responsive * {
+    box-sizing: border-box;
+  }
+
+  .tsb-portal-shell {
+    min-width: 0;
+  }
+
+  .tsb-portal-responsive img,
+  .tsb-portal-responsive video,
+  .tsb-portal-responsive canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .tsb-portal-responsive input,
+  .tsb-portal-responsive textarea,
+  .tsb-portal-responsive select {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .tsb-portal-responsive button,
+  .tsb-portal-responsive a,
+  .tsb-portal-responsive input,
+  .tsb-portal-responsive select,
+  .tsb-portal-responsive textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .tsb-portal-header {
+    gap: 18px !important;
+    margin-bottom: 26px !important;
+  }
+
+  .tsb-portal-nav,
+  .tsb-portal-nav-wrap nav {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .tsb-portal-nav::-webkit-scrollbar,
+  .tsb-portal-nav-wrap nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tsb-admin-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    overflow-x: visible !important;
+  }
+
+  .tsb-client-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    overflow-x: visible !important;
+  }
+
+  .tsb-portal-dialog-backdrop {
+    padding:
+      max(12px, env(safe-area-inset-top))
+      max(12px, env(safe-area-inset-right))
+      max(12px, env(safe-area-inset-bottom))
+      max(12px, env(safe-area-inset-left)) !important;
+  }
+
+  .tsb-portal-dialog-backdrop > div {
+    max-width: min(820px, 100%) !important;
+    max-height: min(88vh, calc(100dvh - 24px)) !important;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+/* TÉLÉPHONE */
+@media (max-width: 640px) {
+  .tsb-portal-responsive {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-bottom: max(22px, env(safe-area-inset-bottom));
+  }
+
+  .tsb-portal-header {
+    align-items: flex-start !important;
+    gap: 14px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .tsb-portal-header > div {
+    width: 100%;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+
+  .tsb-portal-header h1 {
+    font-size: clamp(1.55rem, 8vw, 2rem) !important;
+  }
+
+  .tsb-portal-header p,
+  .tsb-portal-header span {
+    overflow-wrap: anywhere;
+  }
+
+  .tsb-portal-responsive .login-card {
+    min-width: 0;
+    padding: 16px !important;
+    border-radius: 14px !important;
+  }
+
+  .tsb-portal-responsive [style*="grid-template-columns"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .tsb-admin-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    overflow-x: visible !important;
+  }
+
+  .tsb-client-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    overflow-x: visible !important;
+  }
+
+  .tsb-admin-stats-grid .login-card {
+    padding: 12px 10px !important;
+  }
+
+  .tsb-admin-stats-grid h2 {
+    font-size: 1.25rem !important;
+  }
+
+  .tsb-admin-stats-grid p {
+    font-size: 0.68rem !important;
+  }
+
+  .tsb-portal-nav,
+  .tsb-portal-nav-wrap nav {
+    position: sticky !important;
+    top: max(6px, env(safe-area-inset-top)) !important;
+    z-index: 80 !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x proximity;
+    gap: 7px !important;
+    padding: 8px !important;
+    border-radius: 13px !important;
+  }
+
+  .tsb-portal-nav button,
+  .tsb-portal-nav-wrap nav button {
+    min-height: 44px !important;
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+
+  .tsb-portal-responsive input,
+  .tsb-portal-responsive select,
+  .tsb-portal-responsive textarea {
+    width: 100% !important;
+    min-height: 44px;
+    font-size: 16px !important;
+  }
+
+  .tsb-portal-responsive textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+
+  .tsb-portal-responsive button {
+    min-height: 44px;
+  }
+
+  .tsb-portal-dialog-backdrop {
+    align-items: flex-end !important;
+    padding:
+      max(8px, env(safe-area-inset-top))
+      max(8px, env(safe-area-inset-right))
+      max(8px, env(safe-area-inset-bottom))
+      max(8px, env(safe-area-inset-left)) !important;
+  }
+
+  .tsb-portal-dialog-backdrop > div {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: min(92dvh, 760px) !important;
+    padding: 15px !important;
+    border-radius: 18px 18px 12px 12px !important;
+  }
+}
+
+/* PETIT TÉLÉPHONE */
+@media (max-width: 390px) {
+  .tsb-portal-responsive {
+    padding-left: max(9px, env(safe-area-inset-left));
+    padding-right: max(9px, env(safe-area-inset-right));
+  }
+
+  .tsb-admin-stats-grid {
+    gap: 6px !important;
+  }
+
+  .tsb-client-stats-grid {
+    gap: 6px !important;
+  }
+
+  .tsb-admin-stats-grid .login-card {
+    padding: 10px 8px !important;
+  }
+
+  .tsb-portal-responsive .login-card {
+    padding: 14px !important;
+  }
+
+  .tsb-portal-nav,
+  .tsb-portal-nav-wrap nav {
+    margin-left: -3px;
+    margin-right: -3px;
+  }
+}

@@ -1,0 +1,522 @@
+import {
+  Building2,
+  ExternalLink,
+  FileText,
+  Globe2,
+  Mail,
+  Scale,
+  ShieldCheck,
+} from "lucide-react";
+
+import Navbar from "../../components/layout/Navbar";
+import Footer from "../../components/layout/Footer";
+import ScrollToTop from "../../components/common/ScrollToTop";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../i18n";
+import { legalTranslations } from "../../i18n/locales/legal";
+
+
+const sections = [
+  { id: "publisher", icon: Building2, color: "blue" },
+  { id: "hosting", icon: Globe2, color: "cyan" },
+  { id: "intellectual", icon: ShieldCheck, color: "green" },
+  { id: "liability", icon: Scale, color: "purple" },
+] as const;
+
+
+
+function Legal() {
+  const { locale } = useLanguage();
+
+  const t = (key: string) =>
+    translate(
+      legalTranslations,
+      locale,
+      `legal.${key}`
+    );
+
+  return (
+    <div>
+      <Navbar />
+
+      <main>
+        <section className="section section--about">
+          <div className="container">
+            <div
+              className="section-heading"
+              style={{
+                textAlign: "center",
+                maxWidth: "900px",
+                margin: "0 auto",
+              }}
+            >
+              <span className="section__eyebrow">
+                {t("eyebrow")}
+              </span>
+
+              <h1>
+                {t("title1")} <span>{t("title2")}</span>
+              </h1>
+
+              <p
+                style={{
+                  maxWidth: "790px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                {t("intro")}
+              </p>
+
+              <p
+                style={{
+                  marginTop: "14px",
+                  fontSize: "0.9rem",
+                  opacity: 0.75,
+                }}
+              >
+                {t("updated")}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                  marginTop: "24px",
+                }}
+              >
+                <a
+                  href="/#top"
+                  className="button button--secondary"
+                >
+                  ← {t("backHome")}
+                </a>
+
+                <a
+                  href="/contact"
+                  className="button button--primary"
+                >
+                  {t("contact")}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container">
+            <article
+              className="domain-card domain-orange"
+              style={{
+                maxWidth: "980px",
+                margin: "0 auto 34px",
+                padding: "24px",
+              }}
+            >
+              <div className="domain-card__top">
+                <div className="domain-icon">
+                  <FileText size={24} strokeWidth={1.8} />
+                </div>
+              </div>
+
+              <h2>{t("noticeTitle")}</h2>
+              <p style={{ marginTop: "12px" }}>
+                {t("noticeText")}
+              </p>
+            </article>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fit, minmax(280px, 1fr))",
+                gap: "18px",
+                maxWidth: "1120px",
+                margin: "0 auto",
+              }}
+            >
+              {sections.map((section) => {
+                const Icon = section.icon;
+
+                const title = t(
+                  `sections.${section.id}.title`
+                );
+
+                const paragraphCount =
+                  section.id === "publisher"
+                    ? 5
+                    : 2;
+
+                const paragraphs = Array.from(
+                  { length: paragraphCount },
+                  (_, index) =>
+                    t(
+                      `sections.${section.id}.paragraph${
+                        index + 1
+                      }`
+                    )
+                );
+
+                return (
+                  <article
+                    key={section.id}
+                    className={`domain-card domain-${section.color}`}
+                    style={{
+                      minHeight: "300px",
+                      padding: "22px",
+                    }}
+                  >
+                    <div className="domain-card__top">
+                      <div className="domain-icon">
+                        <Icon
+                          size={23}
+                          strokeWidth={1.8}
+                        />
+                      </div>
+                    </div>
+
+                    <h3>{title}</h3>
+
+                    {paragraphs.map((paragraph) => (
+                      <p
+                        key={paragraph}
+                        style={{ marginTop: "12px" }}
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container">
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fit, minmax(280px, 1fr))",
+                gap: "18px",
+                maxWidth: "980px",
+                margin: "0 auto",
+              }}
+            >
+              <article
+                className="domain-card domain-cyan"
+                style={{ padding: "24px" }}
+              >
+                <ExternalLink size={22} />
+                <h3 style={{ marginTop: "14px" }}>
+                  {t("linksTitle")}
+                </h3>
+                <p style={{ marginTop: "12px" }}>
+                  {t("linksText")}
+                </p>
+              </article>
+
+              <article
+                className="domain-card domain-purple"
+                style={{ padding: "24px" }}
+              >
+                <Scale size={22} />
+                <h3 style={{ marginTop: "14px" }}>
+                  {t("lawTitle")}
+                </h3>
+                <p style={{ marginTop: "12px" }}>
+                  {t("lawText")}
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container">
+            <div
+              style={{
+                maxWidth: "900px",
+                margin: "0 auto",
+                padding: "28px",
+                borderRadius: "20px",
+                border: "1px solid rgba(56,189,248,0.24)",
+                background:
+                  "linear-gradient(135deg, rgba(14,165,233,0.10), rgba(59,130,246,0.06))",
+                textAlign: "center",
+              }}
+            >
+              <h2>{t("privacyTitle")}</h2>
+              <p
+                style={{
+                  maxWidth: "700px",
+                  margin: "12px auto 0",
+                }}
+              >
+                {t("privacyText")}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                  marginTop: "22px",
+                }}
+              >
+                <a
+                  href="/privacy"
+                  className="button button--secondary"
+                >
+                  {t("privacyButton")}
+                </a>
+
+                <a
+                  href="/cookies"
+                  className="button button--secondary"
+                >
+                  {t("cookiesButton")}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container">
+            <div
+              style={{
+                maxWidth: "900px",
+                margin: "0 auto",
+                textAlign: "center",
+              }}
+            >
+              <Mail size={25} strokeWidth={1.8} />
+
+              <h2 style={{ marginTop: "14px" }}>
+                {t("contactTitle")}
+              </h2>
+
+              <p
+                style={{
+                  maxWidth: "700px",
+                  margin: "12px auto 0",
+                }}
+              >
+                {t("contactText")}
+              </p>
+
+              <a
+                href="/contact"
+                className="button button--primary"
+                style={{ marginTop: "22px" }}
+              >
+                {t("contactButton")}
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+      <ScrollToTop />
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export default Legal;

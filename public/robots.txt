@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /client
+Disallow: /login
+Disallow: /register
+Disallow: /reset-password
+
+Sitemap: https://tsbtechgroup.com/sitemap.xml
