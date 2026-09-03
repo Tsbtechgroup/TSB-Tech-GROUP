@@ -1,0 +1,922 @@
+﻿===== ACADEMY PAGE =====
+import {
+  BookOpen,
+  Car,
+  Cpu,
+  GraduationCap,
+  ShieldCheck,
+  Zap,
+} from "lucide-react";
+
+import Navbar from "../../components/layout/Navbar";
+import Footer from "../../components/layout/Footer";
+import ScrollToTop from "../../components/common/ScrollToTop";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../i18n";
+import { academyTranslations } from "../../i18n/locales/academy";
+
+const categories = [
+  { id: "automobile", icon: Car, color: "blue" },
+  { id: "energy", icon: Zap, color: "orange" },
+  { id: "security", icon: ShieldCheck, color: "green" },
+  { id: "digital", icon: Cpu, color: "cyan" },
+] as const;
+
+
+
+function Academy() {
+  const { locale } = useLanguage();
+
+  const t = (key: string) =>
+    translate(
+      academyTranslations,
+      locale,
+      `academy.${key}`
+    );
+
+  return (
+    <div>
+      <Navbar />
+
+      <main>
+        <section className="section section--about">
+          <div className="container">
+            <div
+              className="section-heading"
+              style={{
+                textAlign: "center",
+                maxWidth: "900px",
+                margin: "0 auto",
+              }}
+            >
+              <span className="section__eyebrow">
+                {t("eyebrow")}
+              </span>
+
+              <h1>
+                {t("title1")} <span>{t("title2")}</span>
+              </h1>
+
+              <p
+                style={{
+                  maxWidth: "760px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                {t("intro")}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                  marginTop: "24px",
+                }}
+              >
+                <a
+                  href="/#top"
+                  className="button button--secondary"
+                >
+                  â† {t("backHome")}
+                </a>
+
+                <a
+                  href="/#contact"
+                  className="button button--primary"
+                >
+                  {t("contact")}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container">
+            <div
+              style={{
+                maxWidth: "900px",
+                margin: "0 auto 42px",
+                padding: "28px",
+                borderRadius: "20px",
+                border: "1px solid rgba(139,92,246,0.25)",
+                background:
+                  "linear-gradient(135deg, rgba(139,92,246,0.10), rgba(59,130,246,0.06))",
+                textAlign: "center",
+              }}
+            >
+              <div
+                style={{
+                  width: "56px",
+                  height: "56px",
+                  margin: "0 auto 16px",
+                  display: "grid",
+                  placeItems: "center",
+                  borderRadius: "16px",
+                  background: "rgba(139,92,246,0.14)",
+                  border: "1px solid rgba(167,139,250,0.30)",
+                }}
+              >
+                <GraduationCap
+                  size={27}
+                  strokeWidth={1.8}
+                />
+              </div>
+
+              <span className="section__eyebrow">
+                {t("comingSoon")}
+              </span>
+
+              <h2 style={{ marginTop: "10px" }}>
+                {t("comingSoonTitle")}
+              </h2>
+
+              <p
+                style={{
+                  maxWidth: "720px",
+                  margin: "12px auto 0",
+                }}
+              >
+                {t("comingSoonText")}
+              </p>
+
+              <a
+                href="/#contact"
+                className="button button--primary"
+                style={{ marginTop: "22px" }}
+              >
+                <BookOpen
+                  size={17}
+                  aria-hidden="true"
+                />
+                {t("notify")}
+              </a>
+            </div>
+
+            <div
+              className="section-heading"
+              style={{
+                textAlign: "center",
+                maxWidth: "780px",
+                margin: "0 auto 28px",
+              }}
+            >
+              <h2>{t("categoriesTitle")}</h2>
+              <p>{t("categoriesIntro")}</p>
+            </div>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fit, minmax(230px, 1fr))",
+                gap: "16px",
+                maxWidth: "1120px",
+                margin: "0 auto",
+              }}
+            >
+              {categories.map((category) => {
+                const Icon = category.icon;
+                const title = t(
+                  `items.${category.id}.title`
+                );
+
+                const description = t(
+                  `items.${category.id}.description`
+                );
+
+                return (
+                  <article
+                    key={category.id}
+                    className={`domain-card domain-${category.color}`}
+                    style={{
+                      minHeight: "205px",
+                      padding: "20px",
+                    }}
+                  >
+                    <div className="domain-card__top">
+                      <div className="domain-icon">
+                        <Icon
+                          size={23}
+                          strokeWidth={1.8}
+                        />
+                      </div>
+                    </div>
+
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+      <ScrollToTop />
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export default Academy;
+
+
+===== ACADEMY I18N =====
+import type { TranslationResources } from "../types";
+
+export const academyTranslations: TranslationResources = {
+  fr: { academy: {
+    eyebrow: "TSB ACADEMY",
+    title1: "Formations techniques et",
+    title2: "compÃ©tences professionnelles",
+    intro: "TSB Academy est lâ€™espace de formation de TSB Tech Group destinÃ© au dÃ©veloppement des compÃ©tences techniques, technologiques et professionnelles.",
+    backHome: "Retour Ã  lâ€™accueil",
+    contact: "Nous contacter",
+    comingSoon: "BientÃ´t disponible",
+    comingSoonTitle: "TSB Academy est en prÃ©paration",
+    comingSoonText: "Nous prÃ©parons progressivement des parcours de formation pratiques, accessibles et orientÃ©s vers les besoins rÃ©els du terrain.",
+    categoriesTitle: "Nos futurs domaines de formation",
+    categoriesIntro: "Les formations seront organisÃ©es par spÃ©cialitÃ© afin de proposer des parcours clairs et Ã©volutifs.",
+    notify: "ÃŠtre informÃ© du lancement",
+    items: {
+      automobile: { title: "Automobile", description: "Serrurerie automobile, programmation de clÃ©s, diagnostic, Ã©lectronique et systÃ¨mes embarquÃ©s." },
+      energy: { title: "Ã‰lectricitÃ© & Ã©nergie", description: "Installations Ã©lectriques, Ã©nergie solaire, maintenance et bonnes pratiques techniques." },
+      security: { title: "SÃ©curitÃ©", description: "VidÃ©osurveillance, contrÃ´le dâ€™accÃ¨s, alarmes et solutions de protection." },
+      digital: { title: "Digital & Ã©lectronique", description: "Informatique, Ã©lectronique, automatisation, rÃ©seaux et outils numÃ©riques." },
+    },
+  }},
+
+  nl: { academy: {
+    eyebrow: "TSB ACADEMY",
+    title1: "Technische opleidingen en",
+    title2: "professionele vaardigheden",
+    intro: "TSB Academy is de opleidingsruimte van TSB Tech Group voor de ontwikkeling van technische, technologische en professionele vaardigheden.",
+    backHome: "Terug naar home",
+    contact: "Contacteer ons",
+    comingSoon: "Binnenkort beschikbaar",
+    comingSoonTitle: "TSB Academy is in voorbereiding",
+    comingSoonText: "We bereiden stap voor stap praktische en toegankelijke opleidingen voor die gericht zijn op de echte behoeften van het werkveld.",
+    categoriesTitle: "Onze toekomstige opleidingsdomeinen",
+    categoriesIntro: "De opleidingen worden per specialiteit georganiseerd om duidelijke en schaalbare leertrajecten aan te bieden.",
+    notify: "Blijf op de hoogte",
+    items: {
+      automobile: { title: "Automobiel", description: "Autosleutels, sleutelprogrammering, diagnose, elektronica en ingebouwde systemen." },
+      energy: { title: "Elektriciteit & energie", description: "Elektrische installaties, zonne-energie, onderhoud en technische best practices." },
+      security: { title: "Beveiliging", description: "Camerabewaking, toegangscontrole, alarmen en beveiligingsoplossingen." },
+      digital: { title: "Digitaal & elektronica", description: "IT, elektronica, automatisering, netwerken en digitale tools." },
+    },
+  }},
+
+  en: { academy: {
+    eyebrow: "TSB ACADEMY",
+    title1: "Technical training and",
+    title2: "professional skills",
+    intro: "TSB Academy is the training space of TSB Tech Group dedicated to developing technical, technological and professional skills.",
+    backHome: "Back to home",
+    contact: "Contact us",
+    comingSoon: "Coming soon",
+    comingSoonTitle: "TSB Academy is being prepared",
+    comingSoonText: "We are progressively preparing practical and accessible training programs focused on real-world technical needs.",
+    categoriesTitle: "Our future training areas",
+    categoriesIntro: "Training will be organized by specialty to provide clear and scalable learning paths.",
+    notify: "Get launch updates",
+    items: {
+      automobile: { title: "Automotive", description: "Automotive locksmithing, key programming, diagnostics, electronics and embedded systems." },
+      energy: { title: "Electricity & energy", description: "Electrical installations, solar energy, maintenance and technical best practices." },
+      security: { title: "Security", description: "Video surveillance, access control, alarms and protection solutions." },
+      digital: { title: "Digital & electronics", description: "IT, electronics, automation, networks and digital tools." },
+    },
+  }},
+
+  de: { academy: {
+    eyebrow: "TSB ACADEMY",
+    title1: "Technische Schulungen und",
+    title2: "berufliche Kompetenzen",
+    intro: "TSB Academy ist der Schulungsbereich von TSB Tech Group zur Entwicklung technischer, technologischer und beruflicher Kompetenzen.",
+    backHome: "ZurÃ¼ck zur Startseite",
+    contact: "Kontakt",
+    comingSoon: "DemnÃ¤chst verfÃ¼gbar",
+    comingSoonTitle: "TSB Academy wird vorbereitet",
+    comingSoonText: "Wir entwickeln schrittweise praktische und zugÃ¤ngliche Schulungsprogramme, die sich an den tatsÃ¤chlichen Anforderungen des Arbeitsalltags orientieren.",
+    categoriesTitle: "Unsere zukÃ¼nftigen Schulungsbereiche",
+    categoriesIntro: "Die Schulungen werden nach Fachgebieten organisiert, um klare und skalierbare Lernpfade anzubieten.",
+    notify: "Ãœber den Start informiert werden",
+    items: {
+      automobile: { title: "Automobil", description: "AutoschlÃ¼ssel, SchlÃ¼sselprogrammierung, Diagnose, Elektronik und eingebettete Systeme." },
+      energy: { title: "Elektrik & Energie", description: "Elektrische Installationen, Solarenergie, Wartung und technische Best Practices." },
+      security: { title: "Sicherheit", description: "VideoÃ¼berwachung, Zugangskontrolle, Alarmanlagen und SchutzlÃ¶sungen." },
+      digital: { title: "Digital & Elektronik", description: "IT, Elektronik, Automatisierung, Netzwerke und digitale Werkzeuge." },
+    },
+  }},
+
+  es: { academy: {
+    eyebrow: "TSB ACADEMY",
+    title1: "FormaciÃ³n tÃ©cnica y",
+    title2: "competencias profesionales",
+    intro: "TSB Academy es el espacio de formaciÃ³n de TSB Tech Group dedicado al desarrollo de competencias tÃ©cnicas, tecnolÃ³gicas y profesionales.",
+    backHome: "Volver al inicio",
+    contact: "ContÃ¡ctenos",
+    comingSoon: "PrÃ³ximamente",
+    comingSoonTitle: "TSB Academy estÃ¡ en preparaciÃ³n",
+    comingSoonText: "Estamos preparando progresivamente programas de formaciÃ³n prÃ¡cticos, accesibles y orientados a las necesidades reales del terreno.",
+    categoriesTitle: "Nuestras futuras Ã¡reas de formaciÃ³n",
+    categoriesIntro: "Las formaciones se organizarÃ¡n por especialidad para ofrecer itinerarios claros y evolutivos.",
+    notify: "Recibir novedades del lanzamiento",
+    items: {
+      automobile: { title: "AutomÃ³vil", description: "CerrajerÃ­a del automÃ³vil, programaciÃ³n de llaves, diagnÃ³stico, electrÃ³nica y sistemas embarcados." },
+      energy: { title: "Electricidad y energÃ­a", description: "Instalaciones elÃ©ctricas, energÃ­a solar, mantenimiento y buenas prÃ¡cticas tÃ©cnicas." },
+      security: { title: "Seguridad", description: "Videovigilancia, control de acceso, alarmas y soluciones de protecciÃ³n." },
+      digital: { title: "Digital y electrÃ³nica", description: "InformÃ¡tica, electrÃ³nica, automatizaciÃ³n, redes y herramientas digitales." },
+    },
+  }},
+
+  it: { academy: {
+    eyebrow: "TSB ACADEMY",
+    title1: "Formazione tecnica e",
+    title2: "competenze professionali",
+    intro: "TSB Academy Ã¨ lo spazio formativo di TSB Tech Group dedicato allo sviluppo di competenze tecniche, tecnologiche e professionali.",
+    backHome: "Torna alla home",
+    contact: "Contattaci",
+    comingSoon: "Prossimamente",
+    comingSoonTitle: "TSB Academy Ã¨ in preparazione",
+    comingSoonText: "Stiamo preparando progressivamente percorsi formativi pratici, accessibili e orientati alle reali esigenze del settore.",
+    categoriesTitle: "Le nostre future aree di formazione",
+    categoriesIntro: "Le formazioni saranno organizzate per specialitÃ  per offrire percorsi chiari e scalabili.",
+    notify: "Ricevi aggiornamenti sul lancio",
+    items: {
+      automobile: { title: "Automotive", description: "Chiavi auto, programmazione chiavi, diagnostica, elettronica e sistemi integrati." },
+      energy: { title: "ElettricitÃ  ed energia", description: "Impianti elettrici, energia solare, manutenzione e buone pratiche tecniche." },
+      security: { title: "Sicurezza", description: "Videosorveglianza, controllo accessi, allarmi e soluzioni di protezione." },
+      digital: { title: "Digitale ed elettronica", description: "Informatica, elettronica, automazione, reti e strumenti digitali." },
+    },
+  }},
+
+  pt: { academy: {
+    eyebrow: "TSB ACADEMY",
+    title1: "FormaÃ§Ã£o tÃ©cnica e",
+    title2: "competÃªncias profissionais",
+    intro: "A TSB Academy Ã© o espaÃ§o de formaÃ§Ã£o da TSB Tech Group dedicado ao desenvolvimento de competÃªncias tÃ©cnicas, tecnolÃ³gicas e profissionais.",
+    backHome: "Voltar ao inÃ­cio",
+    contact: "Contacte-nos",
+    comingSoon: "Brevemente disponÃ­vel",
+    comingSoonTitle: "A TSB Academy estÃ¡ em preparaÃ§Ã£o",
+    comingSoonText: "Estamos a preparar progressivamente percursos de formaÃ§Ã£o prÃ¡ticos, acessÃ­veis e orientados para as necessidades reais do terreno.",
+    categoriesTitle: "As nossas futuras Ã¡reas de formaÃ§Ã£o",
+    categoriesIntro: "As formaÃ§Ãµes serÃ£o organizadas por especialidade para oferecer percursos claros e evolutivos.",
+    notify: "Receber novidades do lanÃ§amento",
+    items: {
+      automobile: { title: "AutomÃ³vel", description: "Chaves automÃ³veis, programaÃ§Ã£o de chaves, diagnÃ³stico, eletrÃ³nica e sistemas embarcados." },
+      energy: { title: "Eletricidade e energia", description: "InstalaÃ§Ãµes elÃ©tricas, energia solar, manutenÃ§Ã£o e boas prÃ¡ticas tÃ©cnicas." },
+      security: { title: "SeguranÃ§a", description: "VideovigilÃ¢ncia, controlo de acesso, alarmes e soluÃ§Ãµes de proteÃ§Ã£o." },
+      digital: { title: "Digital e eletrÃ³nica", description: "InformÃ¡tica, eletrÃ³nica, automaÃ§Ã£o, redes e ferramentas digitais." },
+    },
+  }},
+
+  ar: { academy: {
+    eyebrow: "TSB ACADEMY",
+    title1: "ØªØ¯Ø±ÙŠØ¨ ØªÙ‚Ù†ÙŠ Ùˆ",
+    title2: "Ù…Ù‡Ø§Ø±Ø§Øª Ù…Ù‡Ù†ÙŠØ©",
+    intro: "TSB Academy Ù‡ÙŠ Ù…Ø³Ø§Ø­Ø© Ø§Ù„ØªØ¯Ø±ÙŠØ¨ Ø§Ù„ØªØ§Ø¨Ø¹Ø© Ù„Ù€ TSB Tech Group ÙˆØ§Ù„Ù…Ø®ØµØµØ© Ù„ØªØ·ÙˆÙŠØ± Ø§Ù„Ù…Ù‡Ø§Ø±Ø§Øª Ø§Ù„ØªÙ‚Ù†ÙŠØ© ÙˆØ§Ù„ØªÙƒÙ†ÙˆÙ„ÙˆØ¬ÙŠØ© ÙˆØ§Ù„Ù…Ù‡Ù†ÙŠØ©.",
+    backHome: "Ø§Ù„Ø¹ÙˆØ¯Ø© Ø¥Ù„Ù‰ Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©",
+    contact: "ØªÙˆØ§ØµÙ„ Ù…Ø¹Ù†Ø§",
+    comingSoon: "Ù‚Ø±ÙŠØ¨Ù‹Ø§",
+    comingSoonTitle: "TSB Academy Ù‚ÙŠØ¯ Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯",
+    comingSoonText: "Ù†ÙØ¹Ø¯ ØªØ¯Ø±ÙŠØ¬ÙŠÙ‹Ø§ Ø¨Ø±Ø§Ù…Ø¬ ØªØ¯Ø±ÙŠØ¨ Ø¹Ù…Ù„ÙŠØ© ÙˆØ³Ù‡Ù„Ø© Ø§Ù„ÙˆØµÙˆÙ„ ÙˆÙ…ÙˆØ¬Ù‡Ø© Ù†Ø­Ùˆ Ø§Ù„Ø§Ø­ØªÙŠØ§Ø¬Ø§Øª Ø§Ù„Ø­Ù‚ÙŠÙ‚ÙŠØ© Ù„Ù„Ù…ÙŠØ¯Ø§Ù†.",
+    categoriesTitle: "Ù…Ø¬Ø§Ù„Ø§Øª Ø§Ù„ØªØ¯Ø±ÙŠØ¨ Ø§Ù„Ù…Ø³ØªÙ‚Ø¨Ù„ÙŠØ©",
+    categoriesIntro: "Ø³ÙŠØªÙ… ØªÙ†Ø¸ÙŠÙ… Ø§Ù„ØªØ¯Ø±ÙŠØ¨Ø§Øª Ø­Ø³Ø¨ Ø§Ù„ØªØ®ØµØµ Ù„ØªÙ‚Ø¯ÙŠÙ… Ù…Ø³Ø§Ø±Ø§Øª ÙˆØ§Ø¶Ø­Ø© ÙˆÙ‚Ø§Ø¨Ù„Ø© Ù„Ù„ØªØ·ÙˆØ±.",
+    notify: "Ø£Ø¨Ù„ØºÙ†ÙŠ Ø¹Ù†Ø¯ Ø§Ù„Ø¥Ø·Ù„Ø§Ù‚",
+    items: {
+      automobile: { title: "Ø§Ù„Ø³ÙŠØ§Ø±Ø§Øª", description: "Ù…ÙØ§ØªÙŠØ­ Ø§Ù„Ø³ÙŠØ§Ø±Ø§Øª ÙˆØ¨Ø±Ù…Ø¬ØªÙ‡Ø§ ÙˆØ§Ù„ØªØ´Ø®ÙŠØµ ÙˆØ§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠØ§Øª ÙˆØ§Ù„Ø£Ù†Ø¸Ù…Ø© Ø§Ù„Ù…Ø¯Ù…Ø¬Ø©." },
+      energy: { title: "Ø§Ù„ÙƒÙ‡Ø±Ø¨Ø§Ø¡ ÙˆØ§Ù„Ø·Ø§Ù‚Ø©", description: "Ø§Ù„ØªØ±ÙƒÙŠØ¨Ø§Øª Ø§Ù„ÙƒÙ‡Ø±Ø¨Ø§Ø¦ÙŠØ© ÙˆØ§Ù„Ø·Ø§Ù‚Ø© Ø§Ù„Ø´Ù…Ø³ÙŠØ© ÙˆØ§Ù„ØµÙŠØ§Ù†Ø© ÙˆØ£ÙØ¶Ù„ Ø§Ù„Ù…Ù…Ø§Ø±Ø³Ø§Øª Ø§Ù„ØªÙ‚Ù†ÙŠØ©." },
+      security: { title: "Ø§Ù„Ø£Ù…Ù†", description: "Ø§Ù„Ù…Ø±Ø§Ù‚Ø¨Ø© Ø¨Ø§Ù„ÙÙŠØ¯ÙŠÙˆ ÙˆØ§Ù„ØªØ­ÙƒÙ… ÙÙŠ Ø§Ù„Ø¯Ø®ÙˆÙ„ ÙˆØ§Ù„Ø¥Ù†Ø°Ø§Ø±Ø§Øª ÙˆØ­Ù„ÙˆÙ„ Ø§Ù„Ø­Ù…Ø§ÙŠØ©." },
+      digital: { title: "Ø§Ù„Ø±Ù‚Ù…ÙŠ ÙˆØ§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠØ§Øª", description: "ØªÙ‚Ù†ÙŠØ© Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª ÙˆØ§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠØ§Øª ÙˆØ§Ù„Ø£ØªÙ…ØªØ© ÙˆØ§Ù„Ø´Ø¨ÙƒØ§Øª ÙˆØ§Ù„Ø£Ø¯ÙˆØ§Øª Ø§Ù„Ø±Ù‚Ù…ÙŠØ©." },
+    },
+  }},
+
+  tr: { academy: {
+    eyebrow: "TSB ACADEMY",
+    title1: "Teknik eÄŸitim ve",
+    title2: "mesleki beceriler",
+    intro: "TSB Academy, TSB Tech Groupâ€™un teknik, teknolojik ve mesleki becerilerin geliÅŸtirilmesine adanmÄ±ÅŸ eÄŸitim alanÄ±dÄ±r.",
+    backHome: "Ana sayfaya dÃ¶n",
+    contact: "Bize ulaÅŸÄ±n",
+    comingSoon: "YakÄ±nda",
+    comingSoonTitle: "TSB Academy hazÄ±rlanÄ±yor",
+    comingSoonText: "Saha ihtiyaÃ§larÄ±na odaklanan pratik ve eriÅŸilebilir eÄŸitim programlarÄ±nÄ± aÅŸamalÄ± olarak hazÄ±rlÄ±yoruz.",
+    categoriesTitle: "Gelecekteki eÄŸitim alanlarÄ±mÄ±z",
+    categoriesIntro: "EÄŸitimler, aÃ§Ä±k ve geliÅŸebilir Ã¶ÄŸrenme yollarÄ± sunmak iÃ§in uzmanlÄ±k alanlarÄ±na gÃ¶re dÃ¼zenlenecektir.",
+    notify: "Lansman gÃ¼ncellemelerini al",
+    items: {
+      automobile: { title: "Otomotiv", description: "Otomotiv anahtarlarÄ±, anahtar programlama, teÅŸhis, elektronik ve gÃ¶mÃ¼lÃ¼ sistemler." },
+      energy: { title: "Elektrik ve enerji", description: "Elektrik tesisatlarÄ±, gÃ¼neÅŸ enerjisi, bakÄ±m ve teknik iyi uygulamalar." },
+      security: { title: "GÃ¼venlik", description: "Video gÃ¶zetim, eriÅŸim kontrolÃ¼, alarm sistemleri ve koruma Ã§Ã¶zÃ¼mleri." },
+      digital: { title: "Dijital ve elektronik", description: "BT, elektronik, otomasyon, aÄŸlar ve dijital araÃ§lar." },
+    },
+  }},
+
+  zh: { academy: {
+    eyebrow: "TSB ACADEMY",
+    title1: "æŠ€æœ¯åŸ¹è®­ä¸Ž",
+    title2: "èŒä¸šæŠ€èƒ½",
+    intro: "TSB Academy æ˜¯ TSB Tech Group çš„åŸ¹è®­ç©ºé—´ï¼Œè‡´åŠ›äºŽå‘å±•æŠ€æœ¯ã€ç§‘æŠ€å’ŒèŒä¸šæŠ€èƒ½ã€‚",
+    backHome: "è¿”å›žé¦–é¡µ",
+    contact: "è”ç³»æˆ‘ä»¬",
+    comingSoon: "å³å°†æŽ¨å‡º",
+    comingSoonTitle: "TSB Academy æ­£åœ¨ç­¹å¤‡ä¸­",
+    comingSoonText: "æˆ‘ä»¬æ­£åœ¨é€æ­¥å‡†å¤‡å®žç”¨ã€æ˜“äºŽå‚ä¸Žå¹¶é¢å‘çœŸå®žå·¥ä½œéœ€æ±‚çš„åŸ¹è®­è¯¾ç¨‹ã€‚",
+    categoriesTitle: "æœªæ¥åŸ¹è®­é¢†åŸŸ",
+    categoriesIntro: "åŸ¹è®­å°†æŒ‰ä¸“ä¸šé¢†åŸŸç»„ç»‡ï¼Œä»¥æä¾›æ¸…æ™°ä¸”å¯æ‰©å±•çš„å­¦ä¹ è·¯å¾„ã€‚",
+    notify: "èŽ·å–ä¸Šçº¿é€šçŸ¥",
+    items: {
+      automobile: { title: "æ±½è½¦", description: "æ±½è½¦é’¥åŒ™ã€é’¥åŒ™ç¼–ç¨‹ã€è¯Šæ–­ã€ç”µå­å’ŒåµŒå…¥å¼ç³»ç»Ÿã€‚" },
+      energy: { title: "ç”µæ°”ä¸Žèƒ½æº", description: "ç”µæ°”å®‰è£…ã€å¤ªé˜³èƒ½ã€ç»´æŠ¤å’ŒæŠ€æœ¯æœ€ä½³å®žè·µã€‚" },
+      security: { title: "å®‰å…¨", description: "è§†é¢‘ç›‘æŽ§ã€é—¨ç¦æŽ§åˆ¶ã€æŠ¥è­¦å’Œä¿æŠ¤è§£å†³æ–¹æ¡ˆã€‚" },
+      digital: { title: "æ•°å­—æŠ€æœ¯ä¸Žç”µå­", description: "ä¿¡æ¯æŠ€æœ¯ã€ç”µå­ã€è‡ªåŠ¨åŒ–ã€ç½‘ç»œå’Œæ•°å­—å·¥å…·ã€‚" },
+    },
+  }},
+};
+
+
+===== ACADEMY REFERENCES =====
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1457 | placeholder={at("informationAboutTheInterventionVehicleEquipmentPlannedW")}
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2670 | // CLIENT / INFORMATIONS FACTURE
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2731 | "INFORMATIONS FACTURE",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2975 | // INFORMATIONS + TOTAUX
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2998 | "INFORMATIONS SUPPLÉMENTAIRES",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3000 | "ADDITIONAL INFORMATION"
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4568 | "INFORMATIONS COMMANDE",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4570 | "ORDER INFORMATION"
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 9446 | "Ex. délai, conditions, informations complémentaires...",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 9448 | "E.g. lead time, conditions, additional information..."
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 216 | <a href="/academy">
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 217 | {t("academy")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 554 | <a href="/academy" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 555 | {navT("academy")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 589 | <a href="/academy" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 590 | {navT("academy")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 791 | <a href="/academy" onClick={closeMobile}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 792 | {navT("academy")}
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 310 | q("steps.information"),
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1360 | const handleInformationSubmit = (
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1930 | handleInformationSubmit
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 31 | { id: "academy", icon: GraduationCap, color: "purple" },
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 105 | : service.id === "academy"
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 106 | ? "/academy"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 3 | export const academyTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 4 | fr: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 5 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 6 | title1: "Formations techniques et",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 8 | intro: "TSB Academy est l’espace de formation de TSB Tech Group destiné au développement des compétences techniques, technologiques et professionnelles.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 12 | comingSoonTitle: "TSB Academy est en préparation",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 13 | comingSoonText: "Nous préparons progressivement des parcours de formation pratiques, accessibles et orientés vers les besoins réels du terrain.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 14 | categoriesTitle: "Nos futurs domaines de formation",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 15 | categoriesIntro: "Les formations seront organisées par spécialité afin de proposer des parcours clairs et évolutifs.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 25 | nl: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 26 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 29 | intro: "TSB Academy is de opleidingsruimte van TSB Tech Group voor de ontwikkeling van technische, technologische en professionele vaardigheden.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 33 | comingSoonTitle: "TSB Academy is in voorbereiding",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 46 | en: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 47 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 48 | title1: "Technical training and",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 50 | intro: "TSB Academy is the training space of TSB Tech Group dedicated to developing technical, technological and professional skills.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 54 | comingSoonTitle: "TSB Academy is being prepared",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 55 | comingSoonText: "We are progressively preparing practical and accessible training programs focused on real-world technical needs.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 56 | categoriesTitle: "Our future training areas",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 57 | categoriesIntro: "Training will be organized by specialty to provide clear and scalable learning paths.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 67 | de: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 68 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 71 | intro: "TSB Academy ist der Schulungsbereich von TSB Tech Group zur Entwicklung technischer, technologischer und beruflicher Kompetenzen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 75 | comingSoonTitle: "TSB Academy wird vorbereitet",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 88 | es: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 89 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 92 | intro: "TSB Academy es el espacio de formación de TSB Tech Group dedicado al desarrollo de competencias técnicas, tecnológicas y profesionales.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 96 | comingSoonTitle: "TSB Academy está en preparación",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 109 | it: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 110 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 113 | intro: "TSB Academy è lo spazio formativo di TSB Tech Group dedicato allo sviluppo di competenze tecniche, tecnologiche e professionali.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 117 | comingSoonTitle: "TSB Academy è in preparazione",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 130 | pt: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 131 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 134 | intro: "A TSB Academy é o espaço de formação da TSB Tech Group dedicado ao desenvolvimento de competências técnicas, tecnológicas e profissionais.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 138 | comingSoonTitle: "A TSB Academy está em preparação",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 151 | ar: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 152 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 155 | intro: "TSB Academy هي مساحة التدريب التابعة لـ TSB Tech Group والمخصصة لتطوير المهارات التقنية والتكنولوجية والمهنية.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 159 | comingSoonTitle: "TSB Academy قيد الإعداد",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 172 | tr: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 173 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 176 | intro: "TSB Academy, TSB Tech Group’un teknik, teknolojik ve mesleki becerilerin geliştirilmesine adanmış eğitim alanıdır.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 180 | comingSoonTitle: "TSB Academy hazırlanıyor",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 193 | zh: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 194 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 197 | intro: "TSB Academy 是 TSB Tech Group 的培训空间，致力于发展技术、科技和职业技能。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 201 | comingSoonTitle: "TSB Academy 正在筹备中",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2344 | "usefulInformationForTheAppointment": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2345 | fr: "Informations utiles pour le rendez-vous...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2347 | en: "Useful information for the appointment...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2348 | de: "Nützliche Informationen zum Termin...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2416 | "informationAboutTheInterventionVehicleEquipmentPlannedW": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2417 | fr: "Informations sur l’intervention, véhicule, équipement, travail prévu...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2419 | en: "Information about the intervention, vehicle, equipment, planned work...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2420 | de: "Informationen zum Einsatz, Fahrzeug, Gerät, geplanten Arbeiten...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3677 | fr: "Je souhaite obtenir des informations et un devis pour ce produit.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3679 | en: "I would like information and a quote for this product.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3680 | de: "Ich möchte Informationen und ein Angebot für dieses Produkt erhalten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4649 | fr: "Le client, le service et les informations de la demande ont été préremplis automatiquement.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6016 | "storeEGLeadTimeConditionsAdditionalInformation": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6017 | fr: "Ex. délai, conditions, informations complémentaires...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6019 | en: "E.g. lead time, conditions, additional information...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6020 | de: "Z. B. Lieferzeit, Bedingungen, zusätzliche Informationen...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6184 | "storeOrderINFORMATION": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6185 | fr: "INFORMATIONS COMMANDE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6187 | en: "ORDER INFORMATION",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6188 | de: "BESTELLINFORMATIONEN",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6293 | fr: "INFORMATIONS FACTURE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6328 | "storeAdditionalINFORMATION": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6329 | fr: "INFORMATIONS SUPPLÉMENTAIRES",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6331 | en: "ADDITIONAL INFORMATION",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6332 | de: "ZUSÄTZLICHE INFORMATIONEN",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 39 | opportunities: { automotive: "Automobile & mobilité", energy: "Énergie", water: "Eau & forage", security: "Sécurité", automation: "Automatisation", networks: "Réseaux & télécommunications", digital: "Digital & technologies", academy: "TSB Academy", store: "TSB Store", projects: "Projets spéciaux" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 42 | internationalText: "TSB Tech Group développe un modèle capable de connecter expertise technique, technologie, commerce, formation et partenariats selon les besoins de chaque marché.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 87 | opportunities: { automotive: "Automotive & mobiliteit", energy: "Energie", water: "Water & boringen", security: "Beveiliging", automation: "Automatisering", networks: "Netwerken & telecom", digital: "Digital & technologie", academy: "TSB Academy", store: "TSB Store", projects: "Speciale projecten" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 119 | opportunities: { automotive: "Automotive & mobility", energy: "Energy", water: "Water & drilling", security: "Security", automation: "Automation", networks: "Networks & telecom", digital: "Digital & technology", academy: "TSB Academy", store: "TSB Store", projects: "Special projects" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 120 | internationalEyebrow: "INTERNATIONAL DEVELOPMENT", internationalTitle: "A vision designed beyond borders", internationalText: "TSB Tech Group connects technical expertise, technology, commerce, training and partnerships according to the needs of each market.", reach: "Europe • Africa • America • Asia • Worldwide",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 135 | opportunitiesEyebrow: "CHANCENBEREICHE", opportunitiesTitle: "Ein multisektorales Ökosystem", opportunitiesIntro: "Chancen können mehrere aktuelle oder zukünftige Bereiche der TSB Tech Group betreffen.", opportunities: { automotive: "Automotive & Mobilität", energy: "Energie", water: "Wasser & Bohrungen", security: "Sicherheit", automation: "Automatisierung", networks: "Netzwerke & Telekom", digital: "Digital & Technologie", academy: "TSB Academy", store: "TSB Store", projects: "Sonderprojekte" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 148 | opportunitiesEyebrow: "SECTORES DE OPORTUNIDAD", opportunitiesTitle: "Un ecosistema multisectorial", opportunitiesIntro: "Las oportunidades pueden abarcar varias áreas actuales o futuras de TSB Tech Group.", opportunities: { automotive: "Automoción y movilidad", energy: "Energía", water: "Agua y perforación", security: "Seguridad", automation: "Automatización", networks: "Redes y telecom", digital: "Digital y tecnología", academy: "TSB Academy", store: "TSB Store", projects: "Proyectos especiales" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 161 | opportunitiesEyebrow: "SETTORI DI OPPORTUNITÀ", opportunitiesTitle: "Un ecosistema multisettoriale", opportunitiesIntro: "Le opportunità possono riguardare diversi poli attuali o futuri di TSB Tech Group.", opportunities: { automotive: "Automotive & mobilità", energy: "Energia", water: "Acqua & perforazione", security: "Sicurezza", automation: "Automazione", networks: "Reti & telecom", digital: "Digitale & tecnologia", academy: "TSB Academy", store: "TSB Store", projects: "Progetti speciali" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 174 | opportunitiesEyebrow: "SETORES DE OPORTUNIDADE", opportunitiesTitle: "Um ecossistema multissetorial", opportunitiesIntro: "As oportunidades podem envolver vários polos atuais ou futuros da TSB Tech Group.", opportunities: { automotive: "Automóvel & mobilidade", energy: "Energia", water: "Água & perfuração", security: "Segurança", automation: "Automação", networks: "Redes & telecom", digital: "Digital & tecnologia", academy: "TSB Academy", store: "TSB Store", projects: "Projetos especiais" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 187 | opportunitiesEyebrow: "قطاعات الفرص", opportunitiesTitle: "منظومة متعددة القطاعات", opportunitiesIntro: "يمكن أن تشمل الفرص عدة مجالات حالية أو مستقبلية في TSB Tech Group.", opportunities: { automotive: "السيارات والتنقل", energy: "الطاقة", water: "المياه والحفر", security: "الأمن", automation: "الأتمتة", networks: "الشبكات والاتصالات", digital: "الرقمنة والتكنولوجيا", academy: "TSB Academy", store: "TSB Store", projects: "مشاريع خاصة" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 200 | opportunitiesEyebrow: "FIRSAT ALANLARI", opportunitiesTitle: "Çok sektörlü bir ekosistem", opportunitiesIntro: "Fırsatlar TSB Tech Group’un mevcut veya gelecekteki farklı alanlarını kapsayabilir.", opportunities: { automotive: "Otomotiv & mobilite", energy: "Enerji", water: "Su & sondaj", security: "Güvenlik", automation: "Otomasyon", networks: "Ağlar & telekom", digital: "Dijital & teknoloji", academy: "TSB Academy", store: "TSB Store", projects: "Özel projeler" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 213 | opportunitiesEyebrow: "机会领域", opportunitiesTitle: "多行业生态体系", opportunitiesIntro: "机会可涉及 TSB Tech Group 当前或未来的多个业务板块。", opportunities: { automotive: "汽车与出行", energy: "能源", water: "水务与钻探", security: "安全", automation: "自动化", networks: "网络与通信", digital: "数字与技术", academy: "TSB Academy", store: "TSB Store", projects: "专项项目" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 226 | "personalInformation": "Informations personnelles",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 253 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 295 | "body": "Je souhaite obtenir des informations et un devis pour ce produit."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 325 | "invoiceDetails": "INFORMATIONS FACTURE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 336 | "additionalInformation": "INFORMATIONS SUPPLÉMENTAIRES",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 568 | "personalInformation": "Persoonlijke gegevens",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 595 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 678 | "additionalInformation": "AANVULLENDE INFORMATIE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 910 | "personalInformation": "Personal information",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 937 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 979 | "body": "I would like information and a quote for this product."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1020 | "additionalInformation": "ADDITIONAL INFORMATION",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1252 | "personalInformation": "Persönliche Informationen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1279 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1321 | "body": "Ich möchte Informationen und ein Angebot für dieses Produkt erhalten."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1365 | "additionalInformation": "ZUSÄTZLICHE INFORMATIONEN",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1594 | "personalInformation": "Información personal",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1621 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1707 | "additionalInformation": "INFORMACIÓN ADICIONAL",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1936 | "personalInformation": "Informazioni personali",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1963 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2049 | "additionalInformation": "INFORMAZIONI AGGIUNTIVE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2278 | "personalInformation": "Informações pessoais",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2305 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2391 | "additionalInformation": "INFORMAÇÕES ADICIONAIS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2620 | "personalInformation": "المعلومات الشخصية",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2647 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2733 | "additionalInformation": "معلومات إضافية",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2962 | "personalInformation": "Kişisel bilgiler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2989 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3075 | "additionalInformation": "EK BİLGİLER",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3304 | "personalInformation": "个人信息",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3331 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3417 | "additionalInformation": "附加信息",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 17 | "Les informations du produit ont été reprises automatiquement pour faciliter votre demande.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 29 | "Pour nous écrire rapidement et partager les premières informations.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 41 | "Utilisez notre formulaire de devis pour nous transmettre directement votre besoin, le service concerné et les informations utiles.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 45 | "Bonjour TSB Tech Group,\n\nJe souhaite obtenir des informations concernant ce produit :",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 47 | "Bonjour TSB Tech Group, je souhaite obtenir des informations concernant ce produit :",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 49 | "Bonjour TSB Tech Group, je souhaite obtenir des informations concernant vos services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 115 | "The product information has been added automatically to make your request easier.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 143 | "Hello TSB Tech Group,\n\nI would like information about this product:",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 145 | "Hello TSB Tech Group, I would like information about this product:",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 147 | "Hello TSB Tech Group, I would like information about your services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 164 | "Die Produktinformationen wurden automatisch übernommen, um Ihre Anfrage zu erleichtern.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 176 | "Für eine schnelle Nachricht und die ersten Informationen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 188 | "Nutzen Sie unser Angebotsformular, um uns Ihren Bedarf, den betreffenden Service und die wichtigsten Informationen direkt mitzuteilen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 192 | "Hallo TSB Tech Group,\n\nIch möchte Informationen zu diesem Produkt erhalten:",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 194 | "Hallo TSB Tech Group, ich möchte Informationen zu diesem Produkt erhalten:",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 196 | "Hallo TSB Tech Group, ich möchte Informationen zu Ihren Dienstleistungen erhalten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\deleteAccount.ts | ligne 19 | includeTitle: "Informations à indiquer",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\deleteAccount.ts | ligne 28 | "Après vérification de la demande, le compte utilisateur et les données personnelles qui lui sont associées sont supprimés ou rendus anonymes lorsqu’ils ne sont plus nécessaires. Cela peut notamment concerner les informations du profil, les demandes, les messages de support et les autres données liées au compte.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\deleteAccount.ts | ligne 31 | "Certaines informations peuvent être conservées uniquement lorsqu’une obligation légale, comptable, fiscale, de sécurité, de prévention de la fraude ou de défense de droits l’exige. Elles sont alors conservées uniquement pendant la durée nécessaire à cette obligation.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\deleteAccount.ts | ligne 95 | includeTitle: "Information to include",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\deleteAccount.ts | ligne 104 | "After verification of the request, the user account and associated personal data are deleted or anonymised when they are no longer needed. This may include profile information, requests, support messages and other account-related data.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\deleteAccount.ts | ligne 107 | "Certain information may only be retained when required by a legal, accounting, tax or security obligation, fraud prevention, or the defence of legal rights. It is then retained only for as long as necessary for that purpose.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\deleteAccount.ts | ligne 133 | includeTitle: "Anzugebende Informationen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\deleteAccount.ts | ligne 145 | "Bestimmte Informationen dürfen nur aufbewahrt werden, wenn dies aufgrund gesetzlicher, buchhalterischer, steuerlicher oder sicherheitsbezogener Pflichten, zur Betrugsprävention oder zur Verteidigung von Rechten erforderlich ist. Sie werden nur so lange wie nötig gespeichert.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 17 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 49 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 81 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 113 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 145 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 177 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 209 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 241 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 273 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 305 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 7 | title1: "Informations",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 10 | "Cette page présente les informations juridiques générales relatives au site TSB Tech Group. Les données administratives officielles seront complétées avant la mise en production publique.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 14 | noticeTitle: "Informations à compléter avant publication",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 25 | "Les informations légales d’identification de l’entreprise seront ajoutées dès qu’elles seront officiellement définies et enregistrées.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 44 | "TSB Tech Group s’efforce de fournir des informations exactes et à jour, mais ne peut garantir l’absence totale d’erreurs, d’interruptions ou d’informations devenues obsolètes.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 46 | "Les informations publiées sur le site ne remplacent pas un diagnostic, un devis, une étude technique ou un engagement contractuel lorsqu’une analyse professionnelle spécifique est nécessaire.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 57 | "Pour les informations relatives au traitement des données personnelles et aux cookies, consultez nos politiques dédiées.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 62 | "Vous pouvez contacter TSB Tech Group pour toute question liée aux informations publiées sur cette page.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 134 | title2: "information",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 136 | "This page provides general legal information about the TSB Tech Group website. Official administrative details will be completed before public launch.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 140 | noticeTitle: "Information to complete before publication",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 170 | "TSB Tech Group aims to provide accurate and up-to-date information but cannot guarantee that the website is completely free from errors, interruptions or outdated information.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 172 | "Information published on the website does not replace a diagnosis, quotation, technical study or contractual commitment where a specific professional assessment is required.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 183 | "Please review our dedicated policies for information about personal data and cookies.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 188 | "You can contact TSB Tech Group with any question relating to the information published on this page.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 197 | title2: "Informationen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 199 | "Diese Seite enthält allgemeine rechtliche Informationen zur Website von TSB Tech Group. Die offiziellen Unternehmensdaten werden vor der öffentlichen Veröffentlichung ergänzt.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 233 | "TSB Tech Group bemüht sich um genaue und aktuelle Informationen, kann jedoch nicht garantieren, dass die Website vollständig frei von Fehlern, Unterbrechungen oder veralteten Informationen ist.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 235 | "Die auf der Website veröffentlichten Informationen ersetzen keine Diagnose, kein Angebot, keine technische Studie und keine vertragliche Verpflichtung, wenn eine spezifische professionelle Bewertung erforderlich ist.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 246 | "Informationen zur Verarbeitung personenbezogener Daten und zu Cookies finden Sie in unseren entsprechenden Richtlinien.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 251 | "Sie können TSB Tech Group bei Fragen zu den auf dieser Seite veröffentlichten Informationen kontaktieren.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 22 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 58 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 94 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 130 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 166 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 202 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 238 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 274 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 310 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 346 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 23 | "Notre architecture modulaire permettra d’intégrer progressivement TSB Academy, TSB Store, l’espace client, le support et de nouveaux services numériques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 54 | "Onze modulaire architectuur maakt het mogelijk om geleidelijk TSB Academy, TSB Store, de klantenzone, support en nieuwe digitale diensten te integreren.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 85 | "Our modular architecture will progressively integrate TSB Academy, TSB Store, the client area, support and new digital services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 116 | "Unsere modulare Architektur ermöglicht die schrittweise Integration von TSB Academy, TSB Store, Kundenbereich, Support und neuen digitalen Diensten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 147 | "Nuestra arquitectura modular permitirá integrar progresivamente TSB Academy, TSB Store, el espacio cliente, soporte y nuevos servicios digitales.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 178 | "La nostra architettura modulare consentirà di integrare progressivamente TSB Academy, TSB Store, area clienti, supporto e nuovi servizi digitali.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 209 | "A nossa arquitetura modular permitirá integrar progressivamente a TSB Academy, a TSB Store, a área de cliente, o suporte e novos serviços digitais.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 240 | "ستتيح بنيتنا المعيارية دمج TSB Academy وTSB Store ومنطقة العملاء والدعم وخدمات رقمية جديدة بشكل تدريجي.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 271 | "Modüler mimarimiz TSB Academy, TSB Store, müşteri alanı, destek ve yeni dijital hizmetlerin kademeli olarak entegre edilmesini sağlayacak.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 302 | "我们的模块化架构将逐步整合 TSB Academy、TSB Store、客户空间、支持以及新的数字服务。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 35 | "Notre architecture modulaire permettra d’intégrer progressivement TSB Academy, TSB Store, l’espace client, le support et de nouveaux services numériques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 39 | "TSB Academy, TSB Store, l’espace client, le support et les futurs projets pourront ainsi être intégrés progressivement.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 90 | "Onze modulaire architectuur maakt het mogelijk om geleidelijk TSB Academy, TSB Store, de klantenzone, support en nieuwe digitale diensten te integreren.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 94 | "TSB Academy, TSB Store, de klantenzone, support en toekomstige projecten kunnen zo stap voor stap worden geïntegreerd.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 145 | "Our modular architecture will progressively integrate TSB Academy, TSB Store, the client area, support and new digital services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 149 | "TSB Academy, TSB Store, the client area, support and future projects can therefore be integrated progressively.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 200 | "Unsere modulare Architektur ermöglicht die schrittweise Integration von TSB Academy, TSB Store, Kundenbereich, Support und neuen digitalen Diensten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 204 | "TSB Academy, TSB Store, Kundenbereich, Support und zukünftige Projekte können so schrittweise integriert werden.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 255 | "Nuestra arquitectura modular permitirá integrar progresivamente TSB Academy, TSB Store, el área de cliente, soporte y nuevos servicios digitales.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 259 | "TSB Academy, TSB Store, el área de cliente, soporte y futuros proyectos podrán integrarse paso a paso.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 310 | "La nostra architettura modulare permetterà di integrare progressivamente TSB Academy, TSB Store, area clienti, supporto e nuovi servizi digitali.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 314 | "TSB Academy, TSB Store, area clienti, supporto e progetti futuri potranno così essere integrati gradualmente.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 365 | "A nossa arquitetura modular permitirá integrar progressivamente TSB Academy, TSB Store, área de cliente, suporte e novos serviços digitais.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 369 | "TSB Academy, TSB Store, área de cliente, suporte e futuros projetos poderão assim ser integrados gradualmente.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 420 | "ستسمح بنيتنا المعيارية بدمج TSB Academy وTSB Store ومساحة العميل والدعم وخدمات رقمية جديدة تدريجيًا.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 424 | "يمكن بذلك دمج TSB Academy وTSB Store ومساحة العميل والدعم والمشاريع المستقبلية تدريجيًا.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 475 | "Modüler mimarimiz TSB Academy, TSB Store, müşteri alanı, destek ve yeni dijital hizmetlerin aşamalı entegrasyonunu sağlayacak.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 479 | "TSB Academy, TSB Store, müşteri alanı, destek ve gelecekteki projeler böylece adım adım entegre edilebilecek.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 530 | "我们的模块化架构将逐步整合 TSB Academy、TSB Store、客户空间、支持以及新的数字服务。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 534 | "TSB Academy、TSB Store、客户空间、支持以及未来项目都可以逐步集成。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 51 | "Coopérations avec institutions, organismes, centres de formation et structures actives dans l’emploi, l’innovation et le développement des compétences.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 245 | "Cooperation with institutions, organizations, training centers and structures involved in employment, innovation and skills development.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 22 | "Selon le service utilisé, nous pouvons traiter des informations telles que votre nom, adresse e-mail, numéro de téléphone, société, contenu de votre demande, service demandé et informations liées à votre compte client.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 24 | "L’espace client peut également contenir des informations relatives à vos demandes de devis, services ou interventions, documents associés, messages et tickets de support.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 55 | "Certaines informations peuvent être conservées lorsque cela est strictement nécessaire pour respecter une obligation légale, assurer la sécurité, prévenir la fraude ou défendre des droits. Dans ce cas, elles sont conservées uniquement pendant la durée nécessaire.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 160 | "Depending on the service you use, we may process information such as your name, email address, phone number, company, request content, requested service and information related to your client account.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 162 | "The client area may also contain information about quote requests, services or interventions, associated documents, messages and support tickets.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 193 | "Certain information may be retained where strictly necessary to comply with a legal obligation, ensure security, prevent fraud or defend legal rights. In such cases, it is retained only for as long as necessary.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 229 | "Je nach genutztem Dienst können wir Informationen wie Ihren Namen, Ihre E-Mail-Adresse, Telefonnummer, Ihr Unternehmen, den Inhalt Ihrer Anfrage, den angefragten Dienst und Informationen zu Ihrem Kundenkonto verarbeiten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 231 | "Der Kundenbereich kann außerdem Informationen zu Angebotsanfragen, Dienstleistungen oder Einsätzen, zugehörigen Dokumenten, Nachrichten und Support-Tickets enthalten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 262 | "Bestimmte Informationen können aufbewahrt werden, wenn dies zur Erfüllung einer gesetzlichen Pflicht, zur Gewährleistung der Sicherheit, zur Betrugsprävention oder zur Verteidigung von Rechten unbedingt erforderlich ist. In diesem Fall werden sie nur so lange wie nötig gespeichert.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 12 | "information": "Vos informations",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 74 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 90 | "cartClosing": "Je souhaite obtenir des informations et un devis pour cette sélection.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 93 | "productClosing": "Je souhaite obtenir des informations et un devis pour ce produit."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 105 | "information": "Uw gegevens",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 167 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 198 | "information": "Your information",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 260 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 276 | "cartClosing": "I would like information and a quote for this selection.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 279 | "productClosing": "I would like information and a quote for this product."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 291 | "information": "Ihre Angaben",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 353 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 369 | "cartClosing": "Ich möchte Informationen und ein Angebot für diese Auswahl erhalten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 372 | "productClosing": "Ich möchte Informationen und ein Angebot für dieses Produkt erhalten."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 384 | "information": "Sus datos",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 446 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 477 | "information": "I tuoi dati",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 539 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 570 | "information": "Os seus dados",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 632 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 663 | "information": "معلوماتك",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 725 | "academy": "الأكاديمية",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 756 | "information": "Bilgileriniz",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 818 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 849 | "information": "您的信息",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 911 | "academy": "学院",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\register.ts | ligne 14 | "Renseignez vos informations pour créer votre espace TSB.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\register.ts | ligne 128 | "Enter your information to create your TSB space.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 82 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 83 | category: "Formation",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 84 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 86 | "Formations techniques, transmission de compétences, accompagnement pratique et développement professionnel.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 188 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 190 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 294 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 295 | category: "Training",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 296 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 298 | "Technical training, knowledge transfer, practical support and professional development.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 400 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 402 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 506 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 508 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 612 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 614 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 718 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 720 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 824 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 826 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 930 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 932 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 1036 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 1038 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 67 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 68 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 70 | "Formation technique, transmission de compétences et développement professionnel dans les métiers technologiques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 71 | category: "Formation",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 158 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 159 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 249 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 250 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 252 | "Technical training, knowledge transfer and professional development in technology-related fields.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 253 | category: "Training",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 340 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 341 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 431 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 432 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 522 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 523 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 613 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 614 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 704 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 705 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 795 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 796 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 886 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 887 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 25 | "Pour accéder à votre espace client, suivre vos demandes et retrouver les informations liées à votre compte.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 51 | "Utilisez directement notre formulaire de devis afin de nous transmettre toutes les informations nécessaires.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 129 | "To access your client area, follow your requests and review account-related information.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 155 | "Use our quote form to send us all the necessary information directly.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 181 | "Für den Zugang zu Ihrem Kundenbereich, die Verfolgung Ihrer Anfragen und kontobezogene Informationen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 207 | "Nutzen Sie unser Angebotsformular, um uns alle erforderlichen Informationen direkt zu senden.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 23 | "L’utilisateur est responsable de l’exactitude des informations fournies et doit protéger ses identifiants de connexion.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 30 | "Les informations disponibles sur le site présentent les activités et solutions proposées par TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 43 | "L’utilisateur reste responsable des informations et contenus qu’il transmet via les formulaires ou espaces mis à sa disposition.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 52 | "Les informations présentes sur le site peuvent évoluer et ne constituent pas, sauf mention contraire, un engagement contractuel définitif.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 167 | "Users are responsible for the accuracy of the information they provide and must protect their login credentials.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 174 | "Information available on the website describes the activities and solutions offered by TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 187 | "Users remain responsible for information and content they submit through forms or available areas.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 196 | "Website information may evolve and, unless otherwise stated, does not constitute a final contractual commitment.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 239 | "Nutzer sind für die Richtigkeit der bereitgestellten Informationen verantwortlich und müssen ihre Zugangsdaten schützen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 246 | "Die auf der Website verfügbaren Informationen beschreiben die Aktivitäten und Lösungen von TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 259 | "Nutzer bleiben für die Informationen und Inhalte verantwortlich, die sie über Formulare oder bereitgestellte Bereiche übermitteln.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 268 | "Informationen auf der Website können sich ändern und stellen, sofern nicht anders angegeben, keine endgültige vertragliche Verpflichtung dar.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 276 | "Die Nutzung der Website kann die Verarbeitung personenbezogener Daten beinhalten. Weitere Informationen finden Sie in unserer Datenschutz- und Cookie-Richtlinie.",
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 15 | import { academyTranslations } from "../../i18n/locales/academy";
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 26 | function Academy() {
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 31 | academyTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 33 | `academy.${key}`
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 331 | export default Academy;
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9134 | placeholder="Informations utiles pour le rendez-vous..."
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 56 | { id: "academy", icon: GraduationCap },
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1280 | academy: "domains.academy",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2228 | // CLIENT / INFORMATIONS FACTURE
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2529 | // INFORMATIONS + TOTAUX
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2551 | ipt("additionalInformation"),
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 9936 | {ct("copy.personalInformation")}</h2>
+C:\TSB\TSB-Tech-Group\src\pages\Services\index.tsx | ligne 97 | id: "academy",
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 654 | {/* INFORMATIONS PRODUIT */}
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 991 | {/* INFORMATIONS ESSENTIELLES */}
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 25 | | "academy"
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 79 | const academyTheme = makeTheme("#d4a017", "#f4c430", "212,160,23");
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 232 | key: "academy",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 233 | label: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 234 | shortLabel: "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 235 | theme: academyTheme,
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 236 | services: ["Academy", "TSB Academy", "Formation", "Formations"],
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 404 | if (includesAny(normalized, ["academy", "formation"])) {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 27 | const Academy = lazy(() => import("./pages/Academy"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 107 | } else if (path === "/academy") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 108 | page = <Academy />;

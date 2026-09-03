@@ -1,0 +1,173 @@
+﻿===== ADMIN FINAL AUDIT =====
+
+===== FILE SIZES =====
+.\src\pages\Admin\index.tsx | 10703 lignes
+.\src\components\admin\StoreProductsPanel.tsx | 10174 lignes
+.\src\components\admin\AdminNavigation.tsx | 209 lignes
+
+===== ADMIN ROUTES / IMPORTS =====
+C:\TSB\TSB-Tech-Group\src\components\admin\AdminNavigation.tsx | ligne 31 | type AdminNavigationProps = {
+C:\TSB\TSB-Tech-Group\src\components\admin\AdminNavigation.tsx | ligne 91 | function AdminNavigation({
+C:\TSB\TSB-Tech-Group\src\components\admin\AdminNavigation.tsx | ligne 95 | }: AdminNavigationProps) {
+C:\TSB\TSB-Tech-Group\src\components\admin\AdminNavigation.tsx | ligne 209 | export default AdminNavigation;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 401 | function StoreProductsPanel() {
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 10174 | export default StoreProductsPanel;
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 39 | import AdminNavigation from "../../components/admin/AdminNavigation";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 40 | import type { AdminSection } from "../../components/admin/AdminNavigation";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 42 | import StoreProductsPanel from "../../components/admin/StoreProductsPanel";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3954 | const adminNavigationUnreadCounts: Partial<
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4599 | <AdminNavigation
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4602 | adminNavigationUnreadCounts
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9977 | <StoreProductsPanel />
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 686 | window.location.href = "/admin";
+C:\TSB\TSB-Tech-Group\src\pages\Login\index.tsx | ligne 534 | "/admin";
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 95 | } else if (path === "/admin") {
+
+===== SUPABASE STORE / CLIENT TABLES =====
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 181 | const NOTIFICATIONS_PER_PAGE = 8;
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 295 | ? "notificationsUnit"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 551 | const [notifications, setNotifications] = useState<
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 556 | notificationsLoading,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 557 | setNotificationsLoading,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 566 | markingAllNotifications,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 567 | setMarkingAllNotifications,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 571 | notificationSearchQuery,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 572 | setNotificationSearchQuery,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 803 | notificationsResult,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 808 | .from("quote_requests")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 817 | .from("support_tickets")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 826 | .from("client_documents")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 835 | .from("client_services")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 844 | .from("client_appointments")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 862 | .from("notifications")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 872 | .from("support_messages")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 881 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 977 | if (notificationsResult.error) {
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 979 | "Erreur chargement notifications admin :",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 980 | notificationsResult.error
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 984 | "Impossible de charger certaines notifications administrateur."
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 987 | setNotifications(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 988 | notificationsResult.data ?? []
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1024 | setNotificationsLoading(false);
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1073 | const notificationsChannel =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1076 | `admin-notifications-${user.id}`
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1083 | table: "notifications",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1094 | setNotifications(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1124 | "Erreur Realtime notifications administrateur."
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1128 | "Le temps réel des notifications administrateur est momentanément indisponible. Vous pouvez toujours actualiser la page."
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1136 | notificationsChannel
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1157 | "support_messages",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1272 | .from("quote_requests")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1346 | "quote_requests"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1426 | .from("support_tickets")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1490 | .from("support_messages")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1699 | .from("client_documents")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1847 | .from("client_documents")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1930 | .from("client_documents")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2051 | .from("notifications")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2084 | setNotifications(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2119 | .from("quote_requests")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2180 | .from("support_tickets")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2266 | setActiveSection("notifications");
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2276 | : "admin-notifications";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2347 | : "admin-notifications";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2395 | const handleMarkAllNotificationsRead =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2398 | markingAllNotifications ||
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2405 | notifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2415 | setMarkingAllNotifications(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2424 | .from("notifications")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2438 | setMarkingAllNotifications(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2444 | "Erreur lecture notifications admin :",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2449 | at("unableMarkAllNotificationsReadDetail", {
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2457 | setNotifications([]);
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2549 | .from("client_appointments")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2610 | .from("client_appointments")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2690 | .from("client_appointments")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2800 | "client_appointments"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3715 | notifications: "admin-notifications",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3945 | const unreadNotifications =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3946 | notifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3951 | const unreadNotificationsCount =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3952 | unreadNotifications.length;
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3957 | clients: unreadNotifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3964 | quotes: unreadNotifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3972 | services: unreadNotifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3980 | unreadNotifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3988 | documents: unreadNotifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3995 | support: unreadNotifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4002 | store: unreadNotifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4007 | notifications:
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4008 | unreadNotificationsCount,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4011 | const normalizedNotificationSearch =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4012 | notificationSearchQuery
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4016 | const filteredNotifications =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4017 | [...notifications]
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4027 | if (!normalizedNotificationSearch) {
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4044 | normalizedNotificationSearch
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4058 | all: notifications.length,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4059 | quote: notifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4063 | service: notifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4067 | appointment: notifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4071 | document: notifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4075 | support: notifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4079 | system: notifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4089 | filteredNotifications.length /
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4090 | NOTIFICATIONS_PER_PAGE
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4100 | const paginatedNotifications =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4101 | filteredNotifications.slice(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4103 | NOTIFICATIONS_PER_PAGE,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4105 | NOTIFICATIONS_PER_PAGE
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4384 | "notifications",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4385 | "admin-notifications"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4388 | aria-label={tr("Voir les notifications administrateur", "Administratiemeldingen bekijken", "View administrator notifications")}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4389 | title={tr("Notifications", "Meldingen", "Notifications")}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4415 | {unreadNotificationsCount >
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4450 | {unreadNotificationsCount >
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4453 | : unreadNotificationsCount}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5072 | {activeSection === "notifications" && (
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5074 | {/* NOTIFICATIONS ADMIN */}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5077 | id="admin-notifications"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5095 | NOTIFICATIONS
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5099 | Centre de notifications
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5126 | {filteredNotifications.length} {at("resultsUnit")}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5129 | {unreadNotificationsCount > 0 && (
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5134 | void handleMarkAllNotificationsRead()
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5136 | disabled={markingAllNotifications}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5149 | {markingAllNotifications
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5170 | value={notificationSearchQuery}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5172 | setNotificationSearchQuery(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5177 | placeholder={tr("Rechercher dans les notifications...", "Zoeken in meldingen...", "Search notifications...")}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5245 | {notificationsLoading ? (
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5247 | {tr("Chargement des notifications...", "Meldingen laden...", "Loading notifications...")}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5249 | ) : paginatedNotifications.length === 0 ? (
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5276 | {paginatedNotifications.map(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5463 | {filteredNotifications.length >
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5464 | NOTIFICATIONS_PER_PAGE && (
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5512 | {filteredNotifications.length} {at("notificationsUnit")}
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1162 | .from("quote_requests")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1217 | .from("quote_requests")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1315 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1323 | .from("store_invoice_items")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1471 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1554 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1632 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1731 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1913 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2032 | .from("store_invoice_items")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2045 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3324 | .from("store_orders")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3330 | .from("store_order_items")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3442 | .from("store_orders")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3542 | "store_order_items"
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3558 | .from("store_orders")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3690 | .from("store_orders")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4130 | "store_order_items"
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4155 | .from("store_orders")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5328 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5904 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5947 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 6038 | .from("store_products")
+
+===== TODO / FIXME =====
+
+===== END AUDIT =====

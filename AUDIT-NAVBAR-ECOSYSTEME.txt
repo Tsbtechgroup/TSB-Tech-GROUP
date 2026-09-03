@@ -1,0 +1,2150 @@
+﻿===== NAVBAR =====
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import {
+  FileText,
+  MessageCircle,
+  ShoppingBag,
+  UserRound,
+} from "lucide-react";
+
+import BrandLogo from "../common/BrandLogo";
+import { useLanguage } from "../../context/LanguageContext";
+import {
+  translate,
+  type LocaleCode,
+} from "../../i18n";
+import { navbarTranslations } from "../../i18n/locales/navbar";
+
+const WHATSAPP_URL = "https://wa.me/32493964587";
+
+
+function Navbar() {
+  const [servicesOpen, setServicesOpen] =
+    useState(false);
+  const [languageOpen, setLanguageOpen] =
+    useState(false);
+  const [mobileOpen, setMobileOpen] =
+    useState(false);
+  const [accountOpen, setAccountOpen] =
+    useState(false);
+
+  const {
+    locale,
+    setLocale,
+    availableLocales,
+    t: i18nT,
+  } = useLanguage();
+
+  const headerRef =
+    useRef<HTMLElement | null>(null);
+
+  const navT = (
+    key: string
+  ) =>
+    translate(
+      navbarTranslations,
+      locale,
+      `navbar.${key}`
+    );
+
+  const currentLocale =
+    availableLocales.find(
+      (item) => item.code === locale
+    ) ?? availableLocales[0];
+
+  const toggleServices = () => {
+    setServicesOpen(
+      (previous) => !previous
+    );
+    setLanguageOpen(false);
+    setAccountOpen(false);
+  };
+
+  const toggleLanguage = () => {
+    setLanguageOpen(
+      (previous) => !previous
+    );
+    setServicesOpen(false);
+    setAccountOpen(false);
+  };
+
+  const toggleAccount = () => {
+    setAccountOpen(
+      (previous) => !previous
+    );
+    setServicesOpen(false);
+    setLanguageOpen(false);
+  };
+
+  const toggleMobile = () => {
+    setMobileOpen(
+      (previous) => !previous
+    );
+    setServicesOpen(false);
+    setLanguageOpen(false);
+    setAccountOpen(false);
+  };
+
+  const closeDropdowns = () => {
+    setServicesOpen(false);
+    setLanguageOpen(false);
+    setAccountOpen(false);
+  };
+
+  const closeMobile = () => {
+    setMobileOpen(false);
+  };
+
+  const changeLocale = (
+    newLocale: LocaleCode
+  ) => {
+    setLocale(newLocale);
+    setLanguageOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (
+      event: MouseEvent
+    ) => {
+      const target =
+        event.target as Node;
+
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(target)
+      ) {
+        closeDropdowns();
+      }
+    };
+
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside
+    );
+
+    return () => {
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
+    };
+  }, []);
+
+  return (
+    <header
+      ref={headerRef}
+      className="tsb-header"
+    >
+      <style>{`
+        .tsb-header {
+          overflow: visible !important;
+        }
+
+        .tsb-header-inner {
+          gap: 12px !important;
+          padding-left: 14px !important;
+          padding-right: 14px !important;
+          overflow: visible !important;
+        }
+
+        .tsb-header-brand {
+          flex: 0 0 auto;
+        }
+
+        .tsb-header-nav {
+          flex: 1 1 auto;
+          min-width: 0;
+          gap: 11px !important;
+          justify-content: center;
+        }
+
+        .tsb-header-nav > a,
+        .tsb-nav-dropdown-button {
+          padding-left: 2px !important;
+          padding-right: 2px !important;
+          font-size: 0.74rem !important;
+          white-space: nowrap;
+        }
+
+        .tsb-header-actions {
+          flex: 0 0 auto;
+          gap: 6px !important;
+          overflow: visible !important;
+        }
+
+        .tsb-language {
+          position: relative;
+          overflow: visible !important;
+        }
+
+        .tsb-header-actions .tsb-language-button {
+          min-height: 34px !important;
+          padding: 0 8px !important;
+          border-radius: 10px !important;
+          font-size: 0.72rem !important;
+          white-space: nowrap;
+        }
+
+
+        .tsb-language-button--international {
+          display: inline-flex !important;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .tsb-language-button--international .tsb-language-globe {
+          width: 17px;
+          height: 17px;
+          display: inline-grid;
+          place-items: center;
+          border-radius: 50%;
+          border: 1px solid rgba(56,189,248,0.30);
+          background: rgba(56,189,248,0.08);
+          color: #7dd3fc;
+          font-size: 0.68rem;
+          line-height: 1;
+        }
+
+        .tsb-language-menu--international {
+          position: absolute;
+          top: calc(100% + 9px);
+          right: 0;
+          z-index: 10060;
+          width: 238px;
+          max-height: min(430px, 72vh);
+          overflow-y: auto;
+          overscroll-behavior: contain;
+          padding: 8px;
+          display: grid;
+          gap: 4px;
+          border: 1px solid rgba(56, 189, 248, 0.22);
+          border-radius: 15px;
+          background: rgba(7, 18, 31, 0.99);
+          box-shadow:
+            0 20px 50px rgba(0,0,0,0.48),
+            0 0 28px rgba(56,189,248,0.08);
+          backdrop-filter: blur(18px);
+        }
+
+        .tsb-language-menu--international::-webkit-scrollbar {
+          width: 7px;
+        }
+
+        .tsb-language-menu--international::-webkit-scrollbar-thumb {
+          border-radius: 999px;
+          background: rgba(148,163,184,0.28);
+        }
+
+        .tsb-language-option {
+          width: 100%;
+          min-height: 43px;
+          padding: 0 10px;
+          display: grid;
+          grid-template-columns: 38px minmax(0,1fr) 18px;
+          align-items: center;
+          gap: 8px;
+          border: 1px solid transparent;
+          border-radius: 11px;
+          background: transparent;
+          color: rgba(255,255,255,0.84);
+          cursor: pointer;
+          text-align: left;
+          transition:
+            background 0.16s ease,
+            border-color 0.16s ease,
+            color 0.16s ease;
+        }
+
+        .tsb-language-option:hover {
+          background: rgba(56,189,248,0.08);
+          color: #fff;
+        }
+
+        .tsb-language-option.is-active {
+          border-color: rgba(56,189,248,0.38);
+          background: rgba(56,189,248,0.12);
+          color: #fff;
+        }
+
+        .tsb-language-option__code {
+          min-width: 34px;
+          min-height: 25px;
+          display: inline-grid;
+          place-items: center;
+          border-radius: 7px;
+          background: rgba(255,255,255,0.055);
+          color: #7dd3fc;
+          font-size: 0.68rem;
+          font-weight: 900;
+          letter-spacing: 0.04em;
+        }
+
+        .tsb-language-option__name {
+          min-width: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-size: 0.77rem;
+          font-weight: 800;
+        }
+
+        .tsb-language-option__check {
+          color: #38bdf8;
+          font-size: 0.76rem;
+          font-weight: 900;
+          text-align: center;
+        }
+
+        .tsb-mobile-language-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 8px;
+          padding: 14px 0 6px;
+          border-top: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .tsb-mobile-language-option {
+          min-height: 44px;
+          padding: 0 10px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 8px;
+          border-radius: 10px;
+          border: 1px solid rgba(255,255,255,0.14);
+          background: rgba(255,255,255,0.04);
+          color: #fff;
+          font-weight: 800;
+          cursor: pointer;
+          text-align: left;
+        }
+
+        .tsb-mobile-language-option.is-active {
+          border-color: rgba(59,130,246,0.95);
+          background: rgba(37,99,235,0.22);
+        }
+
+        .tsb-mobile-language-option small {
+          color: rgba(255,255,255,0.62);
+          font-size: 0.68rem;
+          font-weight: 800;
+        }
+
+        .tsb-account-menu {
+          position: absolute;
+          top: calc(100% + 9px);
+          right: 0;
+          z-index: 10050;
+          min-width: 190px;
+          padding: 7px;
+          border: 1px solid rgba(56, 189, 248, 0.22);
+          border-radius: 14px;
+          background: rgba(7, 18, 31, 0.985);
+          box-shadow:
+            0 18px 45px rgba(0, 0, 0, 0.42),
+            0 0 24px rgba(56, 189, 248, 0.08);
+          backdrop-filter: blur(16px);
+        }
+
+        .tsb-account-menu a {
+          min-height: 40px;
+          padding: 0 11px;
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          border-radius: 10px;
+          color: rgba(255,255,255,0.88);
+          font-size: 0.78rem;
+          font-weight: 800;
+          text-decoration: none;
+          white-space: nowrap;
+        }
+
+        .tsb-account-menu a:hover {
+          color: #ffffff;
+          background: rgba(56,189,248,0.10);
+        }
+
+        .tsb-header-quote.tsb-header-quote--compact {
+          min-height: 34px !important;
+          padding: 0 9px !important;
+          gap: 5px !important;
+          border-radius: 10px !important;
+          font-size: 0.70rem !important;
+          white-space: nowrap;
+        }
+
+        .tsb-whatsapp-icon-button {
+          position: relative;
+          width: 36px;
+          height: 36px;
+          flex: 0 0 36px;
+          display: inline-grid;
+          place-items: center;
+          border: 1px solid rgba(34, 197, 94, 0.48);
+          border-radius: 50%;
+          background:
+            radial-gradient(circle at 35% 30%, rgba(134,239,172,0.22), transparent 42%),
+            rgba(22, 101, 52, 0.18);
+          color: #86efac;
+          text-decoration: none;
+          box-shadow:
+            0 0 0 0 rgba(34,197,94,0.40),
+            0 0 14px rgba(34,197,94,0.28);
+          animation: tsbWhatsappPulse 1.75s ease-in-out infinite;
+          transition:
+            transform 0.18s ease,
+            border-color 0.18s ease,
+            background 0.18s ease;
+        }
+
+        .tsb-whatsapp-icon-button:hover {
+          transform: translateY(-1px) scale(1.06);
+          border-color: rgba(134,239,172,0.82);
+          background: rgba(22, 163, 74, 0.24);
+        }
+
+        .tsb-whatsapp-icon-button::after {
+          content: "";
+          position: absolute;
+          inset: -4px;
+          border: 1px solid rgba(34,197,94,0.24);
+          border-radius: 50%;
+          animation: tsbWhatsappRing 1.75s ease-out infinite;
+          pointer-events: none;
+        }
+
+        @keyframes tsbWhatsappPulse {
+          0%, 100% {
+            box-shadow:
+              0 0 0 0 rgba(34,197,94,0.34),
+              0 0 12px rgba(34,197,94,0.24);
+          }
+          50% {
+            box-shadow:
+              0 0 0 7px rgba(34,197,94,0.06),
+              0 0 24px rgba(34,197,94,0.58);
+          }
+        }
+
+        @keyframes tsbWhatsappRing {
+          0% {
+            opacity: 0.70;
+            transform: scale(0.88);
+          }
+          70% {
+            opacity: 0;
+            transform: scale(1.28);
+          }
+          100% {
+            opacity: 0;
+            transform: scale(1.28);
+          }
+        }
+
+        @media (max-width: 1220px) {
+          .tsb-header-nav {
+            gap: 8px !important;
+          }
+
+          .tsb-header-nav > a,
+          .tsb-nav-dropdown-button {
+            font-size: 0.69rem !important;
+          }
+
+          .tsb-header-actions .tsb-language-button {
+            padding: 0 6px !important;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .tsb-whatsapp-icon-button,
+          .tsb-whatsapp-icon-button::after {
+            animation: none !important;
+          }
+        }
+      `}</style>
+      <div className="tsb-header-inner">
+        <a
+          href="/#top"
+          className="tsb-header-brand"
+          aria-label="TSB Tech Group"
+          onClick={closeDropdowns}
+        >
+          <BrandLogo compact />
+        </a>
+
+        <nav
+          className="tsb-header-nav"
+          aria-label={navT("navigation")}
+        >
+          <a href="/#top" onClick={closeDropdowns}>
+            {navT("home")}
+          </a>
+
+          <a href="/about" onClick={closeDropdowns}>
+            {navT("about")}
+          </a>
+
+          <div className="tsb-nav-dropdown">
+            <button
+              type="button"
+              className="tsb-nav-dropdown-button"
+              onClick={toggleServices}
+              aria-expanded={servicesOpen}
+            >
+              {navT("services")}
+              <span>âŒ„</span>
+            </button>
+
+            {servicesOpen && (
+              <div className="tsb-nav-dropdown-menu">
+                <a href="/services" onClick={closeDropdowns}>
+                  {navT("allServices")}
+                </a>
+
+                <a href="/services#automobile" onClick={closeDropdowns}>
+                  {navT("automobile")}
+                </a>
+
+                <a href="/services#diagnostic" onClick={closeDropdowns}>
+                  {navT("diagnostic")}
+                </a>
+
+                <a href="/services#securite" onClick={closeDropdowns}>
+                  {navT("security")}
+                </a>
+
+                <a href="/services#electricite" onClick={closeDropdowns}>
+                  {navT("electricity")}
+                </a>
+
+                <a href="/services#energie" onClick={closeDropdowns}>
+                  {navT("energy")}
+                </a>
+
+                <a href="/services#eau" onClick={closeDropdowns}>
+                  {navT("water")}
+                </a>
+
+                <a href="/services#automatisation" onClick={closeDropdowns}>
+                  {navT("automation")}
+                </a>
+
+                <a href="/services#informatique" onClick={closeDropdowns}>
+                  {navT("digital")}
+                </a>
+
+                <a href="/services#reseaux" onClick={closeDropdowns}>
+                  {navT("networks")}
+                </a>
+
+                <a href="/services#site-web" onClick={closeDropdowns}>
+                  {navT("website")}
+                </a>
+
+                <a href="/services#maintenance" onClick={closeDropdowns}>
+                  {navT("maintenance")}
+                </a>
+
+                <a href="/academy" onClick={closeDropdowns}>
+                  {navT("academy")}
+                </a>
+
+                <a href="/store" onClick={closeDropdowns}>
+                  {navT("store")}
+                </a>
+
+                <a href="/business" onClick={closeDropdowns}>
+                  {navT("business")}
+                </a>
+
+                <a href="/innovation" onClick={closeDropdowns}>
+                  {navT("innovation")}
+                </a>
+              </div>
+            )}
+          </div>
+
+          <a
+            href="/store"
+            onClick={closeDropdowns}
+            aria-label={navT("store")}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              color: "#38bdf8",
+              fontWeight: 800,
+            }}
+          >
+            <ShoppingBag size={15} strokeWidth={2} />
+            {navT("store")}
+          </a>
+
+          <a href="/academy" onClick={closeDropdowns}>
+            {navT("academy")}
+          </a>
+
+          <a href="/projects" onClick={closeDropdowns}>
+            {navT("projects")}
+          </a>
+
+          <a href="/news" onClick={closeDropdowns}>
+            {navT("news")}
+          </a>
+
+          <a href="/contact" onClick={closeDropdowns}>
+            {navT("contact")}
+          </a>
+        </nav>
+
+        <div className="tsb-header-actions">
+          <div className="tsb-language">
+            <button
+              type="button"
+              className="tsb-language-button tsb-language-button--international"
+              onClick={toggleLanguage}
+              aria-expanded={languageOpen}
+              aria-haspopup="menu"
+              aria-label={i18nT("language.choose")}
+              title={currentLocale.nativeLabel}
+            >
+              <span
+                className="tsb-language-globe"
+                aria-hidden="true"
+              >
+                â—‰
+              </span>
+              <span>{currentLocale.shortLabel}</span>
+              <span>âŒ„</span>
+            </button>
+
+            {languageOpen && (
+              <div
+                className="tsb-language-menu--international"
+                role="menu"
+                aria-label={i18nT("language.choose")}
+              >
+                {availableLocales
+                  .filter((item) => item.enabled)
+                  .map((item) => {
+                    const isActive =
+                      locale === item.code;
+
+                    return (
+                      <button
+                        key={item.code}
+                        type="button"
+                        className={`tsb-language-option${
+                          isActive
+                            ? " is-active"
+                            : ""
+                        }`}
+                        onClick={() =>
+                          changeLocale(item.code)
+                        }
+                        aria-pressed={isActive}
+                        role="menuitemradio"
+                        dir={item.direction}
+                      >
+                        <span className="tsb-language-option__code">
+                          {item.shortLabel}
+                        </span>
+
+                        <span className="tsb-language-option__name">
+                          {item.nativeLabel}
+                        </span>
+
+                        <span
+                          className="tsb-language-option__check"
+                          aria-hidden="true"
+                        >
+                          {isActive ? "âœ“" : ""}
+                        </span>
+                      </button>
+                    );
+                  })}
+              </div>
+            )}
+          </div>
+
+          <div
+            className="tsb-language"
+            style={{ position: "relative" }}
+          >
+            <button
+              type="button"
+              className="tsb-language-button"
+              onClick={toggleAccount}
+              aria-expanded={accountOpen}
+              aria-label={navT("account")}
+              title={navT("account")}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+              }}
+            >
+              <UserRound size={16} strokeWidth={2} />
+              <span>{navT("account")}</span>
+              <span>âŒ„</span>
+            </button>
+
+            {accountOpen && (
+              <div className="tsb-account-menu">
+                <a
+                  href="/login"
+                  onClick={closeDropdowns}
+                  style={{
+                    display: "block",
+                    textDecoration: "none",
+                  }}
+                >
+                  <UserRound size={15} strokeWidth={2} />
+                  {navT("login")}
+                </a>
+
+                <a
+                  href="/register"
+                  onClick={closeDropdowns}
+                  style={{
+                    display: "block",
+                    textDecoration: "none",
+                  }}
+                >
+                  <UserRound size={15} strokeWidth={2} />
+                  {navT("register")}
+                </a>
+              </div>
+            )}
+          </div>
+
+          <a
+            href="/#quote"
+            className="tsb-header-quote tsb-header-quote--compact"
+            onClick={closeDropdowns}
+            aria-label={navT("quote")}
+            title={navT("quote")}
+          >
+            <FileText size={14} strokeWidth={2} />
+            {navT("quoteShort")}
+          </a>
+
+          <a
+            href={WHATSAPP_URL}
+            className="tsb-whatsapp-icon-button"
+            aria-label={navT("whatsapp")}
+            title="WhatsApp"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={closeDropdowns}
+          >
+            <MessageCircle size={19} strokeWidth={2.2} />
+          </a>
+
+          <button
+            type="button"
+            className="tsb-mobile-toggle"
+            onClick={toggleMobile}
+            aria-label={navT("menu")}
+            aria-expanded={mobileOpen}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+      </div>
+
+      {mobileOpen && (
+        <div className="tsb-mobile-menu">
+          <a href="/#top" onClick={closeMobile}>
+            {navT("home")}
+          </a>
+
+          <a href="/about" onClick={closeMobile}>
+            {navT("about")}
+          </a>
+
+          <a href="/services" onClick={closeMobile}>
+            {navT("services")}
+          </a>
+
+          <a
+            href="/store"
+            onClick={closeMobile}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+            }}
+          >
+            <ShoppingBag size={17} strokeWidth={2} />
+            {navT("store")}
+          </a>
+
+          <a href="/academy" onClick={closeMobile}>
+            {navT("academy")}
+          </a>
+
+          <a href="/projects" onClick={closeMobile}>
+            {navT("projects")}
+          </a>
+
+          <a href="/news" onClick={closeMobile}>
+            {navT("news")}
+          </a>
+
+          <a href="/contact" onClick={closeMobile}>
+            {navT("contact")}
+          </a>
+
+          <div
+            className="tsb-mobile-language-grid"
+            aria-label={i18nT("language.choose")}
+          >
+            {availableLocales
+              .filter((item) => item.enabled)
+              .map((item) => {
+                const isActive =
+                  locale === item.code;
+
+                return (
+                  <button
+                    key={item.code}
+                    type="button"
+                    className={`tsb-mobile-language-option${
+                      isActive
+                        ? " is-active"
+                        : ""
+                    }`}
+                    onClick={() => {
+                      changeLocale(item.code);
+                      closeMobile();
+                    }}
+                    aria-pressed={isActive}
+                    dir={item.direction}
+                  >
+                    <span>{item.nativeLabel}</span>
+                    <small>
+                      {item.shortLabel}
+                    </small>
+                  </button>
+                );
+              })}
+          </div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "10px",
+              paddingTop: "8px",
+            }}
+          >
+            <a
+              href="/login"
+              onClick={closeMobile}
+              style={{
+                minHeight: "44px",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                borderRadius: "10px",
+                border: "1px solid rgba(56,189,248,0.30)",
+                background: "rgba(56,189,248,0.08)",
+                color: "#fff",
+                textDecoration: "none",
+                fontWeight: 800,
+              }}
+            >
+              <UserRound size={16} strokeWidth={2} />
+              {navT("login")}
+            </a>
+
+            <a
+              href="/register"
+              onClick={closeMobile}
+              style={{
+                minHeight: "44px",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "10px",
+                border: "1px solid rgba(255,255,255,0.14)",
+                background: "rgba(255,255,255,0.04)",
+                color: "#fff",
+                textDecoration: "none",
+                fontWeight: 800,
+                textAlign: "center",
+              }}
+            >
+              {navT("register")}
+            </a>
+          </div>
+
+          <a
+            href="/#quote"
+            className="tsb-mobile-quote"
+            onClick={closeMobile}
+          >
+            {navT("mobileQuote")}
+          </a>
+
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={closeMobile}
+          >
+            WhatsApp
+          </a>
+        </div>
+      )}
+    </header>
+  );
+}
+
+export default Navbar;
+
+
+===== NAVBAR I18N / RELATED TRANSLATIONS =====
+
+===== NAVBAR REFERENCES =====
+C:\TSB\TSB-Tech-Group\src\components\admin\AdminNavigation.tsx | ligne 24 | | "services"
+C:\TSB\TSB-Tech-Group\src\components\admin\AdminNavigation.tsx | ligne 60 | id: "services",
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 17 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 76 | services?: ClientService[];
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 84 | | "services"
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 91 | services = [],
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 121 | services.map((service) => service.user_id)
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 135 | services: profiles.filter((profile) =>
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 145 | }, [profiles, quotes, services, documents, tickets]);
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 185 | case "services":
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 186 | return services.some(
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 209 | services,
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 285 | const selectedServices = useMemo(() => {
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 288 | services
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 296 | }, [services, selectedClientId]);
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 650 | {selectedServices.length}
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 660 | {at("servicesLabel")}
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 845 | {/* SERVICES */}
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 856 | {at("servicesUpper")}
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 865 | {at("clientServices")}
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 868 | {selectedServices.length === 0 ? (
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 880 | {selectedServices.map(
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1269 | ["services", at("withInterventions"), clientActivityCounts.services],
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1558 | services.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 24 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 64 | type ServicesPanelProps = {
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 73 | const SERVICES_PER_PAGE = 8;
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 87 | "Autres services",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 110 | "Autres services":
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 111 | "serviceCategoryOtherServices",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 114 | function ServicesPanel({
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 118 | }: ServicesPanelProps) {
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 138 | clientServices,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 139 | setClientServices,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 228 | serviceSearch,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 229 | setServiceSearch,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 233 | serviceStatusFilter,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 234 | setServiceStatusFilter,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 238 | serviceStatusDrafts,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 239 | setServiceStatusDrafts,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 423 | setService("Autres services");
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 439 | STATUTS SERVICES
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 444 | serviceStatus: string
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 446 | switch (serviceStatus) {
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 463 | return serviceStatus;
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 467 | const filteredClientServices = useMemo(() => {
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 468 | const query = serviceSearch
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 472 | return clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 493 | serviceStatusFilter !== "all" &&
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 495 | serviceStatusFilter
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 531 | clientServices,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 533 | serviceSearch,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 534 | serviceStatusFilter,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 539 | const getEffectiveServiceStatus = (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 542 | serviceStatusDrafts[clientService.id] ?? clientService.status;
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 544 | const serviceStatusCounts = {
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 545 | all: clientServices.length,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 546 | planned: clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 548 | getEffectiveServiceStatus(clientService) === "planned"
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 550 | scheduled: clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 552 | getEffectiveServiceStatus(clientService) === "scheduled"
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 554 | in_progress: clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 556 | getEffectiveServiceStatus(clientService) === "in_progress"
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 558 | completed: clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 560 | getEffectiveServiceStatus(clientService) === "completed"
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 562 | cancelled: clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 564 | getEffectiveServiceStatus(clientService) === "cancelled"
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 569 | serviceStatusCounts.planned +
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 570 | serviceStatusCounts.scheduled +
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 571 | serviceStatusCounts.in_progress;
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 574 | serviceStatusCounts.completed +
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 575 | serviceStatusCounts.cancelled;
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 580 | filteredClientServices.length /
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 581 | SERVICES_PER_PAGE
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 590 | const paginatedClientServices =
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 591 | filteredClientServices.slice(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 593 | SERVICES_PER_PAGE,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 594 | safeServicePage * SERVICES_PER_PAGE
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 599 | CHARGEMENT SERVICES
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 603 | const loadServices = async () => {
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 609 | .from("client_services")
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 621 | "Erreur chargement services :",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 626 | `${at("loadServicesError")} : ${error.message}`
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 632 | setClientServices(data ?? []);
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 636 | void loadServices();
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 707 | .from("client_services")
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 745 | setClientServices(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 806 | .from("client_services")
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 829 | setClientServices((previous) =>
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 844 | setServiceStatusDrafts((previous) => {
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 853 | at("serviceStatusUpdatedSuccess")
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 961 | .from("client_services")
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 987 | setClientServices((previous) =>
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1045 | {at("servicesPanelIntro")}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1062 | {clientServices.length}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1089 | onClick={() => void loadServices()}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1492 | {/* LISTE SERVICES */}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1512 | {at("recordedServices")}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1541 | ["all", at("allServicesView"), clientServices.length, "rgba(255,255,255,0.72)"],
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1553 | setServiceStatusFilter("all");
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1597 | value={serviceSearch}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1599 | setServiceSearch(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1609 | value={serviceStatusFilter}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1611 | setServiceStatusFilter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1628 | {at("allStatuses")} ({serviceStatusCounts.all})
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1633 | {at("toPlan")} ({serviceStatusCounts.planned})
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1636 | {at("scheduled_3")} ({serviceStatusCounts.scheduled})
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1639 | {at("inProgress")} ({serviceStatusCounts.in_progress})
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1646 | {at("completedPlural")} ({serviceStatusCounts.completed})
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1649 | {at("cancelledPlural")} ({serviceStatusCounts.cancelled})
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1668 | clientServices.length > 0 && (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1677 | {filteredClientServices.length}{" "}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1679 | filteredClientServices.length === 1
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1688 | {at("loadingServices")}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1690 | ) : clientServices.length === 0 ? (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1694 | ) : filteredClientServices.length === 0 ? (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1705 | {paginatedClientServices.map(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1833 | serviceStatusDrafts[clientService.id] ??
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1837 | setServiceStatusDrafts((previous) => ({
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1853 | serviceStatusDrafts[clientService.id] &&
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1854 | serviceStatusDrafts[clientService.id] !==
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1885 | serviceStatusDrafts[clientService.id] ??
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1892 | !serviceStatusDrafts[clientService.id] ||
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1893 | serviceStatusDrafts[clientService.id] ===
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1902 | serviceStatusDrafts[clientService.id] &&
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1903 | serviceStatusDrafts[clientService.id] !==
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1908 | serviceStatusDrafts[clientService.id] &&
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1909 | serviceStatusDrafts[clientService.id] !==
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2264 | filteredClientServices.length >
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2265 | SERVICES_PER_PAGE && (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2335 | export default ServicesPanel;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 43 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 207 | <a href="/services">{t("services")}</a>
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 210 | <a href="/partners">{t("partners")}</a>
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 216 | <a href="/academy">
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 220 | <a href="/store">
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 229 | href="/client"
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 26 | const [servicesOpen, setServicesOpen] =
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 59 | const toggleServices = () => {
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 60 | setServicesOpen(
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 71 | setServicesOpen(false);
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 79 | setServicesOpen(false);
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 87 | setServicesOpen(false);
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 93 | setServicesOpen(false);
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 497 | onClick={toggleServices}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 498 | aria-expanded={servicesOpen}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 500 | {navT("services")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 504 | {servicesOpen && (
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 506 | <a href="/services" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 507 | {navT("allServices")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 510 | <a href="/services#automobile" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 514 | <a href="/services#diagnostic" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 518 | <a href="/services#securite" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 522 | <a href="/services#electricite" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 526 | <a href="/services#energie" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 530 | <a href="/services#eau" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 534 | <a href="/services#automatisation" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 538 | <a href="/services#informatique" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 542 | <a href="/services#reseaux" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 546 | <a href="/services#site-web" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 550 | <a href="/services#maintenance" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 554 | <a href="/academy" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 558 | <a href="/store" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 562 | <a href="/business" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 574 | href="/store"
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 589 | <a href="/academy" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 774 | <a href="/services" onClick={closeMobile}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 775 | {navT("services")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 779 | href="/store"
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 791 | <a href="/academy" onClick={closeMobile}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 70 | href="/partners"
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 31 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 37 | const services = [
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 50 | "Autres services",
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 69 | "Autres services": BriefcaseBusiness,
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 220 | "Autres services": "other",
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 808 | services.includes(
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1333 | const handleServiceSelect = (
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1753 | className="quote-services"
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1763 | {services.map(
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1790 | handleServiceSelect(
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 2077 | {services.map(
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 19 | import { servicesGridTranslations } from "../../i18n/locales/servicesGrid";
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 37 | function ServicesGrid() {
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 42 | servicesGridTranslations,
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 44 | `servicesGrid.${key}`
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 67 | `services.${service.id}.title`
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 71 | `services.${service.id}.description`
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 75 | `services.${service.id}.category`
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 104 | ? "/store"
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 106 | ? "/academy"
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 108 | ? "/business"
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 111 | : `/services#${service.id}`
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 417 | export default ServicesGrid;
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 17 | import { storeMiniCartTranslations } from "../i18n/locales/storeMiniCart";
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 647 | href="/store#catalogue"
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 688 | href={`/store/product/${encodeURIComponent(
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 762 | href={`/store/product/${encodeURIComponent(
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 9 | "intro": "TSB Tech Group développe un écosystème de services techniques, technologiques et numériques pensé pour accompagner les particuliers, les professionnels, les entreprises et les institutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 15 | "whoText2": "Cette approche permet de proposer des solutions adaptées à chaque besoin tout en construisant progressivement un écosystème cohérent autour de la marque TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 93 | "intro": "TSB Tech Group is developing an ecosystem of technical, technological and digital services for individuals, professionals, businesses and institutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 99 | "whoText2": "This approach allows us to provide solutions tailored to each need while progressively building a coherent ecosystem around the TSB Tech Group brand.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 1576 | "clientServices": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 1577 | fr: "Services du client",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 1579 | en: "Client services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2356 | "recordedServices": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2357 | fr: "Services enregistrés",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2359 | en: "Recorded services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2380 | "loadingServices": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2381 | fr: "Chargement des services...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2383 | en: "Loading services...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4120 | "servicesLabel": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4121 | fr: "Services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4123 | en: "Services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4156 | "servicesUpper": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4157 | fr: "SERVICES",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4159 | en: "SERVICES",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4336 | "servicesPanelIntro": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4480 | "serviceCategoryOtherServices": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4481 | fr: "Autres services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4483 | en: "Other services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4540 | "loadServicesError": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4541 | fr: "Impossible de charger les services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4543 | en: "Unable to load services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4600 | "serviceStatusUpdatedSuccess": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4732 | "allServicesView": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 30 | strategic: { title: "Partenariats stratégiques", description: "Collaborations durables avec entreprises, groupes, experts et acteurs complémentaires à l’écosystème TSB." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 37 | opportunitiesTitle: "Un écosystème multisectoriel",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 118 | opportunitiesEyebrow: "OPPORTUNITY SECTORS", opportunitiesTitle: "A multisector ecosystem", opportunitiesIntro: "Opportunities may involve several current or future TSB Tech Group business areas.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 11 | "yourServicesCannotBeLoadedAtTheMoment": "Impossible de charger vos services pour le moment.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 87 | "yourTsbAreaCentralizesYourRequestsServicesDocumentsAndExchanges": "Votre espace TSB centralise vos demandes, services, documents et échanges avec TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 153 | "myServices": "MES SERVICES",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 159 | "loadingYourServices": "Chargement de vos services...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 257 | "other": "Autres services"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 275 | "services": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 288 | "otherServices": "Autres services"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 353 | "yourServicesCannotBeLoadedAtTheMoment": "Uw diensten kunnen momenteel niet worden geladen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 429 | "yourTsbAreaCentralizesYourRequestsServicesDocumentsAndExchanges": "Uw TSB-zone bundelt uw aanvragen, diensten, documenten en communicatie met TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 495 | "myServices": "MIJN DIENSTEN",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 501 | "loadingYourServices": "Uw diensten laden...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 617 | "services": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 630 | "otherServices": "Andere diensten"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 695 | "yourServicesCannotBeLoadedAtTheMoment": "Your services cannot be loaded at the moment.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 771 | "yourTsbAreaCentralizesYourRequestsServicesDocumentsAndExchanges": "Your TSB area centralizes your requests, services, documents and exchanges with TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 837 | "myServices": "MY SERVICES",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 843 | "loadingYourServices": "Loading your services...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 941 | "other": "Other services"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 959 | "services": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 972 | "otherServices": "Other services"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1037 | "yourServicesCannotBeLoadedAtTheMoment": "Ihre Dienstleistungen können derzeit nicht geladen werden.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1113 | "yourTsbAreaCentralizesYourRequestsServicesDocumentsAndExchanges": "Ihr TSB-Bereich bündelt Ihre Anfragen, Dienstleistungen, Dokumente und den Austausch mit TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1179 | "myServices": "MEINE DIENSTLEISTUNGEN",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1185 | "loadingYourServices": "Ihre Dienstleistungen werden geladen...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1283 | "other": "Weitere Services"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1301 | "services": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1314 | "otherServices": "Weitere Services"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1379 | "yourServicesCannotBeLoadedAtTheMoment": "Sus servicios no pueden cargarse en este momento.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1455 | "yourTsbAreaCentralizesYourRequestsServicesDocumentsAndExchanges": "Su área TSB centraliza sus solicitudes, servicios, documentos e intercambios con TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1521 | "myServices": "MIS SERVICIOS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1527 | "loadingYourServices": "Cargando sus servicios...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1643 | "services": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1656 | "otherServices": "Otros servicios"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1721 | "yourServicesCannotBeLoadedAtTheMoment": "I tuoi servizi non possono essere caricati al momento.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1797 | "yourTsbAreaCentralizesYourRequestsServicesDocumentsAndExchanges": "La tua area TSB centralizza richieste, servizi, documenti e comunicazioni con TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1863 | "myServices": "I MIEI SERVIZI",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1869 | "loadingYourServices": "Caricamento dei tuoi servizi...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1985 | "services": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1998 | "otherServices": "Altri servizi"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2063 | "yourServicesCannotBeLoadedAtTheMoment": "Os seus serviços não podem ser carregados neste momento.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2139 | "yourTsbAreaCentralizesYourRequestsServicesDocumentsAndExchanges": "A sua área TSB centraliza os seus pedidos, serviços, documentos e comunicações com a TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2205 | "myServices": "OS MEUS SERVIÇOS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2211 | "loadingYourServices": "A carregar os seus serviços...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2327 | "services": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2340 | "otherServices": "Outros serviços"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2405 | "yourServicesCannotBeLoadedAtTheMoment": "يتعذر تحميل خدماتك في الوقت الحالي.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2481 | "yourTsbAreaCentralizesYourRequestsServicesDocumentsAndExchanges": "تجمع مساحة TSB الخاصة بك طلباتك وخدماتك ومستنداتك وتواصلك مع TSB Tech Group في مكان واحد.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2547 | "myServices": "خدماتي",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2553 | "loadingYourServices": "جارٍ تحميل خدماتك...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2669 | "services": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2682 | "otherServices": "خدمات أخرى"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2747 | "yourServicesCannotBeLoadedAtTheMoment": "Hizmetleriniz şu anda yüklenemiyor.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2823 | "yourTsbAreaCentralizesYourRequestsServicesDocumentsAndExchanges": "TSB alanınız taleplerinizi, hizmetlerinizi, belgelerinizi ve TSB Tech Group ile iletişiminizi tek yerde toplar.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2889 | "myServices": "HİZMETLERİM",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2895 | "loadingYourServices": "Hizmetleriniz yükleniyor...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3011 | "services": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3024 | "otherServices": "Diğer hizmetler"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3089 | "yourServicesCannotBeLoadedAtTheMoment": "目前无法加载您的服务。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3165 | "yourTsbAreaCentralizesYourRequestsServicesDocumentsAndExchanges": "您的 TSB 空间集中管理您的请求、服务、文档以及与 TSB Tech Group 的沟通。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3231 | "myServices": "我的服务",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3237 | "loadingYourServices": "正在加载您的服务...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3353 | "services": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3366 | "otherServices": "其他服务"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 49 | "Bonjour TSB Tech Group, je souhaite obtenir des informations concernant vos services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 147 | "Hello TSB Tech Group, I would like information about your services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\cookies.ts | ligne 43 | thirdPartyTitle: "Services tiers",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\cookies.ts | ligne 45 | "Certains services techniques intégrés au site peuvent utiliser leurs propres technologies de stockage lorsqu’ils sont activés. TSB Tech Group veille à ne pas activer les services non essentiels avant le consentement requis.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\cookies.ts | ligne 149 | thirdPartyTitle: "Third-party services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\cookies.ts | ligne 151 | "Some technical services integrated into the website may use their own storage technologies when enabled. TSB Tech Group aims not to activate non-essential services before the required consent is obtained.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 12 | services: "Nos services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 44 | services: "Onze diensten",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 76 | services: "Our services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 108 | services: "Unsere Leistungen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 140 | services: "Nuestros servicios",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 172 | services: "I nostri servizi",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 204 | services: "Os nossos serviços",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 236 | services: "خدماتنا",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 268 | services: "Hizmetlerimiz",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 300 | services: "我们的服务",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 13 | discoverServices: "Découvrir nos services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 17 | aboutTitle2: "Un écosystème de",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 20 | "TSB Tech Group réunit différentes expertises technologiques et techniques au sein d’un même écosystème.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 44 | discoverServices: "Ontdek onze diensten",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 75 | discoverServices: "Discover our services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 79 | aboutTitle2: "An ecosystem of",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 82 | "TSB Tech Group brings together a wide range of technological and technical expertise within a single ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 106 | discoverServices: "Unsere Dienstleistungen entdecken",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 137 | discoverServices: "Descubrir nuestros servicios",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 168 | discoverServices: "Scopri i nostri servizi",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 199 | discoverServices: "Descobrir os nossos serviços",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 230 | discoverServices: "اكتشف خدماتنا",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 261 | discoverServices: "Hizmetlerimizi keşfedin",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 292 | discoverServices: "了解我们的服务",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 39 | "Intégration de systèmes communicants, objets connectés, réseaux et services numériques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 131 | "Integration of communicating systems, IoT, networks and digital services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 30 | "L’hébergement du site et des services associés est prévu chez o2switch.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 51 | "Le site peut contenir des liens vers des services ou sites tiers. TSB Tech Group n’est pas responsable du contenu, du fonctionnement ou des politiques de confidentialité de ces services externes.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 156 | "The website and associated services are planned to be hosted by o2switch.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 177 | "The website may contain links to third-party websites or services. TSB Tech Group is not responsible for their content, operation or privacy policies.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 10 | "Accédez à vos demandes, devis, services, documents et futures fonctionnalités de la plateforme TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 156 | "Access your requests, quotes, services, documents and future features of the TSB Tech Group platform.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 9 | services: "Services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 10 | allServices: "Tous nos services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 45 | services: "Services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 46 | allServices: "All services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 81 | services: "Diensten",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 82 | allServices: "Alle diensten",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 117 | services: "Dienstleistungen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 118 | allServices: "Alle Dienstleistungen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 153 | services: "Servicios",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 154 | allServices: "Todos los servicios",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 189 | services: "Servizi",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 190 | allServices: "Tutti i servizi",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 225 | services: "Serviços",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 226 | allServices: "Todos os serviços",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 261 | services: "الخدمات",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 262 | allServices: "جميع الخدمات",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 297 | services: "Hizmetler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 298 | allServices: "Tüm hizmetler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 333 | services: "服务",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 334 | allServices: "全部服务",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 10 | "Suivez l’évolution de nos projets, de notre plateforme et de l’écosystème TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 17 | "TSB Tech Group construit progressivement une plateforme numérique destinée à réunir ses services, ses clients et ses futures solutions technologiques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 23 | "Notre architecture modulaire permettra d’intégrer progressivement TSB Academy, TSB Store, l’espace client, le support et de nouveaux services numériques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 72 | "Follow the progress of our projects, our platform and the TSB Tech Group ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 79 | "TSB Tech Group is progressively building a digital platform designed to bring together its services, clients and future technology solutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 85 | "Our modular architecture will progressively integrate TSB Academy, TSB Store, the client area, support and new digital services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 10 | "Suivez l’évolution de nos projets, de notre plateforme et de l’écosystème TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 23 | "TSB Tech Group construit progressivement une plateforme numérique destinée à réunir ses services, ses clients et ses futures solutions technologiques dans un même environnement.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 25 | "La TSB Digital Platform est conçue comme le futur point central de l’écosystème TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 27 | "Elle réunira progressivement les services, les demandes de devis, l’espace client et les futurs modules numériques du groupe.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 35 | "Notre architecture modulaire permettra d’intégrer progressivement TSB Academy, TSB Store, l’espace client, le support et de nouveaux services numériques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 37 | "La plateforme est développée avec une architecture modulaire afin de pouvoir ajouter de nouveaux services sans reconstruire l’ensemble du site.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 120 | "Follow the progress of our projects, our platform and the TSB Tech Group ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 133 | "TSB Tech Group is progressively building a digital platform designed to bring together its services, clients and future technology solutions in one environment.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 135 | "The TSB Digital Platform is being designed as the future central hub of the TSB Tech Group ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 137 | "It will progressively bring together services, quote requests, the client area and future digital modules.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 145 | "Our modular architecture will progressively integrate TSB Academy, TSB Store, the client area, support and new digital services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 147 | "The platform is being developed with a modular architecture so new services can be added without rebuilding the entire website.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 46 | "Collaboration commerciale, sous-traitance, développement de services, projets communs et solutions complémentaires.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 70 | ecosystem: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 71 | title: "Écosystème multisectoriel",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 73 | "Des compétences complémentaires réunies autour des services techniques, technologiques, numériques et professionnels.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 88 | "Développer ensemble des solutions, services, marchés et projets créateurs de valeur à long terme.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 167 | ecosystem: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 264 | ecosystem: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 265 | title: "Multisector ecosystem",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 267 | "Complementary expertise across technical, technological, digital and professional services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 282 | "Building solutions, services, markets and long-term value-creating projects together.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 361 | ecosystem: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 458 | ecosystem: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 555 | ecosystem: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 652 | ecosystem: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 749 | ecosystem: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 846 | ecosystem: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 943 | ecosystem: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 10 | "Cette politique explique comment TSB Tech Group collecte, utilise, protège et traite les données personnelles lorsque vous utilisez son site Web, son application, ses formulaires, son espace client ou ses services numériques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 16 | "TSB Tech Group est responsable du traitement des données personnelles collectées dans le cadre de ses services numériques, sauf lorsqu’un autre responsable est clairement indiqué.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 24 | "L’espace client peut également contenir des informations relatives à vos demandes de devis, services ou interventions, documents associés, messages et tickets de support.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 26 | "Certaines données techniques peuvent également être traitées lorsque cela est nécessaire au fonctionnement, à la sécurité, à l’authentification ou à la protection du site, de l’application et de leurs services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 33 | "Lorsque la loi l’exige, le traitement repose notamment sur votre consentement, l’exécution d’un contrat ou de mesures précontractuelles, une obligation légale ou l’intérêt légitime de TSB Tech Group à sécuriser et exploiter ses services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 38 | "TSB Tech Group met en place des mesures techniques et organisationnelles raisonnables afin de protéger les données contre l’accès non autorisé, la perte, l’altération ou la divulgation. Les échanges avec nos services numériques utilisent notamment des connexions sécurisées HTTPS.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 62 | "Le site et certains services numériques peuvent utiliser des cookies ou technologies similaires nécessaires au fonctionnement, à la sécurité, à l’authentification, aux préférences ou, lorsque cela sera activé, à la mesure d’audience. Les cookies non essentiels ne doivent être utilisés qu’avec le consentement requis.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 65 | "Cette politique pourra évoluer afin de tenir compte des nouvelles fonctionnalités de TSB Tech Group, de son application, de ses services ou des obligations applicables. La date de dernière mise à jour sera modifiée en conséquence.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 148 | "This policy explains how TSB Tech Group collects, uses, protects and processes personal data when you use its website, application, forms, client area or digital services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 154 | "TSB Tech Group is responsible for processing personal data collected through its digital services unless another controller is clearly identified.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 162 | "The client area may also contain information about quote requests, services or interventions, associated documents, messages and support tickets.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 164 | "Certain technical data may also be processed where necessary for the operation, security, authentication or protection of the website, application and their services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 169 | "Data may be used to respond to requests, process quotes, create and manage client accounts, follow up services or interventions, provide documents, handle support requests, communicate with you and improve the platform.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 171 | "Where required by law, processing may rely on your consent, performance of a contract or pre-contractual measures, a legal obligation, or TSB Tech Group’s legitimate interest in operating and securing its services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 176 | "TSB Tech Group uses reasonable technical and organisational measures to protect personal data against unauthorised access, loss, alteration or disclosure. Communications with our digital services use secure HTTPS connections where applicable.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 200 | "The website and certain digital services may use cookies or similar technologies required for operation, security, authentication, preferences or, when enabled, audience measurement. Non-essential cookies should only be used where the required consent has been obtained.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\privacy.ts | ligne 203 | "This policy may evolve to reflect new TSB Tech Group features, the application, services or applicable requirements. The last-updated date will be changed accordingly.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 61 | "other": "Autres services"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 247 | "other": "Other services"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 340 | "other": "Weitere Services"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\register.ts | ligne 10 | "Centralisez vos demandes, devis, services et futurs outils dans un seul espace sécurisé TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\register.ts | ligne 124 | "Centralize your requests, quotes, services and future tools in one secure TSB Tech Group space.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 3 | export const servicesTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 5 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 6 | eyebrow: "NOS SERVICES",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 7 | title1: "Un écosystème de",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 111 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 217 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 218 | eyebrow: "OUR SERVICES",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 219 | title1: "An ecosystem of",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 323 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 429 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 535 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 641 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 747 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 853 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 959 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 3 | export const servicesGridTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 5 | servicesGrid: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 10 | "Un écosystème de compétences réunies autour d’une même vision : proposer des solutions techniques, technologiques et professionnelles adaptées à chaque projet.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 12 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 96 | servicesGrid: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 103 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 187 | servicesGrid: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 192 | "An ecosystem of expertise built around one vision: delivering technical, technological and professional solutions tailored to every project.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 194 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 278 | servicesGrid: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 285 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 369 | servicesGrid: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 376 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 460 | servicesGrid: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 467 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 551 | servicesGrid: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 558 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 642 | servicesGrid: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 649 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 733 | servicesGrid: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 740 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 824 | servicesGrid: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 831 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 30 | "Pour toute demande concernant nos services, nos activités, nos projets ou nos solutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 134 | "For questions about our services, activities, projects or solutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 10 | "Les présentes conditions définissent les règles générales d’utilisation du site, de la plateforme et des services numériques proposés par TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 16 | "En utilisant le site ou la plateforme TSB Tech Group, vous acceptez les présentes conditions d’utilisation dans la mesure où elles vous sont applicables. Si vous n’acceptez pas ces conditions, vous devez cesser d’utiliser les services concernés.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 27 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 28 | title: "Demandes, devis et services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 48 | "TSB Tech Group cherche à maintenir ses services accessibles et fonctionnels, mais ne garantit pas une disponibilité permanente ou sans interruption.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 68 | "TSB Tech Group peut modifier ces conditions afin de tenir compte de l’évolution du site, de ses services ou des obligations applicables. La date de mise à jour sera adaptée en conséquence.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 99 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 154 | "These terms set out the general rules for using the TSB Tech Group website, platform and digital services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 160 | "By using the TSB Tech Group website or platform, you agree to these terms of use where applicable to you. If you do not agree, you should stop using the relevant services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 171 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 172 | title: "Requests, quotes and services",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 192 | "TSB Tech Group aims to keep its services accessible and functional but does not guarantee permanent or uninterrupted availability.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 212 | "TSB Tech Group may update these terms to reflect changes to the website, services or applicable requirements. The last-updated date will be adjusted accordingly.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 243 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 315 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 387 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 459 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 531 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 603 | services: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\terms.ts | ligne 675 | services: {
+C:\TSB\TSB-Tech-Group\src\pages\About\index.tsx | ligne 38 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 26 | import { academyTranslations } from "../../i18n/locales/academy";
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 78 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 38 | import ClientsPanel from "../../components/admin/ClientsPanel";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 41 | import ServicesPanel from "../../components/admin/ServicesPanel";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 42 | import StoreProductsPanel from "../../components/admin/StoreProductsPanel";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 43 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 471 | const [clientServices, setClientServices] = useState<
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 800 | servicesResult,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 835 | .from("client_services")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 932 | if (servicesResult.error) {
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 935 | servicesResult.error
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 942 | setClientServices(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 943 | servicesResult.data ?? []
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1054 | window.location.href = "/client";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1820 | clientServices.find(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2258 | setActiveSection("services");
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2510 | clientServices.find(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3113 | const getServiceStatusLabel = (
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3190 | return `${clientService.title} — ${clientService.service} — ${getServiceStatusLabel(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3195 | const selectedClientServices =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3197 | ? clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3204 | const appointmentClientServices =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3206 | ? clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3214 | clientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3710 | services: "admin-interventions",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3781 | setActiveSection("services");
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3972 | services: unreadNotifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4140 | value: clientServices.length,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4142 | section: "services" as AdminSection,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4196 | clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5748 | {selectedClientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7922 | const documentClientServices =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7923 | clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8199 | {documentClientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8914 | {appointmentClientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9951 | {activeSection === "services" && (
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9958 | <ServicesPanel
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9964 | setClientServices((previous) =>
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9992 | services={clientServices}
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 29 | import { businessTranslations } from "../../i18n/locales/business";
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 73 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 36 | import { clientTranslations } from "../../i18n/locales/client";
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 38 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 356 | | "services"
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 435 | clientServices,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 436 | setClientServices,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 440 | servicesLoading,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 441 | setServicesLoading,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 445 | servicesError,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 446 | setServicesError,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 779 | servicesResult,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 801 | .from("client_services")
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1014 | if (servicesResult.error) {
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1016 | "Erreur chargement services :",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1017 | servicesResult.error
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1020 | setServicesError(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1021 | ct("copy.yourServicesCannotBeLoadedAtTheMoment")
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1024 | setClientServices(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1025 | servicesResult.data ?? []
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1110 | setServicesLoading(false);
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1306 | "Serrurerie automobile": "services.automotiveLocksmithing",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1307 | "Diagnostic automobile": "services.automotiveDiagnostics",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1308 | "Sécurité": "services.security",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1309 | "Électricité": "services.electricity",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1310 | "Énergie": "services.energy",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1311 | "Eau & forage": "services.waterDrilling",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1312 | "Automatisation": "services.automation",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1313 | "Informatique & électronique": "services.itElectronics",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1314 | "Réseaux & télécommunications": "services.networksTelecommunications",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1315 | "Site web": "services.website",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1316 | "Maintenance technique": "services.technicalMaintenance",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1317 | "TSB Store": "services.tsbStore",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1318 | "Autres services": "services.otherServices",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2854 | const getClientServiceStatusLabel = (
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 3350 | ? "services"
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 3389 | : "mes-services";
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 3439 | ? "mes-services"
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4334 | case "services":
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4372 | clientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4518 | const visibleClientServices =
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4520 | ? clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4527 | : clientServices;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4976 | {ct("copy.yourTsbAreaCentralizesYourRequestsServicesDocumentsAndExchanges")}</p>
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5011 | href="/store"
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5136 | key: "services" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5313 | value: clientServices.length,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5315 | section: "services" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5618 | const linkedServices =
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5619 | clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5727 | {linkedServices.length >
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5759 | {linkedServices.length >
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5773 | {linkedServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5857 | {getClientServiceStatusLabel(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5955 | {/* MES SERVICES */}
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 6990 | {activeSection === "services" && (
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 6992 | id="mes-services"
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7012 | {ct("copy.myServices")}</span>
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7090 | {servicesLoading && (
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7098 | {ct("copy.loadingYourServices")}</p>
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7101 | {servicesError && (
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7103 | {servicesError}
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7107 | {!servicesLoading &&
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7108 | !servicesError &&
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7109 | clientServices.length ===
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7137 | {!servicesLoading &&
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7138 | !servicesError &&
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7139 | visibleClientServices.length >
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7150 | {visibleClientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7233 | {getClientServiceStatusLabel(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 8453 | {clientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 21 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 226 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Cookies\index.tsx | ligne 35 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\DeleteAccount\index.tsx | ligne 36 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 5 | import Partners from "../../components/layout/Partners";
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 8 | import ServicesGrid from "../../components/layout/ServicesGrid";
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 76 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 121 | {t("discoverServices")}
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 168 | <ServicesGrid />
+C:\TSB\TSB-Tech-Group\src\pages\Innovation\index.tsx | ligne 39 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Legal\index.tsx | ligne 40 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Login\index.tsx | ligne 13 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\pages\Login\index.tsx | ligne 565 | "/client";
+C:\TSB\TSB-Tech-Group\src\pages\News\index.tsx | ligne 70 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\News\index.tsx | ligne 154 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\NotFound\index.tsx | ligne 27 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 20 | import { partnersTranslations } from "../../i18n/locales/partners";
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 57 | id: "ecosystem",
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 90 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Privacy\index.tsx | ligne 40 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 56 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Register\index.tsx | ligne 16 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\pages\ResetPassword\index.tsx | ligne 20 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\pages\Services\index.tsx | ligne 27 | import { servicesTranslations } from "../../i18n/locales/services";
+C:\TSB\TSB-Tech-Group\src\pages\Services\index.tsx | ligne 124 | function Services() {
+C:\TSB\TSB-Tech-Group\src\pages\Services\index.tsx | ligne 129 | servicesTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Services\index.tsx | ligne 131 | `services.${key}`
+C:\TSB\TSB-Tech-Group\src\pages\Services\index.tsx | ligne 194 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Services\index.tsx | ligne 705 | export default Services;
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 28 | } from "../../components/StoreMiniCart";
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 31 | import { storeTranslations } from "../../i18n/locales/store";
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 32 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 705 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 2056 | href={`/store/product/${encodeURIComponent(
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 24 | } from "../../components/StoreMiniCart";
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 29 | import { storeProductTranslations } from "../../i18n/locales/storeProduct";
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 30 | import { supabase } from "../../services/supabase";
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 320 | const prefix = "/store/product/";
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 490 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 502 | href="/store#catalogue"
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 578 | href="/store#catalogue"
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 1312 | href="/store#catalogue"
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 1442 | href={`/store/product/${encodeURIComponent(
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 1660 | href={`/store/product/${encodeURIComponent(
+C:\TSB\TSB-Tech-Group\src\pages\Support\index.tsx | ligne 60 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\pages\Support\index.tsx | ligne 108 | href="/client"
+C:\TSB\TSB-Tech-Group\src\pages\Terms\index.tsx | ligne 18 | { id: "services", icon: FileCheck2, color: "cyan" },
+C:\TSB\TSB-Tech-Group\src\pages\Terms\index.tsx | ligne 37 | <Navbar />
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 48 | services: readonly string[];
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 99 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 115 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 129 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 142 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 156 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 169 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 181 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 196 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 209 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 224 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 236 | services: ["Academy", "TSB Academy", "Formation", "Formations"],
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 244 | services: ["Store", "TSB Store", "Boutique", "Boutique en ligne"],
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 252 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 256 | "Services aux entreprises",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 265 | services: [
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 275 | label: "Autres services",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 278 | services: ["Autres services", "Autre service", "Autres"],
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 304 | domain.services.some(
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 11 | const Client = lazy(() => import("./pages/Client"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 18 | const Services = lazy(() => import("./pages/Services"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 21 | const Store = lazy(() => import("./pages/Store"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 24 | () => import("./pages/StoreProduct")
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 27 | const Academy = lazy(() => import("./pages/Academy"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 28 | const Business = lazy(() => import("./pages/Business"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 36 | const Partners = lazy(() => import("./pages/Partners"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 78 | path.startsWith("/store/product/") &&
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 79 | path.length > "/store/product/".length;
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 93 | } else if (path === "/client") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 97 | } else if (path === "/services") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 98 | page = <Services />;
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 103 | } else if (path === "/store") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 107 | } else if (path === "/academy") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 109 | } else if (path === "/business") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 117 | } else if (path === "/partners") {
+C:\TSB\TSB-Tech-Group\src\main.tsx | ligne 2 | import { createRoot } from "react-dom/client";
+
+===== FOOTER LINKS =====
+import BrandLogo from "../common/BrandLogo";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../i18n";
+import { footerTranslations } from "../../i18n/locales/footer";
+
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+  FaTiktok,
+  FaWhatsapp,
+  FaSnapchatGhost,
+  FaTelegramPlane,
+  FaUserAlt,
+} from "react-icons/fa";
+
+const WHATSAPP_URL = "https://wa.me/32493964587";
+
+
+
+const socialIconBaseStyle = {
+  width: "40px",
+  height: "40px",
+  borderRadius: "50%",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "18px",
+  transition:
+    "transform 180ms ease, box-shadow 180ms ease, filter 180ms ease",
+} as const;
+
+function Footer() {
+  const { locale } = useLanguage();
+
+  const t = (key: string) =>
+    translate(
+      footerTranslations,
+      locale,
+      `footer.${key}`
+    );
+
+  return (
+    <footer id="footer" className="tsb-footer">
+      <div className="tsb-footer-grid">
+        <div className="tsb-footer-brand">
+          <BrandLogo compact />
+
+          <p className="tsb-footer-slogan">
+            {t("slogan")}
+          </p>
+
+          <p className="tsb-footer-description">
+            {t("description")}
+          </p>
+
+          <div
+            className="tsb-footer-socials"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "10px",
+              alignItems: "center",
+            }}
+          >
+            <a
+              href="https://www.facebook.com/share/18pVHvJxxQ/?mibextid=wwXIfr"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              title="Facebook"
+              style={{
+                ...socialIconBaseStyle,
+                background: "#1877F2",
+                color: "#ffffff",
+                boxShadow:
+                  "0 8px 20px rgba(24,119,242,0.28)",
+              }}
+            >
+              <FaFacebookF />
+            </a>
+
+            <a
+              href="https://www.instagram.com/tsbtechgroup/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              title="Instagram"
+              style={{
+                ...socialIconBaseStyle,
+                background:
+                  "linear-gradient(135deg, #833AB4 0%, #C13584 35%, #E1306C 55%, #FD1D1D 72%, #FCAF45 100%)",
+                color: "#ffffff",
+                boxShadow:
+                  "0 8px 20px rgba(225,48,108,0.30)",
+              }}
+            >
+              <FaInstagram />
+            </a>
+
+            <span
+              aria-label="LinkedIn"
+              title="LinkedIn"
+              style={{
+                ...socialIconBaseStyle,
+                background: "#0A66C2",
+                color: "#ffffff",
+                boxShadow:
+                  "0 8px 20px rgba(10,102,194,0.28)",
+              }}
+            >
+              <FaLinkedinIn />
+            </span>
+
+            <span
+              aria-label="YouTube"
+              title="YouTube"
+              style={{
+                ...socialIconBaseStyle,
+                background: "#FF0000",
+                color: "#ffffff",
+                boxShadow:
+                  "0 8px 20px rgba(255,0,0,0.26)",
+              }}
+            >
+              <FaYoutube />
+            </span>
+
+            <a
+              href="https://www.tiktok.com/@ib50293"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok"
+              title="TikTok"
+              style={{
+                ...socialIconBaseStyle,
+                background: "#000000",
+                color: "#ffffff",
+                border:
+                  "1px solid rgba(255,255,255,0.12)",
+                boxShadow:
+                  "-3px 0 0 rgba(37,244,238,0.70), 3px 0 0 rgba(254,44,85,0.70), 0 8px 20px rgba(0,0,0,0.34)",
+              }}
+            >
+              <FaTiktok />
+            </a>
+
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              title="WhatsApp"
+              style={{
+                ...socialIconBaseStyle,
+                background: "#25D366",
+                color: "#ffffff",
+                boxShadow:
+                  "0 8px 20px rgba(37,211,102,0.28)",
+              }}
+            >
+              <FaWhatsapp />
+            </a>
+
+            <a
+              href="https://snapchat.com/t/JFbzQw9L"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Snapchat"
+              title="Snapchat"
+              style={{
+                ...socialIconBaseStyle,
+                background: "#FFFC00",
+                color: "#000000",
+                boxShadow:
+                  "0 8px 20px rgba(255,252,0,0.22)",
+              }}
+            >
+              <FaSnapchatGhost />
+            </a>
+
+            <a
+              href="https://t.me/+32493964587"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Telegram"
+              title="Telegram"
+              style={{
+                ...socialIconBaseStyle,
+                background: "#229ED9",
+                color: "#ffffff",
+                boxShadow:
+                  "0 8px 20px rgba(34,158,217,0.28)",
+              }}
+            >
+              <FaTelegramPlane />
+            </a>
+          </div>
+        </div>
+
+        <div className="tsb-footer-column">
+          <h3>{t("quickLinks")}</h3>
+
+          <a href="/#top">{t("home")}</a>
+          <a href="/about">{t("about")}</a>
+          <a href="/services">{t("services")}</a>
+          <a href="/projects">{t("projects")}</a>
+          <a href="/news">{t("news")}</a>
+          <a href="/partners">{t("partners")}</a>
+        </div>
+
+        <div className="tsb-footer-column">
+          <h3>{t("platform")}</h3>
+
+          <a href="/academy">
+            {t("academy")}
+          </a>
+
+          <a href="/store">
+            {t("store")}
+          </a>
+
+          <a href="/support">
+            {t("support")}
+          </a>
+
+          <a
+            href="/client"
+            aria-label={t("clientArea")}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
+              width: "fit-content",
+              marginTop: "6px",
+              marginBottom: "4px",
+              padding: "11px 16px",
+              borderRadius: "12px",
+              border: "1px solid rgba(56, 189, 248, 0.55)",
+              background:
+                "linear-gradient(135deg, rgba(14,165,233,0.22), rgba(59,130,246,0.30))",
+              color: "#ffffff",
+              fontWeight: 800,
+              textDecoration: "none",
+              boxShadow:
+                "0 10px 28px rgba(14,165,233,0.18), inset 0 1px 0 rgba(255,255,255,0.08)",
+              transition:
+                "transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease",
+            }}
+            onMouseEnter={(event) => {
+              event.currentTarget.style.transform =
+                "translateY(-2px)";
+              event.currentTarget.style.boxShadow =
+                "0 14px 34px rgba(14,165,233,0.28), inset 0 1px 0 rgba(255,255,255,0.10)";
+              event.currentTarget.style.borderColor =
+                "rgba(125, 211, 252, 0.9)";
+            }}
+            onMouseLeave={(event) => {
+              event.currentTarget.style.transform =
+                "translateY(0)";
+              event.currentTarget.style.boxShadow =
+                "0 10px 28px rgba(14,165,233,0.18), inset 0 1px 0 rgba(255,255,255,0.08)";
+              event.currentTarget.style.borderColor =
+                "rgba(56, 189, 248, 0.55)";
+            }}
+          >
+            <FaUserAlt aria-hidden="true" />
+            <span>{t("clientArea")}</span>
+            <span aria-hidden="true">→</span>
+          </a>
+
+        </div>
+
+        <div className="tsb-footer-column">
+          <h3>{t("contactUs")}</h3>
+
+          <span>{t("location")}</span>
+
+          <a href="mailto:contact@tsbtechgroup.com">
+            contact@tsbtechgroup.com
+          </a>
+
+          <a href="tel:+32466327536">
+            +32 466 32 75 36
+          </a>
+
+          <span>{t("hours")}</span>
+
+          <a
+            className="tsb-footer-quote"
+            href="/#quote"
+          >
+            {t("requestQuote")}
+          </a>
+        </div>
+      </div>
+
+      <div className="tsb-footer-payments">
+        <strong>{t("payments")}</strong>
+
+        <div className="tsb-footer-payment-list">
+          <span>Visa</span>
+          <span>Mastercard</span>
+          <span>PayPal</span>
+          <span>Bancontact</span>
+          <span>Wave</span>
+          <span>Orange Money</span>
+          <span className="tsb-wallet">
+            Wallet TSB
+          </span>
+        </div>
+      </div>
+
+      <div className="tsb-footer-bottom">
+        <span>{t("copyright")}</span>
+
+        <a
+          href="/privacy"
+          style={{
+            color: "#38bdf8",
+            fontWeight: 700,
+            textDecoration: "none",
+            transition:
+              "transform 180ms ease, filter 180ms ease",
+          }}
+          onMouseEnter={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(-3px)";
+            event.currentTarget.style.filter =
+              "brightness(1.25)";
+          }}
+          onMouseLeave={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(0)";
+            event.currentTarget.style.filter =
+              "brightness(1)";
+          }}
+        >
+          {t("privacy")}
+        </a>
+
+        <a
+          href="/cookies"
+          style={{
+            color: "#f59e0b",
+            fontWeight: 700,
+            textDecoration: "none",
+            transition:
+              "transform 180ms ease, filter 180ms ease",
+          }}
+          onMouseEnter={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(-3px)";
+            event.currentTarget.style.filter =
+              "brightness(1.25)";
+          }}
+          onMouseLeave={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(0)";
+            event.currentTarget.style.filter =
+              "brightness(1)";
+          }}
+        >
+          {t("cookies")}
+        </a>
+
+        <a
+          href="/legal"
+          style={{
+            color: "#a78bfa",
+            fontWeight: 700,
+            textDecoration: "none",
+            transition:
+              "transform 180ms ease, filter 180ms ease",
+          }}
+          onMouseEnter={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(-3px)";
+            event.currentTarget.style.filter =
+              "brightness(1.25)";
+          }}
+          onMouseLeave={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(0)";
+            event.currentTarget.style.filter =
+              "brightness(1)";
+          }}
+        >
+          {t("legal")}
+        </a>
+
+        <a
+          href="/terms"
+          style={{
+            color: "#4ade80",
+            fontWeight: 700,
+            textDecoration: "none",
+            transition:
+              "transform 180ms ease, filter 180ms ease",
+          }}
+          onMouseEnter={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(-3px)";
+            event.currentTarget.style.filter =
+              "brightness(1.25)";
+          }}
+          onMouseLeave={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(0)";
+            event.currentTarget.style.filter =
+              "brightness(1)";
+          }}
+        >
+          {t("terms")}
+        </a>
+
+        <button
+          type="button"
+          onClick={() => {
+            window.dispatchEvent(
+              new Event("tsb-open-cookie-settings")
+            );
+          }}
+          style={{
+            border: "none",
+            padding: 0,
+            background: "transparent",
+            color: "#fb7185",
+            font: "inherit",
+            fontWeight: 700,
+            cursor: "pointer",
+            transition:
+              "transform 180ms ease, filter 180ms ease",
+          }}
+          onMouseEnter={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(-3px)";
+            event.currentTarget.style.filter =
+              "brightness(1.25)";
+          }}
+          onMouseLeave={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(0)";
+            event.currentTarget.style.filter =
+              "brightness(1)";
+          }}
+        >
+          {t("manageCookies")}
+        </button>
+
+        <span
+          style={{
+            color: "#94a3b8",
+            transition:
+              "transform 180ms ease, color 180ms ease",
+          }}
+          onMouseEnter={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(-3px)";
+            event.currentTarget.style.color =
+              "#e2e8f0";
+          }}
+          onMouseLeave={(event) => {
+            event.currentTarget.style.transform =
+              "translateY(0)";
+            event.currentTarget.style.color =
+              "#94a3b8";
+          }}
+        >
+          {t("digitalPlatform")}
+        </span>
+      </div>
+    </footer>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export default Footer;
+

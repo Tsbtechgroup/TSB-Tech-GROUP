@@ -1,0 +1,858 @@
+﻿===== PROJECTS PAGE =====
+import {
+  Car,
+  ShieldCheck,
+  Sun,
+  Zap,
+  Globe2,
+} from "lucide-react";
+
+import Navbar from "../../components/layout/Navbar";
+import Footer from "../../components/layout/Footer";
+import ScrollToTop from "../../components/common/ScrollToTop";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../i18n";
+import { projectsPageTranslations } from "../../i18n/locales/projectsPage";
+
+const projectConfig = [
+  {
+    id: "automobile",
+    icon: Car,
+    color: "blue",
+  },
+  {
+    id: "security",
+    icon: ShieldCheck,
+    color: "green",
+  },
+  {
+    id: "solar",
+    icon: Sun,
+    color: "orange",
+  },
+  {
+    id: "industry",
+    icon: Zap,
+    color: "yellow",
+  },
+  {
+    id: "digital",
+    icon: Globe2,
+    color: "cyan",
+  },
+] as const;
+
+function Projects() {
+  const { locale } = useLanguage();
+
+  const t = (key: string) =>
+    translate(
+      projectsPageTranslations,
+      locale,
+      `projectsPage.${key}`
+    );
+
+  return (
+    <div>
+      <Navbar />
+
+      <main>
+        <section className="section section--about">
+          <div className="container">
+            <div
+              className="section-heading"
+              style={{
+                textAlign: "center",
+                maxWidth: "900px",
+                margin: "0 auto",
+              }}
+            >
+              <span className="section__eyebrow">
+                {t("eyebrow")}
+              </span>
+
+              <h1>
+                {t("title1")}{" "}
+                <span>{t("title2")}</span>
+              </h1>
+
+              <p
+                style={{
+                  maxWidth: "760px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                {t("intro")}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                  marginTop: "24px",
+                }}
+              >
+                <a
+                  href="/#top"
+                  className="button button--secondary"
+                >
+                  â† {t("backHome")}
+                </a>
+
+                <a
+                  href="/#quote"
+                  className="button button--primary"
+                >
+                  {t("quote")}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section section--domains">
+          <div className="container">
+            <div
+              className="domains-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fit, minmax(240px, 1fr))",
+                gap: "18px",
+                maxWidth: "1120px",
+                margin: "0 auto",
+              }}
+            >
+              {projectConfig.map((project) => {
+                const Icon = project.icon;
+
+                const category = t(
+                  `items.${project.id}.category`
+                );
+
+                const title = t(
+                  `items.${project.id}.title`
+                );
+
+                const description = t(
+                  `items.${project.id}.description`
+                );
+
+                return (
+                  <article
+                    className={`domain-card domain-${project.color}`}
+                    key={project.id}
+                    style={{
+                      minHeight: "230px",
+                      padding: "20px",
+                    }}
+                  >
+                    <div className="domain-card__top">
+                      <div className="domain-icon">
+                        <Icon
+                          size={23}
+                          strokeWidth={1.8}
+                        />
+                      </div>
+
+                      <span className="domain-category">
+                        {category}
+                      </span>
+                    </div>
+
+                    <h3>{title}</h3>
+
+                    <p>{description}</p>
+
+                    <a href="/#quote">
+                      {t("discuss")}
+                      <span aria-hidden="true">
+                        â†’
+                      </span>
+                    </a>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+      <ScrollToTop />
+    </div>
+  );
+}
+
+export default Projects;
+
+
+===== PROJECTS I18N =====
+import type { TranslationResources } from "../types";
+
+export const projectsTranslations: TranslationResources = {
+  fr: {
+    projects: {
+      eyebrow: "NOTRE SAVOIR-FAIRE",
+      title1: "Nos",
+      title2: "rÃ©alisations",
+      intro:
+        "DÃ©couvrez quelques exemples de projets rÃ©alisÃ©s dans nos diffÃ©rents domaines dâ€™expertise.",
+      viewAll: "Voir toutes nos rÃ©alisations",
+      items: {
+        automobile: {
+          title: "Serrurerie automobile",
+          subtitle: "Programmation de clÃ©s et solutions automobiles",
+          category: "Automobile",
+        },
+        security: {
+          title: "SystÃ¨mes de sÃ©curitÃ©",
+          subtitle: "VidÃ©osurveillance, contrÃ´le dâ€™accÃ¨s et protection",
+          category: "SÃ©curitÃ©",
+        },
+        solar: {
+          title: "Installation photovoltaÃ¯que",
+          subtitle: "Solutions Ã©nergÃ©tiques et installations solaires",
+          category: "Ã‰nergie",
+        },
+        industry: {
+          title: "Ã‰lectricitÃ© industrielle",
+          subtitle: "Installation, maintenance et automatisation",
+          category: "Industrie",
+        },
+        digital: {
+          title: "Solutions digitales",
+          subtitle: "Sites web et plateformes professionnelles",
+          category: "Digital",
+        },
+      },
+    },
+  },
+
+  nl: {
+    projects: {
+      eyebrow: "ONZE EXPERTISE",
+      title1: "Onze",
+      title2: "realisaties",
+      intro:
+        "Ontdek enkele voorbeelden van projecten die we binnen onze verschillende expertisedomeinen hebben gerealiseerd.",
+      viewAll: "Bekijk al onze realisaties",
+      items: {
+        automobile: {
+          title: "Autosleutels & voertuigoplossingen",
+          subtitle: "Sleutelprogrammering en automotive oplossingen",
+          category: "Automobiel",
+        },
+        security: {
+          title: "Beveiligingssystemen",
+          subtitle: "Camerabewaking, toegangscontrole en bescherming",
+          category: "Beveiliging",
+        },
+        solar: {
+          title: "FotovoltaÃ¯sche installatie",
+          subtitle: "Energieoplossingen en zonne-installaties",
+          category: "Energie",
+        },
+        industry: {
+          title: "IndustriÃ«le elektriciteit",
+          subtitle: "Installatie, onderhoud en automatisering",
+          category: "Industrie",
+        },
+        digital: {
+          title: "Digitale oplossingen",
+          subtitle: "Websites en professionele platforms",
+          category: "Digitaal",
+        },
+      },
+    },
+  },
+
+  en: {
+    projects: {
+      eyebrow: "OUR EXPERTISE",
+      title1: "Our",
+      title2: "projects",
+      intro:
+        "Discover some examples of projects completed across our different areas of expertise.",
+      viewAll: "View all our projects",
+      items: {
+        automobile: {
+          title: "Automotive locksmithing",
+          subtitle: "Key programming and automotive solutions",
+          category: "Automotive",
+        },
+        security: {
+          title: "Security systems",
+          subtitle: "Video surveillance, access control and protection",
+          category: "Security",
+        },
+        solar: {
+          title: "Photovoltaic installation",
+          subtitle: "Energy solutions and solar installations",
+          category: "Energy",
+        },
+        industry: {
+          title: "Industrial electricity",
+          subtitle: "Installation, maintenance and automation",
+          category: "Industry",
+        },
+        digital: {
+          title: "Digital solutions",
+          subtitle: "Websites and professional platforms",
+          category: "Digital",
+        },
+      },
+    },
+  },
+
+  de: {
+    projects: {
+      eyebrow: "UNSERE KOMPETENZ",
+      title1: "Unsere",
+      title2: "Projekte",
+      intro:
+        "Entdecken Sie einige Beispiele fÃ¼r Projekte aus unseren verschiedenen Fachbereichen.",
+      viewAll: "Alle Projekte ansehen",
+      items: {
+        automobile: {
+          title: "AutoschlÃ¼ssel & FahrzeuglÃ¶sungen",
+          subtitle: "SchlÃ¼sselprogrammierung und FahrzeuglÃ¶sungen",
+          category: "Automobil",
+        },
+        security: {
+          title: "Sicherheitssysteme",
+          subtitle: "VideoÃ¼berwachung, Zugangskontrolle und Schutz",
+          category: "Sicherheit",
+        },
+        solar: {
+          title: "Photovoltaikanlage",
+          subtitle: "EnergielÃ¶sungen und Solaranlagen",
+          category: "Energie",
+        },
+        industry: {
+          title: "Industrieelektrik",
+          subtitle: "Installation, Wartung und Automatisierung",
+          category: "Industrie",
+        },
+        digital: {
+          title: "Digitale LÃ¶sungen",
+          subtitle: "Websites und professionelle Plattformen",
+          category: "Digital",
+        },
+      },
+    },
+  },
+
+  es: {
+    projects: {
+      eyebrow: "NUESTRA EXPERIENCIA",
+      title1: "Nuestros",
+      title2: "proyectos",
+      intro:
+        "Descubra algunos ejemplos de proyectos realizados en nuestras diferentes Ã¡reas de especializaciÃ³n.",
+      viewAll: "Ver todos nuestros proyectos",
+      items: {
+        automobile: {
+          title: "CerrajerÃ­a del automÃ³vil",
+          subtitle: "ProgramaciÃ³n de llaves y soluciones para automÃ³viles",
+          category: "AutomÃ³vil",
+        },
+        security: {
+          title: "Sistemas de seguridad",
+          subtitle: "Videovigilancia, control de acceso y protecciÃ³n",
+          category: "Seguridad",
+        },
+        solar: {
+          title: "InstalaciÃ³n fotovoltaica",
+          subtitle: "Soluciones energÃ©ticas e instalaciones solares",
+          category: "EnergÃ­a",
+        },
+        industry: {
+          title: "Electricidad industrial",
+          subtitle: "InstalaciÃ³n, mantenimiento y automatizaciÃ³n",
+          category: "Industria",
+        },
+        digital: {
+          title: "Soluciones digitales",
+          subtitle: "Sitios web y plataformas profesionales",
+          category: "Digital",
+        },
+      },
+    },
+  },
+
+  it: {
+    projects: {
+      eyebrow: "LE NOSTRE COMPETENZE",
+      title1: "I nostri",
+      title2: "progetti",
+      intro:
+        "Scopri alcuni esempi di progetti realizzati nei nostri diversi ambiti di competenza.",
+      viewAll: "Vedi tutti i nostri progetti",
+      items: {
+        automobile: {
+          title: "Chiavi e soluzioni auto",
+          subtitle: "Programmazione chiavi e soluzioni automotive",
+          category: "Automotive",
+        },
+        security: {
+          title: "Sistemi di sicurezza",
+          subtitle: "Videosorveglianza, controllo accessi e protezione",
+          category: "Sicurezza",
+        },
+        solar: {
+          title: "Impianto fotovoltaico",
+          subtitle: "Soluzioni energetiche e impianti solari",
+          category: "Energia",
+        },
+        industry: {
+          title: "ElettricitÃ  industriale",
+          subtitle: "Installazione, manutenzione e automazione",
+          category: "Industria",
+        },
+        digital: {
+          title: "Soluzioni digitali",
+          subtitle: "Siti web e piattaforme professionali",
+          category: "Digitale",
+        },
+      },
+    },
+  },
+
+  pt: {
+    projects: {
+      eyebrow: "A NOSSA EXPERIÃŠNCIA",
+      title1: "Os nossos",
+      title2: "projetos",
+      intro:
+        "Descubra alguns exemplos de projetos realizados nas nossas diferentes Ã¡reas de especializaÃ§Ã£o.",
+      viewAll: "Ver todos os nossos projetos",
+      items: {
+        automobile: {
+          title: "Chaves e soluÃ§Ãµes automÃ³veis",
+          subtitle: "ProgramaÃ§Ã£o de chaves e soluÃ§Ãµes automÃ³veis",
+          category: "AutomÃ³vel",
+        },
+        security: {
+          title: "Sistemas de seguranÃ§a",
+          subtitle: "VideovigilÃ¢ncia, controlo de acesso e proteÃ§Ã£o",
+          category: "SeguranÃ§a",
+        },
+        solar: {
+          title: "InstalaÃ§Ã£o fotovoltaica",
+          subtitle: "SoluÃ§Ãµes energÃ©ticas e instalaÃ§Ãµes solares",
+          category: "Energia",
+        },
+        industry: {
+          title: "Eletricidade industrial",
+          subtitle: "InstalaÃ§Ã£o, manutenÃ§Ã£o e automaÃ§Ã£o",
+          category: "IndÃºstria",
+        },
+        digital: {
+          title: "SoluÃ§Ãµes digitais",
+          subtitle: "Sites e plataformas profissionais",
+          category: "Digital",
+        },
+      },
+    },
+  },
+
+  ar: {
+    projects: {
+      eyebrow: "Ø®Ø¨Ø±Ø§ØªÙ†Ø§",
+      title1: "Ø¨Ø¹Ø¶",
+      title2: "Ù…Ø´Ø§Ø±ÙŠØ¹Ù†Ø§",
+      intro:
+        "Ø§ÙƒØªØ´Ù Ø¨Ø¹Ø¶ Ø§Ù„Ø£Ù…Ø«Ù„Ø© Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø´Ø§Ø±ÙŠØ¹ Ø§Ù„ØªÙŠ Ø£Ù†Ø¬Ø²Ù†Ø§Ù‡Ø§ ÙÙŠ Ù…Ø®ØªÙ„Ù Ù…Ø¬Ø§Ù„Ø§Øª Ø®Ø¨Ø±ØªÙ†Ø§.",
+      viewAll: "Ø¹Ø±Ø¶ Ø¬Ù…ÙŠØ¹ Ù…Ø´Ø§Ø±ÙŠØ¹Ù†Ø§",
+      items: {
+        automobile: {
+          title: "Ù…ÙØ§ØªÙŠØ­ ÙˆØ­Ù„ÙˆÙ„ Ø§Ù„Ø³ÙŠØ§Ø±Ø§Øª",
+          subtitle: "Ø¨Ø±Ù…Ø¬Ø© Ø§Ù„Ù…ÙØ§ØªÙŠØ­ ÙˆØ­Ù„ÙˆÙ„ Ø§Ù„Ø³ÙŠØ§Ø±Ø§Øª",
+          category: "Ø§Ù„Ø³ÙŠØ§Ø±Ø§Øª",
+        },
+        security: {
+          title: "Ø£Ù†Ø¸Ù…Ø© Ø§Ù„Ø£Ù…Ù†",
+          subtitle: "Ø§Ù„Ù…Ø±Ø§Ù‚Ø¨Ø© Ø¨Ø§Ù„ÙÙŠØ¯ÙŠÙˆ ÙˆØ§Ù„ØªØ­ÙƒÙ… ÙÙŠ Ø§Ù„Ø¯Ø®ÙˆÙ„ ÙˆØ§Ù„Ø­Ù…Ø§ÙŠØ©",
+          category: "Ø§Ù„Ø£Ù…Ù†",
+        },
+        solar: {
+          title: "ØªØ±ÙƒÙŠØ¨ Ø£Ù†Ø¸Ù…Ø© Ø§Ù„Ø·Ø§Ù‚Ø© Ø§Ù„Ø´Ù…Ø³ÙŠØ©",
+          subtitle: "Ø­Ù„ÙˆÙ„ Ø§Ù„Ø·Ø§Ù‚Ø© ÙˆØ§Ù„ØªØ±ÙƒÙŠØ¨Ø§Øª Ø§Ù„Ø´Ù…Ø³ÙŠØ©",
+          category: "Ø§Ù„Ø·Ø§Ù‚Ø©",
+        },
+        industry: {
+          title: "Ø§Ù„ÙƒÙ‡Ø±Ø¨Ø§Ø¡ Ø§Ù„ØµÙ†Ø§Ø¹ÙŠØ©",
+          subtitle: "Ø§Ù„ØªØ±ÙƒÙŠØ¨ ÙˆØ§Ù„ØµÙŠØ§Ù†Ø© ÙˆØ§Ù„Ø£ØªÙ…ØªØ©",
+          category: "Ø§Ù„ØµÙ†Ø§Ø¹Ø©",
+        },
+        digital: {
+          title: "Ø§Ù„Ø­Ù„ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠØ©",
+          subtitle: "Ø§Ù„Ù…ÙˆØ§Ù‚Ø¹ ÙˆØ§Ù„Ù…Ù†ØµØ§Øª Ø§Ù„Ù…Ù‡Ù†ÙŠØ©",
+          category: "Ø±Ù‚Ù…ÙŠ",
+        },
+      },
+    },
+  },
+
+  tr: {
+    projects: {
+      eyebrow: "UZMANLIÄžIMIZ",
+      title1: "Projelerimizden",
+      title2: "Ã¶rnekler",
+      intro:
+        "FarklÄ± uzmanlÄ±k alanlarÄ±mÄ±zda tamamlanan bazÄ± proje Ã¶rneklerini keÅŸfedin.",
+      viewAll: "TÃ¼m projelerimizi gÃ¶rÃ¼ntÃ¼le",
+      items: {
+        automobile: {
+          title: "Otomotiv anahtar Ã§Ã¶zÃ¼mleri",
+          subtitle: "Anahtar programlama ve otomotiv Ã§Ã¶zÃ¼mleri",
+          category: "Otomotiv",
+        },
+        security: {
+          title: "GÃ¼venlik sistemleri",
+          subtitle: "Video gÃ¶zetim, eriÅŸim kontrolÃ¼ ve koruma",
+          category: "GÃ¼venlik",
+        },
+        solar: {
+          title: "Fotovoltaik kurulum",
+          subtitle: "Enerji Ã§Ã¶zÃ¼mleri ve gÃ¼neÅŸ enerjisi kurulumlarÄ±",
+          category: "Enerji",
+        },
+        industry: {
+          title: "EndÃ¼striyel elektrik",
+          subtitle: "Kurulum, bakÄ±m ve otomasyon",
+          category: "EndÃ¼stri",
+        },
+        digital: {
+          title: "Dijital Ã§Ã¶zÃ¼mler",
+          subtitle: "Web siteleri ve profesyonel platformlar",
+          category: "Dijital",
+        },
+      },
+    },
+  },
+
+  zh: {
+    projects: {
+      eyebrow: "æˆ‘ä»¬çš„ä¸“ä¸šèƒ½åŠ›",
+      title1: "æˆ‘ä»¬çš„",
+      title2: "é¡¹ç›®",
+      intro:
+        "äº†è§£æˆ‘ä»¬åœ¨ä¸åŒä¸“ä¸šé¢†åŸŸå®Œæˆçš„ä¸€äº›é¡¹ç›®æ¡ˆä¾‹ã€‚",
+      viewAll: "æŸ¥çœ‹å…¨éƒ¨é¡¹ç›®",
+      items: {
+        automobile: {
+          title: "æ±½è½¦é’¥åŒ™ä¸Žè½¦è¾†è§£å†³æ–¹æ¡ˆ",
+          subtitle: "é’¥åŒ™ç¼–ç¨‹å’Œæ±½è½¦è§£å†³æ–¹æ¡ˆ",
+          category: "æ±½è½¦",
+        },
+        security: {
+          title: "å®‰é˜²ç³»ç»Ÿ",
+          subtitle: "è§†é¢‘ç›‘æŽ§ã€é—¨ç¦æŽ§åˆ¶å’Œå®‰å…¨é˜²æŠ¤",
+          category: "å®‰å…¨",
+        },
+        solar: {
+          title: "å…‰ä¼å®‰è£…",
+          subtitle: "èƒ½æºè§£å†³æ–¹æ¡ˆå’Œå¤ªé˜³èƒ½å®‰è£…",
+          category: "èƒ½æº",
+        },
+        industry: {
+          title: "å·¥ä¸šç”µæ°”",
+          subtitle: "å®‰è£…ã€ç»´æŠ¤å’Œè‡ªåŠ¨åŒ–",
+          category: "å·¥ä¸š",
+        },
+        digital: {
+          title: "æ•°å­—è§£å†³æ–¹æ¡ˆ",
+          subtitle: "ç½‘ç«™å’Œä¸“ä¸šå¹³å°",
+          category: "æ•°å­—æŠ€æœ¯",
+        },
+      },
+    },
+  },
+};
+
+
+===== PROJECTS REFERENCES =====
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 208 | <a href="/projects">{t("projects")}</a>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 654 | <a href="/projects" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 655 | {navT("projects")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 867 | <a href="/projects" onClick={closeMobile}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 868 | {navT("projects")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 3 | import { projectsTranslations } from "../../i18n/locales/projects";
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 5 | const projectConfig = [
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 23 | function Projects() {
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 28 | projectsTranslations,
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 30 | `projects.${key}`
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 34 | <section id="projects" className="projects-section">
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 36 | <div className="projects-heading">
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 48 | <div className="projects-grid">
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 49 | {projectConfig.map((project) => {
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 51 | `items.${project.id}.title`
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 55 | `items.${project.id}.subtitle`
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 59 | `items.${project.id}.category`
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 64 | className="project-card"
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 65 | key={project.id}
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 67 | <div className="project-card__visual">
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 71 | <div className="project-card__content">
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 80 | <div className="projects-actions">
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 202 | export default Projects;
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 67 | "description": "Duidelijke, duurzame oplossingen ontwikkelen die aansluiten bij de werkelijke behoeften van elk project."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 83 | "ctaTitle": "Een project ontwikkelen met TSB Tech Group?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 109 | "description": "Develop clear, durable solutions tailored to the real needs of each project."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 125 | "ctaTitle": "A project to develop with TSB Tech Group?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\brands.ts | ligne 22 | "Afhankelijk van het project en de apparatuur gebruikt of integreert TSB Tech Group oplossingen van erkende merken en technologieën uit verschillende professionele sectoren.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\brands.ts | ligne 34 | "Depending on the project and equipment, TSB Tech Group uses or integrates solutions from recognized brands and technologies across different professional sectors.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 39 | opportunities: { automotive: "Automobile & mobilité", energy: "Énergie", water: "Eau & forage", security: "Sécurité", automation: "Automatisation", networks: "Réseaux & télécommunications", digital: "Digital & technologies", academy: "TSB Academy", store: "TSB Store", projects: "Projets spéciaux" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 58 | ctaProject: "Présenter un projet",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 59 | projectEmailSubject: "TSB Business & Invest — Proposition de projet",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 67 | intro: "TSB Tech Group ondersteunt bedrijven, professionals, instellingen, partners en projecteigenaars met technische oplossingen, strategische samenwerkingen en internationale ontwikkelingskansen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 77 | investEyebrow: "BUSINESS & INVEST", investTitle1: "Samen kansen", investTitle2: "bouwen", investIntro: "TSB Business creëert ruimte voor strategische partnerschappen, investeringen, gezamenlijke projecten en nieuwe activiteiten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 79 | investment: { title: "Investeringen", description: "Analyse van investeringskansen, projectfinanciering en activiteiten met groeipotentieel." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 81 | jointVenture: { title: "Joint ventures & gezamenlijke projecten", description: "Samen projecten ontwikkelen door expertise, middelen en doelstellingen te delen." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 83 | institutions: { title: "Instellingen & grote projecten", description: "Samenwerking met organisaties, overheden en instellingen rond structurerende projecten." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 84 | international: { title: "Internationale ontwikkeling", description: "Partners en kansen zoeken om projecten op meerdere markten uit te bouwen." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 87 | opportunities: { automotive: "Automotive & mobiliteit", energy: "Energie", water: "Water & boringen", security: "Beveiliging", automation: "Automatisering", networks: "Netwerken & telecom", digital: "Digital & technologie", academy: "TSB Academy", store: "TSB Store", projects: "Speciale projecten" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 91 | discover: { title: "Project voorstellen", description: "U deelt uw behoefte, voorstel of kans." }, review: { title: "TSB-studie", description: "We analyseren context, doelstellingen, middelen en mogelijkheden." }, exchange: { title: "Overleg", description: "De partijen verduidelijken verwachtingen, verantwoordelijkheden en voorwaarden." }, proposal: { title: "Voorstel", description: "Een samenwerkings- of projectstructuur kan worden geformaliseerd." }, collaboration: { title: "Samenwerking", description: "Na validatie gaat het project naar uitvoering en opvolging." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 93 | ctaEyebrow: "LATEN WE BUSINESS BESPREKEN", ctaTitle: "Een project, kans of voorstel?", ctaText: "Gebruik de offerteaanvraag voor een technische behoefte. Voor partnerschap, investering of een strategisch project kunt u uw voorstel rechtstreeks aan TSB Tech Group voorleggen.", ctaQuote: "Offerte aanvragen", ctaProject: "Project voorstellen", projectEmailSubject: "TSB Business & Invest — Projectvoorstel",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 99 | intro: "TSB Tech Group supports businesses, professionals, institutions, partners and project owners with technical solutions, strategic collaboration and international development opportunities.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 109 | investEyebrow: "BUSINESS & INVEST", investTitle1: "Building opportunities", investTitle2: "together", investIntro: "TSB Business creates a dedicated space for strategic partnerships, investment, joint projects and new activities.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 111 | investment: { title: "Investment", description: "Assessment of investment opportunities, project financing and activities with growth potential." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 113 | jointVenture: { title: "Joint ventures & shared projects", description: "Developing projects together by combining expertise, resources and objectives." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 115 | institutions: { title: "Institutions & major projects", description: "Cooperation with organizations, public bodies and institutions carrying structuring projects." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 116 | international: { title: "International development", description: "Identifying partners and opportunities to support projects across multiple markets." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 119 | opportunities: { automotive: "Automotive & mobility", energy: "Energy", water: "Water & drilling", security: "Security", automation: "Automation", networks: "Networks & telecom", digital: "Digital & technology", academy: "TSB Academy", store: "TSB Store", projects: "Special projects" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 123 | discover: { title: "Present the project", description: "Share your need, proposal or identified opportunity." }, review: { title: "TSB review", description: "We assess the context, objectives, resources and collaboration paths." }, exchange: { title: "Discussion", description: "The parties clarify expectations, responsibilities, conditions and next steps." }, proposal: { title: "Proposal", description: "A collaboration, partnership or project structure can be formalized." }, collaboration: { title: "Collaboration", description: "Once approved, the project moves into implementation and follow-up." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 125 | ctaEyebrow: "LET’S TALK BUSINESS", ctaTitle: "A project, opportunity or proposal?", ctaText: "For a technical need, use the quote request. For a partnership, investment or strategic project, present your proposal directly to TSB Tech Group.", ctaQuote: "Request a quote", ctaProject: "Present a project", projectEmailSubject: "TSB Business & Invest — Project proposal",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 135 | opportunitiesEyebrow: "CHANCENBEREICHE", opportunitiesTitle: "Ein multisektorales Ökosystem", opportunitiesIntro: "Chancen können mehrere aktuelle oder zukünftige Bereiche der TSB Tech Group betreffen.", opportunities: { automotive: "Automotive & Mobilität", energy: "Energie", water: "Wasser & Bohrungen", security: "Sicherheit", automation: "Automatisierung", networks: "Netzwerke & Telekom", digital: "Digital & Technologie", academy: "TSB Academy", store: "TSB Store", projects: "Sonderprojekte" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 138 | ctaEyebrow: "BUSINESS BESPRECHEN", ctaTitle: "Ein Projekt, eine Chance oder ein Vorschlag?", ctaText: "Für technische Anforderungen nutzen Sie die Angebotsanfrage. Für Partnerschaften, Investitionen oder strategische Projekte senden Sie Ihren Vorschlag direkt an TSB Tech Group.", ctaQuote: "Angebot anfordern", ctaProject: "Projekt vorstellen", projectEmailSubject: "TSB Business & Invest — Projektvorschlag",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 148 | opportunitiesEyebrow: "SECTORES DE OPORTUNIDAD", opportunitiesTitle: "Un ecosistema multisectorial", opportunitiesIntro: "Las oportunidades pueden abarcar varias áreas actuales o futuras de TSB Tech Group.", opportunities: { automotive: "Automoción y movilidad", energy: "Energía", water: "Agua y perforación", security: "Seguridad", automation: "Automatización", networks: "Redes y telecom", digital: "Digital y tecnología", academy: "TSB Academy", store: "TSB Store", projects: "Proyectos especiales" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 151 | ctaEyebrow: "HABLEMOS DE BUSINESS", ctaTitle: "¿Un proyecto, una oportunidad o una propuesta?", ctaText: "Para una necesidad técnica, utilice la solicitud de presupuesto. Para una alianza, inversión o proyecto estratégico, presente su propuesta directamente a TSB Tech Group.", ctaQuote: "Solicitar presupuesto", ctaProject: "Presentar un proyecto", projectEmailSubject: "TSB Business & Invest — Propuesta de proyecto",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 161 | opportunitiesEyebrow: "SETTORI DI OPPORTUNITÀ", opportunitiesTitle: "Un ecosistema multisettoriale", opportunitiesIntro: "Le opportunità possono riguardare diversi poli attuali o futuri di TSB Tech Group.", opportunities: { automotive: "Automotive & mobilità", energy: "Energia", water: "Acqua & perforazione", security: "Sicurezza", automation: "Automazione", networks: "Reti & telecom", digital: "Digitale & tecnologia", academy: "TSB Academy", store: "TSB Store", projects: "Progetti speciali" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 164 | ctaEyebrow: "PARLIAMO DI BUSINESS", ctaTitle: "Un progetto, un’opportunità o una proposta?", ctaText: "Per un’esigenza tecnica usate la richiesta di preventivo. Per partnership, investimenti o progetti strategici, presentate la proposta direttamente a TSB Tech Group.", ctaQuote: "Richiedi un preventivo", ctaProject: "Presenta un progetto", projectEmailSubject: "TSB Business & Invest — Proposta di progetto",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 174 | opportunitiesEyebrow: "SETORES DE OPORTUNIDADE", opportunitiesTitle: "Um ecossistema multissetorial", opportunitiesIntro: "As oportunidades podem envolver vários polos atuais ou futuros da TSB Tech Group.", opportunities: { automotive: "Automóvel & mobilidade", energy: "Energia", water: "Água & perfuração", security: "Segurança", automation: "Automação", networks: "Redes & telecom", digital: "Digital & tecnologia", academy: "TSB Academy", store: "TSB Store", projects: "Projetos especiais" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 177 | ctaEyebrow: "VAMOS FALAR DE BUSINESS", ctaTitle: "Um projeto, oportunidade ou proposta?", ctaText: "Para uma necessidade técnica, utilize o pedido de orçamento. Para parceria, investimento ou projeto estratégico, apresente a proposta diretamente à TSB Tech Group.", ctaQuote: "Pedir orçamento", ctaProject: "Apresentar um projeto", projectEmailSubject: "TSB Business & Invest — Proposta de projeto",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 187 | opportunitiesEyebrow: "قطاعات الفرص", opportunitiesTitle: "منظومة متعددة القطاعات", opportunitiesIntro: "يمكن أن تشمل الفرص عدة مجالات حالية أو مستقبلية في TSB Tech Group.", opportunities: { automotive: "السيارات والتنقل", energy: "الطاقة", water: "المياه والحفر", security: "الأمن", automation: "الأتمتة", networks: "الشبكات والاتصالات", digital: "الرقمنة والتكنولوجيا", academy: "TSB Academy", store: "TSB Store", projects: "مشاريع خاصة" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 190 | ctaEyebrow: "لنتحدث عن الأعمال", ctaTitle: "لديكم مشروع أو فرصة أو مقترح؟", ctaText: "للحاجة التقنية استخدموا طلب عرض السعر. أما للشراكة أو الاستثمار أو المشروع الاستراتيجي فقدموا مقترحكم مباشرة إلى TSB Tech Group.", ctaQuote: "طلب عرض سعر", ctaProject: "تقديم مشروع", projectEmailSubject: "TSB Business & Invest — مقترح مشروع",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 200 | opportunitiesEyebrow: "FIRSAT ALANLARI", opportunitiesTitle: "Çok sektörlü bir ekosistem", opportunitiesIntro: "Fırsatlar TSB Tech Group’un mevcut veya gelecekteki farklı alanlarını kapsayabilir.", opportunities: { automotive: "Otomotiv & mobilite", energy: "Enerji", water: "Su & sondaj", security: "Güvenlik", automation: "Otomasyon", networks: "Ağlar & telekom", digital: "Dijital & teknoloji", academy: "TSB Academy", store: "TSB Store", projects: "Özel projeler" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 203 | ctaEyebrow: "BUSINESS KONUŞALIM", ctaTitle: "Bir proje, fırsat veya teklifiniz mi var?", ctaText: "Teknik ihtiyaçlar için teklif talebini kullanın. Ortaklık, yatırım veya stratejik proje için teklifinizi doğrudan TSB Tech Group’a sunun.", ctaQuote: "Teklif iste", ctaProject: "Proje sun", projectEmailSubject: "TSB Business & Invest — Proje teklifi",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 213 | opportunitiesEyebrow: "机会领域", opportunitiesTitle: "多行业生态体系", opportunitiesIntro: "机会可涉及 TSB Tech Group 当前或未来的多个业务板块。", opportunities: { automotive: "汽车与出行", energy: "能源", water: "水务与钻探", security: "安全", automation: "自动化", networks: "网络与通信", digital: "数字与技术", academy: "TSB Academy", store: "TSB Store", projects: "专项项目" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 216 | ctaEyebrow: "洽谈 BUSINESS", ctaTitle: "有项目、机会或合作提案？", ctaText: "技术需求请使用报价申请。合作伙伴关系、投资或战略项目可直接向 TSB Tech Group 提交提案。", ctaQuote: "申请报价", ctaProject: "提交项目", projectEmailSubject: "TSB Business & Invest — 项目提案",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 598 | "innovation": "Innovatie & projecten",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 940 | "innovation": "Innovation & projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 57 | title2: "project bespreken",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 59 | "Een vraag, technische behoefte of project? Neem contact op met TSB Tech Group via het kanaal dat u het beste past.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 74 | "Voor een rechtstreeks gesprek over uw aanvraag of project.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 106 | title2: "project",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 108 | "Have a question, technical need or project to develop? Contact TSB Tech Group through the channel that works best for you.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 123 | "For a direct conversation about your request or project.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 13 | projects: "Réalisations",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 45 | projects: "Realisaties",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 77 | projects: "Projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 109 | projects: "Projekte",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 141 | projects: "Proyectos",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 173 | projects: "Progetti",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 205 | projects: "Projetos",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 237 | projects: "المشاريع",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 269 | projects: "Projeler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 301 | projects: "项目",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 24 | projectEyebrow: "VOTRE PROJET COMMENCE ICI",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 25 | projectTitle:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 27 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 55 | projectEyebrow: "UW PROJECT BEGINT HIER",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 56 | projectTitle:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 57 | "Samen bouwen we de juiste oplossing voor uw project.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 58 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 86 | projectEyebrow: "YOUR PROJECT STARTS HERE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 87 | projectTitle:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 88 | "Let’s build the right solution for your project.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 89 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 117 | projectEyebrow: "IHR PROJEKT BEGINNT HIER",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 118 | projectTitle:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 120 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 148 | projectEyebrow: "SU PROYECTO EMPIEZA AQUÍ",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 149 | projectTitle:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 151 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 179 | projectEyebrow: "IL TUO PROGETTO INIZIA QUI",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 180 | projectTitle:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 182 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 210 | projectEyebrow: "O SEU PROJETO COMEÇA AQUI",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 211 | projectTitle:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 213 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 241 | projectEyebrow: "مشروعك يبدأ من هنا",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 242 | projectTitle:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 244 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 272 | projectEyebrow: "PROJENİZ BURADA BAŞLAR",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 273 | projectTitle:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 275 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 303 | projectEyebrow: "您的项目从这里开始",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 304 | projectTitle:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 306 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 16 | projectTitle: "Vous avez une idée ou un projet ?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 17 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 19 | projectButton: "Parler de mon projet",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 52 | eyebrow: "INNOVATIE & PROJECTEN",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 61 | "We gaan van idee naar prototype en vervolgens naar een concrete oplossing wanneer het project echte waarde biedt.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 62 | projectTitle: "Hebt u een idee of project?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 63 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 65 | projectButton: "Mijn project bespreken",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 88 | title: "Toekomstprojecten",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 98 | eyebrow: "INNOVATION & PROJECTS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 107 | "We move from idea to prototype and then toward a concrete solution when the project creates real value.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 108 | projectTitle: "Do you have an idea or project?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 109 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 111 | projectButton: "Discuss my project",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 134 | title: "Future projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 154 | projectTitle: "Haben Sie eine Idee oder ein Projekt?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 155 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 157 | projectButton: "Mein Projekt besprechen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 200 | projectTitle: "¿Tiene una idea o un proyecto?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 201 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 203 | projectButton: "Hablar de mi proyecto",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 246 | projectTitle: "Hai un’idea o un progetto?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 247 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 249 | projectButton: "Parla del mio progetto",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 292 | projectTitle: "Tem uma ideia ou um projeto?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 293 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 295 | projectButton: "Falar do meu projeto",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 338 | projectTitle: "هل لديك فكرة أو مشروع؟",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 339 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 341 | projectButton: "تحدث عن مشروعي",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 384 | projectTitle: "Bir fikriniz veya projeniz mi var?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 385 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 387 | projectButton: "Projemi konuşalım",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 430 | projectTitle: "您有创意或项目吗？",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 431 | projectText:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 433 | projectButton: "讨论我的项目",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 28 | projects: "Réalisations",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 64 | innovation: "Innovation & projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 66 | projects: "Projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 102 | innovation: "Innovatie & projecten",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 104 | projects: "Realisaties",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 142 | projects: "Projekte",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 180 | projects: "Proyectos",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 218 | projects: "Progetti",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 256 | projects: "Projetos",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 294 | projects: "المشاريع",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 332 | projects: "Projeler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 370 | projects: "项目",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 41 | "Volg de ontwikkeling van onze projecten, ons platform en het TSB Tech Group-ecosysteem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 58 | title: "Het project gaat de Engineering-fase in",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 72 | "Follow the progress of our projects, our platform and the TSB Tech Group ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 89 | title: "The project enters the Engineering phase",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 65 | "Volg de ontwikkeling van onze projecten, ons platform en het TSB Tech Group-ecosysteem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 94 | "TSB Academy, TSB Store, de klantenzone, support en toekomstige projecten kunnen zo stap voor stap worden geïntegreerd.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 100 | title: "Het project gaat de Engineering-fase in",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 120 | "Follow the progress of our projects, our platform and the TSB Tech Group ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 149 | "TSB Academy, TSB Store, the client area, support and future projects can therefore be integrated progressively.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 155 | title: "The project enters the Engineering phase",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 85 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 108 | "TSB Tech Group bouwt aan een betrouwbaar samenwerkingsnetwerk om zijn mogelijkheden te versterken, nieuwe kansen te creëren en langetermijnprojecten te ontwikkelen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 114 | "Wij werken met erkende merken, apparatuur en technologieën in verschillende sectoren om professionele oplossingen voor elk project te bieden.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 127 | "TSB Tech Group staat open voor verschillende vormen van samenwerking afhankelijk van sector, markt en project.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 143 | "Commerciële samenwerking, onderaanneming, ontwikkeling van diensten, gezamenlijke projecten en aanvullende oplossingen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 156 | title: "Projecten & internationale samenwerking",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 158 | "Ontwikkeling van gezamenlijke projecten, internationale samenwerking en kansen tussen verschillende markten en regio’s.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 164 | "Ons multisectorale model maakt samenwerkingen mogelijk die aangepast zijn aan verschillende projecten, markten en ontwikkelingsniveaus.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 182 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 183 | title: "Gezamenlijke projecten & kansen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 185 | "Samen oplossingen, diensten, markten en duurzame projecten ontwikkelen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 205 | "TSB Tech Group is developing a reliable collaboration network to strengthen its capabilities, create new opportunities and build long-term projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 211 | "We work with recognized brands, equipment and technologies across different sectors to deliver professional solutions tailored to each project.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 224 | "TSB Tech Group is open to different forms of collaboration depending on sectors, markets and projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 240 | "Commercial collaboration, subcontracting, service development, joint projects and complementary solutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 253 | title: "Projects & international cooperation",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 255 | "Development of joint projects, international cooperation and opportunities across multiple markets and regions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 261 | "Our multisector model enables collaborations adapted to different projects, markets and levels of development.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 279 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 280 | title: "Joint projects & opportunities",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 282 | "Building solutions, services, markets and long-term value-creating projects together.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 376 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 473 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 570 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 667 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 764 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 861 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 958 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 3 | export const projectsTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 5 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 8 | title2: "réalisations",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 11 | viewAll: "Voir toutes nos réalisations",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 43 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 48 | "Ontdek enkele voorbeelden van projecten die we binnen onze verschillende expertisedomeinen hebben gerealiseerd.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 81 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 84 | title2: "projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 86 | "Discover some examples of projects completed across our different areas of expertise.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 87 | viewAll: "View all our projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 119 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 157 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 195 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 233 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 271 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 309 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 347 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 3 | export const projectsPageTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 5 | projectsPage: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 6 | eyebrow: "NOS RÉALISATIONS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 50 | projectsPage: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 58 | discuss: "Bespreek dit project",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 95 | projectsPage: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 96 | eyebrow: "OUR PROJECTS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 103 | discuss: "Discuss this project",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 140 | projectsPage: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 185 | projectsPage: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 230 | projectsPage: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 275 | projectsPage: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 320 | projectsPage: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 365 | projectsPage: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 410 | projectsPage: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 119 | "messagePlaceholder": "Leg ons uw project, probleem of de dienst die u nodig hebt uit...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 212 | "messagePlaceholder": "Tell us about your project, problem, or the service you need...",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 150 | "Fotovoltaïsche oplossingen, energieoptimalisatie, autonomie, verbruiksbeheer en begeleiding van energieprojecten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 204 | "Volledige begeleiding van bedrijven met technische, digitale en operationele oplossingen voor hun projecten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 208 | title: "Innovatie & projecten",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 256 | "Photovoltaic solutions, energy optimization, autonomy, consumption management and support for energy projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 310 | "Comprehensive support for businesses with technical, digital and operational solutions tailored to their projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 314 | title: "Innovation & projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 101 | "Een ecosysteem van vaardigheden rond één visie: technische, technologische en professionele oplossingen aanbieden die zijn aangepast aan elk project.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 173 | "Volledige ondersteuning van bedrijven met technische oplossingen aangepast aan hun infrastructuur en projecten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 177 | title: "Innovatie & projecten",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 192 | "An ecosystem of expertise built around one vision: delivering technical, technological and professional solutions tailored to every project.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 264 | "Comprehensive support for businesses with technical solutions tailored to their infrastructure and projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 268 | title: "Innovation & projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 197 | "description": "Componenten, kabels, connectoren, accessoires en materiaal voor elektronische projecten en reparaties."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 300 | "description": "Components, cables, connectors, accessories and equipment for electronic projects and repairs."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 82 | "Voor vragen over onze diensten, activiteiten, projecten of oplossingen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 134 | "For questions about our services, activities, projects or solutions.",
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 58 | { id: "projects", icon: Rocket },
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 67 | const projectMailHref = `mailto:contact@tsbtechgroup.com?subject=${encodeURIComponent(
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 68 | t("projectEmailSubject")
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 210 | <a href={projectMailHref} className="button button--primary">{t("ctaProject")} <ArrowRight size={17} aria-hidden="true" /></a>
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 6 | import Projects from "../../components/layout/Projects";
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 173 | <Projects />
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 197 | {t("projectEyebrow")}
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 200 | <h2>{t("projectTitle")}</h2>
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 202 | <p>{t("projectText")}</p>
+C:\TSB\TSB-Tech-Group\src\pages\Innovation\index.tsx | ligne 177 | <h2>{t("projectTitle")}</h2>
+C:\TSB\TSB-Tech-Group\src\pages\Innovation\index.tsx | ligne 185 | {t("projectText")}
+C:\TSB\TSB-Tech-Group\src\pages\Innovation\index.tsx | ligne 193 | {t("projectButton")}
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 72 | id: "projects",
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 14 | import { projectsPageTranslations } from "../../i18n/locales/projectsPage";
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 16 | const projectConfig = [
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 44 | function Projects() {
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 49 | projectsPageTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 51 | `projectsPage.${key}`
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 128 | {projectConfig.map((project) => {
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 129 | const Icon = project.icon;
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 132 | `items.${project.id}.category`
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 136 | `items.${project.id}.title`
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 140 | `items.${project.id}.description`
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 145 | className={`domain-card domain-${project.color}`}
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 146 | key={project.id}
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 189 | export default Projects;
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 19 | const Projects = lazy(() => import("./pages/Projects"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 99 | } else if (path === "/projects") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 100 | page = <Projects />;

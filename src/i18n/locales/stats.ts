@@ -3,130 +3,130 @@ import type { TranslationResources } from "../types";
 export const statsTranslations: TranslationResources = {
   fr: {
     stats: {
-      ariaLabel: "TSB Tech Group en chiffres",
+      ariaLabel: "Indicateurs dynamiques TSB Tech Group",
       labels: {
-        interventions: "Interventions réalisées",
-        clients: "Clients satisfaits",
-        domains: "Domaines d’expertise",
-        support: "Support disponible",
-        quality: "Engagement qualité",
+        clients: "Clients depuis le lancement",
+        completed_services: "Interventions terminées",
+        orders: "Commandes validées",
+        quote_requests: "Demandes reçues",
+        published_products: "Produits publiés",
       },
     },
   },
 
   nl: {
     stats: {
-      ariaLabel: "TSB Tech Group in cijfers",
+      ariaLabel: "Dynamische indicatoren van TSB Tech Group",
       labels: {
-        interventions: "Uitgevoerde interventies",
-        clients: "Tevreden klanten",
-        domains: "Expertisedomeinen",
-        support: "Beschikbare ondersteuning",
-        quality: "Kwaliteitsgarantie",
+        clients: "Klanten sinds de lancering",
+        completed_services: "Voltooide interventies",
+        orders: "Bevestigde bestellingen",
+        quote_requests: "Ontvangen aanvragen",
+        published_products: "Gepubliceerde producten",
       },
     },
   },
 
   en: {
     stats: {
-      ariaLabel: "TSB Tech Group in numbers",
+      ariaLabel: "TSB Tech Group live indicators",
       labels: {
-        interventions: "Completed interventions",
-        clients: "Satisfied clients",
-        domains: "Areas of expertise",
-        support: "Support available",
-        quality: "Quality commitment",
+        clients: "Clients since launch",
+        completed_services: "Completed interventions",
+        orders: "Confirmed orders",
+        quote_requests: "Requests received",
+        published_products: "Published products",
       },
     },
   },
 
   de: {
     stats: {
-      ariaLabel: "TSB Tech Group in Zahlen",
+      ariaLabel: "Dynamische Kennzahlen der TSB Tech Group",
       labels: {
-        interventions: "Durchgeführte Einsätze",
-        clients: "Zufriedene Kunden",
-        domains: "Fachbereiche",
-        support: "Verfügbarer Support",
-        quality: "Qualitätsversprechen",
+        clients: "Kunden seit dem Start",
+        completed_services: "Abgeschlossene Einsätze",
+        orders: "Bestätigte Bestellungen",
+        quote_requests: "Eingegangene Anfragen",
+        published_products: "Veröffentlichte Produkte",
       },
     },
   },
 
   es: {
     stats: {
-      ariaLabel: "TSB Tech Group en cifras",
+      ariaLabel: "Indicadores dinámicos de TSB Tech Group",
       labels: {
-        interventions: "Intervenciones realizadas",
-        clients: "Clientes satisfechos",
-        domains: "Áreas de especialización",
-        support: "Soporte disponible",
-        quality: "Compromiso con la calidad",
+        clients: "Clientes desde el lanzamiento",
+        completed_services: "Intervenciones completadas",
+        orders: "Pedidos confirmados",
+        quote_requests: "Solicitudes recibidas",
+        published_products: "Productos publicados",
       },
     },
   },
 
   it: {
     stats: {
-      ariaLabel: "TSB Tech Group in cifre",
+      ariaLabel: "Indicatori dinamici di TSB Tech Group",
       labels: {
-        interventions: "Interventi realizzati",
-        clients: "Clienti soddisfatti",
-        domains: "Ambiti di competenza",
-        support: "Supporto disponibile",
-        quality: "Impegno per la qualità",
+        clients: "Clienti dal lancio",
+        completed_services: "Interventi completati",
+        orders: "Ordini confermati",
+        quote_requests: "Richieste ricevute",
+        published_products: "Prodotti pubblicati",
       },
     },
   },
 
   pt: {
     stats: {
-      ariaLabel: "TSB Tech Group em números",
+      ariaLabel: "Indicadores dinâmicos da TSB Tech Group",
       labels: {
-        interventions: "Intervenções realizadas",
-        clients: "Clientes satisfeitos",
-        domains: "Áreas de especialização",
-        support: "Suporte disponível",
-        quality: "Compromisso com a qualidade",
+        clients: "Clientes desde o lançamento",
+        completed_services: "Intervenções concluídas",
+        orders: "Encomendas confirmadas",
+        quote_requests: "Pedidos recebidos",
+        published_products: "Produtos publicados",
       },
     },
   },
 
   ar: {
     stats: {
-      ariaLabel: "TSB Tech Group بالأرقام",
+      ariaLabel: "مؤشرات TSB Tech Group الديناميكية",
       labels: {
-        interventions: "التدخلات المنجزة",
-        clients: "عملاء راضون",
-        domains: "مجالات الخبرة",
-        support: "دعم متاح",
-        quality: "التزام بالجودة",
+        clients: "العملاء منذ الإطلاق",
+        completed_services: "التدخلات المكتملة",
+        orders: "الطلبات المؤكدة",
+        quote_requests: "الطلبات المستلمة",
+        published_products: "المنتجات المنشورة",
       },
     },
   },
 
   tr: {
     stats: {
-      ariaLabel: "Rakamlarla TSB Tech Group",
+      ariaLabel: "TSB Tech Group dinamik göstergeleri",
       labels: {
-        interventions: "Tamamlanan müdahaleler",
-        clients: "Memnun müşteriler",
-        domains: "Uzmanlık alanları",
-        support: "Mevcut destek",
-        quality: "Kalite taahhüdü",
+        clients: "Lansmandan bu yana müşteriler",
+        completed_services: "Tamamlanan müdahaleler",
+        orders: "Onaylanan siparişler",
+        quote_requests: "Alınan talepler",
+        published_products: "Yayınlanan ürünler",
       },
     },
   },
 
   zh: {
     stats: {
-      ariaLabel: "TSB Tech Group 数据概览",
+      ariaLabel: "TSB Tech Group 动态指标",
       labels: {
-        interventions: "已完成服务",
-        clients: "满意客户",
-        domains: "专业领域",
-        support: "全天候支持",
-        quality: "质量承诺",
+        clients: "上线以来的客户",
+        completed_services: "已完成的服务",
+        orders: "已确认订单",
+        quote_requests: "已收到的请求",
+        published_products: "已发布产品",
       },
     },
   },

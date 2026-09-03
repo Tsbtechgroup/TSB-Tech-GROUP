@@ -3,461 +3,217 @@ import type { TranslationResources } from "../types";
 export const businessTranslations: TranslationResources = {
   fr: {
     business: {
-      eyebrow: "SOLUTIONS ENTREPRISES",
-      title1: "Des solutions techniques pour",
-      title2: "vos activités",
-      intro:
-        "TSB Tech Group accompagne les entreprises, professionnels et institutions avec des solutions techniques, technologiques et opérationnelles adaptées à leurs besoins.",
+      eyebrow: "TSB BUSINESS",
+      title1: "Solutions entreprises, partenariats",
+      title2: "& investissement",
+      intro: "TSB Tech Group accompagne les entreprises, professionnels, institutions, partenaires et porteurs de projets avec des solutions techniques, des collaborations stratégiques et des opportunités de développement à l’échelle internationale.",
       backHome: "Retour à l’accueil",
+      solutionsButton: "Solutions entreprises",
+      investButton: "Business & Invest",
       quote: "Demander un devis",
-      sectionTitle: "Un accompagnement global",
-      sectionIntro:
-        "Nous pouvons intervenir sur plusieurs domaines afin de construire une solution cohérente autour de votre infrastructure, de votre sécurité et de vos équipements.",
-      contactTitle: "Parlons de votre projet",
-      contactText:
-        "Présentez-nous votre besoin et nous étudierons la solution la plus adaptée à votre activité.",
-      contact: "Nous contacter",
+      solutionsEyebrow: "SOLUTIONS ENTREPRISES",
+      solutionsTitle: "Des solutions techniques pour vos activités",
+      solutionsIntro: "Audit, sécurité, réseaux, automatisation et maintenance : TSB Tech Group construit des réponses adaptées à vos infrastructures, équipements et objectifs opérationnels.",
       items: {
-        audit: {
-          title: "Audit & étude technique",
-          description:
-            "Analyse des besoins, étude de l’existant et définition d’une solution adaptée à votre environnement.",
-        },
-        security: {
-          title: "Sécurité & contrôle d’accès",
-          description:
-            "Vidéosurveillance, alarmes, contrôle d’accès et solutions de protection pour sites professionnels.",
-        },
-        network: {
-          title: "Réseaux & télécommunications",
-          description:
-            "Infrastructure réseau, connectivité, équipements de communication et accompagnement technique.",
-        },
-        automation: {
-          title: "Automatisation & digital",
-          description:
-            "Automatisation, intégration de systèmes, outils numériques et solutions professionnelles sur mesure.",
-        },
-        maintenance: {
-          title: "Maintenance & support",
-          description:
-            "Entretien, dépannage, suivi technique et accompagnement des équipements et installations.",
-        },
+        audit: { title: "Audit & étude technique", description: "Analyse des besoins, étude de l’existant et définition d’une solution adaptée à votre environnement." },
+        security: { title: "Sécurité & contrôle d’accès", description: "Vidéosurveillance, alarmes, contrôle d’accès et solutions de protection pour sites professionnels." },
+        network: { title: "Réseaux & télécommunications", description: "Infrastructure réseau, connectivité, équipements de communication et accompagnement technique." },
+        automation: { title: "Automatisation & digital", description: "Automatisation, intégration de systèmes, outils numériques et solutions professionnelles sur mesure." },
+        maintenance: { title: "Maintenance & support", description: "Entretien, dépannage, suivi technique et accompagnement des équipements et installations." },
       },
+      investEyebrow: "BUSINESS & INVEST",
+      investTitle1: "Construire des opportunités",
+      investTitle2: "ensemble",
+      investIntro: "TSB Business ouvre un espace dédié aux partenariats stratégiques, aux investissements, aux projets communs et au développement de nouvelles activités.",
+      investItems: {
+        investment: { title: "Investissement", description: "Étude d’opportunités d’investissement, de financement de projets et de développement d’activités à potentiel." },
+        strategic: { title: "Partenariats stratégiques", description: "Collaborations durables avec entreprises, groupes, experts et acteurs complémentaires à l’écosystème TSB." },
+        jointVenture: { title: "Joint-venture & projets communs", description: "Création ou développement de projets communs avec partage de compétences, moyens et objectifs." },
+        distribution: { title: "Distribution & représentation", description: "Coopérations commerciales, représentation de marques, distribution de solutions et développement de marchés." },
+        institutions: { title: "Institutions & grands projets", description: "Coopération avec organismes, collectivités, institutions et structures portant des projets structurants." },
+        international: { title: "Développement international", description: "Recherche de partenaires et opportunités pour accompagner l’expansion de projets sur plusieurs marchés." },
+      },
+      opportunitiesEyebrow: "SECTEURS D’OPPORTUNITÉS",
+      opportunitiesTitle: "Un écosystème multisectoriel",
+      opportunitiesIntro: "Les opportunités peuvent concerner plusieurs pôles actuels ou futurs de TSB Tech Group.",
+      opportunities: { automotive: "Automobile & mobilité", energy: "Énergie", water: "Eau & forage", security: "Sécurité", automation: "Automatisation", networks: "Réseaux & télécommunications", digital: "Digital & technologies", academy: "TSB Academy", store: "TSB Store", projects: "Projets spéciaux" },
+      internationalEyebrow: "DÉVELOPPEMENT INTERNATIONAL",
+      internationalTitle: "Une vision pensée au-delà des frontières",
+      internationalText: "TSB Tech Group développe un modèle capable de connecter expertise technique, technologie, commerce, formation et partenariats selon les besoins de chaque marché.",
+      reach: "Europe • Afrique • Amérique • Asie • Partout dans le monde",
+      processEyebrow: "PROCESSUS",
+      processTitle: "De l’idée à la collaboration",
+      processIntro: "Chaque proposition est étudiée progressivement afin de vérifier sa cohérence, sa faisabilité et son intérêt mutuel.",
+      processItems: {
+        discover: { title: "Présenter le projet", description: "Vous partagez votre besoin, votre proposition ou l’opportunité identifiée." },
+        review: { title: "Étude TSB", description: "Nous analysons le contexte, les objectifs, les ressources et les possibilités de collaboration." },
+        exchange: { title: "Échange", description: "Les parties précisent les attentes, responsabilités, conditions et prochaines étapes." },
+        proposal: { title: "Proposition", description: "Une structure de collaboration, de partenariat ou de projet peut être formalisée." },
+        collaboration: { title: "Collaboration", description: "Après validation, le projet entre dans sa phase de mise en œuvre et de suivi." },
+      },
+      ctaEyebrow: "PARLONS BUSINESS",
+      ctaTitle: "Un projet, une opportunité ou une proposition ?",
+      ctaText: "Pour un besoin technique, utilisez la demande de devis. Pour un partenariat, un investissement ou un projet stratégique, présentez directement votre proposition à TSB Tech Group.",
+      ctaQuote: "Demander un devis",
+      ctaProject: "Présenter un projet",
+      projectEmailSubject: "TSB Business & Invest — Proposition de projet",
     },
   },
-
   nl: {
     business: {
-      eyebrow: "BEDRIJFSOPLOSSINGEN",
-      title1: "Technische oplossingen voor",
-      title2: "uw activiteiten",
-      intro:
-        "TSB Tech Group ondersteunt bedrijven, professionals en instellingen met technische, technologische en operationele oplossingen op maat.",
-      backHome: "Terug naar home",
-      quote: "Offerte aanvragen",
-      sectionTitle: "Volledige ondersteuning",
-      sectionIntro:
-        "We kunnen op meerdere domeinen tussenkomen om een coherente oplossing te bouwen rond uw infrastructuur, beveiliging en apparatuur.",
-      contactTitle: "Bespreek uw project",
-      contactText:
-        "Vertel ons wat u nodig hebt en we bekijken welke oplossing het best bij uw activiteit past.",
-      contact: "Contacteer ons",
+      eyebrow: "TSB BUSINESS",
+      title1: "Bedrijfsoplossingen, partnerschappen",
+      title2: "& investeringen",
+      intro: "TSB Tech Group ondersteunt bedrijven, professionals, instellingen, partners en projecteigenaars met technische oplossingen, strategische samenwerkingen en internationale ontwikkelingskansen.",
+      backHome: "Terug naar home", solutionsButton: "Bedrijfsoplossingen", investButton: "Business & Invest", quote: "Offerte aanvragen",
+      solutionsEyebrow: "BEDRIJFSOPLOSSINGEN", solutionsTitle: "Technische oplossingen voor uw activiteiten", solutionsIntro: "Audit, beveiliging, netwerken, automatisering en onderhoud afgestemd op uw infrastructuur, apparatuur en operationele doelstellingen.",
       items: {
-        audit: {
-          title: "Audit & technische studie",
-          description:
-            "Analyse van de behoeften, beoordeling van de bestaande situatie en definitie van een passende oplossing.",
-        },
-        security: {
-          title: "Beveiliging & toegangscontrole",
-          description:
-            "Camerabewaking, alarmen, toegangscontrole en beveiligingsoplossingen voor professionele sites.",
-        },
-        network: {
-          title: "Netwerken & telecommunicatie",
-          description:
-            "Netwerkinfrastructuur, connectiviteit, communicatieapparatuur en technische ondersteuning.",
-        },
-        automation: {
-          title: "Automatisering & digitaal",
-          description:
-            "Automatisering, systeemintegratie, digitale tools en professionele oplossingen op maat.",
-        },
-        maintenance: {
-          title: "Onderhoud & support",
-          description:
-            "Onderhoud, herstellingen, technische opvolging en ondersteuning van apparatuur en installaties.",
-        },
+        audit: { title: "Audit & technische studie", description: "Analyse van behoeften en definitie van een passende oplossing." },
+        security: { title: "Beveiliging & toegangscontrole", description: "Camerabewaking, alarmen, toegangscontrole en bescherming voor professionele locaties." },
+        network: { title: "Netwerken & telecommunicatie", description: "Netwerkinfrastructuur, connectiviteit, communicatieapparatuur en technische ondersteuning." },
+        automation: { title: "Automatisering & digitaal", description: "Automatisering, systeemintegratie en digitale oplossingen op maat." },
+        maintenance: { title: "Onderhoud & support", description: "Onderhoud, herstellingen, technische opvolging en ondersteuning." },
       },
+      investEyebrow: "BUSINESS & INVEST", investTitle1: "Samen kansen", investTitle2: "bouwen", investIntro: "TSB Business creëert ruimte voor strategische partnerschappen, investeringen, gezamenlijke projecten en nieuwe activiteiten.",
+      investItems: {
+        investment: { title: "Investeringen", description: "Analyse van investeringskansen, projectfinanciering en activiteiten met groeipotentieel." },
+        strategic: { title: "Strategische partnerschappen", description: "Duurzame samenwerking met bedrijven, groepen, experts en complementaire spelers." },
+        jointVenture: { title: "Joint ventures & gezamenlijke projecten", description: "Samen projecten ontwikkelen door expertise, middelen en doelstellingen te delen." },
+        distribution: { title: "Distributie & vertegenwoordiging", description: "Commerciële samenwerking, merkvertegenwoordiging en marktontwikkeling." },
+        institutions: { title: "Instellingen & grote projecten", description: "Samenwerking met organisaties, overheden en instellingen rond structurerende projecten." },
+        international: { title: "Internationale ontwikkeling", description: "Partners en kansen zoeken om projecten op meerdere markten uit te bouwen." },
+      },
+      opportunitiesEyebrow: "KANSSECTOREN", opportunitiesTitle: "Een multisectoraal ecosysteem", opportunitiesIntro: "Kansen kunnen verschillende huidige of toekomstige pijlers van TSB Tech Group omvatten.",
+      opportunities: { automotive: "Automotive & mobiliteit", energy: "Energie", water: "Water & boringen", security: "Beveiliging", automation: "Automatisering", networks: "Netwerken & telecom", digital: "Digital & technologie", academy: "TSB Academy", store: "TSB Store", projects: "Speciale projecten" },
+      internationalEyebrow: "INTERNATIONALE ONTWIKKELING", internationalTitle: "Een visie die verder kijkt dan grenzen", internationalText: "TSB Tech Group verbindt technische expertise, technologie, handel, opleiding en partnerschappen volgens de behoeften van elke markt.", reach: "Europa • Afrika • Amerika • Azië • Overal ter wereld",
+      processEyebrow: "PROCES", processTitle: "Van idee tot samenwerking", processIntro: "Elk voorstel wordt stap voor stap beoordeeld op samenhang, haalbaarheid en wederzijds belang.",
+      processItems: {
+        discover: { title: "Project voorstellen", description: "U deelt uw behoefte, voorstel of kans." }, review: { title: "TSB-studie", description: "We analyseren context, doelstellingen, middelen en mogelijkheden." }, exchange: { title: "Overleg", description: "De partijen verduidelijken verwachtingen, verantwoordelijkheden en voorwaarden." }, proposal: { title: "Voorstel", description: "Een samenwerkings- of projectstructuur kan worden geformaliseerd." }, collaboration: { title: "Samenwerking", description: "Na validatie gaat het project naar uitvoering en opvolging." },
+      },
+      ctaEyebrow: "LATEN WE BUSINESS BESPREKEN", ctaTitle: "Een project, kans of voorstel?", ctaText: "Gebruik de offerteaanvraag voor een technische behoefte. Voor partnerschap, investering of een strategisch project kunt u uw voorstel rechtstreeks aan TSB Tech Group voorleggen.", ctaQuote: "Offerte aanvragen", ctaProject: "Project voorstellen", projectEmailSubject: "TSB Business & Invest — Projectvoorstel",
     },
   },
-
   en: {
     business: {
-      eyebrow: "BUSINESS SOLUTIONS",
-      title1: "Technical solutions for",
-      title2: "your operations",
-      intro:
-        "TSB Tech Group supports businesses, professionals and institutions with technical, technological and operational solutions tailored to their needs.",
-      backHome: "Back to home",
-      quote: "Request a quote",
-      sectionTitle: "End-to-end support",
-      sectionIntro:
-        "We can work across several areas to build a coherent solution around your infrastructure, security and equipment.",
-      contactTitle: "Let’s discuss your project",
-      contactText:
-        "Tell us what you need and we will study the most suitable solution for your activity.",
-      contact: "Contact us",
+      eyebrow: "TSB BUSINESS", title1: "Business solutions, partnerships", title2: "& investment",
+      intro: "TSB Tech Group supports businesses, professionals, institutions, partners and project owners with technical solutions, strategic collaboration and international development opportunities.",
+      backHome: "Back to home", solutionsButton: "Business solutions", investButton: "Business & Invest", quote: "Request a quote",
+      solutionsEyebrow: "BUSINESS SOLUTIONS", solutionsTitle: "Technical solutions for your operations", solutionsIntro: "Audit, security, networks, automation and maintenance tailored to your infrastructure, equipment and operational goals.",
       items: {
-        audit: {
-          title: "Audit & technical study",
-          description:
-            "Needs analysis, assessment of the existing environment and definition of a suitable solution.",
-        },
-        security: {
-          title: "Security & access control",
-          description:
-            "Video surveillance, alarms, access control and protection solutions for professional sites.",
-        },
-        network: {
-          title: "Networks & telecommunications",
-          description:
-            "Network infrastructure, connectivity, communication equipment and technical support.",
-        },
-        automation: {
-          title: "Automation & digital",
-          description:
-            "Automation, system integration, digital tools and custom professional solutions.",
-        },
-        maintenance: {
-          title: "Maintenance & support",
-          description:
-            "Maintenance, troubleshooting, technical follow-up and support for equipment and installations.",
-        },
+        audit: { title: "Audit & technical study", description: "Needs analysis, review of the existing environment and definition of a suitable solution." },
+        security: { title: "Security & access control", description: "Video surveillance, alarms, access control and protection solutions for professional sites." },
+        network: { title: "Networks & telecommunications", description: "Network infrastructure, connectivity, communication equipment and technical support." },
+        automation: { title: "Automation & digital", description: "Automation, system integration, digital tools and custom professional solutions." },
+        maintenance: { title: "Maintenance & support", description: "Maintenance, troubleshooting, technical follow-up and support." },
       },
+      investEyebrow: "BUSINESS & INVEST", investTitle1: "Building opportunities", investTitle2: "together", investIntro: "TSB Business creates a dedicated space for strategic partnerships, investment, joint projects and new activities.",
+      investItems: {
+        investment: { title: "Investment", description: "Assessment of investment opportunities, project financing and activities with growth potential." },
+        strategic: { title: "Strategic partnerships", description: "Long-term collaboration with companies, groups, experts and complementary players." },
+        jointVenture: { title: "Joint ventures & shared projects", description: "Developing projects together by combining expertise, resources and objectives." },
+        distribution: { title: "Distribution & representation", description: "Commercial cooperation, brand representation, solution distribution and market development." },
+        institutions: { title: "Institutions & major projects", description: "Cooperation with organizations, public bodies and institutions carrying structuring projects." },
+        international: { title: "International development", description: "Identifying partners and opportunities to support projects across multiple markets." },
+      },
+      opportunitiesEyebrow: "OPPORTUNITY SECTORS", opportunitiesTitle: "A multisector ecosystem", opportunitiesIntro: "Opportunities may involve several current or future TSB Tech Group business areas.",
+      opportunities: { automotive: "Automotive & mobility", energy: "Energy", water: "Water & drilling", security: "Security", automation: "Automation", networks: "Networks & telecom", digital: "Digital & technology", academy: "TSB Academy", store: "TSB Store", projects: "Special projects" },
+      internationalEyebrow: "INTERNATIONAL DEVELOPMENT", internationalTitle: "A vision designed beyond borders", internationalText: "TSB Tech Group connects technical expertise, technology, commerce, training and partnerships according to the needs of each market.", reach: "Europe • Africa • America • Asia • Worldwide",
+      processEyebrow: "PROCESS", processTitle: "From idea to collaboration", processIntro: "Each proposal is reviewed progressively to assess consistency, feasibility and mutual value.",
+      processItems: {
+        discover: { title: "Present the project", description: "Share your need, proposal or identified opportunity." }, review: { title: "TSB review", description: "We assess the context, objectives, resources and collaboration paths." }, exchange: { title: "Discussion", description: "The parties clarify expectations, responsibilities, conditions and next steps." }, proposal: { title: "Proposal", description: "A collaboration, partnership or project structure can be formalized." }, collaboration: { title: "Collaboration", description: "Once approved, the project moves into implementation and follow-up." },
+      },
+      ctaEyebrow: "LET’S TALK BUSINESS", ctaTitle: "A project, opportunity or proposal?", ctaText: "For a technical need, use the quote request. For a partnership, investment or strategic project, present your proposal directly to TSB Tech Group.", ctaQuote: "Request a quote", ctaProject: "Present a project", projectEmailSubject: "TSB Business & Invest — Project proposal",
     },
   },
-
   de: {
     business: {
-      eyebrow: "UNTERNEHMENSLÖSUNGEN",
-      title1: "Technische Lösungen für",
-      title2: "Ihre Aktivitäten",
-      intro:
-        "TSB Tech Group unterstützt Unternehmen, Fachkräfte und Institutionen mit technischen, technologischen und operativen Lösungen, die auf ihre Bedürfnisse zugeschnitten sind.",
-      backHome: "Zurück zur Startseite",
-      quote: "Angebot anfordern",
-      sectionTitle: "Ganzheitliche Unterstützung",
-      sectionIntro:
-        "Wir können in mehreren Bereichen tätig werden, um eine kohärente Lösung rund um Ihre Infrastruktur, Sicherheit und Ausrüstung aufzubauen.",
-      contactTitle: "Sprechen wir über Ihr Projekt",
-      contactText:
-        "Beschreiben Sie uns Ihren Bedarf und wir prüfen die für Ihre Tätigkeit am besten geeignete Lösung.",
-      contact: "Kontakt",
-      items: {
-        audit: {
-          title: "Audit & technische Studie",
-          description:
-            "Bedarfsanalyse, Bewertung der bestehenden Situation und Definition einer passenden Lösung für Ihre Umgebung.",
-        },
-        security: {
-          title: "Sicherheit & Zugangskontrolle",
-          description:
-            "Videoüberwachung, Alarmanlagen, Zugangskontrolle und Schutzlösungen für professionelle Standorte.",
-        },
-        network: {
-          title: "Netzwerke & Telekommunikation",
-          description:
-            "Netzwerkinfrastruktur, Konnektivität, Kommunikationsausrüstung und technische Betreuung.",
-        },
-        automation: {
-          title: "Automatisierung & Digital",
-          description:
-            "Automatisierung, Systemintegration, digitale Werkzeuge und maßgeschneiderte professionelle Lösungen.",
-        },
-        maintenance: {
-          title: "Wartung & Support",
-          description:
-            "Wartung, Fehlerbehebung, technische Betreuung und Unterstützung für Geräte und Anlagen.",
-        },
-      },
+      eyebrow: "TSB BUSINESS", title1: "Unternehmenslösungen, Partnerschaften", title2: "& Investitionen", intro: "TSB Tech Group unterstützt Unternehmen, Fachleute, Institutionen, Partner und Projektträger mit technischen Lösungen, strategischen Kooperationen und internationalen Entwicklungsmöglichkeiten.", backHome: "Zurück zur Startseite", solutionsButton: "Unternehmenslösungen", investButton: "Business & Invest", quote: "Angebot anfordern",
+      solutionsEyebrow: "UNTERNEHMENSLÖSUNGEN", solutionsTitle: "Technische Lösungen für Ihre Aktivitäten", solutionsIntro: "Audit, Sicherheit, Netzwerke, Automatisierung und Wartung passend zu Infrastruktur, Ausstattung und operativen Zielen.",
+      items: { audit: { title: "Audit & technische Studie", description: "Bedarfsanalyse und Definition einer passenden Lösung." }, security: { title: "Sicherheit & Zugangskontrolle", description: "Videoüberwachung, Alarmanlagen, Zugangskontrolle und Schutzlösungen." }, network: { title: "Netzwerke & Telekommunikation", description: "Netzwerkinfrastruktur, Konnektivität und technische Betreuung." }, automation: { title: "Automatisierung & Digital", description: "Automatisierung, Systemintegration und digitale Lösungen." }, maintenance: { title: "Wartung & Support", description: "Wartung, Fehlerbehebung und technische Betreuung." } },
+      investEyebrow: "BUSINESS & INVEST", investTitle1: "Chancen gemeinsam", investTitle2: "entwickeln", investIntro: "TSB Business schafft Raum für strategische Partnerschaften, Investitionen, gemeinsame Projekte und neue Aktivitäten.",
+      investItems: { investment: { title: "Investitionen", description: "Prüfung von Investitionschancen und Projektfinanzierungen." }, strategic: { title: "Strategische Partnerschaften", description: "Langfristige Kooperationen mit Unternehmen, Gruppen und Experten." }, jointVenture: { title: "Joint Ventures & gemeinsame Projekte", description: "Gemeinsame Entwicklung durch Bündelung von Know-how und Ressourcen." }, distribution: { title: "Vertrieb & Vertretung", description: "Kommerzielle Kooperation, Markenvertretung und Marktentwicklung." }, institutions: { title: "Institutionen & Großprojekte", description: "Zusammenarbeit mit Organisationen und Institutionen bei strukturierenden Projekten." }, international: { title: "Internationale Entwicklung", description: "Partner und Chancen für mehrere Märkte identifizieren." } },
+      opportunitiesEyebrow: "CHANCENBEREICHE", opportunitiesTitle: "Ein multisektorales Ökosystem", opportunitiesIntro: "Chancen können mehrere aktuelle oder zukünftige Bereiche der TSB Tech Group betreffen.", opportunities: { automotive: "Automotive & Mobilität", energy: "Energie", water: "Wasser & Bohrungen", security: "Sicherheit", automation: "Automatisierung", networks: "Netzwerke & Telekom", digital: "Digital & Technologie", academy: "TSB Academy", store: "TSB Store", projects: "Sonderprojekte" },
+      internationalEyebrow: "INTERNATIONALE ENTWICKLUNG", internationalTitle: "Eine Vision über Grenzen hinaus", internationalText: "TSB Tech Group verbindet technische Expertise, Technologie, Handel, Ausbildung und Partnerschaften entsprechend den Anforderungen jedes Marktes.", reach: "Europa • Afrika • Amerika • Asien • Weltweit",
+      processEyebrow: "PROZESS", processTitle: "Von der Idee zur Zusammenarbeit", processIntro: "Jeder Vorschlag wird schrittweise auf Stimmigkeit, Machbarkeit und gegenseitigen Nutzen geprüft.", processItems: { discover: { title: "Projekt vorstellen", description: "Sie teilen Bedarf, Vorschlag oder Chance." }, review: { title: "TSB-Prüfung", description: "Wir analysieren Kontext, Ziele und Ressourcen." }, exchange: { title: "Austausch", description: "Die Parteien klären Erwartungen und Bedingungen." }, proposal: { title: "Vorschlag", description: "Eine Kooperations- oder Projektstruktur kann formalisiert werden." }, collaboration: { title: "Zusammenarbeit", description: "Nach Freigabe beginnt Umsetzung und Betreuung." } },
+      ctaEyebrow: "BUSINESS BESPRECHEN", ctaTitle: "Ein Projekt, eine Chance oder ein Vorschlag?", ctaText: "Für technische Anforderungen nutzen Sie die Angebotsanfrage. Für Partnerschaften, Investitionen oder strategische Projekte senden Sie Ihren Vorschlag direkt an TSB Tech Group.", ctaQuote: "Angebot anfordern", ctaProject: "Projekt vorstellen", projectEmailSubject: "TSB Business & Invest — Projektvorschlag",
     },
   },
-
   es: {
     business: {
-      eyebrow: "SOLUCIONES PARA EMPRESAS",
-      title1: "Soluciones técnicas para",
-      title2: "sus actividades",
-      intro:
-        "TSB Tech Group acompaña a empresas, profesionales e instituciones con soluciones técnicas, tecnológicas y operativas adaptadas a sus necesidades.",
-      backHome: "Volver al inicio",
-      quote: "Solicitar presupuesto",
-      sectionTitle: "Acompañamiento integral",
-      sectionIntro:
-        "Podemos intervenir en varias áreas para construir una solución coherente en torno a su infraestructura, seguridad y equipos.",
-      contactTitle: "Hablemos de su proyecto",
-      contactText:
-        "Preséntenos su necesidad y estudiaremos la solución más adecuada para su actividad.",
-      contact: "Contáctenos",
-      items: {
-        audit: {
-          title: "Auditoría y estudio técnico",
-          description:
-            "Análisis de necesidades, evaluación de la situación existente y definición de una solución adaptada a su entorno.",
-        },
-        security: {
-          title: "Seguridad y control de acceso",
-          description:
-            "Videovigilancia, alarmas, control de acceso y soluciones de protección para instalaciones profesionales.",
-        },
-        network: {
-          title: "Redes y telecomunicaciones",
-          description:
-            "Infraestructura de red, conectividad, equipos de comunicación y asistencia técnica.",
-        },
-        automation: {
-          title: "Automatización y digital",
-          description:
-            "Automatización, integración de sistemas, herramientas digitales y soluciones profesionales a medida.",
-        },
-        maintenance: {
-          title: "Mantenimiento y soporte",
-          description:
-            "Mantenimiento, reparación, seguimiento técnico y apoyo para equipos e instalaciones.",
-        },
-      },
+      eyebrow: "TSB BUSINESS", title1: "Soluciones empresariales, alianzas", title2: "e inversión", intro: "TSB Tech Group acompaña a empresas, profesionales, instituciones, socios y promotores de proyectos con soluciones técnicas, colaboraciones estratégicas y oportunidades de desarrollo internacional.", backHome: "Volver al inicio", solutionsButton: "Soluciones empresariales", investButton: "Business & Invest", quote: "Solicitar presupuesto",
+      solutionsEyebrow: "SOLUCIONES EMPRESARIALES", solutionsTitle: "Soluciones técnicas para sus actividades", solutionsIntro: "Auditoría, seguridad, redes, automatización y mantenimiento adaptados a su infraestructura, equipos y objetivos.",
+      items: { audit: { title: "Auditoría y estudio técnico", description: "Análisis de necesidades y definición de una solución adecuada." }, security: { title: "Seguridad y control de acceso", description: "Videovigilancia, alarmas, control de acceso y protección." }, network: { title: "Redes y telecomunicaciones", description: "Infraestructura de red, conectividad y asistencia técnica." }, automation: { title: "Automatización y digital", description: "Automatización, integración de sistemas y soluciones digitales." }, maintenance: { title: "Mantenimiento y soporte", description: "Mantenimiento, reparación y seguimiento técnico." } },
+      investEyebrow: "BUSINESS & INVEST", investTitle1: "Construir oportunidades", investTitle2: "juntos", investIntro: "TSB Business abre un espacio dedicado a alianzas estratégicas, inversión, proyectos conjuntos y nuevas actividades.",
+      investItems: { investment: { title: "Inversión", description: "Estudio de oportunidades de inversión y financiación de proyectos." }, strategic: { title: "Alianzas estratégicas", description: "Colaboraciones duraderas con empresas, grupos y expertos." }, jointVenture: { title: "Joint venture y proyectos conjuntos", description: "Desarrollo conjunto compartiendo competencias, recursos y objetivos." }, distribution: { title: "Distribución y representación", description: "Cooperación comercial, representación de marcas y desarrollo de mercados." }, institutions: { title: "Instituciones y grandes proyectos", description: "Cooperación con organismos e instituciones en proyectos estructurantes." }, international: { title: "Desarrollo internacional", description: "Búsqueda de socios y oportunidades en distintos mercados." } },
+      opportunitiesEyebrow: "SECTORES DE OPORTUNIDAD", opportunitiesTitle: "Un ecosistema multisectorial", opportunitiesIntro: "Las oportunidades pueden abarcar varias áreas actuales o futuras de TSB Tech Group.", opportunities: { automotive: "Automoción y movilidad", energy: "Energía", water: "Agua y perforación", security: "Seguridad", automation: "Automatización", networks: "Redes y telecom", digital: "Digital y tecnología", academy: "TSB Academy", store: "TSB Store", projects: "Proyectos especiales" },
+      internationalEyebrow: "DESARROLLO INTERNACIONAL", internationalTitle: "Una visión más allá de las fronteras", internationalText: "TSB Tech Group conecta experiencia técnica, tecnología, comercio, formación y alianzas según las necesidades de cada mercado.", reach: "Europa • África • América • Asia • En todo el mundo",
+      processEyebrow: "PROCESO", processTitle: "De la idea a la colaboración", processIntro: "Cada propuesta se estudia para evaluar coherencia, viabilidad e interés mutuo.", processItems: { discover: { title: "Presentar el proyecto", description: "Comparta su necesidad, propuesta u oportunidad." }, review: { title: "Estudio TSB", description: "Analizamos contexto, objetivos y recursos." }, exchange: { title: "Intercambio", description: "Las partes precisan expectativas y condiciones." }, proposal: { title: "Propuesta", description: "Puede formalizarse una estructura de colaboración o proyecto." }, collaboration: { title: "Colaboración", description: "Tras la validación comienza la ejecución y el seguimiento." } },
+      ctaEyebrow: "HABLEMOS DE BUSINESS", ctaTitle: "¿Un proyecto, una oportunidad o una propuesta?", ctaText: "Para una necesidad técnica, utilice la solicitud de presupuesto. Para una alianza, inversión o proyecto estratégico, presente su propuesta directamente a TSB Tech Group.", ctaQuote: "Solicitar presupuesto", ctaProject: "Presentar un proyecto", projectEmailSubject: "TSB Business & Invest — Propuesta de proyecto",
     },
   },
-
   it: {
     business: {
-      eyebrow: "SOLUZIONI AZIENDALI",
-      title1: "Soluzioni tecniche per",
-      title2: "le vostre attività",
-      intro:
-        "TSB Tech Group supporta aziende, professionisti e istituzioni con soluzioni tecniche, tecnologiche e operative adatte alle loro esigenze.",
-      backHome: "Torna alla home",
-      quote: "Richiedi un preventivo",
-      sectionTitle: "Supporto completo",
-      sectionIntro:
-        "Possiamo intervenire in più ambiti per costruire una soluzione coerente attorno alla vostra infrastruttura, sicurezza e attrezzature.",
-      contactTitle: "Parliamo del vostro progetto",
-      contactText:
-        "Presentateci la vostra esigenza e studieremo la soluzione più adatta alla vostra attività.",
-      contact: "Contattaci",
-      items: {
-        audit: {
-          title: "Audit e studio tecnico",
-          description:
-            "Analisi delle esigenze, valutazione dell’esistente e definizione di una soluzione adatta al vostro ambiente.",
-        },
-        security: {
-          title: "Sicurezza e controllo accessi",
-          description:
-            "Videosorveglianza, allarmi, controllo accessi e soluzioni di protezione per siti professionali.",
-        },
-        network: {
-          title: "Reti e telecomunicazioni",
-          description:
-            "Infrastruttura di rete, connettività, apparecchiature di comunicazione e supporto tecnico.",
-        },
-        automation: {
-          title: "Automazione e digitale",
-          description:
-            "Automazione, integrazione di sistemi, strumenti digitali e soluzioni professionali personalizzate.",
-        },
-        maintenance: {
-          title: "Manutenzione e supporto",
-          description:
-            "Manutenzione, risoluzione guasti, monitoraggio tecnico e supporto per attrezzature e impianti.",
-        },
-      },
+      eyebrow: "TSB BUSINESS", title1: "Soluzioni aziendali, partnership", title2: "& investimenti", intro: "TSB Tech Group supporta aziende, professionisti, istituzioni, partner e promotori di progetti con soluzioni tecniche, collaborazioni strategiche e opportunità di sviluppo internazionale.", backHome: "Torna alla home", solutionsButton: "Soluzioni aziendali", investButton: "Business & Invest", quote: "Richiedi un preventivo",
+      solutionsEyebrow: "SOLUZIONI AZIENDALI", solutionsTitle: "Soluzioni tecniche per le vostre attività", solutionsIntro: "Audit, sicurezza, reti, automazione e manutenzione adatti a infrastrutture, attrezzature e obiettivi operativi.",
+      items: { audit: { title: "Audit e studio tecnico", description: "Analisi delle esigenze e definizione di una soluzione adeguata." }, security: { title: "Sicurezza e controllo accessi", description: "Videosorveglianza, allarmi, controllo accessi e protezione." }, network: { title: "Reti e telecomunicazioni", description: "Infrastruttura di rete, connettività e supporto tecnico." }, automation: { title: "Automazione e digitale", description: "Automazione, integrazione di sistemi e soluzioni digitali." }, maintenance: { title: "Manutenzione e supporto", description: "Manutenzione, risoluzione guasti e monitoraggio tecnico." } },
+      investEyebrow: "BUSINESS & INVEST", investTitle1: "Costruire opportunità", investTitle2: "insieme", investIntro: "TSB Business crea uno spazio dedicato a partnership strategiche, investimenti, progetti congiunti e nuove attività.",
+      investItems: { investment: { title: "Investimenti", description: "Valutazione di opportunità di investimento e finanziamento di progetti." }, strategic: { title: "Partnership strategiche", description: "Collaborazioni durature con aziende, gruppi ed esperti." }, jointVenture: { title: "Joint venture & progetti comuni", description: "Sviluppo condiviso di competenze, risorse e obiettivi." }, distribution: { title: "Distribuzione & rappresentanza", description: "Cooperazione commerciale, rappresentanza di marchi e sviluppo dei mercati." }, institutions: { title: "Istituzioni & grandi progetti", description: "Cooperazione con enti e istituzioni per progetti strutturanti." }, international: { title: "Sviluppo internazionale", description: "Ricerca di partner e opportunità su più mercati." } },
+      opportunitiesEyebrow: "SETTORI DI OPPORTUNITÀ", opportunitiesTitle: "Un ecosistema multisettoriale", opportunitiesIntro: "Le opportunità possono riguardare diversi poli attuali o futuri di TSB Tech Group.", opportunities: { automotive: "Automotive & mobilità", energy: "Energia", water: "Acqua & perforazione", security: "Sicurezza", automation: "Automazione", networks: "Reti & telecom", digital: "Digitale & tecnologia", academy: "TSB Academy", store: "TSB Store", projects: "Progetti speciali" },
+      internationalEyebrow: "SVILUPPO INTERNAZIONALE", internationalTitle: "Una visione oltre i confini", internationalText: "TSB Tech Group collega competenza tecnica, tecnologia, commercio, formazione e partnership in base alle esigenze di ogni mercato.", reach: "Europa • Africa • America • Asia • In tutto il mondo",
+      processEyebrow: "PROCESSO", processTitle: "Dall’idea alla collaborazione", processIntro: "Ogni proposta viene valutata per verificarne coerenza, fattibilità e valore reciproco.", processItems: { discover: { title: "Presentare il progetto", description: "Condividete esigenza, proposta o opportunità." }, review: { title: "Valutazione TSB", description: "Analizziamo contesto, obiettivi e risorse." }, exchange: { title: "Confronto", description: "Le parti chiariscono aspettative e condizioni." }, proposal: { title: "Proposta", description: "Può essere formalizzata una struttura di collaborazione o progetto." }, collaboration: { title: "Collaborazione", description: "Dopo l’approvazione iniziano realizzazione e monitoraggio." } },
+      ctaEyebrow: "PARLIAMO DI BUSINESS", ctaTitle: "Un progetto, un’opportunità o una proposta?", ctaText: "Per un’esigenza tecnica usate la richiesta di preventivo. Per partnership, investimenti o progetti strategici, presentate la proposta direttamente a TSB Tech Group.", ctaQuote: "Richiedi un preventivo", ctaProject: "Presenta un progetto", projectEmailSubject: "TSB Business & Invest — Proposta di progetto",
     },
   },
-
   pt: {
     business: {
-      eyebrow: "SOLUÇÕES EMPRESARIAIS",
-      title1: "Soluções técnicas para",
-      title2: "as suas atividades",
-      intro:
-        "A TSB Tech Group apoia empresas, profissionais e instituições com soluções técnicas, tecnológicas e operacionais adaptadas às suas necessidades.",
-      backHome: "Voltar ao início",
-      quote: "Pedir orçamento",
-      sectionTitle: "Acompanhamento global",
-      sectionIntro:
-        "Podemos atuar em várias áreas para construir uma solução coerente em torno da sua infraestrutura, segurança e equipamentos.",
-      contactTitle: "Vamos falar do seu projeto",
-      contactText:
-        "Apresente-nos a sua necessidade e estudaremos a solução mais adequada à sua atividade.",
-      contact: "Contacte-nos",
-      items: {
-        audit: {
-          title: "Auditoria e estudo técnico",
-          description:
-            "Análise das necessidades, avaliação da situação existente e definição de uma solução adequada ao seu ambiente.",
-        },
-        security: {
-          title: "Segurança e controlo de acesso",
-          description:
-            "Videovigilância, alarmes, controlo de acesso e soluções de proteção para instalações profissionais.",
-        },
-        network: {
-          title: "Redes e telecomunicações",
-          description:
-            "Infraestrutura de rede, conectividade, equipamentos de comunicação e acompanhamento técnico.",
-        },
-        automation: {
-          title: "Automação e digital",
-          description:
-            "Automação, integração de sistemas, ferramentas digitais e soluções profissionais personalizadas.",
-        },
-        maintenance: {
-          title: "Manutenção e suporte",
-          description:
-            "Manutenção, reparação, acompanhamento técnico e suporte a equipamentos e instalações.",
-        },
-      },
+      eyebrow: "TSB BUSINESS", title1: "Soluções empresariais, parcerias", title2: "& investimento", intro: "A TSB Tech Group apoia empresas, profissionais, instituições, parceiros e promotores de projetos com soluções técnicas, colaborações estratégicas e oportunidades de desenvolvimento internacional.", backHome: "Voltar ao início", solutionsButton: "Soluções empresariais", investButton: "Business & Invest", quote: "Pedir orçamento",
+      solutionsEyebrow: "SOLUÇÕES EMPRESARIAIS", solutionsTitle: "Soluções técnicas para as suas atividades", solutionsIntro: "Auditoria, segurança, redes, automação e manutenção adaptadas à infraestrutura, equipamentos e objetivos operacionais.",
+      items: { audit: { title: "Auditoria e estudo técnico", description: "Análise das necessidades e definição de uma solução adequada." }, security: { title: "Segurança e controlo de acesso", description: "Videovigilância, alarmes, controlo de acesso e proteção." }, network: { title: "Redes e telecomunicações", description: "Infraestrutura de rede, conectividade e apoio técnico." }, automation: { title: "Automação e digital", description: "Automação, integração de sistemas e soluções digitais." }, maintenance: { title: "Manutenção e suporte", description: "Manutenção, reparação e acompanhamento técnico." } },
+      investEyebrow: "BUSINESS & INVEST", investTitle1: "Construir oportunidades", investTitle2: "em conjunto", investIntro: "TSB Business cria um espaço dedicado a parcerias estratégicas, investimento, projetos conjuntos e novas atividades.",
+      investItems: { investment: { title: "Investimento", description: "Estudo de oportunidades de investimento e financiamento de projetos." }, strategic: { title: "Parcerias estratégicas", description: "Colaborações duradouras com empresas, grupos e especialistas." }, jointVenture: { title: "Joint venture & projetos conjuntos", description: "Desenvolvimento conjunto partilhando competências, recursos e objetivos." }, distribution: { title: "Distribuição & representação", description: "Cooperação comercial, representação de marcas e desenvolvimento de mercados." }, institutions: { title: "Instituições & grandes projetos", description: "Cooperação com organismos e instituições em projetos estruturantes." }, international: { title: "Desenvolvimento internacional", description: "Procura de parceiros e oportunidades em vários mercados." } },
+      opportunitiesEyebrow: "SETORES DE OPORTUNIDADE", opportunitiesTitle: "Um ecossistema multissetorial", opportunitiesIntro: "As oportunidades podem envolver vários polos atuais ou futuros da TSB Tech Group.", opportunities: { automotive: "Automóvel & mobilidade", energy: "Energia", water: "Água & perfuração", security: "Segurança", automation: "Automação", networks: "Redes & telecom", digital: "Digital & tecnologia", academy: "TSB Academy", store: "TSB Store", projects: "Projetos especiais" },
+      internationalEyebrow: "DESENVOLVIMENTO INTERNACIONAL", internationalTitle: "Uma visão para além das fronteiras", internationalText: "A TSB Tech Group liga conhecimento técnico, tecnologia, comércio, formação e parcerias de acordo com as necessidades de cada mercado.", reach: "Europa • África • América • Ásia • Em todo o mundo",
+      processEyebrow: "PROCESSO", processTitle: "Da ideia à colaboração", processIntro: "Cada proposta é analisada para avaliar coerência, viabilidade e interesse mútuo.", processItems: { discover: { title: "Apresentar o projeto", description: "Partilhe a sua necessidade, proposta ou oportunidade." }, review: { title: "Estudo TSB", description: "Analisamos contexto, objetivos e recursos." }, exchange: { title: "Intercâmbio", description: "As partes clarificam expectativas e condições." }, proposal: { title: "Proposta", description: "Pode ser formalizada uma estrutura de colaboração ou projeto." }, collaboration: { title: "Colaboração", description: "Após validação começam implementação e acompanhamento." } },
+      ctaEyebrow: "VAMOS FALAR DE BUSINESS", ctaTitle: "Um projeto, oportunidade ou proposta?", ctaText: "Para uma necessidade técnica, utilize o pedido de orçamento. Para parceria, investimento ou projeto estratégico, apresente a proposta diretamente à TSB Tech Group.", ctaQuote: "Pedir orçamento", ctaProject: "Apresentar um projeto", projectEmailSubject: "TSB Business & Invest — Proposta de projeto",
     },
   },
-
   ar: {
     business: {
-      eyebrow: "حلول الشركات",
-      title1: "حلول تقنية من أجل",
-      title2: "أعمالكم",
-      intro:
-        "تدعم TSB Tech Group الشركات والمهنيين والمؤسسات بحلول تقنية وتكنولوجية وتشغيلية مصممة وفق احتياجاتهم.",
-      backHome: "العودة إلى الرئيسية",
-      quote: "طلب عرض سعر",
-      sectionTitle: "دعم متكامل",
-      sectionIntro:
-        "يمكننا التدخل في عدة مجالات لبناء حل متكامل حول البنية التحتية والأمن والمعدات الخاصة بكم.",
-      contactTitle: "لنتحدث عن مشروعكم",
-      contactText:
-        "اعرضوا علينا احتياجاتكم وسندرس الحل الأنسب لنشاطكم.",
-      contact: "تواصل معنا",
-      items: {
-        audit: {
-          title: "تدقيق ودراسة تقنية",
-          description:
-            "تحليل الاحتياجات وتقييم الوضع القائم وتحديد حل مناسب لبيئتكم.",
-        },
-        security: {
-          title: "الأمن والتحكم في الدخول",
-          description:
-            "المراقبة بالفيديو والإنذارات والتحكم في الدخول وحلول الحماية للمواقع المهنية.",
-        },
-        network: {
-          title: "الشبكات والاتصالات",
-          description:
-            "البنية التحتية للشبكات والاتصال ومعدات الاتصالات والدعم الفني.",
-        },
-        automation: {
-          title: "الأتمتة والحلول الرقمية",
-          description:
-            "الأتمتة ودمج الأنظمة والأدوات الرقمية والحلول المهنية المخصصة.",
-        },
-        maintenance: {
-          title: "الصيانة والدعم",
-          description:
-            "الصيانة وإصلاح الأعطال والمتابعة التقنية ودعم المعدات والمنشآت.",
-        },
-      },
+      eyebrow: "TSB BUSINESS", title1: "حلول الشركات والشراكات", title2: "والاستثمار", intro: "تدعم TSB Tech Group الشركات والمهنيين والمؤسسات والشركاء وأصحاب المشاريع من خلال حلول تقنية وتعاون استراتيجي وفرص للتطوير الدولي.", backHome: "العودة إلى الرئيسية", solutionsButton: "حلول الشركات", investButton: "Business & Invest", quote: "طلب عرض سعر",
+      solutionsEyebrow: "حلول الشركات", solutionsTitle: "حلول تقنية لأنشطتكم", solutionsIntro: "التدقيق والأمن والشبكات والأتمتة والصيانة وفق احتياجات البنية التحتية والمعدات والأهداف التشغيلية.",
+      items: { audit: { title: "تدقيق ودراسة تقنية", description: "تحليل الاحتياجات وتحديد حل مناسب." }, security: { title: "الأمن والتحكم في الدخول", description: "المراقبة بالفيديو والإنذارات والتحكم في الدخول والحماية." }, network: { title: "الشبكات والاتصالات", description: "البنية التحتية للشبكات والاتصال والدعم التقني." }, automation: { title: "الأتمتة والحلول الرقمية", description: "الأتمتة ودمج الأنظمة والحلول الرقمية." }, maintenance: { title: "الصيانة والدعم", description: "الصيانة وإصلاح الأعطال والمتابعة التقنية." } },
+      investEyebrow: "BUSINESS & INVEST", investTitle1: "نبني الفرص", investTitle2: "معاً", investIntro: "تخصص TSB Business مساحة للشراكات الاستراتيجية والاستثمار والمشاريع المشتركة وتطوير أنشطة جديدة.",
+      investItems: { investment: { title: "الاستثمار", description: "دراسة فرص الاستثمار وتمويل المشاريع." }, strategic: { title: "الشراكات الاستراتيجية", description: "تعاون طويل الأمد مع الشركات والمجموعات والخبراء." }, jointVenture: { title: "المشاريع المشتركة", description: "تطوير مشاريع مشتركة عبر توحيد الخبرات والموارد والأهداف." }, distribution: { title: "التوزيع والتمثيل", description: "تعاون تجاري وتمثيل العلامات وتطوير الأسواق." }, institutions: { title: "المؤسسات والمشاريع الكبرى", description: "تعاون مع الهيئات والمؤسسات في المشاريع الهيكلية." }, international: { title: "التطوير الدولي", description: "البحث عن شركاء وفرص في أسواق متعددة." } },
+      opportunitiesEyebrow: "قطاعات الفرص", opportunitiesTitle: "منظومة متعددة القطاعات", opportunitiesIntro: "يمكن أن تشمل الفرص عدة مجالات حالية أو مستقبلية في TSB Tech Group.", opportunities: { automotive: "السيارات والتنقل", energy: "الطاقة", water: "المياه والحفر", security: "الأمن", automation: "الأتمتة", networks: "الشبكات والاتصالات", digital: "الرقمنة والتكنولوجيا", academy: "TSB Academy", store: "TSB Store", projects: "مشاريع خاصة" },
+      internationalEyebrow: "التطوير الدولي", internationalTitle: "رؤية تتجاوز الحدود", internationalText: "تربط TSB Tech Group الخبرة التقنية والتكنولوجيا والتجارة والتدريب والشراكات وفق احتياجات كل سوق.", reach: "أوروبا • أفريقيا • أمريكا • آسيا • في جميع أنحاء العالم",
+      processEyebrow: "المسار", processTitle: "من الفكرة إلى التعاون", processIntro: "تتم دراسة كل مقترح للتأكد من الاتساق والجدوى والقيمة المتبادلة.", processItems: { discover: { title: "تقديم المشروع", description: "تشاركون احتياجكم أو مقترحكم أو الفرصة." }, review: { title: "دراسة TSB", description: "نحلل السياق والأهداف والموارد." }, exchange: { title: "النقاش", description: "توضح الأطراف التوقعات والشروط." }, proposal: { title: "المقترح", description: "يمكن صياغة إطار للتعاون أو المشروع." }, collaboration: { title: "التعاون", description: "بعد الموافقة يبدأ التنفيذ والمتابعة." } },
+      ctaEyebrow: "لنتحدث عن الأعمال", ctaTitle: "لديكم مشروع أو فرصة أو مقترح؟", ctaText: "للحاجة التقنية استخدموا طلب عرض السعر. أما للشراكة أو الاستثمار أو المشروع الاستراتيجي فقدموا مقترحكم مباشرة إلى TSB Tech Group.", ctaQuote: "طلب عرض سعر", ctaProject: "تقديم مشروع", projectEmailSubject: "TSB Business & Invest — مقترح مشروع",
     },
   },
-
   tr: {
     business: {
-      eyebrow: "KURUMSAL ÇÖZÜMLER",
-      title1: "Faaliyetleriniz için",
-      title2: "teknik çözümler",
-      intro:
-        "TSB Tech Group; şirketleri, profesyonelleri ve kurumları ihtiyaçlarına uygun teknik, teknolojik ve operasyonel çözümlerle destekler.",
-      backHome: "Ana sayfaya dön",
-      quote: "Teklif iste",
-      sectionTitle: "Uçtan uca destek",
-      sectionIntro:
-        "Altyapınız, güvenliğiniz ve ekipmanlarınız etrafında bütünlüklü bir çözüm oluşturmak için birden fazla alanda çalışabiliriz.",
-      contactTitle: "Projenizi konuşalım",
-      contactText:
-        "İhtiyacınızı bize anlatın; faaliyetiniz için en uygun çözümü değerlendirelim.",
-      contact: "Bize ulaşın",
-      items: {
-        audit: {
-          title: "Denetim ve teknik çalışma",
-          description:
-            "İhtiyaç analizi, mevcut durumun değerlendirilmesi ve ortamınıza uygun bir çözümün belirlenmesi.",
-        },
-        security: {
-          title: "Güvenlik ve erişim kontrolü",
-          description:
-            "Profesyonel alanlar için video gözetim, alarm, erişim kontrolü ve koruma çözümleri.",
-        },
-        network: {
-          title: "Ağlar ve telekomünikasyon",
-          description:
-            "Ağ altyapısı, bağlantı, iletişim ekipmanları ve teknik destek.",
-        },
-        automation: {
-          title: "Otomasyon ve dijital",
-          description:
-            "Otomasyon, sistem entegrasyonu, dijital araçlar ve özel profesyonel çözümler.",
-        },
-        maintenance: {
-          title: "Bakım ve destek",
-          description:
-            "Ekipman ve tesisler için bakım, arıza giderme, teknik takip ve destek.",
-        },
-      },
+      eyebrow: "TSB BUSINESS", title1: "Kurumsal çözümler, ortaklıklar", title2: "& yatırım", intro: "TSB Tech Group; şirketleri, profesyonelleri, kurumları, ortakları ve proje sahiplerini teknik çözümler, stratejik iş birlikleri ve uluslararası gelişim fırsatlarıyla destekler.", backHome: "Ana sayfaya dön", solutionsButton: "Kurumsal çözümler", investButton: "Business & Invest", quote: "Teklif iste",
+      solutionsEyebrow: "KURUMSAL ÇÖZÜMLER", solutionsTitle: "Faaliyetleriniz için teknik çözümler", solutionsIntro: "Denetim, güvenlik, ağlar, otomasyon ve bakım; altyapınıza, ekipmanlarınıza ve hedeflerinize uygun şekilde sunulur.",
+      items: { audit: { title: "Denetim ve teknik çalışma", description: "İhtiyaç analizi ve uygun çözümün belirlenmesi." }, security: { title: "Güvenlik ve erişim kontrolü", description: "Video gözetim, alarm, erişim kontrolü ve koruma." }, network: { title: "Ağlar ve telekomünikasyon", description: "Ağ altyapısı, bağlantı ve teknik destek." }, automation: { title: "Otomasyon ve dijital", description: "Otomasyon, sistem entegrasyonu ve dijital çözümler." }, maintenance: { title: "Bakım ve destek", description: "Bakım, arıza giderme ve teknik takip." } },
+      investEyebrow: "BUSINESS & INVEST", investTitle1: "Fırsatları birlikte", investTitle2: "oluşturmak", investIntro: "TSB Business; stratejik ortaklıklar, yatırım, ortak projeler ve yeni faaliyetler için özel bir alan oluşturur.",
+      investItems: { investment: { title: "Yatırım", description: "Yatırım fırsatları ve proje finansmanının değerlendirilmesi." }, strategic: { title: "Stratejik ortaklıklar", description: "Şirketler, gruplar ve uzmanlarla uzun vadeli iş birlikleri." }, jointVenture: { title: "Ortak girişimler & projeler", description: "Uzmanlık, kaynak ve hedefleri birleştirerek ortak geliştirme." }, distribution: { title: "Dağıtım & temsil", description: "Ticari iş birliği, marka temsilciliği ve pazar geliştirme." }, institutions: { title: "Kurumlar & büyük projeler", description: "Kuruluşlar ve kurumlarla yapısal projelerde iş birliği." }, international: { title: "Uluslararası gelişim", description: "Farklı pazarlarda ortak ve fırsatların belirlenmesi." } },
+      opportunitiesEyebrow: "FIRSAT ALANLARI", opportunitiesTitle: "Çok sektörlü bir ekosistem", opportunitiesIntro: "Fırsatlar TSB Tech Group’un mevcut veya gelecekteki farklı alanlarını kapsayabilir.", opportunities: { automotive: "Otomotiv & mobilite", energy: "Enerji", water: "Su & sondaj", security: "Güvenlik", automation: "Otomasyon", networks: "Ağlar & telekom", digital: "Dijital & teknoloji", academy: "TSB Academy", store: "TSB Store", projects: "Özel projeler" },
+      internationalEyebrow: "ULUSLARARASI GELİŞİM", internationalTitle: "Sınırların ötesine uzanan bir vizyon", internationalText: "TSB Tech Group teknik uzmanlık, teknoloji, ticaret, eğitim ve ortaklıkları her pazarın ihtiyaçlarına göre bir araya getirir.", reach: "Avrupa • Afrika • Amerika • Asya • Dünyanın her yerinde",
+      processEyebrow: "SÜREÇ", processTitle: "Fikirden iş birliğine", processIntro: "Her teklif uyum, uygulanabilirlik ve karşılıklı değer açısından değerlendirilir.", processItems: { discover: { title: "Projeyi sunun", description: "İhtiyacınızı, teklifinizi veya fırsatı paylaşın." }, review: { title: "TSB değerlendirmesi", description: "Bağlamı, hedefleri ve kaynakları analiz ederiz." }, exchange: { title: "Görüşme", description: "Taraflar beklentileri ve koşulları netleştirir." }, proposal: { title: "Teklif", description: "Bir iş birliği veya proje yapısı resmileştirilebilir." }, collaboration: { title: "İş birliği", description: "Onaydan sonra uygulama ve takip başlar." } },
+      ctaEyebrow: "BUSINESS KONUŞALIM", ctaTitle: "Bir proje, fırsat veya teklifiniz mi var?", ctaText: "Teknik ihtiyaçlar için teklif talebini kullanın. Ortaklık, yatırım veya stratejik proje için teklifinizi doğrudan TSB Tech Group’a sunun.", ctaQuote: "Teklif iste", ctaProject: "Proje sun", projectEmailSubject: "TSB Business & Invest — Proje teklifi",
     },
   },
-
   zh: {
     business: {
-      eyebrow: "企业解决方案",
-      title1: "面向业务活动的",
-      title2: "技术解决方案",
-      intro:
-        "TSB Tech Group 为企业、专业人士和机构提供根据实际需求定制的技术、科技和运营解决方案。",
-      backHome: "返回首页",
-      quote: "申请报价",
-      sectionTitle: "全方位支持",
-      sectionIntro:
-        "我们可以在多个领域提供服务，围绕您的基础设施、安全和设备构建协调一致的解决方案。",
-      contactTitle: "谈谈您的项目",
-      contactText:
-        "告诉我们您的需求，我们将研究最适合您业务的解决方案。",
-      contact: "联系我们",
-      items: {
-        audit: {
-          title: "审计与技术研究",
-          description:
-            "分析需求、评估现有环境并制定适合您实际情况的解决方案。",
-        },
-        security: {
-          title: "安全与门禁控制",
-          description:
-            "为专业场所提供视频监控、报警、门禁控制和保护解决方案。",
-        },
-        network: {
-          title: "网络与通信",
-          description:
-            "网络基础设施、连接、通信设备和技术支持。",
-        },
-        automation: {
-          title: "自动化与数字化",
-          description:
-            "自动化、系统集成、数字工具和定制专业解决方案。",
-        },
-        maintenance: {
-          title: "维护与支持",
-          description:
-            "为设备和设施提供维护、故障排查、技术跟进和支持。",
-        },
-      },
+      eyebrow: "TSB BUSINESS", title1: "企业解决方案、合作伙伴关系", title2: "与投资", intro: "TSB Tech Group 为企业、专业人士、机构、合作伙伴和项目发起人提供技术解决方案、战略合作以及国际发展机会。", backHome: "返回首页", solutionsButton: "企业解决方案", investButton: "Business & Invest", quote: "申请报价",
+      solutionsEyebrow: "企业解决方案", solutionsTitle: "面向业务运营的技术解决方案", solutionsIntro: "审计、安全、网络、自动化与维护，根据您的基础设施、设备和运营目标提供。",
+      items: { audit: { title: "审计与技术研究", description: "分析需求并制定合适的解决方案。" }, security: { title: "安全与门禁控制", description: "视频监控、报警、门禁控制和保护方案。" }, network: { title: "网络与通信", description: "网络基础设施、连接和技术支持。" }, automation: { title: "自动化与数字化", description: "自动化、系统集成和数字解决方案。" }, maintenance: { title: "维护与支持", description: "维护、故障排查和技术跟进。" } },
+      investEyebrow: "BUSINESS & INVEST", investTitle1: "共同打造", investTitle2: "发展机会", investIntro: "TSB Business 为战略合作、投资、联合项目以及新业务发展提供专门空间。",
+      investItems: { investment: { title: "投资", description: "评估投资机会和项目融资。" }, strategic: { title: "战略合作伙伴关系", description: "与企业、集团和专家建立长期合作。" }, jointVenture: { title: "合资与联合项目", description: "通过共享专业能力、资源和目标共同发展。" }, distribution: { title: "分销与代理", description: "商业合作、品牌代理和市场拓展。" }, institutions: { title: "机构与大型项目", description: "与组织和机构开展结构性项目合作。" }, international: { title: "国际发展", description: "在多个市场寻找合作伙伴和机会。" } },
+      opportunitiesEyebrow: "机会领域", opportunitiesTitle: "多行业生态体系", opportunitiesIntro: "机会可涉及 TSB Tech Group 当前或未来的多个业务板块。", opportunities: { automotive: "汽车与出行", energy: "能源", water: "水务与钻探", security: "安全", automation: "自动化", networks: "网络与通信", digital: "数字与技术", academy: "TSB Academy", store: "TSB Store", projects: "专项项目" },
+      internationalEyebrow: "国际发展", internationalTitle: "面向全球的愿景", internationalText: "TSB Tech Group 根据不同市场需求连接技术专长、科技、商业、培训与合作伙伴关系。", reach: "欧洲 • 非洲 • 美洲 • 亚洲 • 世界各地",
+      processEyebrow: "流程", processTitle: "从想法到合作", processIntro: "每项提案都会评估其一致性、可行性和双方价值。", processItems: { discover: { title: "提交项目", description: "分享您的需求、提案或机会。" }, review: { title: "TSB 评估", description: "我们分析背景、目标和资源。" }, exchange: { title: "沟通", description: "双方明确预期和条件。" }, proposal: { title: "方案", description: "可正式确定合作或项目结构。" }, collaboration: { title: "合作", description: "通过审核后进入实施和跟进。" } },
+      ctaEyebrow: "洽谈 BUSINESS", ctaTitle: "有项目、机会或合作提案？", ctaText: "技术需求请使用报价申请。合作伙伴关系、投资或战略项目可直接向 TSB Tech Group 提交提案。", ctaQuote: "申请报价", ctaProject: "提交项目", projectEmailSubject: "TSB Business & Invest — 项目提案",
     },
   },
 };

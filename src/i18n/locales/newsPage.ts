@@ -1,553 +1,324 @@
 import type { TranslationResources } from "../types";
 
-export const newsPageTranslations: TranslationResources = {
+const localeData = {
   fr: {
-    newsPage: {
-      eyebrow: "ACTUALITÉS",
-      title1: "Les dernières nouvelles de",
-      title2: "TSB Tech Group",
-      intro:
-        "Suivez l’évolution de nos projets, de notre plateforme et de l’écosystème TSB Tech Group.",
-      backHome: "Retour à l’accueil",
-      contact: "Nous contacter",
-      sectionTitle: "À la une",
-      sectionIntro:
-        "Découvrez les principales étapes du développement de TSB Tech Group et de sa plateforme numérique.",
-      learnMore: "En savoir plus",
-      backNews: "Retour aux actualités",
-      items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Lancement de la TSB Digital Platform",
-          description:
-            "TSB Tech Group construit progressivement une plateforme numérique destinée à réunir ses services, ses clients et ses futures solutions technologiques dans un même environnement.",
-          detail1:
-            "La TSB Digital Platform est conçue comme le futur point central de l’écosystème TSB Tech Group.",
-          detail2:
-            "Elle réunira progressivement les services, les demandes de devis, l’espace client et les futurs modules numériques du groupe.",
-          detail3:
-            "L’objectif est de construire une plateforme professionnelle, évolutive et adaptée à un développement en Belgique, en Europe et à l’international.",
-        },
-        evolution: {
-          category: "Innovation",
-          title: "Une plateforme pensée pour évoluer",
-          description:
-            "Notre architecture modulaire permettra d’intégrer progressivement TSB Academy, TSB Store, l’espace client, le support et de nouveaux services numériques.",
-          detail1:
-            "La plateforme est développée avec une architecture modulaire afin de pouvoir ajouter de nouveaux services sans reconstruire l’ensemble du site.",
-          detail2:
-            "TSB Academy, TSB Store, l’espace client, le support et les futurs projets pourront ainsi être intégrés progressivement.",
-          detail3:
-            "Cette approche permet à TSB Tech Group de faire évoluer la plateforme au rythme du développement réel de ses activités.",
-        },
-        engineering: {
-          category: "Développement",
-          title: "Le projet entre dans sa phase Engineering",
-          description:
-            "Après la définition du Blueprint officiel, TSB Tech Group est désormais entré dans la phase de développement concret de sa plateforme.",
-          detail1:
-            "Le Blueprint a défini la structure générale, les objectifs et les principaux parcours de la plateforme.",
-          detail2:
-            "La phase Engineering transforme maintenant cette architecture en composants, pages, authentification et fonctionnalités concrètes.",
-          detail3:
-            "Le développement avance progressivement avec une priorité donnée à une base stable, professionnelle et réutilisable.",
-        },
+    eyebrow: "ACTUALITÉS",
+    title1: "Les jalons de",
+    title2: "TSB Tech Group",
+    intro: "Une chronologie transparente des principales avancées de la TSB Digital Platform et de son écosystème.",
+    backHome: "Retour à l’accueil",
+    contact: "Nous contacter",
+    sectionTitle: "Jalons récents",
+    sectionIntro: "Des étapes réellement atteintes, présentées sans chiffres artificiels ni annonces prématurées.",
+    learnMore: "En savoir plus",
+    backNews: "Retour aux actualités",
+    items: {
+      multilingual: {
+        category: "Plateforme",
+        date: "Septembre 2026",
+        status: "Intégré",
+        title: "La plateforme est disponible en 10 langues",
+        description: "L’architecture multilingue de TSB Tech Group couvre désormais dix langues et prend en charge l’affichage RTL pour l’arabe.",
+        detail1: "Les langues intégrées sont le français, le néerlandais, l’anglais, l’allemand, l’espagnol, l’italien, le portugais, l’arabe, le turc et le chinois.",
+        detail2: "Les traductions sont centralisées dans l’architecture i18n afin de garder une base cohérente et évolutive.",
+        detail3: "Cette étape renforce la capacité de la plateforme à accompagner le développement de TSB Tech Group en Belgique, en Europe et à l’international.",
+      },
+      store: {
+        category: "Écosystème",
+        date: "Septembre 2026",
+        status: "Intégré",
+        title: "TSB Store et les espaces Client/Admin sont reliés",
+        description: "Le Store, l’espace client et les outils d’administration fonctionnent désormais dans le même environnement numérique.",
+        detail1: "Le catalogue TSB Store est connecté à Supabase et permet de publier des produits dans la plateforme.",
+        detail2: "Les demandes et commandes peuvent être suivies dans les espaces Client et Admin selon les droits d’accès.",
+        detail3: "Cette intégration prépare un écosystème unique où services, commerce et suivi client peuvent évoluer ensemble.",
+      },
+      android: {
+        category: "Mobile",
+        date: "Août 2026",
+        status: "Préparation Google Play",
+        title: "La version Android entre dans sa phase Google Play",
+        description: "Le projet Android de TSB Tech Group a été généré depuis la plateforme web avec Capacitor et ouvert dans Android Studio.",
+        detail1: "Le package Android utilisé est com.tsbtechgroup.app et la synchronisation entre le build web et le projet Android a été effectuée.",
+        detail2: "Les premiers éléments Google Play, dont l’icône, le visuel promotionnel et des captures d’écran, ont été préparés.",
+        detail3: "La publication sur Google Play reste une étape distincte : cette actualité décrit la préparation technique, pas une mise en ligne déjà effectuée.",
+      },
+      supabase: {
+        category: "Infrastructure",
+        date: "Août 2026",
+        status: "Opérationnel",
+        title: "Supabase devient le socle des données et de l’authentification",
+        description: "La plateforme utilise Supabase pour l’authentification, les demandes, les espaces clients et plusieurs modules métier.",
+        detail1: "Les règles RLS protègent les données sensibles et limitent l’accès selon le rôle et l’utilisateur connecté.",
+        detail2: "Les demandes de devis, profils, services clients et modules Store sont reliés progressivement à cette infrastructure.",
+        detail3: "Cette base permet de faire évoluer les fonctionnalités sans exposer directement les données privées des utilisateurs.",
+      },
+      coding: {
+        category: "Développement",
+        date: "Août 2026",
+        status: "En développement",
+        title: "Le projet passe de l’Engineering au Coding",
+        description: "Après l’architecture du projet, TSB Tech Group est entré dans la réalisation concrète des pages, composants et parcours.",
+        detail1: "Le socle React, TypeScript et Vite a été structuré autour de composants réutilisables et de pages spécialisées.",
+        detail2: "HOME, authentification, espace client, Store, Admin et plusieurs pages stratégiques ont été construits progressivement.",
+        detail3: "Le travail se poursuit par étapes SAFE afin de protéger les modules déjà validés et de limiter les régressions.",
+      },
+      blueprint: {
+        category: "Stratégie",
+        date: "Juillet–Août 2026",
+        status: "Validé",
+        title: "Le Blueprint officiel fixe la direction de la plateforme",
+        description: "Le Blueprint de TSB Tech Group a défini la vision, les publics, l’architecture fonctionnelle et les grandes étapes du projet.",
+        detail1: "Il sert de référence pour éviter de reconstruire continuellement la stratégie pendant la phase de développement.",
+        detail2: "La plateforme est pensée pour les particuliers, professionnels, entreprises et institutions, avec une ambition Belgique, Europe et international.",
+        detail3: "Le Blueprint reste la base officielle du projet et n’évolue que lorsqu’une décision structurante est validée.",
       },
     },
   },
 
   nl: {
-    newsPage: {
-      eyebrow: "NIEUWS",
-      title1: "Het laatste nieuws van",
-      title2: "TSB Tech Group",
-      intro:
-        "Volg de ontwikkeling van onze projecten, ons platform en het TSB Tech Group-ecosysteem.",
-      backHome: "Terug naar home",
-      contact: "Contacteer ons",
-      sectionTitle: "Uitgelicht",
-      sectionIntro:
-        "Ontdek de belangrijkste stappen in de ontwikkeling van TSB Tech Group en zijn digitale platform.",
-      learnMore: "Meer informatie",
-      backNews: "Terug naar nieuws",
-      items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Lancering van het TSB Digital Platform",
-          description:
-            "TSB Tech Group bouwt stap voor stap aan een digitaal platform dat zijn diensten, klanten en toekomstige technologische oplossingen samenbrengt in één omgeving.",
-          detail1:
-            "Het TSB Digital Platform wordt ontwikkeld als het toekomstige centrale punt van het TSB Tech Group-ecosysteem.",
-          detail2:
-            "Het zal geleidelijk diensten, offerteaanvragen, de klantenzone en toekomstige digitale modules van de groep samenbrengen.",
-          detail3:
-            "Het doel is een professioneel en schaalbaar platform voor ontwikkeling in België, Europa en internationaal.",
-        },
-        evolution: {
-          category: "Innovatie",
-          title: "Een platform ontworpen om mee te groeien",
-          description:
-            "Onze modulaire architectuur maakt het mogelijk om geleidelijk TSB Academy, TSB Store, de klantenzone, support en nieuwe digitale diensten te integreren.",
-          detail1:
-            "Het platform wordt modulair ontwikkeld zodat nieuwe diensten kunnen worden toegevoegd zonder de volledige website opnieuw op te bouwen.",
-          detail2:
-            "TSB Academy, TSB Store, de klantenzone, support en toekomstige projecten kunnen zo stap voor stap worden geïntegreerd.",
-          detail3:
-            "Deze aanpak laat TSB Tech Group toe om het platform te laten meegroeien met de echte ontwikkeling van zijn activiteiten.",
-        },
-        engineering: {
-          category: "Ontwikkeling",
-          title: "Het project gaat de Engineering-fase in",
-          description:
-            "Na de definitie van de officiële Blueprint is TSB Tech Group nu gestart met de concrete ontwikkelingsfase van het platform.",
-          detail1:
-            "De Blueprint definieerde de algemene structuur, doelstellingen en belangrijkste gebruikersroutes van het platform.",
-          detail2:
-            "De Engineering-fase zet deze architectuur nu om in concrete componenten, pagina’s, authenticatie en functies.",
-          detail3:
-            "De ontwikkeling verloopt stap voor stap met focus op een stabiele, professionele en herbruikbare basis.",
-        },
+    eyebrow: "NIEUWS",
+    title1: "De mijlpalen van",
+    title2: "TSB Tech Group",
+    intro: "Een transparante tijdlijn van de belangrijkste vooruitgangen van het TSB Digital Platform en zijn ecosysteem.",
+    backHome: "Terug naar home",
+    contact: "Contacteer ons",
+    sectionTitle: "Recente mijlpalen",
+    sectionIntro: "Werkelijk bereikte stappen, zonder kunstmatige cijfers of voorbarige aankondigingen.",
+    learnMore: "Meer informatie",
+    backNews: "Terug naar nieuws",
+    items: {
+      multilingual: {
+        category: "Platform", date: "September 2026", status: "Geïntegreerd",
+        title: "Het platform is beschikbaar in 10 talen",
+        description: "De meertalige architectuur van TSB Tech Group ondersteunt nu tien talen en RTL-weergave voor Arabisch.",
+        detail1: "De geïntegreerde talen zijn Frans, Nederlands, Engels, Duits, Spaans, Italiaans, Portugees, Arabisch, Turks en Chinees.",
+        detail2: "Vertalingen zijn gecentraliseerd in de i18n-architectuur om de basis coherent en schaalbaar te houden.",
+        detail3: "Deze stap versterkt de internationale ontwikkelingscapaciteit van het platform.",
+      },
+      store: {
+        category: "Ecosysteem", date: "September 2026", status: "Geïntegreerd",
+        title: "TSB Store en de Client/Admin-ruimtes zijn gekoppeld",
+        description: "Store, klantenzone en beheertools werken nu binnen dezelfde digitale omgeving.",
+        detail1: "De TSB Store-catalogus is gekoppeld aan Supabase en kan producten in het platform publiceren.",
+        detail2: "Aanvragen en bestellingen kunnen volgens toegangsrechten worden gevolgd in Client en Admin.",
+        detail3: "Deze integratie bereidt één ecosysteem voor waarin diensten, commerce en klantopvolging samen groeien.",
+      },
+      android: {
+        category: "Mobiel", date: "Augustus 2026", status: "Google Play-voorbereiding",
+        title: "De Android-versie gaat de Google Play-fase in",
+        description: "Het Android-project werd vanuit het webplatform met Capacitor gegenereerd en in Android Studio geopend.",
+        detail1: "Het gebruikte Android-package is com.tsbtechgroup.app en webbuild en Android-project zijn gesynchroniseerd.",
+        detail2: "De eerste Google Play-assets, waaronder icoon, promotiebeeld en screenshots, zijn voorbereid.",
+        detail3: "Publicatie in Google Play is een aparte stap; dit nieuws beschrijft de technische voorbereiding, niet een reeds uitgevoerde publicatie.",
+      },
+      supabase: {
+        category: "Infrastructuur", date: "Augustus 2026", status: "Operationeel",
+        title: "Supabase wordt de basis voor data en authenticatie",
+        description: "Het platform gebruikt Supabase voor authenticatie, aanvragen, klantenzones en verschillende bedrijfsmodules.",
+        detail1: "RLS-regels beschermen gevoelige gegevens en beperken toegang volgens rol en ingelogde gebruiker.",
+        detail2: "Offerteaanvragen, profielen, klantdiensten en Store-modules worden stap voor stap met deze infrastructuur verbonden.",
+        detail3: "Deze basis laat nieuwe functies toe zonder privégegevens rechtstreeks openbaar te maken.",
+      },
+      coding: {
+        category: "Ontwikkeling", date: "Augustus 2026", status: "In ontwikkeling",
+        title: "Het project gaat van Engineering naar Coding",
+        description: "Na de projectarchitectuur ging TSB Tech Group over naar de concrete bouw van pagina’s, componenten en gebruikersflows.",
+        detail1: "De React-, TypeScript- en Vite-basis werd rond herbruikbare componenten en gespecialiseerde pagina’s opgebouwd.",
+        detail2: "HOME, authenticatie, klantenzone, Store, Admin en strategische pagina’s werden stapsgewijs ontwikkeld.",
+        detail3: "Het werk verloopt in SAFE-stappen om gevalideerde modules te beschermen en regressies te beperken.",
+      },
+      blueprint: {
+        category: "Strategie", date: "Juli–Augustus 2026", status: "Gevalideerd",
+        title: "De officiële Blueprint bepaalt de richting van het platform",
+        description: "De TSB Tech Group Blueprint definieerde visie, doelgroepen, functionele architectuur en grote projectfasen.",
+        detail1: "Hij dient als referentie zodat de strategie tijdens de ontwikkeling niet voortdurend opnieuw wordt opgebouwd.",
+        detail2: "Het platform richt zich op particulieren, professionals, bedrijven en instellingen, met ambitie in België, Europa en internationaal.",
+        detail3: "De Blueprint blijft de officiële basis en evolueert alleen na een gevalideerde structurele beslissing.",
       },
     },
   },
 
   en: {
-    newsPage: {
-      eyebrow: "NEWS",
-      title1: "Latest news from",
-      title2: "TSB Tech Group",
-      intro:
-        "Follow the progress of our projects, our platform and the TSB Tech Group ecosystem.",
-      backHome: "Back to home",
-      contact: "Contact us",
-      sectionTitle: "Featured",
-      sectionIntro:
-        "Discover the main milestones in the development of TSB Tech Group and its digital platform.",
-      learnMore: "Learn more",
-      backNews: "Back to news",
-      items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Launch of the TSB Digital Platform",
-          description:
-            "TSB Tech Group is progressively building a digital platform designed to bring together its services, clients and future technology solutions in one environment.",
-          detail1:
-            "The TSB Digital Platform is being designed as the future central hub of the TSB Tech Group ecosystem.",
-          detail2:
-            "It will progressively bring together services, quote requests, the client area and future digital modules.",
-          detail3:
-            "The goal is to build a professional and scalable platform for growth in Belgium, Europe and internationally.",
-        },
-        evolution: {
-          category: "Innovation",
-          title: "A platform designed to evolve",
-          description:
-            "Our modular architecture will progressively integrate TSB Academy, TSB Store, the client area, support and new digital services.",
-          detail1:
-            "The platform is being developed with a modular architecture so new services can be added without rebuilding the entire website.",
-          detail2:
-            "TSB Academy, TSB Store, the client area, support and future projects can therefore be integrated progressively.",
-          detail3:
-            "This approach allows TSB Tech Group to evolve the platform alongside the real development of its activities.",
-        },
-        engineering: {
-          category: "Development",
-          title: "The project enters the Engineering phase",
-          description:
-            "Following the definition of the official Blueprint, TSB Tech Group has now entered the concrete development phase of its platform.",
-          detail1:
-            "The Blueprint defined the general structure, objectives and main user journeys of the platform.",
-          detail2:
-            "The Engineering phase now turns that architecture into concrete components, pages, authentication and functionality.",
-          detail3:
-            "Development is progressing step by step with priority given to a stable, professional and reusable foundation.",
-        },
+    eyebrow: "NEWS",
+    title1: "Milestones from",
+    title2: "TSB Tech Group",
+    intro: "A transparent timeline of the main advances across the TSB Digital Platform and its ecosystem.",
+    backHome: "Back to home",
+    contact: "Contact us",
+    sectionTitle: "Recent milestones",
+    sectionIntro: "Actually achieved steps, presented without artificial numbers or premature announcements.",
+    learnMore: "Learn more",
+    backNews: "Back to news",
+    items: {
+      multilingual: {
+        category: "Platform", date: "September 2026", status: "Integrated",
+        title: "The platform is available in 10 languages",
+        description: "TSB Tech Group’s multilingual architecture now covers ten languages and supports RTL display for Arabic.",
+        detail1: "The integrated languages are French, Dutch, English, German, Spanish, Italian, Portuguese, Arabic, Turkish and Chinese.",
+        detail2: "Translations are centralized in the i18n architecture to keep the platform consistent and scalable.",
+        detail3: "This milestone strengthens the platform’s ability to support growth in Belgium, Europe and internationally.",
+      },
+      store: {
+        category: "Ecosystem", date: "September 2026", status: "Integrated",
+        title: "TSB Store and the Client/Admin areas are connected",
+        description: "The Store, client area and administration tools now operate within the same digital environment.",
+        detail1: "The TSB Store catalog is connected to Supabase and can publish products into the platform.",
+        detail2: "Requests and orders can be tracked in Client and Admin areas according to access rights.",
+        detail3: "This integration prepares a single ecosystem where services, commerce and client follow-up can evolve together.",
+      },
+      android: {
+        category: "Mobile", date: "August 2026", status: "Google Play preparation",
+        title: "The Android version enters its Google Play phase",
+        description: "The TSB Tech Group Android project was generated from the web platform with Capacitor and opened in Android Studio.",
+        detail1: "The Android package is com.tsbtechgroup.app and the web build has been synchronized with the Android project.",
+        detail2: "Initial Google Play assets, including the icon, feature graphic and screenshots, have been prepared.",
+        detail3: "Google Play publication remains a separate step: this milestone describes technical preparation, not an already completed release.",
+      },
+      supabase: {
+        category: "Infrastructure", date: "August 2026", status: "Operational",
+        title: "Supabase becomes the data and authentication foundation",
+        description: "The platform uses Supabase for authentication, requests, client areas and several business modules.",
+        detail1: "RLS rules protect sensitive data and restrict access according to role and signed-in user.",
+        detail2: "Quote requests, profiles, client services and Store modules are progressively connected to this infrastructure.",
+        detail3: "This foundation allows features to evolve without directly exposing users’ private data.",
+      },
+      coding: {
+        category: "Development", date: "August 2026", status: "In development",
+        title: "The project moves from Engineering to Coding",
+        description: "After defining the project architecture, TSB Tech Group entered the concrete construction of pages, components and user flows.",
+        detail1: "The React, TypeScript and Vite foundation was structured around reusable components and specialized pages.",
+        detail2: "HOME, authentication, client area, Store, Admin and several strategic pages were progressively built.",
+        detail3: "Work continues in SAFE steps to protect validated modules and reduce regressions.",
+      },
+      blueprint: {
+        category: "Strategy", date: "July–August 2026", status: "Validated",
+        title: "The official Blueprint sets the platform direction",
+        description: "The TSB Tech Group Blueprint defined the vision, audiences, functional architecture and major project stages.",
+        detail1: "It acts as the reference so the strategy is not continuously rebuilt during development.",
+        detail2: "The platform is designed for individuals, professionals, companies and institutions, with ambitions in Belgium, Europe and internationally.",
+        detail3: "The Blueprint remains the official project baseline and evolves only when a structural decision is validated.",
       },
     },
   },
 
   de: {
-    newsPage: {
-      eyebrow: "AKTUELLES",
-      title1: "Die neuesten Nachrichten von",
-      title2: "TSB Tech Group",
-      intro:
-        "Verfolgen Sie die Entwicklung unserer Projekte, unserer Plattform und des TSB Tech Group-Ökosystems.",
-      backHome: "Zurück zur Startseite",
-      contact: "Kontakt",
-      sectionTitle: "Im Fokus",
-      sectionIntro:
-        "Entdecken Sie die wichtigsten Meilensteine in der Entwicklung von TSB Tech Group und seiner digitalen Plattform.",
-      learnMore: "Mehr erfahren",
-      backNews: "Zurück zu Aktuelles",
-      items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Start der TSB Digital Platform",
-          description:
-            "TSB Tech Group baut schrittweise eine digitale Plattform auf, die Dienstleistungen, Kunden und zukünftige technologische Lösungen in einer Umgebung vereint.",
-          detail1:
-            "Die TSB Digital Platform ist als zukünftiger zentraler Knotenpunkt des TSB Tech Group-Ökosystems konzipiert.",
-          detail2:
-            "Sie wird schrittweise Dienstleistungen, Angebotsanfragen, den Kundenbereich und zukünftige digitale Module zusammenführen.",
-          detail3:
-            "Ziel ist eine professionelle, skalierbare Plattform für Wachstum in Belgien, Europa und international.",
-        },
-        evolution: {
-          category: "Innovation",
-          title: "Eine Plattform, die mitwächst",
-          description:
-            "Unsere modulare Architektur ermöglicht die schrittweise Integration von TSB Academy, TSB Store, Kundenbereich, Support und neuen digitalen Diensten.",
-          detail1:
-            "Die Plattform wird modular entwickelt, damit neue Dienste hinzugefügt werden können, ohne die gesamte Website neu aufzubauen.",
-          detail2:
-            "TSB Academy, TSB Store, Kundenbereich, Support und zukünftige Projekte können so schrittweise integriert werden.",
-          detail3:
-            "Dieser Ansatz ermöglicht es TSB Tech Group, die Plattform parallel zur tatsächlichen Entwicklung seiner Aktivitäten weiterzuentwickeln.",
-        },
-        engineering: {
-          category: "Entwicklung",
-          title: "Das Projekt tritt in die Engineering-Phase ein",
-          description:
-            "Nach der Definition des offiziellen Blueprints ist TSB Tech Group nun in die konkrete Entwicklungsphase seiner Plattform eingetreten.",
-          detail1:
-            "Der Blueprint definierte die allgemeine Struktur, Ziele und wichtigsten Nutzerabläufe der Plattform.",
-          detail2:
-            "Die Engineering-Phase überführt diese Architektur nun in konkrete Komponenten, Seiten, Authentifizierung und Funktionen.",
-          detail3:
-            "Die Entwicklung erfolgt schrittweise mit Fokus auf eine stabile, professionelle und wiederverwendbare Grundlage.",
-        },
-      },
+    eyebrow: "AKTUELLES", title1: "Meilensteine von", title2: "TSB Tech Group",
+    intro: "Eine transparente Chronologie der wichtigsten Fortschritte der TSB Digital Platform und ihres Ökosystems.",
+    backHome: "Zurück zur Startseite", contact: "Kontakt", sectionTitle: "Aktuelle Meilensteine",
+    sectionIntro: "Tatsächlich erreichte Schritte ohne künstliche Zahlen oder verfrühte Ankündigungen.",
+    learnMore: "Mehr erfahren", backNews: "Zurück zu Aktuelles",
+    items: {
+      multilingual: { category: "Plattform", date: "September 2026", status: "Integriert", title: "Die Plattform ist in 10 Sprachen verfügbar", description: "Die mehrsprachige Architektur unterstützt zehn Sprachen und RTL für Arabisch.", detail1: "Unterstützt werden Französisch, Niederländisch, Englisch, Deutsch, Spanisch, Italienisch, Portugiesisch, Arabisch, Türkisch und Chinesisch.", detail2: "Die Übersetzungen sind zentral in der i18n-Architektur organisiert.", detail3: "Damit wird die internationale Entwicklungsfähigkeit der Plattform gestärkt." },
+      store: { category: "Ökosystem", date: "September 2026", status: "Integriert", title: "TSB Store und Client/Admin-Bereiche sind verbunden", description: "Store, Kundenbereich und Verwaltungstools arbeiten nun in derselben digitalen Umgebung.", detail1: "Der TSB-Store-Katalog ist mit Supabase verbunden und kann Produkte veröffentlichen.", detail2: "Anfragen und Bestellungen können je nach Zugriffsrechten in Client und Admin verfolgt werden.", detail3: "So entsteht ein gemeinsames Ökosystem für Services, Handel und Kundenbetreuung." },
+      android: { category: "Mobil", date: "August 2026", status: "Google-Play-Vorbereitung", title: "Die Android-Version geht in die Google-Play-Phase", description: "Das Android-Projekt wurde mit Capacitor aus der Webplattform erzeugt und in Android Studio geöffnet.", detail1: "Das Android-Paket lautet com.tsbtechgroup.app; Webbuild und Android-Projekt wurden synchronisiert.", detail2: "Erste Google-Play-Assets wie Icon, Feature-Grafik und Screenshots wurden vorbereitet.", detail3: "Die Veröffentlichung im Play Store ist ein separater Schritt; hier geht es um die technische Vorbereitung." },
+      supabase: { category: "Infrastruktur", date: "August 2026", status: "Betriebsbereit", title: "Supabase wird zur Daten- und Authentifizierungsbasis", description: "Supabase unterstützt Authentifizierung, Anfragen, Kundenbereiche und mehrere Geschäftsmodelle.", detail1: "RLS-Regeln schützen sensible Daten anhand von Rollen und angemeldeten Nutzern.", detail2: "Angebotsanfragen, Profile, Kundendienste und Store-Module werden schrittweise angebunden.", detail3: "So können Funktionen wachsen, ohne private Daten direkt öffentlich zu machen." },
+      coding: { category: "Entwicklung", date: "August 2026", status: "In Entwicklung", title: "Das Projekt wechselt von Engineering zu Coding", description: "Nach der Architektur begann die konkrete Umsetzung von Seiten, Komponenten und Nutzerabläufen.", detail1: "React, TypeScript und Vite bilden die wiederverwendbare technische Basis.", detail2: "HOME, Authentifizierung, Kundenbereich, Store, Admin und strategische Seiten wurden schrittweise entwickelt.", detail3: "SAFE-Schritte schützen bereits validierte Module vor Regressionen." },
+      blueprint: { category: "Strategie", date: "Juli–August 2026", status: "Validiert", title: "Der offizielle Blueprint legt die Richtung fest", description: "Der Blueprint definierte Vision, Zielgruppen, Funktionsarchitektur und die wichtigsten Projektphasen.", detail1: "Er dient als feste Referenz während der Entwicklung.", detail2: "Die Plattform richtet sich an Privatkunden, Fachleute, Unternehmen und Institutionen in Belgien, Europa und international.", detail3: "Der Blueprint wird nur bei einer validierten strukturellen Entscheidung weiterentwickelt." },
     },
   },
 
   es: {
-    newsPage: {
-      eyebrow: "ACTUALIDAD",
-      title1: "Las últimas noticias de",
-      title2: "TSB Tech Group",
-      intro:
-        "Siga la evolución de nuestros proyectos, nuestra plataforma y el ecosistema TSB Tech Group.",
-      backHome: "Volver al inicio",
-      contact: "Contáctenos",
-      sectionTitle: "Destacado",
-      sectionIntro:
-        "Descubra los principales hitos del desarrollo de TSB Tech Group y de su plataforma digital.",
-      learnMore: "Más información",
-      backNews: "Volver a noticias",
-      items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Lanzamiento de la TSB Digital Platform",
-          description:
-            "TSB Tech Group construye progresivamente una plataforma digital destinada a reunir sus servicios, clientes y futuras soluciones tecnológicas en un mismo entorno.",
-          detail1:
-            "La TSB Digital Platform está concebida como el futuro punto central del ecosistema TSB Tech Group.",
-          detail2:
-            "Reunirá progresivamente los servicios, las solicitudes de presupuesto, el área de cliente y los futuros módulos digitales.",
-          detail3:
-            "El objetivo es construir una plataforma profesional y escalable para crecer en Bélgica, Europa y a nivel internacional.",
-        },
-        evolution: {
-          category: "Innovación",
-          title: "Una plataforma pensada para evolucionar",
-          description:
-            "Nuestra arquitectura modular permitirá integrar progresivamente TSB Academy, TSB Store, el área de cliente, soporte y nuevos servicios digitales.",
-          detail1:
-            "La plataforma se desarrolla con una arquitectura modular para añadir nuevos servicios sin reconstruir todo el sitio.",
-          detail2:
-            "TSB Academy, TSB Store, el área de cliente, soporte y futuros proyectos podrán integrarse paso a paso.",
-          detail3:
-            "Este enfoque permite a TSB Tech Group hacer evolucionar la plataforma al ritmo del desarrollo real de sus actividades.",
-        },
-        engineering: {
-          category: "Desarrollo",
-          title: "El proyecto entra en la fase Engineering",
-          description:
-            "Tras la definición del Blueprint oficial, TSB Tech Group ha entrado en la fase de desarrollo concreto de su plataforma.",
-          detail1:
-            "El Blueprint definió la estructura general, los objetivos y los principales recorridos de usuario de la plataforma.",
-          detail2:
-            "La fase Engineering transforma ahora esta arquitectura en componentes, páginas, autenticación y funcionalidades concretas.",
-          detail3:
-            "El desarrollo avanza progresivamente, priorizando una base estable, profesional y reutilizable.",
-        },
-      },
+    eyebrow: "ACTUALIDAD", title1: "Hitos de", title2: "TSB Tech Group",
+    intro: "Una cronología transparente de los principales avances de la TSB Digital Platform y su ecosistema.",
+    backHome: "Volver al inicio", contact: "Contáctenos", sectionTitle: "Hitos recientes",
+    sectionIntro: "Etapas realmente alcanzadas, sin cifras artificiales ni anuncios prematuros.",
+    learnMore: "Más información", backNews: "Volver a noticias",
+    items: {
+      multilingual: { category: "Plataforma", date: "Septiembre de 2026", status: "Integrado", title: "La plataforma está disponible en 10 idiomas", description: "La arquitectura multilingüe cubre diez idiomas y admite RTL para árabe.", detail1: "Los idiomas son francés, neerlandés, inglés, alemán, español, italiano, portugués, árabe, turco y chino.", detail2: "Las traducciones están centralizadas en la arquitectura i18n.", detail3: "Este hito refuerza la capacidad internacional de la plataforma." },
+      store: { category: "Ecosistema", date: "Septiembre de 2026", status: "Integrado", title: "TSB Store y las áreas Cliente/Admin están conectadas", description: "Store, área cliente y herramientas de administración operan en el mismo entorno.", detail1: "El catálogo TSB Store está conectado a Supabase y permite publicar productos.", detail2: "Solicitudes y pedidos pueden seguirse en Cliente y Admin según los permisos.", detail3: "La integración prepara un ecosistema único para servicios, comercio y seguimiento del cliente." },
+      android: { category: "Móvil", date: "Agosto de 2026", status: "Preparación Google Play", title: "La versión Android entra en la fase Google Play", description: "El proyecto Android se generó desde la plataforma web con Capacitor y se abrió en Android Studio.", detail1: "El paquete es com.tsbtechgroup.app y el build web se sincronizó con Android.", detail2: "Se prepararon los primeros recursos de Google Play: icono, gráfico y capturas.", detail3: "La publicación sigue siendo una etapa separada; este hito describe la preparación técnica." },
+      supabase: { category: "Infraestructura", date: "Agosto de 2026", status: "Operativo", title: "Supabase se convierte en la base de datos y autenticación", description: "La plataforma utiliza Supabase para autenticación, solicitudes, áreas cliente y módulos de negocio.", detail1: "Las políticas RLS protegen los datos sensibles según rol y usuario autenticado.", detail2: "Solicitudes, perfiles, servicios cliente y módulos Store se conectan progresivamente.", detail3: "La base permite evolucionar sin exponer directamente datos privados." },
+      coding: { category: "Desarrollo", date: "Agosto de 2026", status: "En desarrollo", title: "El proyecto pasa de Engineering a Coding", description: "Tras la arquitectura, comenzó la construcción concreta de páginas, componentes y recorridos.", detail1: "React, TypeScript y Vite forman la base reutilizable.", detail2: "HOME, autenticación, área cliente, Store, Admin y páginas estratégicas se construyeron progresivamente.", detail3: "Los pasos SAFE protegen los módulos validados y reducen regresiones." },
+      blueprint: { category: "Estrategia", date: "Julio–Agosto de 2026", status: "Validado", title: "El Blueprint oficial fija la dirección", description: "El Blueprint definió visión, públicos, arquitectura funcional y grandes fases del proyecto.", detail1: "Sirve como referencia durante el desarrollo.", detail2: "La plataforma se dirige a particulares, profesionales, empresas e instituciones en Bélgica, Europa e internacionalmente.", detail3: "Solo evoluciona cuando se valida una decisión estructural." },
     },
   },
 
   it: {
-    newsPage: {
-      eyebrow: "NOTIZIE",
-      title1: "Le ultime notizie di",
-      title2: "TSB Tech Group",
-      intro:
-        "Segui l’evoluzione dei nostri progetti, della nostra piattaforma e dell’ecosistema TSB Tech Group.",
-      backHome: "Torna alla home",
-      contact: "Contattaci",
-      sectionTitle: "In evidenza",
-      sectionIntro:
-        "Scopri le principali tappe dello sviluppo di TSB Tech Group e della sua piattaforma digitale.",
-      learnMore: "Scopri di più",
-      backNews: "Torna alle notizie",
-      items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Lancio della TSB Digital Platform",
-          description:
-            "TSB Tech Group sta costruendo progressivamente una piattaforma digitale che riunirà servizi, clienti e future soluzioni tecnologiche in un unico ambiente.",
-          detail1:
-            "La TSB Digital Platform è concepita come il futuro punto centrale dell’ecosistema TSB Tech Group.",
-          detail2:
-            "Riunirà progressivamente servizi, richieste di preventivo, area clienti e futuri moduli digitali.",
-          detail3:
-            "L’obiettivo è costruire una piattaforma professionale e scalabile per crescere in Belgio, Europa e a livello internazionale.",
-        },
-        evolution: {
-          category: "Innovazione",
-          title: "Una piattaforma progettata per evolvere",
-          description:
-            "La nostra architettura modulare permetterà di integrare progressivamente TSB Academy, TSB Store, area clienti, supporto e nuovi servizi digitali.",
-          detail1:
-            "La piattaforma viene sviluppata con un’architettura modulare per aggiungere nuovi servizi senza ricostruire l’intero sito.",
-          detail2:
-            "TSB Academy, TSB Store, area clienti, supporto e progetti futuri potranno così essere integrati gradualmente.",
-          detail3:
-            "Questo approccio consente a TSB Tech Group di far evolvere la piattaforma insieme allo sviluppo reale delle proprie attività.",
-        },
-        engineering: {
-          category: "Sviluppo",
-          title: "Il progetto entra nella fase Engineering",
-          description:
-            "Dopo la definizione del Blueprint ufficiale, TSB Tech Group è entrata nella fase di sviluppo concreto della propria piattaforma.",
-          detail1:
-            "Il Blueprint ha definito la struttura generale, gli obiettivi e i principali percorsi utente della piattaforma.",
-          detail2:
-            "La fase Engineering trasforma ora questa architettura in componenti, pagine, autenticazione e funzionalità concrete.",
-          detail3:
-            "Lo sviluppo procede gradualmente dando priorità a una base stabile, professionale e riutilizzabile.",
-        },
-      },
+    eyebrow: "NOTIZIE", title1: "Traguardi di", title2: "TSB Tech Group",
+    intro: "Una cronologia trasparente dei principali progressi della TSB Digital Platform e del suo ecosistema.",
+    backHome: "Torna alla home", contact: "Contattaci", sectionTitle: "Traguardi recenti",
+    sectionIntro: "Passi realmente raggiunti, senza numeri artificiali o annunci prematuri.",
+    learnMore: "Scopri di più", backNews: "Torna alle notizie",
+    items: {
+      multilingual: { category: "Piattaforma", date: "Settembre 2026", status: "Integrato", title: "La piattaforma è disponibile in 10 lingue", description: "L’architettura multilingue copre dieci lingue e supporta RTL per l’arabo.", detail1: "Le lingue sono francese, olandese, inglese, tedesco, spagnolo, italiano, portoghese, arabo, turco e cinese.", detail2: "Le traduzioni sono centralizzate nell’architettura i18n.", detail3: "Questo traguardo rafforza la capacità internazionale della piattaforma." },
+      store: { category: "Ecosistema", date: "Settembre 2026", status: "Integrato", title: "TSB Store e le aree Client/Admin sono collegate", description: "Store, area clienti e strumenti amministrativi operano nello stesso ambiente digitale.", detail1: "Il catalogo TSB Store è collegato a Supabase e può pubblicare prodotti.", detail2: "Richieste e ordini possono essere seguiti nelle aree Client e Admin in base ai permessi.", detail3: "L’integrazione prepara un ecosistema unico per servizi, commercio e follow-up clienti." },
+      android: { category: "Mobile", date: "Agosto 2026", status: "Preparazione Google Play", title: "La versione Android entra nella fase Google Play", description: "Il progetto Android è stato generato dalla piattaforma web con Capacitor e aperto in Android Studio.", detail1: "Il package è com.tsbtechgroup.app e il build web è stato sincronizzato con Android.", detail2: "Sono stati preparati i primi asset Google Play: icona, feature graphic e screenshot.", detail3: "La pubblicazione resta una fase separata; questo traguardo riguarda la preparazione tecnica." },
+      supabase: { category: "Infrastruttura", date: "Agosto 2026", status: "Operativo", title: "Supabase diventa la base dati e autenticazione", description: "La piattaforma usa Supabase per autenticazione, richieste, aree clienti e moduli business.", detail1: "Le policy RLS proteggono i dati sensibili in base al ruolo e all’utente autenticato.", detail2: "Richieste, profili, servizi clienti e moduli Store vengono collegati progressivamente.", detail3: "La base permette di evolvere senza esporre direttamente dati privati." },
+      coding: { category: "Sviluppo", date: "Agosto 2026", status: "In sviluppo", title: "Il progetto passa da Engineering a Coding", description: "Dopo l’architettura è iniziata la costruzione concreta di pagine, componenti e percorsi.", detail1: "React, TypeScript e Vite costituiscono la base riutilizzabile.", detail2: "HOME, autenticazione, area clienti, Store, Admin e pagine strategiche sono state sviluppate progressivamente.", detail3: "I passaggi SAFE proteggono i moduli validati e limitano le regressioni." },
+      blueprint: { category: "Strategia", date: "Luglio–Agosto 2026", status: "Validato", title: "Il Blueprint ufficiale definisce la direzione", description: "Il Blueprint ha definito visione, pubblici, architettura funzionale e grandi fasi del progetto.", detail1: "Funziona come riferimento durante lo sviluppo.", detail2: "La piattaforma è pensata per privati, professionisti, aziende e istituzioni in Belgio, Europa e a livello internazionale.", detail3: "Evolve solo quando viene validata una decisione strutturale." },
     },
   },
 
   pt: {
-    newsPage: {
-      eyebrow: "NOTÍCIAS",
-      title1: "As últimas notícias da",
-      title2: "TSB Tech Group",
-      intro:
-        "Acompanhe a evolução dos nossos projetos, da nossa plataforma e do ecossistema TSB Tech Group.",
-      backHome: "Voltar ao início",
-      contact: "Contacte-nos",
-      sectionTitle: "Em destaque",
-      sectionIntro:
-        "Descubra as principais etapas do desenvolvimento da TSB Tech Group e da sua plataforma digital.",
-      learnMore: "Saber mais",
-      backNews: "Voltar às notícias",
-      items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Lançamento da TSB Digital Platform",
-          description:
-            "A TSB Tech Group está a construir progressivamente uma plataforma digital para reunir serviços, clientes e futuras soluções tecnológicas num único ambiente.",
-          detail1:
-            "A TSB Digital Platform foi concebida como o futuro ponto central do ecossistema TSB Tech Group.",
-          detail2:
-            "Reunirá progressivamente serviços, pedidos de orçamento, área de cliente e futuros módulos digitais.",
-          detail3:
-            "O objetivo é construir uma plataforma profissional e escalável para crescer na Bélgica, na Europa e internacionalmente.",
-        },
-        evolution: {
-          category: "Inovação",
-          title: "Uma plataforma pensada para evoluir",
-          description:
-            "A nossa arquitetura modular permitirá integrar progressivamente TSB Academy, TSB Store, área de cliente, suporte e novos serviços digitais.",
-          detail1:
-            "A plataforma é desenvolvida com uma arquitetura modular para adicionar novos serviços sem reconstruir todo o site.",
-          detail2:
-            "TSB Academy, TSB Store, área de cliente, suporte e futuros projetos poderão assim ser integrados gradualmente.",
-          detail3:
-            "Esta abordagem permite à TSB Tech Group fazer evoluir a plataforma ao ritmo do desenvolvimento real das suas atividades.",
-        },
-        engineering: {
-          category: "Desenvolvimento",
-          title: "O projeto entra na fase Engineering",
-          description:
-            "Após a definição do Blueprint oficial, a TSB Tech Group entrou na fase de desenvolvimento concreto da sua plataforma.",
-          detail1:
-            "O Blueprint definiu a estrutura geral, os objetivos e os principais percursos de utilização da plataforma.",
-          detail2:
-            "A fase Engineering transforma agora esta arquitetura em componentes, páginas, autenticação e funcionalidades concretas.",
-          detail3:
-            "O desenvolvimento avança progressivamente com prioridade para uma base estável, profissional e reutilizável.",
-        },
-      },
+    eyebrow: "NOTÍCIAS", title1: "Marcos da", title2: "TSB Tech Group",
+    intro: "Uma cronologia transparente dos principais avanços da TSB Digital Platform e do seu ecossistema.",
+    backHome: "Voltar ao início", contact: "Contacte-nos", sectionTitle: "Marcos recentes",
+    sectionIntro: "Etapas realmente alcançadas, sem números artificiais nem anúncios prematuros.",
+    learnMore: "Saber mais", backNews: "Voltar às notícias",
+    items: {
+      multilingual: { category: "Plataforma", date: "Setembro de 2026", status: "Integrado", title: "A plataforma está disponível em 10 idiomas", description: "A arquitetura multilingue cobre dez idiomas e suporta RTL para árabe.", detail1: "Os idiomas são francês, neerlandês, inglês, alemão, espanhol, italiano, português, árabe, turco e chinês.", detail2: "As traduções estão centralizadas na arquitetura i18n.", detail3: "Este marco reforça a capacidade internacional da plataforma." },
+      store: { category: "Ecossistema", date: "Setembro de 2026", status: "Integrado", title: "TSB Store e as áreas Cliente/Admin estão ligadas", description: "Store, área de cliente e ferramentas de administração operam no mesmo ambiente digital.", detail1: "O catálogo TSB Store está ligado ao Supabase e pode publicar produtos.", detail2: "Pedidos e encomendas podem ser acompanhados nas áreas Cliente e Admin conforme as permissões.", detail3: "A integração prepara um ecossistema único para serviços, comércio e acompanhamento do cliente." },
+      android: { category: "Mobile", date: "Agosto de 2026", status: "Preparação Google Play", title: "A versão Android entra na fase Google Play", description: "O projeto Android foi gerado a partir da plataforma web com Capacitor e aberto no Android Studio.", detail1: "O package é com.tsbtechgroup.app e o build web foi sincronizado com Android.", detail2: "Foram preparados os primeiros recursos Google Play: ícone, feature graphic e capturas.", detail3: "A publicação continua a ser uma fase separada; este marco descreve a preparação técnica." },
+      supabase: { category: "Infraestrutura", date: "Agosto de 2026", status: "Operacional", title: "Supabase torna-se a base de dados e autenticação", description: "A plataforma usa Supabase para autenticação, pedidos, áreas de cliente e vários módulos de negócio.", detail1: "As políticas RLS protegem dados sensíveis segundo o papel e o utilizador autenticado.", detail2: "Pedidos, perfis, serviços de cliente e módulos Store são ligados progressivamente.", detail3: "A base permite evoluir sem expor diretamente dados privados." },
+      coding: { category: "Desenvolvimento", date: "Agosto de 2026", status: "Em desenvolvimento", title: "O projeto passa de Engineering para Coding", description: "Após a arquitetura começou a construção concreta de páginas, componentes e percursos.", detail1: "React, TypeScript e Vite formam a base reutilizável.", detail2: "HOME, autenticação, área de cliente, Store, Admin e páginas estratégicas foram desenvolvidos progressivamente.", detail3: "Os passos SAFE protegem módulos validados e reduzem regressões." },
+      blueprint: { category: "Estratégia", date: "Julho–Agosto de 2026", status: "Validado", title: "O Blueprint oficial define a direção", description: "O Blueprint definiu visão, públicos, arquitetura funcional e grandes fases do projeto.", detail1: "Serve como referência durante o desenvolvimento.", detail2: "A plataforma destina-se a particulares, profissionais, empresas e instituições na Bélgica, Europa e internacionalmente.", detail3: "Só evolui quando uma decisão estrutural é validada." },
     },
   },
 
   ar: {
-    newsPage: {
-      eyebrow: "الأخبار",
-      title1: "آخر أخبار",
-      title2: "TSB Tech Group",
-      intro:
-        "تابع تطور مشاريعنا ومنصتنا ومنظومة TSB Tech Group.",
-      backHome: "العودة إلى الرئيسية",
-      contact: "تواصل معنا",
-      sectionTitle: "الأبرز",
-      sectionIntro:
-        "اكتشف أهم مراحل تطوير TSB Tech Group ومنصتها الرقمية.",
-      learnMore: "معرفة المزيد",
-      backNews: "العودة إلى الأخبار",
-      items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "إطلاق TSB Digital Platform",
-          description:
-            "تعمل TSB Tech Group تدريجيًا على بناء منصة رقمية تجمع خدماتها وعملاءها وحلولها التكنولوجية المستقبلية في بيئة واحدة.",
-          detail1:
-            "تم تصميم TSB Digital Platform لتكون المركز المستقبلي لمنظومة TSB Tech Group.",
-          detail2:
-            "ستجمع تدريجيًا الخدمات وطلبات عروض الأسعار ومساحة العميل والوحدات الرقمية المستقبلية.",
-          detail3:
-            "الهدف هو بناء منصة مهنية وقابلة للتوسع لدعم النمو في بلجيكا وأوروبا وعلى المستوى الدولي.",
-        },
-        evolution: {
-          category: "الابتكار",
-          title: "منصة مصممة للتطور",
-          description:
-            "ستسمح بنيتنا المعيارية بدمج TSB Academy وTSB Store ومساحة العميل والدعم وخدمات رقمية جديدة تدريجيًا.",
-          detail1:
-            "يتم تطوير المنصة بهندسة معيارية تسمح بإضافة خدمات جديدة دون إعادة بناء الموقع بالكامل.",
-          detail2:
-            "يمكن بذلك دمج TSB Academy وTSB Store ومساحة العميل والدعم والمشاريع المستقبلية تدريجيًا.",
-          detail3:
-            "يسمح هذا النهج لـ TSB Tech Group بتطوير المنصة بالتوازي مع التطور الفعلي لأنشطتها.",
-        },
-        engineering: {
-          category: "التطوير",
-          title: "المشروع يدخل مرحلة Engineering",
-          description:
-            "بعد تحديد الـ Blueprint الرسمي، دخلت TSB Tech Group الآن مرحلة التطوير العملي لمنصتها.",
-          detail1:
-            "حدد الـ Blueprint الهيكل العام والأهداف ومسارات المستخدم الرئيسية للمنصة.",
-          detail2:
-            "تحول مرحلة Engineering هذه الهندسة الآن إلى مكونات وصفحات ومصادقة ووظائف عملية.",
-          detail3:
-            "يتقدم التطوير تدريجيًا مع إعطاء الأولوية لقاعدة مستقرة ومهنية وقابلة لإعادة الاستخدام.",
-        },
-      },
+    eyebrow: "الأخبار", title1: "محطات", title2: "TSB Tech Group",
+    intro: "خط زمني شفاف لأهم التطورات في TSB Digital Platform ومنظومتها.",
+    backHome: "العودة إلى الرئيسية", contact: "تواصل معنا", sectionTitle: "أحدث المحطات",
+    sectionIntro: "خطوات تم إنجازها فعليًا دون أرقام مصطنعة أو إعلانات مبكرة.",
+    learnMore: "معرفة المزيد", backNews: "العودة إلى الأخبار",
+    items: {
+      multilingual: { category: "المنصة", date: "سبتمبر 2026", status: "مدمج", title: "المنصة متاحة بـ10 لغات", description: "تدعم البنية متعددة اللغات عشر لغات مع العرض من اليمين إلى اليسار للعربية.", detail1: "اللغات هي الفرنسية والهولندية والإنجليزية والألمانية والإسبانية والإيطالية والبرتغالية والعربية والتركية والصينية.", detail2: "تم توحيد الترجمات داخل بنية i18n للحفاظ على الاتساق وقابلية التوسع.", detail3: "تعزز هذه المرحلة قدرة المنصة على التطور دوليًا." },
+      store: { category: "المنظومة", date: "سبتمبر 2026", status: "مدمج", title: "ربط TSB Store بمساحتي العميل والإدارة", description: "أصبح المتجر ومساحة العميل وأدوات الإدارة تعمل ضمن نفس البيئة الرقمية.", detail1: "كتالوج TSB Store مرتبط بـSupabase ويمكنه نشر المنتجات.", detail2: "يمكن متابعة الطلبات والأوامر في مساحتي العميل والإدارة حسب الصلاحيات.", detail3: "يمهد هذا الربط لمنظومة موحدة للخدمات والتجارة ومتابعة العملاء." },
+      android: { category: "الهاتف المحمول", date: "أغسطس 2026", status: "إعداد Google Play", title: "نسخة Android تدخل مرحلة Google Play", description: "تم إنشاء مشروع Android من المنصة باستخدام Capacitor وفتحه في Android Studio.", detail1: "اسم الحزمة هو com.tsbtechgroup.app وتمت مزامنة بناء الويب مع مشروع Android.", detail2: "تم إعداد أول أصول Google Play مثل الأيقونة والصورة الترويجية ولقطات الشاشة.", detail3: "النشر على Google Play مرحلة منفصلة؛ هذه المحطة تتعلق بالإعداد التقني." },
+      supabase: { category: "البنية التحتية", date: "أغسطس 2026", status: "تشغيلي", title: "Supabase يصبح أساس البيانات والمصادقة", description: "تستخدم المنصة Supabase للمصادقة والطلبات ومساحات العملاء وعدة وحدات أعمال.", detail1: "تحمي سياسات RLS البيانات الحساسة حسب الدور والمستخدم المسجل.", detail2: "يتم ربط طلبات العروض والملفات الشخصية وخدمات العملاء ووحدات Store تدريجيًا.", detail3: "تسمح هذه القاعدة بالتطور دون كشف البيانات الخاصة مباشرة." },
+      coding: { category: "التطوير", date: "أغسطس 2026", status: "قيد التطوير", title: "المشروع ينتقل من Engineering إلى Coding", description: "بعد تحديد البنية بدأ التنفيذ الفعلي للصفحات والمكونات ومسارات المستخدم.", detail1: "تشكل React وTypeScript وVite قاعدة تقنية قابلة لإعادة الاستخدام.", detail2: "تم تطوير HOME والمصادقة ومساحة العميل وStore وAdmin وصفحات استراتيجية تدريجيًا.", detail3: "تحمي خطوات SAFE الوحدات التي تم التحقق منها وتقلل التراجعات." },
+      blueprint: { category: "الاستراتيجية", date: "يوليو–أغسطس 2026", status: "معتمد", title: "الـBlueprint الرسمي يحدد اتجاه المنصة", description: "حدد الـBlueprint الرؤية والجمهور والبنية الوظيفية والمراحل الرئيسية للمشروع.", detail1: "يعمل كمرجع ثابت أثناء التطوير.", detail2: "المنصة موجهة للأفراد والمهنيين والشركات والمؤسسات في بلجيكا وأوروبا وعلى المستوى الدولي.", detail3: "لا يتغير إلا عند اعتماد قرار هيكلي جديد." },
     },
   },
 
   tr: {
-    newsPage: {
-      eyebrow: "HABERLER",
-      title1: "TSB Tech Group’tan",
-      title2: "son haberler",
-      intro:
-        "Projelerimizin, platformumuzun ve TSB Tech Group ekosisteminin gelişimini takip edin.",
-      backHome: "Ana sayfaya dön",
-      contact: "Bize ulaşın",
-      sectionTitle: "Öne çıkanlar",
-      sectionIntro:
-        "TSB Tech Group ve dijital platformunun gelişimindeki başlıca aşamaları keşfedin.",
-      learnMore: "Daha fazla bilgi",
-      backNews: "Haberlere dön",
-      items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "TSB Digital Platform’un lansmanı",
-          description:
-            "TSB Tech Group, hizmetlerini, müşterilerini ve gelecekteki teknoloji çözümlerini tek ortamda birleştirecek dijital bir platformu adım adım geliştiriyor.",
-          detail1:
-            "TSB Digital Platform, TSB Tech Group ekosisteminin gelecekteki merkezi noktası olarak tasarlanıyor.",
-          detail2:
-            "Hizmetleri, teklif taleplerini, müşteri alanını ve gelecekteki dijital modülleri aşamalı olarak bir araya getirecek.",
-          detail3:
-            "Amaç, Belçika, Avrupa ve uluslararası büyümeye uygun profesyonel ve ölçeklenebilir bir platform kurmaktır.",
-        },
-        evolution: {
-          category: "İnovasyon",
-          title: "Gelişmek üzere tasarlanmış bir platform",
-          description:
-            "Modüler mimarimiz TSB Academy, TSB Store, müşteri alanı, destek ve yeni dijital hizmetlerin aşamalı entegrasyonunu sağlayacak.",
-          detail1:
-            "Platform, tüm siteyi yeniden kurmadan yeni hizmetler eklenebilmesi için modüler bir mimariyle geliştiriliyor.",
-          detail2:
-            "TSB Academy, TSB Store, müşteri alanı, destek ve gelecekteki projeler böylece adım adım entegre edilebilecek.",
-          detail3:
-            "Bu yaklaşım TSB Tech Group’un platformu gerçek faaliyet gelişimiyle birlikte büyütmesini sağlar.",
-        },
-        engineering: {
-          category: "Geliştirme",
-          title: "Proje Engineering aşamasına giriyor",
-          description:
-            "Resmî Blueprint’in tanımlanmasının ardından TSB Tech Group platformunun somut geliştirme aşamasına geçti.",
-          detail1:
-            "Blueprint, platformun genel yapısını, hedeflerini ve temel kullanıcı yolculuklarını tanımladı.",
-          detail2:
-            "Engineering aşaması artık bu mimariyi somut bileşenlere, sayfalara, kimlik doğrulamaya ve işlevlere dönüştürüyor.",
-          detail3:
-            "Geliştirme, istikrarlı, profesyonel ve yeniden kullanılabilir bir temele öncelik verilerek adım adım ilerliyor.",
-        },
-      },
+    eyebrow: "HABERLER", title1: "TSB Tech Group", title2: "kilometre taşları",
+    intro: "TSB Digital Platform ve ekosistemindeki başlıca ilerlemelerin şeffaf zaman çizelgesi.",
+    backHome: "Ana sayfaya dön", contact: "Bize ulaşın", sectionTitle: "Son kilometre taşları",
+    sectionIntro: "Yapay rakamlar veya erken duyurular olmadan gerçekten tamamlanan adımlar.",
+    learnMore: "Daha fazla bilgi", backNews: "Haberlere dön",
+    items: {
+      multilingual: { category: "Platform", date: "Eylül 2026", status: "Entegre", title: "Platform 10 dilde kullanılabilir", description: "Çok dilli mimari on dili ve Arapça için RTL görüntülemeyi destekliyor.", detail1: "Diller Fransızca, Hollandaca, İngilizce, Almanca, İspanyolca, İtalyanca, Portekizce, Arapça, Türkçe ve Çince.", detail2: "Çeviriler i18n mimarisinde merkezi olarak yönetiliyor.", detail3: "Bu adım platformun uluslararası gelişim kapasitesini güçlendiriyor." },
+      store: { category: "Ekosistem", date: "Eylül 2026", status: "Entegre", title: "TSB Store ile Müşteri/Admin alanları bağlandı", description: "Store, müşteri alanı ve yönetim araçları aynı dijital ortamda çalışıyor.", detail1: "TSB Store kataloğu Supabase’e bağlı ve ürün yayınlayabiliyor.", detail2: "Talepler ve siparişler erişim haklarına göre Müşteri ve Admin alanlarında takip edilebiliyor.", detail3: "Bu entegrasyon hizmet, ticaret ve müşteri takibi için tek bir ekosistem hazırlıyor." },
+      android: { category: "Mobil", date: "Ağustos 2026", status: "Google Play hazırlığı", title: "Android sürümü Google Play aşamasına giriyor", description: "Android projesi Capacitor ile web platformundan üretildi ve Android Studio’da açıldı.", detail1: "Paket adı com.tsbtechgroup.app ve web build Android projesiyle senkronize edildi.", detail2: "İkon, feature graphic ve ekran görüntüleri gibi ilk Google Play varlıkları hazırlandı.", detail3: "Google Play yayını ayrı bir adımdır; bu kilometre taşı teknik hazırlığı anlatır." },
+      supabase: { category: "Altyapı", date: "Ağustos 2026", status: "Çalışır durumda", title: "Supabase veri ve kimlik doğrulama temeli oluyor", description: "Platform kimlik doğrulama, talepler, müşteri alanları ve çeşitli iş modülleri için Supabase kullanıyor.", detail1: "RLS kuralları hassas verileri rol ve oturum açmış kullanıcıya göre koruyor.", detail2: "Teklif talepleri, profiller, müşteri hizmetleri ve Store modülleri kademeli olarak bağlanıyor.", detail3: "Bu temel özel verileri doğrudan açığa çıkarmadan yeni işlevlere olanak tanıyor." },
+      coding: { category: "Geliştirme", date: "Ağustos 2026", status: "Geliştiriliyor", title: "Proje Engineering’den Coding’e geçiyor", description: "Mimari sonrasında sayfalar, bileşenler ve kullanıcı akışlarının somut geliştirmesi başladı.", detail1: "React, TypeScript ve Vite yeniden kullanılabilir teknik temeli oluşturuyor.", detail2: "HOME, kimlik doğrulama, müşteri alanı, Store, Admin ve stratejik sayfalar kademeli olarak geliştirildi.", detail3: "SAFE adımları doğrulanmış modülleri korur ve gerilemeleri azaltır." },
+      blueprint: { category: "Strateji", date: "Temmuz–Ağustos 2026", status: "Onaylandı", title: "Resmî Blueprint platformun yönünü belirliyor", description: "Blueprint vizyonu, hedef kitleleri, işlevsel mimariyi ve ana proje aşamalarını tanımladı.", detail1: "Geliştirme boyunca sabit bir referans görevi görür.", detail2: "Platform Belçika, Avrupa ve uluslararası düzeyde bireyler, profesyoneller, şirketler ve kurumlar için tasarlandı.", detail3: "Yalnızca yapısal bir karar onaylandığında gelişir." },
     },
   },
 
   zh: {
-    newsPage: {
-      eyebrow: "新闻",
-      title1: "TSB Tech Group",
-      title2: "最新动态",
-      intro:
-        "关注我们的项目、平台以及 TSB Tech Group 生态系统的发展。",
-      backHome: "返回首页",
-      contact: "联系我们",
-      sectionTitle: "重点动态",
-      sectionIntro:
-        "了解 TSB Tech Group 及其数字平台发展的主要里程碑。",
-      learnMore: "了解更多",
-      backNews: "返回新闻",
-      items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "TSB Digital Platform 正式启动",
-          description:
-            "TSB Tech Group 正在逐步建设一个数字平台，将服务、客户以及未来技术解决方案整合到同一环境中。",
-          detail1:
-            "TSB Digital Platform 被设计为未来 TSB Tech Group 生态系统的核心枢纽。",
-          detail2:
-            "它将逐步整合服务、报价申请、客户空间以及未来的数字模块。",
-          detail3:
-            "目标是打造一个专业且可扩展的平台，支持在比利时、欧洲及国际市场的发展。",
-        },
-        evolution: {
-          category: "创新",
-          title: "为持续发展而设计的平台",
-          description:
-            "我们的模块化架构将逐步整合 TSB Academy、TSB Store、客户空间、支持以及新的数字服务。",
-          detail1:
-            "平台采用模块化架构开发，因此无需重建整个网站即可添加新服务。",
-          detail2:
-            "TSB Academy、TSB Store、客户空间、支持以及未来项目都可以逐步集成。",
-          detail3:
-            "这种方式使 TSB Tech Group 能够随着实际业务发展同步扩展平台。",
-        },
-        engineering: {
-          category: "开发",
-          title: "项目进入 Engineering 阶段",
-          description:
-            "在官方 Blueprint 确定之后，TSB Tech Group 已进入平台的具体开发阶段。",
-          detail1:
-            "Blueprint 定义了平台的总体结构、目标以及主要用户流程。",
-          detail2:
-            "Engineering 阶段正在将这一架构转化为具体组件、页面、身份验证和功能。",
-          detail3:
-            "开发正在逐步推进，并优先构建稳定、专业且可复用的基础。",
-        },
-      },
+    eyebrow: "新闻", title1: "TSB Tech Group", title2: "里程碑",
+    intro: "透明展示 TSB Digital Platform 及其生态系统的重要进展。",
+    backHome: "返回首页", contact: "联系我们", sectionTitle: "近期里程碑",
+    sectionIntro: "仅展示真正完成的阶段，不使用人为数字或过早公告。",
+    learnMore: "了解更多", backNews: "返回新闻",
+    items: {
+      multilingual: { category: "平台", date: "2026年9月", status: "已集成", title: "平台已支持10种语言", description: "多语言架构现支持十种语言，并为阿拉伯语提供RTL显示。", detail1: "支持法语、荷兰语、英语、德语、西班牙语、意大利语、葡萄牙语、阿拉伯语、土耳其语和中文。", detail2: "翻译集中在i18n架构中管理，以保持一致性和可扩展性。", detail3: "这一里程碑增强了平台在比利时、欧洲和国际市场的发展能力。" },
+      store: { category: "生态系统", date: "2026年9月", status: "已集成", title: "TSB Store 已连接客户和管理区域", description: "Store、客户区域和管理工具现在运行在同一数字环境中。", detail1: "TSB Store 商品目录已连接Supabase并可发布商品。", detail2: "请求和订单可根据权限在客户和管理区域中跟踪。", detail3: "这项集成为服务、商业和客户跟进构建统一生态系统。" },
+      android: { category: "移动端", date: "2026年8月", status: "Google Play 准备中", title: "Android版本进入Google Play阶段", description: "Android项目通过Capacitor从Web平台生成并在Android Studio中打开。", detail1: "Android包名为com.tsbtechgroup.app，Web构建已与Android项目同步。", detail2: "图标、宣传图和截图等首批Google Play素材已准备。", detail3: "Google Play发布仍是独立步骤；此里程碑描述的是技术准备，而不是已经上线。" },
+      supabase: { category: "基础设施", date: "2026年8月", status: "运行中", title: "Supabase成为数据和身份验证基础", description: "平台使用Supabase处理身份验证、请求、客户区域及多个业务模块。", detail1: "RLS规则根据角色和登录用户保护敏感数据。", detail2: "报价请求、个人资料、客户服务和Store模块正逐步接入该基础设施。", detail3: "这一基础允许功能持续扩展，而无需直接公开用户隐私数据。" },
+      coding: { category: "开发", date: "2026年8月", status: "开发中", title: "项目从Engineering进入Coding", description: "在完成架构定义后，TSB Tech Group进入页面、组件和用户流程的实际开发。", detail1: "React、TypeScript和Vite构成可复用技术基础。", detail2: "HOME、身份验证、客户区域、Store、Admin和战略页面已逐步构建。", detail3: "SAFE步骤用于保护已验证模块并减少回归问题。" },
+      blueprint: { category: "战略", date: "2026年7月–8月", status: "已验证", title: "官方Blueprint确定平台方向", description: "Blueprint定义了愿景、目标人群、功能架构和主要项目阶段。", detail1: "它在开发期间作为稳定参考。", detail2: "平台面向个人、专业人士、企业和机构，目标覆盖比利时、欧洲和国际市场。", detail3: "只有在结构性决策得到确认后，Blueprint才会演进。" },
     },
   },
-};
+} as const;
+
+export const newsPageTranslations: TranslationResources =
+  Object.fromEntries(
+    Object.entries(localeData).map(([locale, newsPage]) => [
+      locale,
+      { newsPage },
+    ])
+  ) as TranslationResources;

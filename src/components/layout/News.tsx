@@ -1,8 +1,8 @@
 import {
   ArrowRight,
-  Cpu,
-  Layers3,
-  Rocket,
+  Languages,
+  ShoppingBag,
+  Smartphone,
 } from "lucide-react";
 
 import { useLanguage } from "../../context/LanguageContext";
@@ -11,18 +11,18 @@ import { newsTranslations } from "../../i18n/locales/news";
 
 const newsConfig = [
   {
-    id: "platform",
-    icon: Rocket,
-    color: "blue",
-  },
-  {
-    id: "evolution",
-    icon: Layers3,
+    id: "multilingual",
+    icon: Languages,
     color: "cyan",
   },
   {
-    id: "engineering",
-    icon: Cpu,
+    id: "store",
+    icon: ShoppingBag,
+    color: "blue",
+  },
+  {
+    id: "android",
+    icon: Smartphone,
     color: "purple",
   },
 ] as const;
@@ -63,6 +63,14 @@ function News() {
               `items.${item.id}.category`
             );
 
+            const date = t(
+              `items.${item.id}.date`
+            );
+
+            const status = t(
+              `items.${item.id}.status`
+            );
+
             const title = t(
               `items.${item.id}.title`
             );
@@ -89,6 +97,21 @@ function News() {
                   </span>
                 </div>
 
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "8px",
+                    margin: "14px 0 10px",
+                    fontSize: ".78rem",
+                    opacity: 0.82,
+                  }}
+                >
+                  <span>{date}</span>
+                  <span aria-hidden="true">•</span>
+                  <span>{status}</span>
+                </div>
+
                 <h3>{title}</h3>
 
                 <p>{description}</p>
@@ -104,42 +127,28 @@ function News() {
             );
           })}
         </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "26px",
+          }}
+        >
+          <a
+            href="/news"
+            className="button button--secondary"
+          >
+            {t("viewAll")}
+            <ArrowRight
+              size={17}
+              aria-hidden="true"
+            />
+          </a>
+        </div>
       </div>
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export default News;

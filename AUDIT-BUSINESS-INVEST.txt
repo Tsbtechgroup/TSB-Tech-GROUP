@@ -1,0 +1,935 @@
+﻿===== BUSINESS PAGE =====
+import {
+  Building2,
+  ClipboardCheck,
+  Cpu,
+  Network,
+  ShieldCheck,
+  Wrench,
+} from "lucide-react";
+
+import Navbar from "../../components/layout/Navbar";
+import Footer from "../../components/layout/Footer";
+import ScrollToTop from "../../components/common/ScrollToTop";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../i18n";
+import { businessTranslations } from "../../i18n/locales/business";
+
+const solutions = [
+  { id: "audit", icon: ClipboardCheck, color: "blue" },
+  { id: "security", icon: ShieldCheck, color: "green" },
+  { id: "network", icon: Network, color: "cyan" },
+  { id: "automation", icon: Cpu, color: "purple" },
+  { id: "maintenance", icon: Wrench, color: "orange" },
+] as const;
+
+
+
+function Business() {
+  const { locale } = useLanguage();
+
+  const t = (key: string) =>
+    translate(
+      businessTranslations,
+      locale,
+      `business.${key}`
+    );
+
+  return (
+    <div>
+      <Navbar />
+
+      <main>
+        <section className="section section--about">
+          <div className="container">
+            <div
+              className="section-heading"
+              style={{
+                textAlign: "center",
+                maxWidth: "900px",
+                margin: "0 auto",
+              }}
+            >
+              <span className="section__eyebrow">{t("eyebrow")}</span>
+
+              <h1>
+                {t("title1")} <span>{t("title2")}</span>
+              </h1>
+
+              <p
+                style={{
+                  maxWidth: "760px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                {t("intro")}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                  marginTop: "24px",
+                }}
+              >
+                <a href="/#top" className="button button--secondary">
+                  â† {t("backHome")}
+                </a>
+
+                <a href="/#quote" className="button button--primary">
+                  {t("quote")}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section section--domains">
+          <div className="container">
+            <div
+              className="section-heading"
+              style={{
+                textAlign: "center",
+                maxWidth: "780px",
+                margin: "0 auto 30px",
+              }}
+            >
+              <h2>{t("sectionTitle")}</h2>
+              <p>{t("sectionIntro")}</p>
+            </div>
+
+            <div
+              className="domains-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fit, minmax(230px, 1fr))",
+                gap: "16px",
+                maxWidth: "1120px",
+                margin: "0 auto",
+              }}
+            >
+              {solutions.map((solution) => {
+                const Icon = solution.icon;
+                const title = t(
+                  `items.${solution.id}.title`
+                );
+
+                const description = t(
+                  `items.${solution.id}.description`
+                );
+
+                return (
+                  <article
+                    key={solution.id}
+                    className={`domain-card domain-${solution.color}`}
+                    style={{
+                      minHeight: "210px",
+                      padding: "20px",
+                    }}
+                  >
+                    <div className="domain-card__top">
+                      <div className="domain-icon">
+                        <Icon size={23} strokeWidth={1.8} />
+                      </div>
+                    </div>
+
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container">
+            <div
+              style={{
+                maxWidth: "900px",
+                margin: "0 auto",
+                padding: "28px",
+                borderRadius: "20px",
+                border: "1px solid rgba(59,130,246,0.25)",
+                background:
+                  "linear-gradient(135deg, rgba(59,130,246,0.10), rgba(14,165,233,0.06))",
+                textAlign: "center",
+              }}
+            >
+              <div
+                style={{
+                  width: "56px",
+                  height: "56px",
+                  margin: "0 auto 16px",
+                  display: "grid",
+                  placeItems: "center",
+                  borderRadius: "16px",
+                  background: "rgba(59,130,246,0.14)",
+                  border: "1px solid rgba(96,165,250,0.30)",
+                }}
+              >
+                <Building2 size={26} strokeWidth={1.8} />
+              </div>
+
+              <h2>{t("contactTitle")}</h2>
+
+              <p
+                style={{
+                  maxWidth: "700px",
+                  margin: "12px auto 0",
+                }}
+              >
+                {t("contactText")}
+              </p>
+
+              <a
+                href="/#contact"
+                className="button button--primary"
+                style={{ marginTop: "22px" }}
+              >
+                {t("contact")}
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+      <ScrollToTop />
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export default Business;
+
+
+===== BUSINESS I18N =====
+import type { TranslationResources } from "../types";
+
+export const businessTranslations: TranslationResources = {
+  fr: {
+    business: {
+      eyebrow: "SOLUTIONS ENTREPRISES",
+      title1: "Des solutions techniques pour",
+      title2: "vos activitÃ©s",
+      intro:
+        "TSB Tech Group accompagne les entreprises, professionnels et institutions avec des solutions techniques, technologiques et opÃ©rationnelles adaptÃ©es Ã  leurs besoins.",
+      backHome: "Retour Ã  lâ€™accueil",
+      quote: "Demander un devis",
+      sectionTitle: "Un accompagnement global",
+      sectionIntro:
+        "Nous pouvons intervenir sur plusieurs domaines afin de construire une solution cohÃ©rente autour de votre infrastructure, de votre sÃ©curitÃ© et de vos Ã©quipements.",
+      contactTitle: "Parlons de votre projet",
+      contactText:
+        "PrÃ©sentez-nous votre besoin et nous Ã©tudierons la solution la plus adaptÃ©e Ã  votre activitÃ©.",
+      contact: "Nous contacter",
+      items: {
+        audit: {
+          title: "Audit & Ã©tude technique",
+          description:
+            "Analyse des besoins, Ã©tude de lâ€™existant et dÃ©finition dâ€™une solution adaptÃ©e Ã  votre environnement.",
+        },
+        security: {
+          title: "SÃ©curitÃ© & contrÃ´le dâ€™accÃ¨s",
+          description:
+            "VidÃ©osurveillance, alarmes, contrÃ´le dâ€™accÃ¨s et solutions de protection pour sites professionnels.",
+        },
+        network: {
+          title: "RÃ©seaux & tÃ©lÃ©communications",
+          description:
+            "Infrastructure rÃ©seau, connectivitÃ©, Ã©quipements de communication et accompagnement technique.",
+        },
+        automation: {
+          title: "Automatisation & digital",
+          description:
+            "Automatisation, intÃ©gration de systÃ¨mes, outils numÃ©riques et solutions professionnelles sur mesure.",
+        },
+        maintenance: {
+          title: "Maintenance & support",
+          description:
+            "Entretien, dÃ©pannage, suivi technique et accompagnement des Ã©quipements et installations.",
+        },
+      },
+    },
+  },
+
+  nl: {
+    business: {
+      eyebrow: "BEDRIJFSOPLOSSINGEN",
+      title1: "Technische oplossingen voor",
+      title2: "uw activiteiten",
+      intro:
+        "TSB Tech Group ondersteunt bedrijven, professionals en instellingen met technische, technologische en operationele oplossingen op maat.",
+      backHome: "Terug naar home",
+      quote: "Offerte aanvragen",
+      sectionTitle: "Volledige ondersteuning",
+      sectionIntro:
+        "We kunnen op meerdere domeinen tussenkomen om een coherente oplossing te bouwen rond uw infrastructuur, beveiliging en apparatuur.",
+      contactTitle: "Bespreek uw project",
+      contactText:
+        "Vertel ons wat u nodig hebt en we bekijken welke oplossing het best bij uw activiteit past.",
+      contact: "Contacteer ons",
+      items: {
+        audit: {
+          title: "Audit & technische studie",
+          description:
+            "Analyse van de behoeften, beoordeling van de bestaande situatie en definitie van een passende oplossing.",
+        },
+        security: {
+          title: "Beveiliging & toegangscontrole",
+          description:
+            "Camerabewaking, alarmen, toegangscontrole en beveiligingsoplossingen voor professionele sites.",
+        },
+        network: {
+          title: "Netwerken & telecommunicatie",
+          description:
+            "Netwerkinfrastructuur, connectiviteit, communicatieapparatuur en technische ondersteuning.",
+        },
+        automation: {
+          title: "Automatisering & digitaal",
+          description:
+            "Automatisering, systeemintegratie, digitale tools en professionele oplossingen op maat.",
+        },
+        maintenance: {
+          title: "Onderhoud & support",
+          description:
+            "Onderhoud, herstellingen, technische opvolging en ondersteuning van apparatuur en installaties.",
+        },
+      },
+    },
+  },
+
+  en: {
+    business: {
+      eyebrow: "BUSINESS SOLUTIONS",
+      title1: "Technical solutions for",
+      title2: "your operations",
+      intro:
+        "TSB Tech Group supports businesses, professionals and institutions with technical, technological and operational solutions tailored to their needs.",
+      backHome: "Back to home",
+      quote: "Request a quote",
+      sectionTitle: "End-to-end support",
+      sectionIntro:
+        "We can work across several areas to build a coherent solution around your infrastructure, security and equipment.",
+      contactTitle: "Letâ€™s discuss your project",
+      contactText:
+        "Tell us what you need and we will study the most suitable solution for your activity.",
+      contact: "Contact us",
+      items: {
+        audit: {
+          title: "Audit & technical study",
+          description:
+            "Needs analysis, assessment of the existing environment and definition of a suitable solution.",
+        },
+        security: {
+          title: "Security & access control",
+          description:
+            "Video surveillance, alarms, access control and protection solutions for professional sites.",
+        },
+        network: {
+          title: "Networks & telecommunications",
+          description:
+            "Network infrastructure, connectivity, communication equipment and technical support.",
+        },
+        automation: {
+          title: "Automation & digital",
+          description:
+            "Automation, system integration, digital tools and custom professional solutions.",
+        },
+        maintenance: {
+          title: "Maintenance & support",
+          description:
+            "Maintenance, troubleshooting, technical follow-up and support for equipment and installations.",
+        },
+      },
+    },
+  },
+
+  de: {
+    business: {
+      eyebrow: "UNTERNEHMENSLÃ–SUNGEN",
+      title1: "Technische LÃ¶sungen fÃ¼r",
+      title2: "Ihre AktivitÃ¤ten",
+      intro:
+        "TSB Tech Group unterstÃ¼tzt Unternehmen, FachkrÃ¤fte und Institutionen mit technischen, technologischen und operativen LÃ¶sungen, die auf ihre BedÃ¼rfnisse zugeschnitten sind.",
+      backHome: "ZurÃ¼ck zur Startseite",
+      quote: "Angebot anfordern",
+      sectionTitle: "Ganzheitliche UnterstÃ¼tzung",
+      sectionIntro:
+        "Wir kÃ¶nnen in mehreren Bereichen tÃ¤tig werden, um eine kohÃ¤rente LÃ¶sung rund um Ihre Infrastruktur, Sicherheit und AusrÃ¼stung aufzubauen.",
+      contactTitle: "Sprechen wir Ã¼ber Ihr Projekt",
+      contactText:
+        "Beschreiben Sie uns Ihren Bedarf und wir prÃ¼fen die fÃ¼r Ihre TÃ¤tigkeit am besten geeignete LÃ¶sung.",
+      contact: "Kontakt",
+      items: {
+        audit: {
+          title: "Audit & technische Studie",
+          description:
+            "Bedarfsanalyse, Bewertung der bestehenden Situation und Definition einer passenden LÃ¶sung fÃ¼r Ihre Umgebung.",
+        },
+        security: {
+          title: "Sicherheit & Zugangskontrolle",
+          description:
+            "VideoÃ¼berwachung, Alarmanlagen, Zugangskontrolle und SchutzlÃ¶sungen fÃ¼r professionelle Standorte.",
+        },
+        network: {
+          title: "Netzwerke & Telekommunikation",
+          description:
+            "Netzwerkinfrastruktur, KonnektivitÃ¤t, KommunikationsausrÃ¼stung und technische Betreuung.",
+        },
+        automation: {
+          title: "Automatisierung & Digital",
+          description:
+            "Automatisierung, Systemintegration, digitale Werkzeuge und maÃŸgeschneiderte professionelle LÃ¶sungen.",
+        },
+        maintenance: {
+          title: "Wartung & Support",
+          description:
+            "Wartung, Fehlerbehebung, technische Betreuung und UnterstÃ¼tzung fÃ¼r GerÃ¤te und Anlagen.",
+        },
+      },
+    },
+  },
+
+  es: {
+    business: {
+      eyebrow: "SOLUCIONES PARA EMPRESAS",
+      title1: "Soluciones tÃ©cnicas para",
+      title2: "sus actividades",
+      intro:
+        "TSB Tech Group acompaÃ±a a empresas, profesionales e instituciones con soluciones tÃ©cnicas, tecnolÃ³gicas y operativas adaptadas a sus necesidades.",
+      backHome: "Volver al inicio",
+      quote: "Solicitar presupuesto",
+      sectionTitle: "AcompaÃ±amiento integral",
+      sectionIntro:
+        "Podemos intervenir en varias Ã¡reas para construir una soluciÃ³n coherente en torno a su infraestructura, seguridad y equipos.",
+      contactTitle: "Hablemos de su proyecto",
+      contactText:
+        "PresÃ©ntenos su necesidad y estudiaremos la soluciÃ³n mÃ¡s adecuada para su actividad.",
+      contact: "ContÃ¡ctenos",
+      items: {
+        audit: {
+          title: "AuditorÃ­a y estudio tÃ©cnico",
+          description:
+            "AnÃ¡lisis de necesidades, evaluaciÃ³n de la situaciÃ³n existente y definiciÃ³n de una soluciÃ³n adaptada a su entorno.",
+        },
+        security: {
+          title: "Seguridad y control de acceso",
+          description:
+            "Videovigilancia, alarmas, control de acceso y soluciones de protecciÃ³n para instalaciones profesionales.",
+        },
+        network: {
+          title: "Redes y telecomunicaciones",
+          description:
+            "Infraestructura de red, conectividad, equipos de comunicaciÃ³n y asistencia tÃ©cnica.",
+        },
+        automation: {
+          title: "AutomatizaciÃ³n y digital",
+          description:
+            "AutomatizaciÃ³n, integraciÃ³n de sistemas, herramientas digitales y soluciones profesionales a medida.",
+        },
+        maintenance: {
+          title: "Mantenimiento y soporte",
+          description:
+            "Mantenimiento, reparaciÃ³n, seguimiento tÃ©cnico y apoyo para equipos e instalaciones.",
+        },
+      },
+    },
+  },
+
+  it: {
+    business: {
+      eyebrow: "SOLUZIONI AZIENDALI",
+      title1: "Soluzioni tecniche per",
+      title2: "le vostre attivitÃ ",
+      intro:
+        "TSB Tech Group supporta aziende, professionisti e istituzioni con soluzioni tecniche, tecnologiche e operative adatte alle loro esigenze.",
+      backHome: "Torna alla home",
+      quote: "Richiedi un preventivo",
+      sectionTitle: "Supporto completo",
+      sectionIntro:
+        "Possiamo intervenire in piÃ¹ ambiti per costruire una soluzione coerente attorno alla vostra infrastruttura, sicurezza e attrezzature.",
+      contactTitle: "Parliamo del vostro progetto",
+      contactText:
+        "Presentateci la vostra esigenza e studieremo la soluzione piÃ¹ adatta alla vostra attivitÃ .",
+      contact: "Contattaci",
+      items: {
+        audit: {
+          title: "Audit e studio tecnico",
+          description:
+            "Analisi delle esigenze, valutazione dellâ€™esistente e definizione di una soluzione adatta al vostro ambiente.",
+        },
+        security: {
+          title: "Sicurezza e controllo accessi",
+          description:
+            "Videosorveglianza, allarmi, controllo accessi e soluzioni di protezione per siti professionali.",
+        },
+        network: {
+          title: "Reti e telecomunicazioni",
+          description:
+            "Infrastruttura di rete, connettivitÃ , apparecchiature di comunicazione e supporto tecnico.",
+        },
+        automation: {
+          title: "Automazione e digitale",
+          description:
+            "Automazione, integrazione di sistemi, strumenti digitali e soluzioni professionali personalizzate.",
+        },
+        maintenance: {
+          title: "Manutenzione e supporto",
+          description:
+            "Manutenzione, risoluzione guasti, monitoraggio tecnico e supporto per attrezzature e impianti.",
+        },
+      },
+    },
+  },
+
+  pt: {
+    business: {
+      eyebrow: "SOLUÃ‡Ã•ES EMPRESARIAIS",
+      title1: "SoluÃ§Ãµes tÃ©cnicas para",
+      title2: "as suas atividades",
+      intro:
+        "A TSB Tech Group apoia empresas, profissionais e instituiÃ§Ãµes com soluÃ§Ãµes tÃ©cnicas, tecnolÃ³gicas e operacionais adaptadas Ã s suas necessidades.",
+      backHome: "Voltar ao inÃ­cio",
+      quote: "Pedir orÃ§amento",
+      sectionTitle: "Acompanhamento global",
+      sectionIntro:
+        "Podemos atuar em vÃ¡rias Ã¡reas para construir uma soluÃ§Ã£o coerente em torno da sua infraestrutura, seguranÃ§a e equipamentos.",
+      contactTitle: "Vamos falar do seu projeto",
+      contactText:
+        "Apresente-nos a sua necessidade e estudaremos a soluÃ§Ã£o mais adequada Ã  sua atividade.",
+      contact: "Contacte-nos",
+      items: {
+        audit: {
+          title: "Auditoria e estudo tÃ©cnico",
+          description:
+            "AnÃ¡lise das necessidades, avaliaÃ§Ã£o da situaÃ§Ã£o existente e definiÃ§Ã£o de uma soluÃ§Ã£o adequada ao seu ambiente.",
+        },
+        security: {
+          title: "SeguranÃ§a e controlo de acesso",
+          description:
+            "VideovigilÃ¢ncia, alarmes, controlo de acesso e soluÃ§Ãµes de proteÃ§Ã£o para instalaÃ§Ãµes profissionais.",
+        },
+        network: {
+          title: "Redes e telecomunicaÃ§Ãµes",
+          description:
+            "Infraestrutura de rede, conectividade, equipamentos de comunicaÃ§Ã£o e acompanhamento tÃ©cnico.",
+        },
+        automation: {
+          title: "AutomaÃ§Ã£o e digital",
+          description:
+            "AutomaÃ§Ã£o, integraÃ§Ã£o de sistemas, ferramentas digitais e soluÃ§Ãµes profissionais personalizadas.",
+        },
+        maintenance: {
+          title: "ManutenÃ§Ã£o e suporte",
+          description:
+            "ManutenÃ§Ã£o, reparaÃ§Ã£o, acompanhamento tÃ©cnico e suporte a equipamentos e instalaÃ§Ãµes.",
+        },
+      },
+    },
+  },
+
+  ar: {
+    business: {
+      eyebrow: "Ø­Ù„ÙˆÙ„ Ø§Ù„Ø´Ø±ÙƒØ§Øª",
+      title1: "Ø­Ù„ÙˆÙ„ ØªÙ‚Ù†ÙŠØ© Ù…Ù† Ø£Ø¬Ù„",
+      title2: "Ø£Ø¹Ù…Ø§Ù„ÙƒÙ…",
+      intro:
+        "ØªØ¯Ø¹Ù… TSB Tech Group Ø§Ù„Ø´Ø±ÙƒØ§Øª ÙˆØ§Ù„Ù…Ù‡Ù†ÙŠÙŠÙ† ÙˆØ§Ù„Ù…Ø¤Ø³Ø³Ø§Øª Ø¨Ø­Ù„ÙˆÙ„ ØªÙ‚Ù†ÙŠØ© ÙˆØªÙƒÙ†ÙˆÙ„ÙˆØ¬ÙŠØ© ÙˆØªØ´ØºÙŠÙ„ÙŠØ© Ù…ØµÙ…Ù…Ø© ÙˆÙÙ‚ Ø§Ø­ØªÙŠØ§Ø¬Ø§ØªÙ‡Ù….",
+      backHome: "Ø§Ù„Ø¹ÙˆØ¯Ø© Ø¥Ù„Ù‰ Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©",
+      quote: "Ø·Ù„Ø¨ Ø¹Ø±Ø¶ Ø³Ø¹Ø±",
+      sectionTitle: "Ø¯Ø¹Ù… Ù…ØªÙƒØ§Ù…Ù„",
+      sectionIntro:
+        "ÙŠÙ…ÙƒÙ†Ù†Ø§ Ø§Ù„ØªØ¯Ø®Ù„ ÙÙŠ Ø¹Ø¯Ø© Ù…Ø¬Ø§Ù„Ø§Øª Ù„Ø¨Ù†Ø§Ø¡ Ø­Ù„ Ù…ØªÙƒØ§Ù…Ù„ Ø­ÙˆÙ„ Ø§Ù„Ø¨Ù†ÙŠØ© Ø§Ù„ØªØ­ØªÙŠØ© ÙˆØ§Ù„Ø£Ù…Ù† ÙˆØ§Ù„Ù…Ø¹Ø¯Ø§Øª Ø§Ù„Ø®Ø§ØµØ© Ø¨ÙƒÙ….",
+      contactTitle: "Ù„Ù†ØªØ­Ø¯Ø« Ø¹Ù† Ù…Ø´Ø±ÙˆØ¹ÙƒÙ…",
+      contactText:
+        "Ø§Ø¹Ø±Ø¶ÙˆØ§ Ø¹Ù„ÙŠÙ†Ø§ Ø§Ø­ØªÙŠØ§Ø¬Ø§ØªÙƒÙ… ÙˆØ³Ù†Ø¯Ø±Ø³ Ø§Ù„Ø­Ù„ Ø§Ù„Ø£Ù†Ø³Ø¨ Ù„Ù†Ø´Ø§Ø·ÙƒÙ….",
+      contact: "ØªÙˆØ§ØµÙ„ Ù…Ø¹Ù†Ø§",
+      items: {
+        audit: {
+          title: "ØªØ¯Ù‚ÙŠÙ‚ ÙˆØ¯Ø±Ø§Ø³Ø© ØªÙ‚Ù†ÙŠØ©",
+          description:
+            "ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø§Ø­ØªÙŠØ§Ø¬Ø§Øª ÙˆØªÙ‚ÙŠÙŠÙ… Ø§Ù„ÙˆØ¶Ø¹ Ø§Ù„Ù‚Ø§Ø¦Ù… ÙˆØªØ­Ø¯ÙŠØ¯ Ø­Ù„ Ù…Ù†Ø§Ø³Ø¨ Ù„Ø¨ÙŠØ¦ØªÙƒÙ….",
+        },
+        security: {
+          title: "Ø§Ù„Ø£Ù…Ù† ÙˆØ§Ù„ØªØ­ÙƒÙ… ÙÙŠ Ø§Ù„Ø¯Ø®ÙˆÙ„",
+          description:
+            "Ø§Ù„Ù…Ø±Ø§Ù‚Ø¨Ø© Ø¨Ø§Ù„ÙÙŠØ¯ÙŠÙˆ ÙˆØ§Ù„Ø¥Ù†Ø°Ø§Ø±Ø§Øª ÙˆØ§Ù„ØªØ­ÙƒÙ… ÙÙŠ Ø§Ù„Ø¯Ø®ÙˆÙ„ ÙˆØ­Ù„ÙˆÙ„ Ø§Ù„Ø­Ù…Ø§ÙŠØ© Ù„Ù„Ù…ÙˆØ§Ù‚Ø¹ Ø§Ù„Ù…Ù‡Ù†ÙŠØ©.",
+        },
+        network: {
+          title: "Ø§Ù„Ø´Ø¨ÙƒØ§Øª ÙˆØ§Ù„Ø§ØªØµØ§Ù„Ø§Øª",
+          description:
+            "Ø§Ù„Ø¨Ù†ÙŠØ© Ø§Ù„ØªØ­ØªÙŠØ© Ù„Ù„Ø´Ø¨ÙƒØ§Øª ÙˆØ§Ù„Ø§ØªØµØ§Ù„ ÙˆÙ…Ø¹Ø¯Ø§Øª Ø§Ù„Ø§ØªØµØ§Ù„Ø§Øª ÙˆØ§Ù„Ø¯Ø¹Ù… Ø§Ù„ÙÙ†ÙŠ.",
+        },
+        automation: {
+          title: "Ø§Ù„Ø£ØªÙ…ØªØ© ÙˆØ§Ù„Ø­Ù„ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠØ©",
+          description:
+            "Ø§Ù„Ø£ØªÙ…ØªØ© ÙˆØ¯Ù…Ø¬ Ø§Ù„Ø£Ù†Ø¸Ù…Ø© ÙˆØ§Ù„Ø£Ø¯ÙˆØ§Øª Ø§Ù„Ø±Ù‚Ù…ÙŠØ© ÙˆØ§Ù„Ø­Ù„ÙˆÙ„ Ø§Ù„Ù…Ù‡Ù†ÙŠØ© Ø§Ù„Ù…Ø®ØµØµØ©.",
+        },
+        maintenance: {
+          title: "Ø§Ù„ØµÙŠØ§Ù†Ø© ÙˆØ§Ù„Ø¯Ø¹Ù…",
+          description:
+            "Ø§Ù„ØµÙŠØ§Ù†Ø© ÙˆØ¥ØµÙ„Ø§Ø­ Ø§Ù„Ø£Ø¹Ø·Ø§Ù„ ÙˆØ§Ù„Ù…ØªØ§Ø¨Ø¹Ø© Ø§Ù„ØªÙ‚Ù†ÙŠØ© ÙˆØ¯Ø¹Ù… Ø§Ù„Ù…Ø¹Ø¯Ø§Øª ÙˆØ§Ù„Ù…Ù†Ø´Ø¢Øª.",
+        },
+      },
+    },
+  },
+
+  tr: {
+    business: {
+      eyebrow: "KURUMSAL Ã‡Ã–ZÃœMLER",
+      title1: "Faaliyetleriniz iÃ§in",
+      title2: "teknik Ã§Ã¶zÃ¼mler",
+      intro:
+        "TSB Tech Group; ÅŸirketleri, profesyonelleri ve kurumlarÄ± ihtiyaÃ§larÄ±na uygun teknik, teknolojik ve operasyonel Ã§Ã¶zÃ¼mlerle destekler.",
+      backHome: "Ana sayfaya dÃ¶n",
+      quote: "Teklif iste",
+      sectionTitle: "UÃ§tan uca destek",
+      sectionIntro:
+        "AltyapÄ±nÄ±z, gÃ¼venliÄŸiniz ve ekipmanlarÄ±nÄ±z etrafÄ±nda bÃ¼tÃ¼nlÃ¼klÃ¼ bir Ã§Ã¶zÃ¼m oluÅŸturmak iÃ§in birden fazla alanda Ã§alÄ±ÅŸabiliriz.",
+      contactTitle: "Projenizi konuÅŸalÄ±m",
+      contactText:
+        "Ä°htiyacÄ±nÄ±zÄ± bize anlatÄ±n; faaliyetiniz iÃ§in en uygun Ã§Ã¶zÃ¼mÃ¼ deÄŸerlendirelim.",
+      contact: "Bize ulaÅŸÄ±n",
+      items: {
+        audit: {
+          title: "Denetim ve teknik Ã§alÄ±ÅŸma",
+          description:
+            "Ä°htiyaÃ§ analizi, mevcut durumun deÄŸerlendirilmesi ve ortamÄ±nÄ±za uygun bir Ã§Ã¶zÃ¼mÃ¼n belirlenmesi.",
+        },
+        security: {
+          title: "GÃ¼venlik ve eriÅŸim kontrolÃ¼",
+          description:
+            "Profesyonel alanlar iÃ§in video gÃ¶zetim, alarm, eriÅŸim kontrolÃ¼ ve koruma Ã§Ã¶zÃ¼mleri.",
+        },
+        network: {
+          title: "AÄŸlar ve telekomÃ¼nikasyon",
+          description:
+            "AÄŸ altyapÄ±sÄ±, baÄŸlantÄ±, iletiÅŸim ekipmanlarÄ± ve teknik destek.",
+        },
+        automation: {
+          title: "Otomasyon ve dijital",
+          description:
+            "Otomasyon, sistem entegrasyonu, dijital araÃ§lar ve Ã¶zel profesyonel Ã§Ã¶zÃ¼mler.",
+        },
+        maintenance: {
+          title: "BakÄ±m ve destek",
+          description:
+            "Ekipman ve tesisler iÃ§in bakÄ±m, arÄ±za giderme, teknik takip ve destek.",
+        },
+      },
+    },
+  },
+
+  zh: {
+    business: {
+      eyebrow: "ä¼ä¸šè§£å†³æ–¹æ¡ˆ",
+      title1: "é¢å‘ä¸šåŠ¡æ´»åŠ¨çš„",
+      title2: "æŠ€æœ¯è§£å†³æ–¹æ¡ˆ",
+      intro:
+        "TSB Tech Group ä¸ºä¼ä¸šã€ä¸“ä¸šäººå£«å’Œæœºæž„æä¾›æ ¹æ®å®žé™…éœ€æ±‚å®šåˆ¶çš„æŠ€æœ¯ã€ç§‘æŠ€å’Œè¿è¥è§£å†³æ–¹æ¡ˆã€‚",
+      backHome: "è¿”å›žé¦–é¡µ",
+      quote: "ç”³è¯·æŠ¥ä»·",
+      sectionTitle: "å…¨æ–¹ä½æ”¯æŒ",
+      sectionIntro:
+        "æˆ‘ä»¬å¯ä»¥åœ¨å¤šä¸ªé¢†åŸŸæä¾›æœåŠ¡ï¼Œå›´ç»•æ‚¨çš„åŸºç¡€è®¾æ–½ã€å®‰å…¨å’Œè®¾å¤‡æž„å»ºåè°ƒä¸€è‡´çš„è§£å†³æ–¹æ¡ˆã€‚",
+      contactTitle: "è°ˆè°ˆæ‚¨çš„é¡¹ç›®",
+      contactText:
+        "å‘Šè¯‰æˆ‘ä»¬æ‚¨çš„éœ€æ±‚ï¼Œæˆ‘ä»¬å°†ç ”ç©¶æœ€é€‚åˆæ‚¨ä¸šåŠ¡çš„è§£å†³æ–¹æ¡ˆã€‚",
+      contact: "è”ç³»æˆ‘ä»¬",
+      items: {
+        audit: {
+          title: "å®¡è®¡ä¸ŽæŠ€æœ¯ç ”ç©¶",
+          description:
+            "åˆ†æžéœ€æ±‚ã€è¯„ä¼°çŽ°æœ‰çŽ¯å¢ƒå¹¶åˆ¶å®šé€‚åˆæ‚¨å®žé™…æƒ…å†µçš„è§£å†³æ–¹æ¡ˆã€‚",
+        },
+        security: {
+          title: "å®‰å…¨ä¸Žé—¨ç¦æŽ§åˆ¶",
+          description:
+            "ä¸ºä¸“ä¸šåœºæ‰€æä¾›è§†é¢‘ç›‘æŽ§ã€æŠ¥è­¦ã€é—¨ç¦æŽ§åˆ¶å’Œä¿æŠ¤è§£å†³æ–¹æ¡ˆã€‚",
+        },
+        network: {
+          title: "ç½‘ç»œä¸Žé€šä¿¡",
+          description:
+            "ç½‘ç»œåŸºç¡€è®¾æ–½ã€è¿žæŽ¥ã€é€šä¿¡è®¾å¤‡å’ŒæŠ€æœ¯æ”¯æŒã€‚",
+        },
+        automation: {
+          title: "è‡ªåŠ¨åŒ–ä¸Žæ•°å­—åŒ–",
+          description:
+            "è‡ªåŠ¨åŒ–ã€ç³»ç»Ÿé›†æˆã€æ•°å­—å·¥å…·å’Œå®šåˆ¶ä¸“ä¸šè§£å†³æ–¹æ¡ˆã€‚",
+        },
+        maintenance: {
+          title: "ç»´æŠ¤ä¸Žæ”¯æŒ",
+          description:
+            "ä¸ºè®¾å¤‡å’Œè®¾æ–½æä¾›ç»´æŠ¤ã€æ•…éšœæŽ’æŸ¥ã€æŠ€æœ¯è·Ÿè¿›å’Œæ”¯æŒã€‚",
+        },
+      },
+    },
+  },
+};
+
+
+===== REFERENCES BUSINESS / INVEST =====
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 562 | <a href="/business" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 563 | {navT("business")}
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 14 | BriefcaseBusiness,
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 69 | "Autres services": BriefcaseBusiness,
+C:\TSB\TSB-Tech-Group\src\components\layout\Sectors.tsx | ligne 20 | { id: "businesses", icon: Building2 },
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 33 | { id: "business", icon: Building2, color: "blue" },
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 107 | : service.id === "business"
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 108 | ? "/business"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 93 | "intro": "TSB Tech Group is developing an ecosystem of technical, technological and digital services for individuals, professionals, businesses and institutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 124 | "audienceText": "Individuals • Professionals • Businesses • Institutions",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 3 | export const businessTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 5 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 51 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 97 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 98 | eyebrow: "BUSINESS SOLUTIONS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 102 | "TSB Tech Group supports businesses, professionals and institutions with technical, technological and operational solutions tailored to their needs.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 143 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 189 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 235 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 281 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 327 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 373 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 419 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 255 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 597 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 939 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1281 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1623 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1965 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2307 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2649 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2991 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3333 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 72 | "TSB Tech Group supports individuals, businesses and institutions with technological, technical and professional solutions in Belgium, across Europe and internationally.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 84 | "Our goal is to support individuals, professionals, businesses and institutions with tailored, scalable and sustainable solutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 216 | title: "Investigación y experimentación",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 308 | title: "Investigação e experimentação",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 24 | business: "Solutions entreprises",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 60 | business: "Business solutions",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 96 | business: "Bedrijfsoplossingen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 132 | business: "Unternehmenslösungen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 168 | business: "Soluciones para empresas",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 204 | business: "Soluzioni aziendali",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 240 | business: "Soluções empresariais",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 276 | business: "حلول الأعمال",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 312 | business: "Kurumsal çözümler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 348 | business: "企业解决方案",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 43 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 140 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 237 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 238 | title: "Businesses & professionals",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 334 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 431 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 528 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 625 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 722 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 819 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 916 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 115 | "Video surveillance, access control, alarms and protection solutions for individuals, businesses and institutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 76 | "business": "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 169 | "business": "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 262 | "business": "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 355 | "business": "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 448 | "business": "EMPRESA",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 541 | "business": "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 634 | "business": "EMPRESAS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 727 | "business": "الأعمال",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 820 | "business": "KURUMSAL",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 913 | "business": "企业",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 13 | businesses: "Entreprises",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 35 | businesses: "Bedrijven",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 57 | businesses: "Businesses",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 59 | shops: "Retail businesses",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 63 | agriculture: "Agricultural businesses",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 79 | businesses: "Unternehmen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 101 | businesses: "Empresas",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 123 | businesses: "Aziende",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 145 | businesses: "Empresas",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 167 | businesses: "الشركات",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 189 | businesses: "Şirketler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 211 | businesses: "企业",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 94 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 95 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 200 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 201 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 222 | "Discover TSB Tech Group’s areas of expertise. Each service is designed to address real needs for individuals, businesses and institutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 244 | "Video surveillance, access control, alarm systems and security solutions for individuals and businesses.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 306 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 307 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 308 | title: "Business solutions",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 310 | "Comprehensive support for businesses with technical, digital and operational solutions tailored to their projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 412 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 413 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 518 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 624 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 625 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 730 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 836 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 942 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 1048 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 79 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 83 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 170 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 174 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 210 | "Video surveillance, access control, alarm systems and protection solutions for individuals and businesses.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 261 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 262 | title: "Business solutions",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 264 | "Comprehensive support for businesses with technical solutions tailored to their infrastructure and projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 265 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 352 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 356 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 443 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 534 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 538 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 625 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 716 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 807 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 898 | business: {
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 15 | import { businessTranslations } from "../../i18n/locales/business";
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 27 | function Business() {
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 32 | businessTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 34 | `business.${key}`
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 325 | export default Business;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1282 | business: "domains.business",
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 34 | id: "business",
+C:\TSB\TSB-Tech-Group\src\pages\Services\index.tsx | ligne 109 | id: "business",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 27 | | "business"
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 81 | const businessTheme = makeTheme("#f59e0b", "#fbbf24", "245,158,11");
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 248 | key: "business",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 249 | label: "TSB Business",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 250 | shortLabel: "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 251 | theme: businessTheme,
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 253 | "Business",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 254 | "TSB Business",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 412 | if (includesAny(normalized, ["business", "entreprise"])) {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 28 | const Business = lazy(() => import("./pages/Business"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 109 | } else if (path === "/business") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 110 | page = <Business />;
+
+===== FIN AUDIT =====

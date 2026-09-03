@@ -1,0 +1,4574 @@
+﻿===== STORE PAGE =====
+import {
+  ArrowRight,
+  Car,
+  Cpu,
+  Heart,
+  Package,
+  PackageSearch,
+  RotateCcw,
+  Search,
+  ShieldCheck,
+  ShoppingBag,
+  SlidersHorizontal,
+  Wrench,
+  Zap,
+} from "lucide-react";
+
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
+import Navbar from "../../components/layout/Navbar";
+import Footer from "../../components/layout/Footer";
+import ScrollToTop from "../../components/common/ScrollToTop";
+import StoreMiniCart, {
+  addStoreCartItem,
+} from "../../components/StoreMiniCart";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../i18n";
+import { storeTranslations } from "../../i18n/locales/store";
+import { supabase } from "../../services/supabase";
+
+const categories = [
+  { id: "all", icon: ShoppingBag, color: "blue" },
+  { id: "automobile", icon: Car, color: "blue" },
+  { id: "security", icon: ShieldCheck, color: "green" },
+  { id: "energy", icon: Zap, color: "orange" },
+  { id: "electronics", icon: Cpu, color: "cyan" },
+  { id: "other", icon: Package, color: "purple" },
+] as const;
+
+type CategoryId =
+  | "all"
+  | "automobile"
+  | "security"
+  | "energy"
+  | "electronics"
+  | "other";
+
+type Collection = {
+  id: string;
+  category: Exclude<CategoryId, "all">;
+};
+
+type StoreProduct = {
+  id: string;
+  slug: string;
+  category: Exclude<CategoryId, "all">;
+  name_fr: string;
+  name_nl: string | null;
+  name_en: string | null;
+  description_fr: string | null;
+  description_nl: string | null;
+  description_en: string | null;
+  sku: string | null;
+  price: number | null;
+  currency: string;
+  availability:
+    | "in_stock"
+    | "on_request"
+    | "out_of_stock"
+    | "coming_soon";
+  stock_quantity: number | null;
+  image_url: string | null;
+  is_featured: boolean;
+  sort_order: number;
+  created_at: string;
+};
+
+type AvailabilityFilter =
+  | "all"
+  | StoreProduct["availability"];
+
+type ProductSort =
+  | "recommended"
+  | "newest"
+  | "price_asc"
+  | "price_desc"
+  | "name";
+
+const PRODUCTS_PER_PAGE = 12;
+
+const collections: Collection[] = [
+  { id: "car-keys-remotes", category: "automobile" },
+  { id: "diagnostic-tools", category: "automobile" },
+  { id: "security-cameras", category: "security" },
+  { id: "access-control", category: "security" },
+  { id: "electrical-equipment", category: "energy" },
+  { id: "energy-solutions", category: "energy" },
+  { id: "electronic-components", category: "electronics" },
+  { id: "it-tools", category: "electronics" },
+  { id: "other-products", category: "other" },
+];
+
+
+
+function formatProductPrice(
+  price: number,
+  currency: string,
+  intlLocale: string
+) {
+  try {
+    return new Intl.NumberFormat(
+      intlLocale,
+      {
+        style: "currency",
+        currency,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }
+    ).format(price);
+  } catch {
+    return `${price.toFixed(2)} ${currency}`;
+  }
+}
+
+
+function getLocalizedProductName(
+  product: StoreProduct,
+  locale: string
+) {
+  if (locale === "fr") {
+    return (
+      product.name_fr ||
+      product.name_en ||
+      product.name_nl ||
+      ""
+    );
+  }
+
+  if (locale === "nl") {
+    return (
+      product.name_nl ||
+      product.name_en ||
+      product.name_fr ||
+      ""
+    );
+  }
+
+  if (locale === "en") {
+    return (
+      product.name_en ||
+      product.name_fr ||
+      product.name_nl ||
+      ""
+    );
+  }
+
+  /*
+    La base Store ne possÃ¨de actuellement que
+    name_fr / name_nl / name_en.
+    Pour DE/ES/IT/PT/AR/TR/ZH : EN -> FR -> NL.
+  */
+  return (
+    product.name_en ||
+    product.name_fr ||
+    product.name_nl ||
+    ""
+  );
+}
+
+function getLocalizedProductDescription(
+  product: StoreProduct,
+  locale: string
+) {
+  if (locale === "fr") {
+    return (
+      product.description_fr ||
+      product.description_en ||
+      product.description_nl ||
+      ""
+    );
+  }
+
+  if (locale === "nl") {
+    return (
+      product.description_nl ||
+      product.description_en ||
+      product.description_fr ||
+      ""
+    );
+  }
+
+  if (locale === "en") {
+    return (
+      product.description_en ||
+      product.description_fr ||
+      product.description_nl ||
+      ""
+    );
+  }
+
+  /*
+    La base Store ne possÃ¨de actuellement que
+    description_fr / description_nl / description_en.
+    Pour DE/ES/IT/PT/AR/TR/ZH : EN -> FR -> NL.
+  */
+  return (
+    product.description_en ||
+    product.description_fr ||
+    product.description_nl ||
+    ""
+  );
+}
+
+const STORE_FAVORITES_KEY =
+  "tsb_store_favorites";
+
+function readStoreFavorites(): string[] {
+  try {
+    const raw = window.localStorage.getItem(
+      STORE_FAVORITES_KEY
+    );
+
+    if (!raw) {
+      return [];
+    }
+
+    const parsed = JSON.parse(raw);
+
+    return Array.isArray(parsed)
+      ? parsed.filter(
+          (value): value is string =>
+            typeof value === "string"
+        )
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeStoreFavorites(
+  favorites: string[]
+) {
+  try {
+    window.localStorage.setItem(
+      STORE_FAVORITES_KEY,
+      JSON.stringify(favorites)
+    );
+  } catch {
+    // Le Store reste utilisable mÃªme si le stockage local est indisponible.
+  }
+}
+
+function Store() {
+  const {
+    language,
+    locale,
+    intlLocale,
+  } = useLanguage();
+
+  const t = (key: string) =>
+    translate(
+      storeTranslations,
+      locale,
+      `store.${key}`
+    );
+
+  useEffect(() => {
+    if (window.location.hash !== "#catalogue") {
+      return;
+    }
+
+    const scrollToCatalogue = () => {
+      document
+        .getElementById("catalogue")
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+    };
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(
+        scrollToCatalogue
+      );
+    });
+  }, []);
+
+  const [activeCategory, setActiveCategory] =
+    useState<CategoryId>("all");
+
+  const [searchQuery, setSearchQuery] =
+    useState("");
+
+  const [
+    activeAvailability,
+    setActiveAvailability,
+  ] = useState<AvailabilityFilter>("all");
+
+  const [productSort, setProductSort] =
+    useState<ProductSort>("recommended");
+
+  const [favoriteSlugs, setFavoriteSlugs] =
+    useState<string[]>([]);
+
+  const [favoritesOnly, setFavoritesOnly] =
+    useState(false);
+
+  const [storeProducts, setStoreProducts] =
+    useState<StoreProduct[]>([]);
+
+  const [productsLoading, setProductsLoading] =
+    useState(true);
+
+  const [productPage, setProductPage] =
+    useState(1);
+
+  useEffect(() => {
+    const syncFavorites = () => {
+      setFavoriteSlugs(
+        readStoreFavorites()
+      );
+    };
+
+    syncFavorites();
+
+    window.addEventListener(
+      "storage",
+      syncFavorites
+    );
+
+    return () => {
+      window.removeEventListener(
+        "storage",
+        syncFavorites
+      );
+    };
+  }, []);
+
+  const toggleFavorite = (
+    slug: string
+  ) => {
+    setFavoriteSlugs((previous) => {
+      const next = previous.includes(slug)
+        ? previous.filter(
+            (currentSlug) =>
+              currentSlug !== slug
+          )
+        : [...previous, slug];
+
+      writeStoreFavorites(next);
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadPublishedProducts = async () => {
+      setProductsLoading(true);
+
+      const { data, error } = await supabase
+        .from("store_products")
+        .select(
+          "id, slug, category, name_fr, name_nl, name_en, description_fr, description_nl, description_en, sku, price, currency, availability, stock_quantity, image_url, is_featured, sort_order, created_at"
+        )
+        .eq("is_published", true)
+        .order("sort_order", {
+          ascending: true,
+        })
+        .order("created_at", {
+          ascending: false,
+        });
+
+      if (!isMounted) {
+        return;
+      }
+
+      if (error) {
+        console.error(
+          "Erreur chargement produits TSB Store :",
+          error
+        );
+        setStoreProducts([]);
+        setProductsLoading(false);
+        return;
+      }
+
+      setStoreProducts(
+        (data ?? []) as StoreProduct[]
+      );
+      setProductsLoading(false);
+    };
+
+    void loadPublishedProducts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    setProductPage(1);
+  }, [
+    activeCategory,
+    activeAvailability,
+    favoritesOnly,
+    favoriteSlugs,
+    productSort,
+    searchQuery,
+  ]);
+
+  const visibleProducts = useMemo(() => {
+    const normalizedSearch =
+      searchQuery.trim().toLowerCase();
+
+    const getLocalizedName = (
+      product: StoreProduct
+    ) =>
+      getLocalizedProductName(
+        product,
+        locale
+      );
+
+    const filteredProducts =
+      storeProducts.filter((product) => {
+        const matchesCategory =
+          activeCategory === "all" ||
+          product.category === activeCategory;
+
+        if (!matchesCategory) {
+          return false;
+        }
+
+        const matchesAvailability =
+          activeAvailability === "all" ||
+          product.availability ===
+            activeAvailability;
+
+        if (!matchesAvailability) {
+          return false;
+        }
+
+        if (
+          favoritesOnly &&
+          !favoriteSlugs.includes(product.slug)
+        ) {
+          return false;
+        }
+
+        if (!normalizedSearch) {
+          return true;
+        }
+
+        const name =
+          getLocalizedName(product);
+
+        const description =
+          getLocalizedProductDescription(
+            product,
+            locale
+          );
+
+        const searchableText = [
+          name,
+          description,
+          product.sku ?? "",
+          t(`categoryLabels.${product.category}`),
+          t(`availabilityLabels.${product.availability}`),
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        return searchableText.includes(
+          normalizedSearch
+        );
+      });
+
+    return [...filteredProducts].sort(
+      (a, b) => {
+        switch (productSort) {
+          case "newest":
+            return (
+              new Date(
+                b.created_at
+              ).getTime() -
+              new Date(
+                a.created_at
+              ).getTime()
+            );
+
+          case "price_asc": {
+            const aPrice =
+              a.price === null
+                ? Number.POSITIVE_INFINITY
+                : Number(a.price);
+
+            const bPrice =
+              b.price === null
+                ? Number.POSITIVE_INFINITY
+                : Number(b.price);
+
+            return aPrice - bPrice;
+          }
+
+          case "price_desc": {
+            const aPrice =
+              a.price === null
+                ? Number.NEGATIVE_INFINITY
+                : Number(a.price);
+
+            const bPrice =
+              b.price === null
+                ? Number.NEGATIVE_INFINITY
+                : Number(b.price);
+
+            return bPrice - aPrice;
+          }
+
+          case "name":
+            return getLocalizedName(
+              a
+            ).localeCompare(
+              getLocalizedName(b),
+              intlLocale,
+              {
+                sensitivity: "base",
+              }
+            );
+
+          default:
+            if (
+              a.sort_order !==
+              b.sort_order
+            ) {
+              return (
+                a.sort_order -
+                b.sort_order
+              );
+            }
+
+            return (
+              new Date(
+                b.created_at
+              ).getTime() -
+              new Date(
+                a.created_at
+              ).getTime()
+            );
+        }
+      }
+    );
+  }, [
+    activeAvailability,
+    activeCategory,
+    favoriteSlugs,
+    favoritesOnly,
+    intlLocale,
+    locale,
+    productSort,
+    searchQuery,
+    storeProducts,
+  ]);
+
+  const totalProductPages = Math.max(
+    1,
+    Math.ceil(
+      visibleProducts.length / PRODUCTS_PER_PAGE
+    )
+  );
+
+  const safeProductPage = Math.min(
+    productPage,
+    totalProductPages
+  );
+
+  const paginatedProducts =
+    visibleProducts.slice(
+      (safeProductPage - 1) *
+        PRODUCTS_PER_PAGE,
+      safeProductPage *
+        PRODUCTS_PER_PAGE
+    );
+
+  const hasActiveFilters =
+    activeCategory !== "all" ||
+    activeAvailability !== "all" ||
+    favoritesOnly ||
+    searchQuery.trim().length > 0 ||
+    productSort !== "recommended";
+
+  const resetCatalogueFilters = () => {
+    setActiveCategory("all");
+    setActiveAvailability("all");
+    setFavoritesOnly(false);
+    setProductSort("recommended");
+    setSearchQuery("");
+    setProductPage(1);
+  };
+
+  const getCategoryProductCount = (
+    categoryId: CategoryId
+  ) =>
+    categoryId === "all"
+      ? storeProducts.length
+      : storeProducts.filter(
+          (product) =>
+            product.category ===
+            categoryId
+        ).length;
+
+  const getAvailabilityBadgeStyle = (
+    availability:
+      StoreProduct["availability"]
+  ) => {
+    switch (availability) {
+      case "in_stock":
+        return {
+          background:
+            "rgba(34,197,94,0.10)",
+          border:
+            "1px solid rgba(34,197,94,0.24)",
+          color: "#86efac",
+        };
+
+      case "out_of_stock":
+        return {
+          background:
+            "rgba(248,113,113,0.10)",
+          border:
+            "1px solid rgba(248,113,113,0.24)",
+          color: "#fca5a5",
+        };
+
+      case "coming_soon":
+        return {
+          background:
+            "rgba(250,204,21,0.09)",
+          border:
+            "1px solid rgba(250,204,21,0.22)",
+          color: "#fde68a",
+        };
+
+      default:
+        return {
+          background:
+            "rgba(56,189,248,0.09)",
+          border:
+            "1px solid rgba(56,189,248,0.22)",
+          color: "#7dd3fc",
+        };
+    }
+  };
+
+  const visibleCollections = useMemo(() => {
+    if (
+      activeAvailability !== "all" ||
+      favoritesOnly ||
+      productSort !== "recommended"
+    ) {
+      return [];
+    }
+
+    const normalizedSearch =
+      searchQuery.trim().toLowerCase();
+
+    return collections.filter((collection) => {
+      const matchesCategory =
+        activeCategory === "all" ||
+        collection.category === activeCategory;
+
+      if (!matchesCategory) {
+        return false;
+      }
+
+      if (!normalizedSearch) {
+        return true;
+      }
+
+      const searchableText = [
+        t(`collections.${collection.id}.title`),
+        t(`collections.${collection.id}.description`),
+        t(`categoryLabels.${collection.category}`),
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return searchableText.includes(
+        normalizedSearch
+      );
+    });
+  }, [
+    activeAvailability,
+    activeCategory,
+    favoritesOnly,
+    locale,
+    productSort,
+    searchQuery,
+  ]);
+
+  return (
+    <div>
+      <Navbar />
+
+      <main className="tsb-store-page">
+        <style>{`
+          /* TSB Store Premium UI */
+          /* Hero premium */
+          /* Catalogue professionnel */
+          /* Filtres & recherche */
+          /* Cartes produits */
+          /* Familles de produits */
+          /* Responsive desktop / tablette / mobile */
+
+          .tsb-store-page {
+            position: relative;
+            overflow: hidden;
+            background:
+              radial-gradient(circle at 82% 8%, rgba(0,112,255,.09), transparent 26%),
+              radial-gradient(circle at 12% 46%, rgba(0,212,255,.045), transparent 24%),
+              linear-gradient(180deg, rgba(3,9,17,.15), rgba(3,9,17,0));
+          }
+
+          .tsb-store-shell {
+            max-width: 1240px;
+            margin: 0 auto;
+          }
+
+          .tsb-store-panel {
+            border: 1px solid rgba(148,163,184,.12);
+            border-radius: 24px;
+            background:
+              linear-gradient(180deg, rgba(10,21,36,.94), rgba(6,15,26,.94));
+            box-shadow:
+              0 22px 60px rgba(0,0,0,.28),
+              inset 0 1px 0 rgba(255,255,255,.025);
+          }
+
+          .tsb-store-hero {
+            position: relative;
+            min-height: 390px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.06fr) minmax(360px, .94fr);
+            gap: 34px;
+            align-items: center;
+            padding: 48px 52px;
+            overflow: hidden;
+            border: 1px solid rgba(56,189,248,.18);
+            border-radius: 26px;
+            background:
+              radial-gradient(circle at 82% 46%, rgba(0,112,255,.23), transparent 38%),
+              linear-gradient(120deg, rgba(6,18,32,.98), rgba(4,13,24,.98));
+            box-shadow:
+              0 28px 80px rgba(0,0,0,.32),
+              inset 0 1px 0 rgba(255,255,255,.035);
+          }
+
+          .tsb-store-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+              linear-gradient(90deg, rgba(0,112,255,.035) 1px, transparent 1px),
+              linear-gradient(rgba(0,112,255,.025) 1px, transparent 1px);
+            background-size: 54px 54px;
+            mask-image: linear-gradient(to left, rgba(0,0,0,.7), transparent 68%);
+          }
+
+          .tsb-store-hero__copy,
+          .tsb-store-hero__visual {
+            position: relative;
+            z-index: 1;
+          }
+
+          .tsb-store-hero__eyebrow {
+            width: fit-content;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            padding: 7px 12px;
+            border: 1px solid rgba(56,189,248,.22);
+            border-radius: 999px;
+            background: rgba(14,165,233,.10);
+            color: #38bdf8;
+            font-size: .72rem;
+            font-weight: 900;
+            letter-spacing: .08em;
+          }
+
+          .tsb-store-hero h1 {
+            max-width: 680px;
+            margin: 0;
+            font-size: clamp(2.25rem, 4.2vw, 4.65rem);
+            line-height: .98;
+            letter-spacing: -.055em;
+          }
+
+          .tsb-store-hero h1 span {
+            display: block;
+            margin-top: 7px;
+            background: linear-gradient(90deg, #fff 8%, #bfeaff 48%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+          }
+
+          .tsb-store-hero__intro {
+            max-width: 650px;
+            margin: 20px 0 0;
+            color: rgba(226,232,240,.78);
+            font-size: 1rem;
+            line-height: 1.75;
+          }
+
+          .tsb-store-hero__actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+          }
+
+          .tsb-store-hero__actions .button {
+            min-height: 48px;
+            padding: 0 20px;
+            border-radius: 13px;
+            font-size: .78rem;
+            font-weight: 900;
+          }
+
+          .tsb-store-hero__visual {
+            min-height: 300px;
+            display: grid;
+            grid-template-columns: 1.16fr .84fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 12px;
+            align-items: stretch;
+          }
+
+          .tsb-store-hero-product {
+            position: relative;
+            min-height: 138px;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            border: 1px solid rgba(125,211,252,.14);
+            border-radius: 19px;
+            background:
+              radial-gradient(circle at 50% 55%, rgba(22,136,255,.18), transparent 55%),
+              rgba(7,18,31,.84);
+            box-shadow: 0 18px 34px rgba(0,0,0,.28);
+          }
+
+          .tsb-store-hero-product:first-child {
+            grid-row: 1 / span 2;
+          }
+
+          .tsb-store-hero-product::after {
+            content: "";
+            position: absolute;
+            left: 12%;
+            right: 12%;
+            bottom: -8px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(0,112,255,.36);
+            filter: blur(16px);
+          }
+
+          .tsb-store-hero-product img {
+            width: 86%;
+            height: 86%;
+            object-fit: contain;
+            filter: drop-shadow(0 18px 20px rgba(0,0,0,.55));
+          }
+
+          .tsb-store-hero-product__fallback {
+            width: 86px;
+            height: 86px;
+            display: grid;
+            place-items: center;
+            border-radius: 24px;
+            border: 1px solid rgba(56,189,248,.22);
+            background: rgba(14,165,233,.10);
+            color: #38bdf8;
+            box-shadow: 0 0 36px rgba(0,112,255,.18);
+          }
+
+          .tsb-store-progress {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 14px;
+            padding: 13px 16px;
+            border: 1px solid rgba(56,189,248,.10);
+            border-radius: 15px;
+            background: rgba(8,18,31,.68);
+          }
+
+          .tsb-store-progress__main {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+          }
+
+          .tsb-store-progress__icon {
+            width: 36px;
+            height: 36px;
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            border: 1px solid rgba(56,189,248,.20);
+            background: rgba(14,165,233,.09);
+            color: #38bdf8;
+          }
+
+          .tsb-store-progress strong {
+            display: block;
+            color: rgba(255,255,255,.9);
+            font-size: .78rem;
+          }
+
+          .tsb-store-progress p {
+            margin: 3px 0 0;
+            color: rgba(226,232,240,.55);
+            font-size: .72rem;
+            line-height: 1.45;
+          }
+
+          .tsb-store-catalogue {
+            padding: 24px;
+          }
+
+          .tsb-store-catalogue__title-row {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 17px;
+          }
+
+          .tsb-store-catalogue__title-wrap {
+            min-width: 0;
+          }
+
+          .tsb-store-catalogue__eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: #38bdf8;
+            font-size: .72rem;
+            font-weight: 900;
+            letter-spacing: .08em;
+          }
+
+          .tsb-store-catalogue h2,
+          .tsb-store-products-heading h2,
+          .tsb-store-family-heading h2 {
+            margin: 0;
+            color: #fff;
+            letter-spacing: -.025em;
+          }
+
+          .tsb-store-catalogue__intro {
+            margin: 5px 0 0;
+            color: rgba(226,232,240,.56);
+            font-size: .8rem;
+          }
+
+          .tsb-store-search {
+            position: relative;
+          }
+
+          .tsb-store-search svg {
+            position: absolute;
+            left: 17px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(226,232,240,.62);
+            pointer-events: none;
+          }
+
+          .tsb-store-search input {
+            width: 100%;
+            height: 50px;
+            padding: 0 18px 0 48px;
+            border: 1px solid rgba(148,163,184,.14);
+            border-radius: 14px;
+            outline: none;
+            background: rgba(4,12,22,.68);
+            color: #fff;
+            font: inherit;
+            font-size: .82rem;
+            transition: border-color .2s ease, box-shadow .2s ease;
+          }
+
+          .tsb-store-search input:focus {
+            border-color: rgba(56,189,248,.42);
+            box-shadow: 0 0 0 4px rgba(14,165,233,.07);
+          }
+
+          .tsb-store-filter-row {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+
+          .tsb-store-filter-row::-webkit-scrollbar {
+            display: none;
+          }
+
+          .tsb-store-category-row {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 14px;
+            overflow-x: auto;
+            padding: 1px 0 3px;
+          }
+
+          .tsb-store-category-btn {
+            min-height: 42px;
+            padding: 0 14px;
+            flex: 0 0 auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            border: 1px solid rgba(148,163,184,.11);
+            border-radius: 12px;
+            background: rgba(8,17,29,.82);
+            color: rgba(255,255,255,.82);
+            cursor: pointer;
+            font: inherit;
+            font-size: .72rem;
+            font-weight: 800;
+            transition: all .2s ease;
+          }
+
+          .tsb-store-category-btn:hover {
+            transform: translateY(-1px);
+            border-color: rgba(56,189,248,.24);
+          }
+
+          .tsb-store-category-btn.is-active {
+            border-color: rgba(56,189,248,.36);
+            background: linear-gradient(135deg, rgba(0,112,255,.18), rgba(0,212,255,.07));
+            color: #7dd3fc;
+            box-shadow: inset 0 -2px 0 rgba(56,189,248,.75);
+          }
+
+          .tsb-store-count {
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            background: rgba(255,255,255,.075);
+            color: rgba(255,255,255,.78);
+            font-size: .62rem;
+            font-weight: 900;
+          }
+
+          .tsb-store-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(148,163,184,.09);
+          }
+
+          .tsb-store-toolbar__group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+          }
+
+          .tsb-store-control {
+            min-height: 38px;
+            padding: 0 34px 0 11px;
+            border: 1px solid rgba(148,163,184,.12);
+            border-radius: 11px;
+            outline: none;
+            background: #08111e;
+            color: rgba(255,255,255,.84);
+            font: inherit;
+            font-size: .72rem;
+          }
+
+          .tsb-store-control:focus {
+            border-color: rgba(56,189,248,.38);
+          }
+
+          .tsb-store-mini-action {
+            min-height: 38px;
+            padding: 0 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            border: 1px solid rgba(148,163,184,.12);
+            border-radius: 11px;
+            background: rgba(8,17,29,.84);
+            color: rgba(255,255,255,.78);
+            cursor: pointer;
+            font: inherit;
+            font-size: .7rem;
+            font-weight: 800;
+          }
+
+          .tsb-store-mini-action.is-active {
+            border-color: rgba(248,113,113,.30);
+            color: #fca5a5;
+            background: rgba(127,29,29,.12);
+          }
+
+          .tsb-store-products-heading,
+          .tsb-store-family-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 15px;
+          }
+
+          .tsb-store-products-heading__left,
+          .tsb-store-family-heading__left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          }
+
+          .tsb-store-products-heading__icon,
+          .tsb-store-family-heading__icon {
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(56,189,248,.16);
+            border-radius: 11px;
+            background: rgba(14,165,233,.08);
+            color: #7dd3fc;
+          }
+
+          .tsb-store-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 15px;
+          }
+
+          .tsb-store-product-card {
+            position: relative;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(148,163,184,.12);
+            border-radius: 18px;
+            background:
+              linear-gradient(180deg, rgba(12,25,42,.96), rgba(7,17,29,.96));
+            box-shadow: 0 16px 32px rgba(0,0,0,.18);
+            transition:
+              transform .2s ease,
+              border-color .2s ease,
+              box-shadow .2s ease;
+          }
+
+          .tsb-store-product-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1688ff, #00d4ff);
+            opacity: .88;
+            z-index: 2;
+          }
+
+          .tsb-store-product-card--green::before {
+            background: linear-gradient(90deg, #22c55e, #38bdf8);
+          }
+
+          .tsb-store-product-card--orange::before {
+            background: linear-gradient(90deg, #f59e0b, #fb923c);
+          }
+
+          .tsb-store-product-card--cyan::before {
+            background: linear-gradient(90deg, #06b6d4, #38bdf8);
+          }
+
+          .tsb-store-product-card--purple::before {
+            background: linear-gradient(90deg, #8b5cf6, #38bdf8);
+          }
+
+          .tsb-store-product-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(56,189,248,.26);
+            box-shadow: 0 22px 48px rgba(0,0,0,.30);
+          }
+
+          .tsb-store-product-media {
+            position: relative;
+            height: 210px;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            background:
+              radial-gradient(circle at 50% 60%, rgba(0,112,255,.12), transparent 58%),
+              linear-gradient(180deg, rgba(8,17,29,.58), rgba(8,17,29,.20));
+            border-bottom: 1px solid rgba(148,163,184,.08);
+          }
+
+          .tsb-store-product-media img {
+            width: 88%;
+            height: 88%;
+            object-fit: contain;
+            transition: transform .25s ease;
+            filter: drop-shadow(0 14px 18px rgba(0,0,0,.44));
+          }
+
+          .tsb-store-product-card:hover .tsb-store-product-media img {
+            transform: scale(1.035);
+          }
+
+          .tsb-store-product-placeholder {
+            width: 78px;
+            height: 78px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(56,189,248,.18);
+            border-radius: 22px;
+            background: rgba(14,165,233,.07);
+            color: rgba(125,211,252,.68);
+          }
+
+          .tsb-store-favorite-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 3;
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255,255,255,.14);
+            border-radius: 999px;
+            background: rgba(3,10,18,.72);
+            color: #fff;
+            cursor: pointer;
+            backdrop-filter: blur(9px);
+          }
+
+          .tsb-store-favorite-btn.is-active {
+            border-color: rgba(248,113,113,.38);
+            background: rgba(127,29,29,.64);
+            color: #fca5a5;
+          }
+
+          .tsb-store-availability {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 3;
+            padding: 5px 8px;
+            border-radius: 7px;
+            font-size: .62rem;
+            font-weight: 900;
+            backdrop-filter: blur(8px);
+          }
+
+          .tsb-store-product-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+          }
+
+          .tsb-store-category-label {
+            color: #38bdf8;
+            font-size: .66rem;
+            font-weight: 900;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+          }
+
+          .tsb-store-product-title {
+            margin: 7px 0 0;
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.26;
+          }
+
+          .tsb-store-product-description {
+            min-height: 42px;
+            margin: 7px 0 0;
+            color: rgba(226,232,240,.58);
+            font-size: .75rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+
+          .tsb-store-meta {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+          }
+
+          .tsb-store-meta span {
+            padding: 4px 7px;
+            border: 1px solid rgba(148,163,184,.09);
+            border-radius: 7px;
+            background: rgba(255,255,255,.025);
+            color: rgba(226,232,240,.46);
+            font-size: .62rem;
+            font-weight: 750;
+          }
+
+          .tsb-store-featured {
+            width: fit-content;
+            margin-top: 9px;
+            padding: 4px 7px;
+            border: 1px solid rgba(0,212,255,.16);
+            border-radius: 7px;
+            background: rgba(0,112,255,.07);
+            color: #7dd3fc;
+            font-size: .62rem;
+            font-weight: 850;
+          }
+
+          .tsb-store-price {
+            margin-top: auto;
+            padding-top: 14px;
+          }
+
+          .tsb-store-price small {
+            display: block;
+            margin-bottom: 3px;
+            color: rgba(226,232,240,.42);
+            font-size: .61rem;
+            font-weight: 850;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+          }
+
+          .tsb-store-price strong {
+            color: #fff;
+            font-size: 1.08rem;
+          }
+
+          .tsb-store-price strong.is-request {
+            color: #7dd3fc;
+            font-size: .92rem;
+          }
+
+          .tsb-store-product-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 12px;
+          }
+
+          .tsb-store-product-actions .button {
+            min-height: 39px;
+            padding: 0 9px;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: .66rem;
+            font-weight: 850;
+          }
+
+          .tsb-store-pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 18px;
+          }
+
+          .tsb-store-family-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 13px;
+          }
+
+          .tsb-store-family-card {
+            position: relative;
+            min-height: 205px;
+            display: flex;
+            flex-direction: column;
+            padding: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(148,163,184,.11);
+            border-radius: 17px;
+            background: linear-gradient(180deg, rgba(11,23,39,.9), rgba(7,17,29,.9));
+            transition: transform .2s ease, border-color .2s ease;
+          }
+
+          .tsb-store-family-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(56,189,248,.24);
+          }
+
+          .tsb-store-family-card__icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 15px;
+            border: 1px solid rgba(56,189,248,.18);
+            border-radius: 13px;
+            background: rgba(14,165,233,.07);
+            color: #7dd3fc;
+          }
+
+          .tsb-store-family-card h3 {
+            margin: 6px 0 0;
+            color: #fff;
+            font-size: .98rem;
+          }
+
+          .tsb-store-family-card p {
+            margin: 8px 0 0;
+            color: rgba(226,232,240,.53);
+            font-size: .73rem;
+            line-height: 1.55;
+          }
+
+          .tsb-store-family-card a {
+            margin-top: auto;
+            padding-top: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: .7rem;
+            font-weight: 850;
+          }
+
+          .tsb-store-empty {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 36px 24px;
+            text-align: center;
+          }
+
+          .tsb-store-footer-status {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+          }
+
+          .tsb-store-footer-status__icon {
+            width: 42px;
+            height: 42px;
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(56,189,248,.16);
+            border-radius: 13px;
+            background: rgba(14,165,233,.07);
+            color: #7dd3fc;
+          }
+
+          .tsb-store-footer-status__copy {
+            flex: 1 1 auto;
+            min-width: 0;
+          }
+
+          .tsb-store-footer-status h3 {
+            margin: 0;
+            color: #fff;
+            font-size: .9rem;
+          }
+
+          .tsb-store-footer-status p {
+            margin: 4px 0 0;
+            color: rgba(226,232,240,.52);
+            font-size: .72rem;
+            line-height: 1.5;
+          }
+
+          @media (max-width: 1080px) {
+            .tsb-store-hero {
+              grid-template-columns: 1fr;
+              padding: 38px;
+            }
+
+            .tsb-store-hero__visual {
+              min-height: 250px;
+            }
+
+            .tsb-store-grid,
+            .tsb-store-family-grid {
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+          }
+
+          @media (max-width: 720px) {
+            .tsb-store-hero {
+              min-height: auto;
+              padding: 26px 20px;
+              border-radius: 20px;
+            }
+
+            .tsb-store-hero h1 {
+              font-size: clamp(2rem, 10vw, 3rem);
+            }
+
+            .tsb-store-hero__visual {
+              min-height: 220px;
+              grid-template-columns: 1fr 1fr;
+              grid-template-rows: 1fr 1fr;
+            }
+
+            .tsb-store-hero-product:first-child {
+              grid-row: auto;
+              grid-column: 1 / span 2;
+            }
+
+            .tsb-store-progress {
+              align-items: flex-start;
+              flex-direction: column;
+            }
+
+            .tsb-store-catalogue {
+              padding: 18px;
+            }
+
+            .tsb-store-catalogue__title-row,
+            .tsb-store-products-heading,
+            .tsb-store-family-heading {
+              align-items: flex-start;
+              flex-direction: column;
+            }
+
+            .tsb-store-toolbar {
+              align-items: stretch;
+            }
+
+            .tsb-store-toolbar__group {
+              width: 100%;
+            }
+
+            .tsb-store-control,
+            .tsb-store-mini-action {
+              flex: 1 1 160px;
+            }
+
+            .tsb-store-grid,
+            .tsb-store-family-grid {
+              grid-template-columns: 1fr;
+            }
+
+            .tsb-store-product-media {
+              height: 240px;
+            }
+
+            .tsb-store-footer-status {
+              align-items: flex-start;
+              flex-wrap: wrap;
+            }
+          }
+        `}</style>
+
+        <section
+          className="section"
+          style={{
+            paddingTop: "34px",
+            paddingBottom: "16px",
+          }}
+        >
+          <div className="container">
+            <div className="tsb-store-shell">
+              <div className="tsb-store-hero">
+                <div className="tsb-store-hero__copy">
+                  <div className="tsb-store-hero__eyebrow">
+                    <ShoppingBag size={15} strokeWidth={1.9} />
+                    {t("eyebrow")}
+                  </div>
+
+                  <h1>
+                    {t("title1")}
+                    <span>{t("title2")}</span>
+                  </h1>
+
+                  <p className="tsb-store-hero__intro">
+                    {t("intro")}
+                  </p>
+
+                  <div className="tsb-store-hero__actions">
+                    <a
+                      href="/#top"
+                      className="button button--secondary"
+                    >
+                      â† {t("backHome")}
+                    </a>
+
+                    <a
+                      href="/contact"
+                      className="button button--primary"
+                    >
+                      <Package size={16} aria-hidden="true" />
+                      {t("contact")}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="tsb-store-hero__visual" aria-hidden="true">
+                  {storeProducts.length > 0 ? (
+                    storeProducts.slice(0, 3).map((product) => {
+                      const heroCategory = categories.find(
+                        (item) => item.id === product.category
+                      );
+                      const HeroProductIcon = heroCategory?.icon ?? Package;
+
+                      return (
+                        <div
+                          key={`hero-${product.id}`}
+                          className="tsb-store-hero-product"
+                        >
+                          {product.image_url ? (
+                            <img
+                              src={product.image_url}
+                              alt=""
+                            />
+                          ) : (
+                            <div className="tsb-store-hero-product__fallback">
+                              <HeroProductIcon
+                                size={38}
+                                strokeWidth={1.45}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <>
+                      <div className="tsb-store-hero-product">
+                        <div className="tsb-store-hero-product__fallback">
+                          <Car size={38} strokeWidth={1.45} />
+                        </div>
+                      </div>
+                      <div className="tsb-store-hero-product">
+                        <div className="tsb-store-hero-product__fallback">
+                          <ShieldCheck size={38} strokeWidth={1.45} />
+                        </div>
+                      </div>
+                      <div className="tsb-store-hero-product">
+                        <div className="tsb-store-hero-product__fallback">
+                          <Zap size={38} strokeWidth={1.45} />
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              <div className="tsb-store-progress">
+                <div className="tsb-store-progress__main">
+                  <div className="tsb-store-progress__icon">
+                    <PackageSearch size={18} strokeWidth={1.8} />
+                  </div>
+                  <div>
+                    <strong>{t("launchBadge")} Â· {t("launchTitle")}</strong>
+                    <p>{t("launchText")}</p>
+                  </div>
+                </div>
+
+                <a
+                  href="/contact"
+                  className="button button--secondary"
+                  style={{
+                    minHeight: "36px",
+                    padding: "0 12px",
+                    flex: "0 0 auto",
+                    fontSize: ".69rem",
+                  }}
+                >
+                  {t("requestProduct")}
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="catalogue"
+          className="section"
+          style={{
+            paddingTop: "18px",
+            paddingBottom: "20px",
+            scrollMarginTop: "20px",
+          }}
+        >
+          <div className="container">
+            <div className="tsb-store-shell tsb-store-panel tsb-store-catalogue">
+              <div className="tsb-store-catalogue__title-row">
+                <div className="tsb-store-catalogue__title-wrap">
+                  <div className="tsb-store-catalogue__eyebrow">
+                    <PackageSearch size={15} strokeWidth={1.8} />
+                    {t("catalogueEyebrow")}
+                  </div>
+                  <h2>{t("catalogueTitle")}</h2>
+                  <p className="tsb-store-catalogue__intro">
+                    {t("catalogueIntro")}
+                  </p>
+                </div>
+
+                <span
+                  className="tsb-store-count"
+                  style={{ minHeight: "28px", padding: "0 10px" }}
+                >
+                  {visibleProducts.length} {t("resultsLabel")}
+                </span>
+              </div>
+
+              <div className="tsb-store-search">
+                <Search size={19} aria-hidden="true" />
+                <input
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) =>
+                    setSearchQuery(event.target.value)
+                  }
+                  placeholder={t("searchPlaceholder")}
+                  aria-label={t("searchPlaceholder")}
+                />
+              </div>
+
+              <div className="tsb-store-category-row tsb-store-filter-row">
+                {categories.map((category) => {
+                  const Icon = category.icon;
+                  const isActive = activeCategory === category.id;
+
+                  return (
+                    <button
+                      key={category.id}
+                      type="button"
+                      onClick={() => {
+                        setActiveCategory(category.id);
+                        setProductPage(1);
+                      }}
+                      aria-pressed={isActive}
+                      className={`tsb-store-category-btn${
+                        isActive ? " is-active" : ""
+                      }`}
+                    >
+                      <Icon size={15} strokeWidth={1.9} />
+                      {t(`categoryLabels.${category.id}`)}
+                      <span className="tsb-store-count">
+                        {getCategoryProductCount(category.id)}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="tsb-store-toolbar">
+                <div className="tsb-store-toolbar__group">
+                  <SlidersHorizontal
+                    size={16}
+                    strokeWidth={1.8}
+                    style={{ color: "#38bdf8" }}
+                  />
+
+                  <select
+                    className="tsb-store-control"
+                    value={activeAvailability}
+                    onChange={(event) =>
+                      setActiveAvailability(
+                        event.target.value as AvailabilityFilter
+                      )
+                    }
+                    aria-label={t("availabilityFilter")}
+                  >
+                    <option value="all">
+                      {t("allAvailability")}
+                    </option>
+
+                    {(
+                      [
+                        "in_stock",
+                        "on_request",
+                        "out_of_stock",
+                        "coming_soon",
+                      ] as const
+                    ).map((availability) => (
+                      <option
+                        key={availability}
+                        value={availability}
+                      >
+                        {t(`availabilityLabels.${availability}`)}
+                      </option>
+                    ))}
+                  </select>
+
+                  <select
+                    className="tsb-store-control"
+                    value={productSort}
+                    onChange={(event) =>
+                      setProductSort(
+                        event.target.value as ProductSort
+                      )
+                    }
+                    aria-label={t("sortLabel")}
+                  >
+                    {(
+                      [
+                        "recommended",
+                        "newest",
+                        "price_asc",
+                        "price_desc",
+                        "name",
+                      ] as const
+                    ).map((sort) => (
+                      <option key={sort} value={sort}>
+                        {t(`sortOptions.${sort}`)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="tsb-store-toolbar__group">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFavoritesOnly((previous) => !previous)
+                    }
+                    aria-pressed={favoritesOnly}
+                    title={t("favorites")}
+                    className={`tsb-store-mini-action${
+                      favoritesOnly ? " is-active" : ""
+                    }`}
+                  >
+                    <Heart
+                      size={14}
+                      fill={favoritesOnly ? "currentColor" : "none"}
+                    />
+                    {t("favorites")}
+                    <span className="tsb-store-count">
+                      {favoriteSlugs.length}
+                    </span>
+                  </button>
+
+                  {hasActiveFilters && (
+                    <button
+                      type="button"
+                      onClick={resetCatalogueFilters}
+                      className="tsb-store-mini-action"
+                    >
+                      <RotateCcw size={14} />
+                      {t("resetFilters")}
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="section"
+          style={{
+            paddingTop: "8px",
+            paddingBottom: "26px",
+          }}
+        >
+          <div className="container">
+            <div className="tsb-store-shell">
+              {productsLoading ? (
+                <div
+                  className="tsb-store-panel tsb-store-empty"
+                  style={{
+                    color: "rgba(255,255,255,.64)",
+                    fontSize: ".82rem",
+                  }}
+                >
+                  {t("loadingProducts")}
+                </div>
+              ) : visibleProducts.length > 0 ? (
+                <>
+                  <div className="tsb-store-products-heading">
+                    <div className="tsb-store-products-heading__left">
+                      <div className="tsb-store-products-heading__icon">
+                        <ShoppingBag size={18} strokeWidth={1.8} />
+                      </div>
+                      <div>
+                        <h2>{t("productsTitle")}</h2>
+                      </div>
+                      <span className="tsb-store-count">
+                        {visibleProducts.length}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="tsb-store-grid">
+                    {paginatedProducts.map((product) => {
+                      const category = categories.find(
+                        (item) => item.id === product.category
+                      );
+
+                      const ProductIcon = category?.icon ?? Package;
+
+                      const productName =
+                        getLocalizedProductName(
+                          product,
+                          locale
+                        );
+
+                      const productDescription =
+                        getLocalizedProductDescription(
+                          product,
+                          locale
+                        );
+
+                      const isFavorite = favoriteSlugs.includes(
+                        product.slug
+                      );
+
+                      const isUnavailable =
+                        product.availability === "out_of_stock" ||
+                        product.availability === "coming_soon";
+
+                      return (
+                        <article
+                          key={product.id}
+                          className={`tsb-store-product-card tsb-store-product-card--${
+                            category?.color ?? "blue"
+                          }`}
+                        >
+                          <div className="tsb-store-product-media">
+                            <span
+                              className="tsb-store-availability"
+                              style={getAvailabilityBadgeStyle(
+                                product.availability
+                              )}
+                            >
+                              {t(`availabilityLabels.${product.availability}`)}
+                            </span>
+
+                            <button
+                              type="button"
+                              onClick={() => toggleFavorite(product.slug)}
+                              aria-label={
+                                isFavorite
+                                  ? t("favoriteRemove")
+                                  : t("favoriteAdd")
+                              }
+                              title={
+                                isFavorite
+                                  ? t("favoriteRemove")
+                                  : t("favoriteAdd")
+                              }
+                              className={`tsb-store-favorite-btn${
+                                isFavorite ? " is-active" : ""
+                              }`}
+                            >
+                              <Heart
+                                size={16}
+                                fill={
+                                  isFavorite ? "currentColor" : "none"
+                                }
+                              />
+                            </button>
+
+                            {product.image_url ? (
+                              <img
+                                src={product.image_url}
+                                alt={productName}
+                                loading="lazy"
+                              />
+                            ) : (
+                              <div className="tsb-store-product-placeholder">
+                                <ProductIcon
+                                  size={34}
+                                  strokeWidth={1.5}
+                                />
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="tsb-store-product-body">
+                            <span className="tsb-store-category-label">
+                              {t(`categoryLabels.${product.category}`)}
+                            </span>
+
+                            <h3 className="tsb-store-product-title">
+                              {productName}
+                            </h3>
+
+                            {productDescription && (
+                              <p className="tsb-store-product-description">
+                                {productDescription}
+                              </p>
+                            )}
+
+                            <div className="tsb-store-meta">
+                              {product.sku && (
+                                <span>{t("referenceLabel")} {product.sku}</span>
+                              )}
+
+                              {product.stock_quantity !== null && (
+                                <span>
+                                  {t("stockLabel")}: {product.stock_quantity}{" "}
+                                  {t("stockUnit")}
+                                </span>
+                              )}
+                            </div>
+
+                            {product.is_featured && (
+                              <div className="tsb-store-featured">
+                                â˜… {t("featured")}
+                              </div>
+                            )}
+
+                            <div className="tsb-store-price">
+                              <small>{t("priceLabel")}</small>
+                              <strong
+                                className={
+                                  product.price === null
+                                    ? "is-request"
+                                    : undefined
+                                }
+                              >
+                                {product.price === null
+                                  ? t("priceOnRequest")
+                                  : formatProductPrice(
+                                      Number(product.price),
+                                      product.currency,
+                                      intlLocale
+                                    )}
+                              </strong>
+                            </div>
+
+                            <div className="tsb-store-product-actions">
+                              <a
+                                href={`/store/product/${encodeURIComponent(
+                                  product.slug
+                                )}`}
+                                className="button button--secondary"
+                              >
+                                {t("productDetails")}
+                                <ArrowRight size={13} />
+                              </a>
+
+                              <button
+                                type="button"
+                                disabled={isUnavailable}
+                                onClick={() =>
+                                  addStoreCartItem({
+                                    slug: product.slug,
+                                    name_fr: product.name_fr,
+                                    name_nl: product.name_nl,
+                                    name_en: product.name_en,
+                                    sku: product.sku,
+                                    price:
+                                      product.price === null
+                                        ? null
+                                        : Number(product.price),
+                                    currency: product.currency,
+                                    image_url: product.image_url,
+                                  })
+                                }
+                                className="button button--primary"
+                                style={{
+                                  opacity: isUnavailable ? 0.46 : 1,
+                                  cursor: isUnavailable
+                                    ? "not-allowed"
+                                    : "pointer",
+                                }}
+                              >
+                                <ShoppingBag size={13} />
+                                {isUnavailable
+                                  ? t("unavailableCart")
+                                  : t("addToCart")}
+                              </button>
+                            </div>
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+
+                  {totalProductPages > 1 && (
+                    <div className="tsb-store-pagination">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setProductPage((page) =>
+                            Math.max(1, page - 1)
+                          )
+                        }
+                        disabled={safeProductPage <= 1}
+                        className="button button--secondary"
+                        style={{
+                          minHeight: "36px",
+                          padding: "0 13px",
+                          opacity: safeProductPage <= 1 ? 0.45 : 1,
+                        }}
+                      >
+                        â†
+                      </button>
+
+                      <span
+                        style={{
+                          color: "rgba(255,255,255,.64)",
+                          fontSize: ".75rem",
+                        }}
+                      >
+                        {safeProductPage} / {totalProductPages}
+                      </span>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setProductPage((page) =>
+                            Math.min(totalProductPages, page + 1)
+                          )
+                        }
+                        disabled={safeProductPage >= totalProductPages}
+                        className="button button--secondary"
+                        style={{
+                          minHeight: "36px",
+                          padding: "0 13px",
+                          opacity:
+                            safeProductPage >= totalProductPages
+                              ? 0.45
+                              : 1,
+                        }}
+                      >
+                        â†’
+                      </button>
+                    </div>
+                  )}
+                </>
+              ) : null}
+
+              {visibleCollections.length > 0 ? (
+                <div style={{ marginTop: "34px" }}>
+                  <div className="tsb-store-family-heading">
+                    <div className="tsb-store-family-heading__left">
+                      <div className="tsb-store-family-heading__icon">
+                        <PackageSearch size={18} strokeWidth={1.8} />
+                      </div>
+                      <h2>{t("catalogueTitle")}</h2>
+                    </div>
+                  </div>
+
+                  <div className="tsb-store-family-grid">
+                    {visibleCollections.map((collection) => {
+                      const category = categories.find(
+                        (item) => item.id === collection.category
+                      );
+
+                      const Icon = category?.icon ?? PackageSearch;
+
+                      return (
+                        <article
+                          key={collection.id}
+                          className="tsb-store-family-card"
+                        >
+                          <div className="tsb-store-family-card__icon">
+                            <Icon size={21} strokeWidth={1.8} />
+                          </div>
+
+                          <span className="tsb-store-category-label">
+                            {t(`categoryLabels.${collection.category}`)}
+                          </span>
+
+                          <h3>{t(`collections.${collection.id}.title`)}</h3>
+
+                          <p>{t(`collections.${collection.id}.description`)}</p>
+
+                          <a href="/contact">
+                            <Wrench size={15} aria-hidden="true" />
+                            {t("learnMore")}
+                          </a>
+                        </article>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : visibleProducts.length === 0 &&
+                !productsLoading ? (
+                <div className="tsb-store-panel tsb-store-empty">
+                  <PackageSearch
+                    size={30}
+                    strokeWidth={1.7}
+                    style={{ color: "#7dd3fc" }}
+                  />
+                  <h3 style={{ marginTop: "14px" }}>
+                    {t("noResultsTitle")}
+                  </h3>
+                  <p style={{ color: "rgba(255,255,255,.58)" }}>
+                    {t("noResultsText")}
+                  </p>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="section"
+          style={{
+            paddingTop: "0",
+            paddingBottom: "36px",
+          }}
+        >
+          <div className="container">
+            <div className="tsb-store-shell tsb-store-panel tsb-store-footer-status">
+              <div className="tsb-store-footer-status__icon">
+                <PackageSearch size={20} strokeWidth={1.8} />
+              </div>
+
+              <div className="tsb-store-footer-status__copy">
+                <h3>{t("statusLabel")}</h3>
+                <p>{t("statusText")}</p>
+              </div>
+
+              <a
+                href="/contact"
+                className="button button--secondary"
+                style={{
+                  minHeight: "36px",
+                  padding: "0 12px",
+                  flex: "0 0 auto",
+                  fontSize: ".69rem",
+                }}
+              >
+                {t("requestProduct")}
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+      <StoreMiniCart language={language} />
+      <ScrollToTop />
+    </div>
+  );
+}
+
+export default Store;
+
+
+===== STORE PRODUCT PAGE =====
+import {
+  ArrowLeft,
+  ArrowRight,
+  BadgeCheck,
+  Box,
+  CheckCircle2,
+  Clock3,
+  Heart,
+  Package,
+  ShieldCheck,
+  ShoppingBag,
+  Tag,
+  XCircle,
+} from "lucide-react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
+import ScrollToTop from "../../components/common/ScrollToTop";
+import StoreMiniCart, {
+  addStoreCartItem,
+} from "../../components/StoreMiniCart";
+import Footer from "../../components/layout/Footer";
+import Navbar from "../../components/layout/Navbar";
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../i18n";
+import { storeProductTranslations } from "../../i18n/locales/storeProduct";
+import { supabase } from "../../services/supabase";
+
+type StoreCategory =
+  | "automobile"
+  | "security"
+  | "energy"
+  | "electronics"
+  | "other";
+
+type StoreAvailability =
+  | "in_stock"
+  | "on_request"
+  | "out_of_stock"
+  | "coming_soon";
+
+type StoreProductData = {
+  id: string;
+  slug: string;
+  category: StoreCategory;
+  name_fr: string;
+  name_nl: string | null;
+  name_en: string | null;
+  description_fr: string | null;
+  description_nl: string | null;
+  description_en: string | null;
+  sku: string | null;
+  price: number | null;
+  currency: string;
+  availability: StoreAvailability;
+  stock_quantity: number | null;
+  image_url: string | null;
+  is_featured: boolean;
+};
+
+
+
+function formatPrice(
+  value: number,
+  currency: string,
+  intlLocale: string
+) {
+  try {
+    return new Intl.NumberFormat(intlLocale, {
+      style: "currency",
+      currency,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(value);
+  } catch {
+    return `${value.toFixed(2)} ${currency}`;
+  }
+}
+
+function getLocalizedProductName(
+  product: StoreProductData,
+  locale: string
+) {
+  if (locale === "fr") {
+    return product.name_fr ||
+      product.name_en ||
+      product.name_nl ||
+      "";
+  }
+
+  if (locale === "nl") {
+    return product.name_nl ||
+      product.name_en ||
+      product.name_fr ||
+      "";
+  }
+
+  if (locale === "en") {
+    return product.name_en ||
+      product.name_fr ||
+      product.name_nl ||
+      "";
+  }
+
+  return product.name_en ||
+    product.name_fr ||
+    product.name_nl ||
+    "";
+}
+
+function getLocalizedProductDescription(
+  product: StoreProductData,
+  locale: string
+) {
+  if (locale === "fr") {
+    return product.description_fr ||
+      product.description_en ||
+      product.description_nl ||
+      "";
+  }
+
+  if (locale === "nl") {
+    return product.description_nl ||
+      product.description_en ||
+      product.description_fr ||
+      "";
+  }
+
+  if (locale === "en") {
+    return product.description_en ||
+      product.description_fr ||
+      product.description_nl ||
+      "";
+  }
+
+  return product.description_en ||
+    product.description_fr ||
+    product.description_nl ||
+    "";
+}
+
+function getAvailabilityIcon(
+  availability: StoreAvailability
+) {
+  if (availability === "in_stock") {
+    return CheckCircle2;
+  }
+
+  if (availability === "out_of_stock") {
+    return XCircle;
+  }
+
+  if (availability === "coming_soon") {
+    return Clock3;
+  }
+
+  return Package;
+}
+
+const STORE_FAVORITES_KEY =
+  "tsb_store_favorites";
+
+function readStoreFavorites(): string[] {
+  try {
+    const raw = window.localStorage.getItem(
+      STORE_FAVORITES_KEY
+    );
+
+    if (!raw) {
+      return [];
+    }
+
+    const parsed = JSON.parse(raw);
+
+    return Array.isArray(parsed)
+      ? parsed.filter(
+          (value): value is string =>
+            typeof value === "string"
+        )
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeStoreFavorites(
+  favorites: string[]
+) {
+  try {
+    window.localStorage.setItem(
+      STORE_FAVORITES_KEY,
+      JSON.stringify(favorites)
+    );
+  } catch {
+    // La fiche produit reste utilisable sans stockage local.
+  }
+}
+
+function StoreProduct() {
+  const {
+    language,
+    locale,
+    intlLocale,
+  } = useLanguage();
+
+  const tr = (key: string) =>
+    translate(
+      storeProductTranslations,
+      locale,
+      `storeProduct.${key}`
+    );
+
+  const t = {
+    eyebrow: tr("eyebrow"),
+    back: tr("back"),
+    loading: tr("loading"),
+    notFoundTitle: tr("notFoundTitle"),
+    notFoundText: tr("notFoundText"),
+    backStore: tr("backStore"),
+    reference: tr("reference"),
+    referenceShort: tr("referenceShort"),
+    availability: tr("availability"),
+    stock: tr("stock"),
+    stockUnit: tr("stockUnit"),
+    noStockTracking: tr("noStockTracking"),
+    price: tr("price"),
+    priceOnRequest: tr("priceOnRequest"),
+    request: tr("request"),
+    addToCart: tr("addToCart"),
+    unavailableCart: tr("unavailableCart"),
+    favoriteAdd: tr("favoriteAdd"),
+    favoriteRemove: tr("favoriteRemove"),
+    requestHint: tr("requestHint"),
+    trustTitle: tr("trustTitle"),
+    trustReference: tr("trustReference"),
+    trustAvailability: tr("trustAvailability"),
+    trustSupport: tr("trustSupport"),
+    relatedEyebrow: tr("relatedEyebrow"),
+    relatedTitle: tr("relatedTitle"),
+    relatedIntro: tr("relatedIntro"),
+    relatedView: tr("relatedView"),
+    featured: tr("featured"),
+    category: tr("category"),
+    categoryLabels: {
+      automobile: tr("categoryLabels.automobile"),
+      security: tr("categoryLabels.security"),
+      energy: tr("categoryLabels.energy"),
+      electronics: tr("categoryLabels.electronics"),
+      other: tr("categoryLabels.other"),
+    },
+    availabilityLabels: {
+      in_stock: tr("availabilityLabels.in_stock"),
+      on_request: tr("availabilityLabels.on_request"),
+      out_of_stock: tr("availabilityLabels.out_of_stock"),
+      coming_soon: tr("availabilityLabels.coming_soon"),
+    },
+  };
+
+  const [product, setProduct] =
+    useState<StoreProductData | null>(null);
+
+  const [loading, setLoading] =
+    useState(true);
+
+  const [loadError, setLoadError] =
+    useState(false);
+
+  const [favoriteSlugs, setFavoriteSlugs] =
+    useState<string[]>([]);
+
+  const [
+    relatedProducts,
+    setRelatedProducts,
+  ] = useState<StoreProductData[]>([]);
+
+  useEffect(() => {
+    const syncFavorites = () => {
+      setFavoriteSlugs(
+        readStoreFavorites()
+      );
+    };
+
+    syncFavorites();
+
+    window.addEventListener(
+      "storage",
+      syncFavorites
+    );
+
+    return () => {
+      window.removeEventListener(
+        "storage",
+        syncFavorites
+      );
+    };
+  }, []);
+
+  const toggleFavorite = (
+    favoriteSlug: string
+  ) => {
+    setFavoriteSlugs((previous) => {
+      const next = previous.includes(
+        favoriteSlug
+      )
+        ? previous.filter(
+            (currentSlug) =>
+              currentSlug !== favoriteSlug
+          )
+        : [...previous, favoriteSlug];
+
+      writeStoreFavorites(next);
+      return next;
+    });
+  };
+
+  const slug = useMemo(() => {
+    const prefix = "/store/product/";
+
+    const pathname =
+      window.location.pathname.replace(/\/+$/, "");
+
+    if (!pathname.startsWith(prefix)) {
+      return "";
+    }
+
+    try {
+      return decodeURIComponent(
+        pathname.slice(prefix.length)
+      );
+    } catch {
+      return pathname.slice(prefix.length);
+    }
+  }, []);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadProduct = async () => {
+      if (!slug) {
+        setLoadError(true);
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
+      setLoadError(false);
+
+      const { data, error } =
+        await supabase
+          .from("store_products")
+          .select(
+            "id, slug, category, name_fr, name_nl, name_en, description_fr, description_nl, description_en, sku, price, currency, availability, stock_quantity, image_url, is_featured"
+          )
+          .eq("slug", slug)
+          .eq("is_published", true)
+          .maybeSingle();
+
+      if (!mounted) {
+        return;
+      }
+
+      if (error || !data) {
+        if (error) {
+          console.error(
+            "Erreur chargement fiche produit :",
+            error
+          );
+        }
+
+        setProduct(null);
+        setLoadError(true);
+        setLoading(false);
+        return;
+      }
+
+      setProduct(
+        data as StoreProductData
+      );
+
+      setLoading(false);
+    };
+
+    void loadProduct();
+
+    return () => {
+      mounted = false;
+    };
+  }, [slug]);
+
+  useEffect(() => {
+    let mounted = true;
+
+    const loadRelatedProducts = async () => {
+      if (!product) {
+        setRelatedProducts([]);
+        return;
+      }
+
+      const { data, error } =
+        await supabase
+          .from("store_products")
+          .select(
+            "id, slug, category, name_fr, name_nl, name_en, description_fr, description_nl, description_en, sku, price, currency, availability, stock_quantity, image_url, is_featured"
+          )
+          .eq("is_published", true)
+          .eq("category", product.category)
+          .neq("id", product.id)
+          .order("is_featured", {
+            ascending: false,
+          })
+          .order("sort_order", {
+            ascending: true,
+          })
+          .limit(4);
+
+      if (!mounted) {
+        return;
+      }
+
+      if (error) {
+        console.error(
+          "Erreur chargement produits similaires :",
+          error
+        );
+        setRelatedProducts([]);
+        return;
+      }
+
+      setRelatedProducts(
+        (data ?? []) as StoreProductData[]
+      );
+    };
+
+    void loadRelatedProducts();
+
+    return () => {
+      mounted = false;
+    };
+  }, [product]);
+
+  useEffect(() => {
+    if (!product) {
+      return;
+    }
+
+    const name =
+      getLocalizedProductName(
+        product,
+        locale
+      );
+
+    document.title =
+      `${name} | TSB Store`;
+  }, [locale, product]);
+
+  const productName = product
+    ? getLocalizedProductName(
+        product,
+        locale
+      )
+    : "";
+
+  const productDescription = product
+    ? getLocalizedProductDescription(
+        product,
+        locale
+      )
+    : "";
+
+  const AvailabilityIcon =
+    product
+      ? getAvailabilityIcon(
+          product.availability
+        )
+      : Package;
+
+  const requestHref = product
+    ? `/contact?product=${encodeURIComponent(
+        product.slug
+      )}&ref=${encodeURIComponent(
+        product.sku ?? ""
+      )}`
+    : "/contact";
+
+  return (
+    <>
+      <Navbar />
+
+      <main>
+        <section
+          className="section"
+          style={{
+            paddingTop: "34px",
+            paddingBottom: "48px",
+          }}
+        >
+          <div className="container">
+            <a
+              href="/store#catalogue"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "7px",
+                marginBottom: "18px",
+                color: "#7dd3fc",
+                textDecoration: "none",
+                fontSize: "0.84rem",
+                fontWeight: 800,
+              }}
+            >
+              <ArrowLeft size={16} />
+              {t.back}
+            </a>
+
+            {loading ? (
+              <div
+                className="domain-card domain-blue"
+                style={{
+                  padding: "46px 20px",
+                  textAlign: "center",
+                }}
+              >
+                <Package
+                  size={34}
+                  style={{
+                    opacity: 0.45,
+                    marginBottom: "10px",
+                  }}
+                />
+
+                <p style={{ margin: 0 }}>
+                  {t.loading}
+                </p>
+              </div>
+            ) : loadError || !product ? (
+              <div
+                className="domain-card domain-blue"
+                style={{
+                  padding: "46px 20px",
+                  textAlign: "center",
+                }}
+              >
+                <Package
+                  size={38}
+                  style={{
+                    opacity: 0.4,
+                    marginBottom: "12px",
+                  }}
+                />
+
+                <span className="section__eyebrow">
+                  {t.eyebrow}
+                </span>
+
+                <h1
+                  style={{
+                    margin: "8px 0 8px",
+                    fontSize:
+                      "clamp(1.7rem, 4vw, 2.5rem)",
+                  }}
+                >
+                  {t.notFoundTitle}
+                </h1>
+
+                <p
+                  style={{
+                    maxWidth: "620px",
+                    margin: "0 auto 18px",
+                  }}
+                >
+                  {t.notFoundText}
+                </p>
+
+                <a
+                  href="/store#catalogue"
+                  className="button button--primary"
+                >
+                  {t.backStore}
+                </a>
+              </div>
+            ) : (
+              <article
+                className="domain-card domain-cyan"
+                style={{
+                  maxWidth: "1080px",
+                  margin: "0 auto",
+                  padding: 0,
+                  overflow: "hidden",
+                }}
+              >
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns:
+                      "repeat(auto-fit, minmax(300px, 1fr))",
+                    alignItems: "stretch",
+                  }}
+                >
+                  {/* VISUEL PRODUIT */}
+                  <div
+                    style={{
+                      minHeight: "310px",
+                      maxHeight: "410px",
+                      display: "grid",
+                      placeItems: "center",
+                      overflow: "hidden",
+                      background:
+                        "linear-gradient(135deg, rgba(56,189,248,0.08), rgba(255,255,255,0.02))",
+                      borderRight:
+                        "1px solid rgba(255,255,255,0.07)",
+                    }}
+                  >
+                    {product.image_url ? (
+                      <img
+                        src={product.image_url}
+                        alt={productName}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          maxHeight: "410px",
+                          objectFit: "contain",
+                          display: "block",
+                        }}
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          textAlign: "center",
+                          padding: "30px",
+                          opacity: 0.52,
+                        }}
+                      >
+                        <Package
+                          size={58}
+                          strokeWidth={1.35}
+                        />
+                        <div
+                          style={{
+                            marginTop: "10px",
+                            fontSize: "0.76rem",
+                            fontWeight: 800,
+                            letterSpacing: "0.12em",
+                          }}
+                        >
+                          TSB STORE
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* INFORMATIONS PRODUIT */}
+                  <div
+                    style={{
+                      padding: "24px",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "8px",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <span
+                        className="section__eyebrow"
+                        style={{ margin: 0 }}
+                      >
+                        {
+                          t.categoryLabels[
+                            product.category
+                          ]
+                        }
+                      </span>
+
+                      {product.is_featured && (
+                        <span
+                          style={{
+                            padding: "4px 8px",
+                            borderRadius: "999px",
+                            border:
+                              "1px solid rgba(250,204,21,0.20)",
+                            background:
+                              "rgba(250,204,21,0.07)",
+                            fontSize: "0.68rem",
+                            fontWeight: 800,
+                          }}
+                        >
+                          â˜… {t.featured}
+                        </span>
+                      )}
+                    </div>
+
+                    <h1
+                      style={{
+                        margin: "10px 0 7px",
+                        fontSize:
+                          "clamp(1.55rem, 3.2vw, 2.25rem)",
+                        lineHeight: 1.08,
+                      }}
+                    >
+                      {productName}
+                    </h1>
+
+                    {productDescription && (
+                      <p
+                        style={{
+                          margin: "0 0 16px",
+                          maxWidth: "620px",
+                          fontSize: "0.9rem",
+                          lineHeight: 1.6,
+                          opacity: 0.78,
+                        }}
+                      >
+                        {productDescription}
+                      </p>
+                    )}
+
+                    {/* PRIX + ACTION */}
+                    <div
+                      style={{
+                        marginTop: "2px",
+                        padding: "16px",
+                        borderRadius: "15px",
+                        border:
+                          "1px solid rgba(56,189,248,0.16)",
+                        background:
+                          "linear-gradient(135deg, rgba(22,136,255,0.09), rgba(0,212,255,0.04))",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "flex-end",
+                          justifyContent:
+                            "space-between",
+                          gap: "14px",
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        <div>
+                          <div
+                            style={{
+                              fontSize: "0.66rem",
+                              opacity: 0.55,
+                              fontWeight: 850,
+                              textTransform:
+                                "uppercase",
+                              letterSpacing:
+                                "0.08em",
+                            }}
+                          >
+                            {t.price}
+                          </div>
+
+                          <strong
+                            style={{
+                              display: "block",
+                              marginTop: "3px",
+                              color:
+                                product.price ===
+                                null
+                                  ? "#7dd3fc"
+                                  : "#ffffff",
+                              fontSize:
+                                "clamp(1.45rem, 3vw, 1.95rem)",
+                              lineHeight: 1.1,
+                            }}
+                          >
+                            {product.price === null
+                              ? t.priceOnRequest
+                              : formatPrice(
+                                  Number(
+                                    product.price
+                                  ),
+                                  product.currency,
+                                  intlLocale
+                                )}
+                          </strong>
+                        </div>
+
+                        <span
+                          style={{
+                            padding: "6px 10px",
+                            display:
+                              "inline-flex",
+                            alignItems:
+                              "center",
+                            gap: "6px",
+                            borderRadius:
+                              "999px",
+                            border:
+                              product.availability ===
+                              "in_stock"
+                                ? "1px solid rgba(34,197,94,0.28)"
+                                : "1px solid rgba(56,189,248,0.22)",
+                            background:
+                              product.availability ===
+                              "in_stock"
+                                ? "rgba(34,197,94,0.09)"
+                                : "rgba(56,189,248,0.07)",
+                            color:
+                              product.availability ===
+                              "in_stock"
+                                ? "#86efac"
+                                : "#7dd3fc",
+                            fontSize:
+                              "0.72rem",
+                            fontWeight:
+                              850,
+                          }}
+                        >
+                          <AvailabilityIcon
+                            size={14}
+                          />
+                          {
+                            t.availabilityLabels[
+                              product.availability
+                            ]
+                          }
+                        </span>
+                      </div>
+
+                      <a
+                        href={requestHref}
+                        className="button button--primary"
+                        style={{
+                          width: "100%",
+                          minHeight: "46px",
+                          marginTop: "14px",
+                          padding: "0 18px",
+                          justifyContent:
+                            "center",
+                          gap: "8px",
+                          fontWeight: 850,
+                        }}
+                      >
+                        <ShoppingBag size={17} />
+                        {t.request}
+                        <ArrowRight size={16} />
+                      </a>
+
+                      <button
+                        type="button"
+                        disabled={
+                          product.availability ===
+                            "out_of_stock" ||
+                          product.availability ===
+                            "coming_soon"
+                        }
+                        onClick={() =>
+                          addStoreCartItem(
+                            {
+                              slug:
+                                product.slug,
+                              name_fr:
+                                product.name_fr,
+                              name_nl:
+                                product.name_nl,
+                              name_en:
+                                product.name_en,
+                              sku:
+                                product.sku,
+                              price:
+                                product.price ===
+                                null
+                                  ? null
+                                  : Number(
+                                      product.price
+                                    ),
+                              currency:
+                                product.currency,
+                              image_url:
+                                product.image_url,
+                            }
+                          )
+                        }
+                        className="button button--primary"
+                        style={{
+                          width: "100%",
+                          minHeight: "43px",
+                          marginTop: "8px",
+                          padding:
+                            "0 16px",
+                          justifyContent:
+                            "center",
+                          gap: "8px",
+                          opacity:
+                            product.availability ===
+                              "out_of_stock" ||
+                            product.availability ===
+                              "coming_soon"
+                              ? 0.46
+                              : 1,
+                          cursor:
+                            product.availability ===
+                              "out_of_stock" ||
+                            product.availability ===
+                              "coming_soon"
+                              ? "not-allowed"
+                              : "pointer",
+                        }}
+                      >
+                        <ShoppingBag
+                          size={16}
+                        />
+                        {product.availability ===
+                          "out_of_stock" ||
+                        product.availability ===
+                          "coming_soon"
+                          ? t.unavailableCart
+                          : t.addToCart}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          toggleFavorite(
+                            product.slug
+                          )
+                        }
+                        aria-pressed={
+                          favoriteSlugs.includes(
+                            product.slug
+                          )
+                        }
+                        className="button button--secondary"
+                        style={{
+                          width: "100%",
+                          minHeight: "40px",
+                          marginTop: "8px",
+                          padding:
+                            "0 16px",
+                          justifyContent:
+                            "center",
+                          gap: "8px",
+                          borderColor:
+                            favoriteSlugs.includes(
+                              product.slug
+                            )
+                              ? "rgba(248,113,113,0.34)"
+                              : undefined,
+                          color:
+                            favoriteSlugs.includes(
+                              product.slug
+                            )
+                              ? "#fca5a5"
+                              : undefined,
+                        }}
+                      >
+                        <Heart
+                          size={16}
+                          fill={
+                            favoriteSlugs.includes(
+                              product.slug
+                            )
+                              ? "currentColor"
+                              : "none"
+                          }
+                        />
+                        {favoriteSlugs.includes(
+                          product.slug
+                        )
+                          ? t.favoriteRemove
+                          : t.favoriteAdd}
+                      </button>
+
+                      <p
+                        style={{
+                          margin:
+                            "9px 0 0",
+                          color:
+                            "rgba(255,255,255,0.52)",
+                          fontSize:
+                            "0.7rem",
+                          lineHeight: 1.45,
+                          textAlign:
+                            "center",
+                        }}
+                      >
+                        {t.requestHint}
+                      </p>
+                    </div>
+
+                    {/* INFORMATIONS ESSENTIELLES */}
+                    <div
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns:
+                          "repeat(3, minmax(0, 1fr))",
+                        gap: "8px",
+                        marginTop: "14px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          minWidth: 0,
+                          padding: "10px",
+                          borderRadius: "11px",
+                          background:
+                            "rgba(255,255,255,0.03)",
+                          border:
+                            "1px solid rgba(255,255,255,0.065)",
+                        }}
+                      >
+                        <Tag
+                          size={15}
+                          style={{
+                            color: "#7dd3fc",
+                            marginBottom: "5px",
+                          }}
+                        />
+                        <div
+                          style={{
+                            fontSize: "0.64rem",
+                            opacity: 0.5,
+                            fontWeight: 800,
+                            textTransform:
+                              "uppercase",
+                          }}
+                        >
+                          {t.reference}
+                        </div>
+                        <strong
+                          style={{
+                            display: "block",
+                            marginTop: "2px",
+                            fontSize: "0.8rem",
+                            overflowWrap: "anywhere",
+                          }}
+                        >
+                          {product.sku || "â€”"}
+                        </strong>
+                      </div>
+
+                      <div
+                        style={{
+                          minWidth: 0,
+                          padding: "10px",
+                          borderRadius: "11px",
+                          background:
+                            "rgba(255,255,255,0.03)",
+                          border:
+                            "1px solid rgba(255,255,255,0.065)",
+                        }}
+                      >
+                        <AvailabilityIcon
+                          size={15}
+                          style={{
+                            color:
+                              product.availability ===
+                              "in_stock"
+                                ? "#86efac"
+                                : "#7dd3fc",
+                            marginBottom: "5px",
+                          }}
+                        />
+                        <div
+                          style={{
+                            fontSize: "0.64rem",
+                            opacity: 0.5,
+                            fontWeight: 800,
+                            textTransform:
+                              "uppercase",
+                          }}
+                        >
+                          {t.availability}
+                        </div>
+                        <strong
+                          style={{
+                            display: "block",
+                            marginTop: "2px",
+                            fontSize: "0.8rem",
+                          }}
+                        >
+                          {
+                            t.availabilityLabels[
+                              product.availability
+                            ]
+                          }
+                        </strong>
+                      </div>
+
+                      <div
+                        style={{
+                          minWidth: 0,
+                          padding: "10px",
+                          borderRadius: "11px",
+                          background:
+                            "rgba(255,255,255,0.03)",
+                          border:
+                            "1px solid rgba(255,255,255,0.065)",
+                        }}
+                      >
+                        <Box
+                          size={15}
+                          style={{
+                            color: "#7dd3fc",
+                            marginBottom: "5px",
+                          }}
+                        />
+                        <div
+                          style={{
+                            fontSize: "0.64rem",
+                            opacity: 0.5,
+                            fontWeight: 800,
+                            textTransform:
+                              "uppercase",
+                          }}
+                        >
+                          {t.stock}
+                        </div>
+                        <strong
+                          style={{
+                            display: "block",
+                            marginTop: "2px",
+                            fontSize: "0.8rem",
+                          }}
+                        >
+                          {product.stock_quantity ===
+                          null
+                            ? t.noStockTracking
+                            : `${product.stock_quantity} ${t.stockUnit}`}
+                        </strong>
+                      </div>
+                    </div>
+
+                    {/* CONFIANCE TSB */}
+                    <div
+                      style={{
+                        marginTop: "14px",
+                        paddingTop: "14px",
+                        borderTop:
+                          "1px solid rgba(255,255,255,0.07)",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "7px",
+                          marginBottom: "9px",
+                          color: "#7dd3fc",
+                          fontSize: "0.66rem",
+                          fontWeight: 900,
+                          letterSpacing:
+                            "0.08em",
+                        }}
+                      >
+                        <ShieldCheck
+                          size={15}
+                        />
+                        {t.trustTitle}
+                      </div>
+
+                      <div
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns:
+                            "repeat(3, minmax(0, 1fr))",
+                          gap: "8px",
+                        }}
+                      >
+                        {[
+                          {
+                            icon:
+                              BadgeCheck,
+                            label:
+                              t.trustReference,
+                          },
+                          {
+                            icon:
+                              CheckCircle2,
+                            label:
+                              t.trustAvailability,
+                          },
+                          {
+                            icon:
+                              ShieldCheck,
+                            label:
+                              t.trustSupport,
+                          },
+                        ].map(
+                          (trustItem) => {
+                            const TrustIcon =
+                              trustItem.icon;
+
+                            return (
+                              <div
+                                key={
+                                  trustItem.label
+                                }
+                                style={{
+                                  minWidth:
+                                    0,
+                                  minHeight:
+                                    "58px",
+                                  padding:
+                                    "9px",
+                                  display:
+                                    "flex",
+                                  alignItems:
+                                    "center",
+                                  gap:
+                                    "8px",
+                                  borderRadius:
+                                    "11px",
+                                  border:
+                                    "1px solid rgba(255,255,255,0.06)",
+                                  background:
+                                    "rgba(255,255,255,0.025)",
+                                }}
+                              >
+                                <TrustIcon
+                                  size={
+                                    16
+                                  }
+                                  style={{
+                                    flexShrink:
+                                      0,
+                                    color:
+                                      "#38bdf8",
+                                  }}
+                                />
+
+                                <span
+                                  style={{
+                                    fontSize:
+                                      "0.69rem",
+                                    lineHeight:
+                                      1.3,
+                                    color:
+                                      "rgba(255,255,255,0.72)",
+                                    fontWeight:
+                                      750,
+                                  }}
+                                >
+                                  {
+                                    trustItem.label
+                                  }
+                                </span>
+                              </div>
+                            );
+                          }
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            )}
+
+            {!loading &&
+              !loadError &&
+              product &&
+              relatedProducts.length > 0 && (
+                <section
+                  aria-labelledby="related-products-title"
+                  style={{
+                    maxWidth: "1080px",
+                    margin: "28px auto 0",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-end",
+                      justifyContent:
+                        "space-between",
+                      gap: "14px",
+                      flexWrap: "wrap",
+                      marginBottom: "14px",
+                    }}
+                  >
+                    <div>
+                      <span className="section__eyebrow">
+                        {t.relatedEyebrow}
+                      </span>
+
+                      <h2
+                        id="related-products-title"
+                        style={{
+                          margin: "7px 0 5px",
+                          fontSize:
+                            "clamp(1.3rem, 3vw, 1.8rem)",
+                        }}
+                      >
+                        {t.relatedTitle}
+                      </h2>
+
+                      <p
+                        style={{
+                          margin: 0,
+                          maxWidth: "650px",
+                          color:
+                            "rgba(255,255,255,0.62)",
+                          fontSize: "0.82rem",
+                          lineHeight: 1.55,
+                        }}
+                      >
+                        {t.relatedIntro}
+                      </p>
+                    </div>
+
+                    <a
+                      href="/store#catalogue"
+                      style={{
+                        display:
+                          "inline-flex",
+                        alignItems:
+                          "center",
+                        gap: "6px",
+                        color:
+                          "#7dd3fc",
+                        textDecoration:
+                          "none",
+                        fontSize:
+                          "0.76rem",
+                        fontWeight: 850,
+                      }}
+                    >
+                      {t.backStore}
+                      <ArrowRight size={14} />
+                    </a>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns:
+                        "repeat(auto-fit, minmax(210px, 1fr))",
+                      gap: "12px",
+                    }}
+                  >
+                    {relatedProducts.map(
+                      (relatedProduct) => {
+                        const relatedName =
+                          getLocalizedProductName(
+                            relatedProduct,
+                            locale
+                          );
+
+                        return (
+                          <article
+                            key={
+                              relatedProduct.id
+                            }
+                            className="domain-card domain-blue"
+                            style={{
+                              position:
+                                "relative",
+                              padding: 0,
+                              overflow:
+                                "hidden",
+                              display:
+                                "flex",
+                              flexDirection:
+                                "column",
+                              minHeight:
+                                "255px",
+                            }}
+                          >
+                            <button
+                              type="button"
+                              onClick={() =>
+                                toggleFavorite(
+                                  relatedProduct.slug
+                                )
+                              }
+                              aria-label={
+                                favoriteSlugs.includes(
+                                  relatedProduct.slug
+                                )
+                                  ? t.favoriteRemove
+                                  : t.favoriteAdd
+                              }
+                              title={
+                                favoriteSlugs.includes(
+                                  relatedProduct.slug
+                                )
+                                  ? t.favoriteRemove
+                                  : t.favoriteAdd
+                              }
+                              style={{
+                                position:
+                                  "absolute",
+                                top: "9px",
+                                right: "9px",
+                                zIndex: 3,
+                                width: "32px",
+                                height:
+                                  "32px",
+                                display:
+                                  "inline-grid",
+                                placeItems:
+                                  "center",
+                                borderRadius:
+                                  "999px",
+                                border:
+                                  favoriteSlugs.includes(
+                                    relatedProduct.slug
+                                  )
+                                    ? "1px solid rgba(248,113,113,0.46)"
+                                    : "1px solid rgba(255,255,255,0.15)",
+                                background:
+                                  favoriteSlugs.includes(
+                                    relatedProduct.slug
+                                  )
+                                    ? "rgba(127,29,29,0.78)"
+                                    : "rgba(7,18,31,0.78)",
+                                color:
+                                  favoriteSlugs.includes(
+                                    relatedProduct.slug
+                                  )
+                                    ? "#fca5a5"
+                                    : "#ffffff",
+                                cursor:
+                                  "pointer",
+                                backdropFilter:
+                                  "blur(8px)",
+                              }}
+                            >
+                              <Heart
+                                size={16}
+                                fill={
+                                  favoriteSlugs.includes(
+                                    relatedProduct.slug
+                                  )
+                                    ? "currentColor"
+                                    : "none"
+                                }
+                              />
+                            </button>
+
+                            <a
+                              href={`/store/product/${encodeURIComponent(
+                                relatedProduct.slug
+                              )}`}
+                              aria-label={
+                                relatedName
+                              }
+                              style={{
+                                height:
+                                  "132px",
+                                display:
+                                  "grid",
+                                placeItems:
+                                  "center",
+                                overflow:
+                                  "hidden",
+                                background:
+                                  "linear-gradient(135deg, rgba(56,189,248,0.07), rgba(255,255,255,0.02))",
+                                borderBottom:
+                                  "1px solid rgba(255,255,255,0.07)",
+                                textDecoration:
+                                  "none",
+                                color:
+                                  "inherit",
+                              }}
+                            >
+                              {relatedProduct.image_url ? (
+                                <img
+                                  src={
+                                    relatedProduct.image_url
+                                  }
+                                  alt={
+                                    relatedName
+                                  }
+                                  loading="lazy"
+                                  style={{
+                                    width:
+                                      "100%",
+                                    height:
+                                      "100%",
+                                    objectFit:
+                                      "cover",
+                                    display:
+                                      "block",
+                                  }}
+                                />
+                              ) : (
+                                <Package
+                                  size={38}
+                                  strokeWidth={
+                                    1.4
+                                  }
+                                  style={{
+                                    opacity:
+                                      0.45,
+                                  }}
+                                />
+                              )}
+                            </a>
+
+                            <div
+                              style={{
+                                padding:
+                                  "12px",
+                                display:
+                                  "flex",
+                                flexDirection:
+                                  "column",
+                                flex: 1,
+                              }}
+                            >
+                              <div
+                                style={{
+                                  display:
+                                    "flex",
+                                  alignItems:
+                                    "center",
+                                  justifyContent:
+                                    "space-between",
+                                  gap: "7px",
+                                  flexWrap:
+                                    "wrap",
+                                  marginBottom:
+                                    "7px",
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    padding:
+                                      "4px 7px",
+                                    borderRadius:
+                                      "999px",
+                                    border:
+                                      relatedProduct.availability ===
+                                      "in_stock"
+                                        ? "1px solid rgba(34,197,94,0.24)"
+                                        : "1px solid rgba(56,189,248,0.18)",
+                                    background:
+                                      relatedProduct.availability ===
+                                      "in_stock"
+                                        ? "rgba(34,197,94,0.08)"
+                                        : "rgba(56,189,248,0.06)",
+                                    color:
+                                      relatedProduct.availability ===
+                                      "in_stock"
+                                        ? "#86efac"
+                                        : "#7dd3fc",
+                                    fontSize:
+                                      "0.65rem",
+                                    fontWeight:
+                                      850,
+                                  }}
+                                >
+                                  {
+                                    t.availabilityLabels[
+                                      relatedProduct
+                                        .availability
+                                    ]
+                                  }
+                                </span>
+
+                                {relatedProduct.is_featured && (
+                                  <span
+                                    style={{
+                                      fontSize:
+                                        "0.65rem",
+                                      color:
+                                        "#7dd3fc",
+                                      fontWeight:
+                                        850,
+                                    }}
+                                  >
+                                    â˜…{" "}
+                                    {
+                                      t.featured
+                                    }
+                                  </span>
+                                )}
+                              </div>
+
+                              <h3
+                                style={{
+                                  margin: 0,
+                                  fontSize:
+                                    "0.9rem",
+                                  lineHeight:
+                                    1.3,
+                                }}
+                              >
+                                {
+                                  relatedName
+                                }
+                              </h3>
+
+                              {relatedProduct.sku && (
+                                <div
+                                  style={{
+                                    marginTop:
+                                      "5px",
+                                    color:
+                                      "rgba(255,255,255,0.46)",
+                                    fontSize:
+                                      "0.66rem",
+                                  }}
+                                >
+                                  {t.referenceShort}{" "}
+                                  {
+                                    relatedProduct.sku
+                                  }
+                                </div>
+                              )}
+
+                              <div
+                                style={{
+                                  marginTop:
+                                    "auto",
+                                  paddingTop:
+                                    "11px",
+                                  display:
+                                    "flex",
+                                  alignItems:
+                                    "center",
+                                  justifyContent:
+                                    "space-between",
+                                  gap: "8px",
+                                  flexWrap:
+                                    "wrap",
+                                }}
+                              >
+                                <strong
+                                  style={{
+                                    fontSize:
+                                      "0.88rem",
+                                  }}
+                                >
+                                  {relatedProduct.price ===
+                                  null
+                                    ? t.priceOnRequest
+                                    : formatPrice(
+                                        Number(
+                                          relatedProduct.price
+                                        ),
+                                        relatedProduct.currency,
+                                        intlLocale
+                                      )}
+                                </strong>
+
+                                <div
+                                  style={{
+                                    display:
+                                      "flex",
+                                    alignItems:
+                                      "center",
+                                    gap: "6px",
+                                    flexWrap:
+                                      "wrap",
+                                  }}
+                                >
+                                  <a
+                                    href={`/store/product/${encodeURIComponent(
+                                      relatedProduct.slug
+                                    )}`}
+                                    className="button button--secondary"
+                                    style={{
+                                      minHeight:
+                                        "32px",
+                                      padding:
+                                        "0 8px",
+                                      fontSize:
+                                        "0.66rem",
+                                    }}
+                                  >
+                                    {
+                                      t.relatedView
+                                    }
+                                  </a>
+
+                                  <button
+                                    type="button"
+                                    disabled={
+                                      relatedProduct.availability ===
+                                        "out_of_stock" ||
+                                      relatedProduct.availability ===
+                                        "coming_soon"
+                                    }
+                                    onClick={() =>
+                                      addStoreCartItem(
+                                        {
+                                          slug:
+                                            relatedProduct.slug,
+                                          name_fr:
+                                            relatedProduct.name_fr,
+                                          name_nl:
+                                            relatedProduct.name_nl,
+                                          name_en:
+                                            relatedProduct.name_en,
+                                          sku:
+                                            relatedProduct.sku,
+                                          price:
+                                            relatedProduct.price ===
+                                            null
+                                              ? null
+                                              : Number(
+                                                  relatedProduct.price
+                                                ),
+                                          currency:
+                                            relatedProduct.currency,
+                                          image_url:
+                                            relatedProduct.image_url,
+                                        }
+                                      )
+                                    }
+                                    className="button button--primary"
+                                    style={{
+                                      minHeight:
+                                        "32px",
+                                      padding:
+                                        "0 8px",
+                                      fontSize:
+                                        "0.66rem",
+                                      opacity:
+                                        relatedProduct.availability ===
+                                          "out_of_stock" ||
+                                        relatedProduct.availability ===
+                                          "coming_soon"
+                                          ? 0.46
+                                          : 1,
+                                      cursor:
+                                        relatedProduct.availability ===
+                                          "out_of_stock" ||
+                                        relatedProduct.availability ===
+                                          "coming_soon"
+                                          ? "not-allowed"
+                                          : "pointer",
+                                    }}
+                                  >
+                                    <ShoppingBag
+                                      size={
+                                        12
+                                      }
+                                    />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </article>
+                        );
+                      }
+                    )}
+                  </div>
+                </section>
+              )}
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+      <StoreMiniCart language={language} />
+      <ScrollToTop />
+    </>
+  );
+}
+
+export default StoreProduct;
+
+
+===== STORE REFERENCES =====
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 139 | type StoreProduct = {
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 202 | product: StoreProduct | null;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 401 | function StoreProductsPanel() {
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 571 | "storeProductQuantityInvalidDetail",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 581 | "storeProductUnitPriceInvalidDetail",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 611 | "storeProductsInOrderCount",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 667 | product: StoreProduct
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 701 | return `TSB Store · ${formatAdminCopy(
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 762 | useState<StoreProduct[]>([]);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1042 | "Produit TSB Store",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1043 | "TSB Store-product",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1044 | "TSB Store product"
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1168 | "TSB Store"
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1315 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1471 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1554 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1632 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1731 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1913 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1928 | ? `TSB Store · ${invoiceSourceItems.length} produits`
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2045 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3324 | .from("store_orders")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3435 | ? `TSB Store · ${requestItems.length} produits`
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3442 | .from("store_orders")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3558 | .from("store_orders")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3690 | .from("store_orders")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4155 | .from("store_orders")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5328 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5341 | "Erreur chargement TSB Store :",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5357 | (data ?? []) as StoreProduct[]
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5476 | product: StoreProduct
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5904 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5934 | ? (data as StoreProduct)
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5940 | at("storeProductUpdated")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5947 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5960 | data as StoreProduct,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5966 | at("storeProductAdded")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5976 | "Erreur produit TSB Store :",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 6009 | product: StoreProduct
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 6038 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 6092 | at("storeProductDeleted")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 6149 | TSB STORE
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 6905 | {at("storeProductPhoto")}
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 7016 | "Publier dans TSB Store",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 7017 | "Publiceren in TSB Store",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 7018 | "Publish in TSB Store"
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 7832 | "Aucune demande TSB Store pour le moment.",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 7833 | "Nog geen TSB Store-aanvragen.",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 7834 | "No TSB Store requests yet."
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 10174 | export default StoreProductsPanel;
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 220 | <a href="/store">
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 558 | <a href="/store" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 574 | href="/store"
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 779 | href="/store"
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 49 | "TSB Store",
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 68 | "TSB Store": ShoppingBag,
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 84 | type StoreProductRequest = {
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 219 | "TSB Store": "store",
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 276 | const getLocalizedStoreProductName = (
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 894 | PANIER TSB STORE
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 897 | On transforme le panier en une demande TSB Store lisible
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1006 | getLocalizedStoreProductName(
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1144 | "TSB Store"
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1157 | "Erreur récupération panier TSB Store :",
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1169 | PRODUIT TSB STORE
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1172 | une demande TSB Store et on l'amène directement à l'étape
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1208 | ) as Partial<StoreProductRequest>;
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1225 | getLocalizedStoreProductName(
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1226 | product as StoreProductRequest
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1259 | "TSB Store"
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1276 | "Erreur récupération produit TSB Store :",
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1424 | "Nettoyage panier TSB Store :",
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 104 | ? "/store"
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 17 | import { storeMiniCartTranslations } from "../i18n/locales/storeMiniCart";
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 186 | function StoreMiniCart({
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 204 | storeMiniCartTranslations,
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 206 | `storeMiniCart.${key}`
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 423 | "Erreur préparation demande panier TSB Store :",
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 557 | TSB STORE
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 647 | href="/store#catalogue"
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 688 | href={`/store/product/${encodeURIComponent(
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 762 | href={`/store/product/${encodeURIComponent(
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 1173 | export default StoreMiniCart;
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3640 | "storeProductRequestTitle": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3641 | fr: "Demande produit TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3642 | nl: "TSB Store productaanvraag",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3643 | en: "TSB Store product request",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3644 | de: "TSB Store Produktanfrage",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3645 | es: "Solicitud de producto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3646 | it: "Richiesta prodotto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3647 | pt: "Pedido de produto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3648 | ar: "طلب منتج من TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3649 | tr: "TSB Store ürün talebi",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3650 | zh: "TSB Store 产品请求",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3676 | "storeProductRequestClosing": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4109 | fr: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4110 | nl: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4111 | en: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4112 | de: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4113 | es: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4114 | it: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4115 | pt: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4116 | ar: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4117 | tr: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4118 | zh: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4828 | "storeTsbStoreProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4829 | fr: "Produit TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4830 | nl: "TSB Store-product",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4831 | en: "TSB Store product",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4832 | de: "TSB Store-Produkt",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4833 | es: "Producto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4834 | it: "Prodotto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4835 | pt: "Produto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4836 | ar: "منتج TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4837 | tr: "TSB Store ürünü",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4838 | zh: "TSB Store 产品",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5284 | "storeProductManagement": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5392 | "storeProducts": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5524 | "storeProductNameFR": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5633 | fr: "Publier dans TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5634 | nl: "Publiceren in TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5635 | en: "Publish in TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5636 | de: "Im TSB Store veröffentlichen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5637 | es: "Publicar en TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5638 | it: "Pubblica in TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5639 | pt: "Publicar na TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5640 | ar: "النشر في TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5641 | tr: "TSB Store'da yayınla",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5642 | zh: "发布到 TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5801 | fr: "Aucune demande TSB Store pour le moment.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5802 | nl: "Nog geen TSB Store-aanvragen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5803 | en: "No TSB Store requests yet.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5804 | de: "Noch keine TSB Store-Anfragen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5805 | es: "Aún no hay solicitudes de TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5806 | it: "Nessuna richiesta TSB Store per ora.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5807 | pt: "Ainda não existem pedidos TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5808 | ar: "لا توجد طلبات TSB Store حتى الآن.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5809 | tr: "Henüz TSB Store talebi yok.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5810 | zh: "暂时没有 TSB Store 请求。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5812 | "storeProductREQUEST": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5920 | "storeProductsSubtotal": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6220 | "storeProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6400 | "storeProductPricesAndOrderSaved": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6448 | "storeProductPhoto": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6520 | "storeProductUpdated": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6532 | "storeProductAdded": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6533 | fr: "Le produit a été ajouté à TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6534 | nl: "Het product is toegevoegd aan TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6535 | en: "The product has been added to TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6536 | de: "Das Produkt wurde zum TSB Store hinzugefügt.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6537 | es: "El producto se ha añadido a TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6538 | it: "Il prodotto è stato aggiunto a TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6539 | pt: "O produto foi adicionado à TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6540 | ar: "تمت إضافة المنتج إلى TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6541 | tr: "Ürün TSB Store'a eklendi.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6542 | zh: "产品已添加到 TSB Store。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6544 | "storeProductDeleted": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6664 | "storeProductQuantityInvalidDetail": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6676 | "storeProductUnitPriceInvalidDetail": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6712 | "storeProductsInOrderCount": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 39 | opportunities: { automotive: "Automobile & mobilité", energy: "Énergie", water: "Eau & forage", security: "Sécurité", automation: "Automatisation", networks: "Réseaux & télécommunications", digital: "Digital & technologies", academy: "TSB Academy", store: "TSB Store", projects: "Projets spéciaux" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 87 | opportunities: { automotive: "Automotive & mobiliteit", energy: "Energie", water: "Water & boringen", security: "Beveiliging", automation: "Automatisering", networks: "Netwerken & telecom", digital: "Digital & technologie", academy: "TSB Academy", store: "TSB Store", projects: "Speciale projecten" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 119 | opportunities: { automotive: "Automotive & mobility", energy: "Energy", water: "Water & drilling", security: "Security", automation: "Automation", networks: "Networks & telecom", digital: "Digital & technology", academy: "TSB Academy", store: "TSB Store", projects: "Special projects" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 135 | opportunitiesEyebrow: "CHANCENBEREICHE", opportunitiesTitle: "Ein multisektorales Ökosystem", opportunitiesIntro: "Chancen können mehrere aktuelle oder zukünftige Bereiche der TSB Tech Group betreffen.", opportunities: { automotive: "Automotive & Mobilität", energy: "Energie", water: "Wasser & Bohrungen", security: "Sicherheit", automation: "Automatisierung", networks: "Netzwerke & Telekom", digital: "Digital & Technologie", academy: "TSB Academy", store: "TSB Store", projects: "Sonderprojekte" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 148 | opportunitiesEyebrow: "SECTORES DE OPORTUNIDAD", opportunitiesTitle: "Un ecosistema multisectorial", opportunitiesIntro: "Las oportunidades pueden abarcar varias áreas actuales o futuras de TSB Tech Group.", opportunities: { automotive: "Automoción y movilidad", energy: "Energía", water: "Agua y perforación", security: "Seguridad", automation: "Automatización", networks: "Redes y telecom", digital: "Digital y tecnología", academy: "TSB Academy", store: "TSB Store", projects: "Proyectos especiales" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 161 | opportunitiesEyebrow: "SETTORI DI OPPORTUNITÀ", opportunitiesTitle: "Un ecosistema multisettoriale", opportunitiesIntro: "Le opportunità possono riguardare diversi poli attuali o futuri di TSB Tech Group.", opportunities: { automotive: "Automotive & mobilità", energy: "Energia", water: "Acqua & perforazione", security: "Sicurezza", automation: "Automazione", networks: "Reti & telecom", digital: "Digitale & tecnologia", academy: "TSB Academy", store: "TSB Store", projects: "Progetti speciali" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 174 | opportunitiesEyebrow: "SETORES DE OPORTUNIDADE", opportunitiesTitle: "Um ecossistema multissetorial", opportunitiesIntro: "As oportunidades podem envolver vários polos atuais ou futuros da TSB Tech Group.", opportunities: { automotive: "Automóvel & mobilidade", energy: "Energia", water: "Água & perfuração", security: "Segurança", automation: "Automação", networks: "Redes & telecom", digital: "Digital & tecnologia", academy: "TSB Academy", store: "TSB Store", projects: "Projetos especiais" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 187 | opportunitiesEyebrow: "قطاعات الفرص", opportunitiesTitle: "منظومة متعددة القطاعات", opportunitiesIntro: "يمكن أن تشمل الفرص عدة مجالات حالية أو مستقبلية في TSB Tech Group.", opportunities: { automotive: "السيارات والتنقل", energy: "الطاقة", water: "المياه والحفر", security: "الأمن", automation: "الأتمتة", networks: "الشبكات والاتصالات", digital: "الرقمنة والتكنولوجيا", academy: "TSB Academy", store: "TSB Store", projects: "مشاريع خاصة" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 200 | opportunitiesEyebrow: "FIRSAT ALANLARI", opportunitiesTitle: "Çok sektörlü bir ekosistem", opportunitiesIntro: "Fırsatlar TSB Tech Group’un mevcut veya gelecekteki farklı alanlarını kapsayabilir.", opportunities: { automotive: "Otomotiv & mobilite", energy: "Enerji", water: "Su & sondaj", security: "Güvenlik", automation: "Otomasyon", networks: "Ağlar & telekom", digital: "Dijital & teknoloji", academy: "TSB Academy", store: "TSB Store", projects: "Özel projeler" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 213 | opportunitiesEyebrow: "机会领域", opportunitiesTitle: "多行业生态体系", opportunitiesIntro: "机会可涉及 TSB Tech Group 当前或未来的多个业务板块。", opportunities: { automotive: "汽车与出行", energy: "能源", water: "水务与钻探", security: "安全", automation: "自动化", networks: "网络与通信", digital: "数字与技术", academy: "TSB Academy", store: "TSB Store", projects: "专项项目" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 89 | "openTsbStore": "Accéder à TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 128 | "tsbStore": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 254 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 287 | "tsbStore": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 291 | "title": "Demande produit TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 431 | "openTsbStore": "Naar TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 470 | "tsbStore": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 596 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 629 | "tsbStore": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 633 | "title": "TSB Store productaanvraag",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 773 | "openTsbStore": "Open TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 812 | "tsbStore": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 938 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 971 | "tsbStore": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 975 | "title": "TSB Store product request",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1115 | "openTsbStore": "TSB Store öffnen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1154 | "tsbStore": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1280 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1313 | "tsbStore": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1317 | "title": "TSB Store Produktanfrage",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1457 | "openTsbStore": "Abrir TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1496 | "tsbStore": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1622 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1655 | "tsbStore": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1659 | "title": "Solicitud de producto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1799 | "openTsbStore": "Apri TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1838 | "tsbStore": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1964 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1997 | "tsbStore": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2001 | "title": "Richiesta prodotto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2141 | "openTsbStore": "Abrir TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2180 | "tsbStore": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2306 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2339 | "tsbStore": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2343 | "title": "Pedido de produto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2483 | "openTsbStore": "فتح TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2522 | "tsbStore": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2648 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2681 | "tsbStore": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2685 | "title": "طلب منتج من TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2825 | "openTsbStore": "TSB Store'u aç",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2864 | "tsbStore": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2990 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3023 | "tsbStore": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3027 | "title": "TSB Store ürün talebi",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3167 | "openTsbStore": "打开 TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3206 | "tsbStore": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3332 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3365 | "tsbStore": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3369 | "title": "TSB Store 产品询价",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 43 | emailSubject: "Demande produit TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 92 | emailSubject: "Productaanvraag TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 141 | emailSubject: "TSB Store product request",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 190 | emailSubject: "TSB Store Produktanfrage",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 239 | emailSubject: "Solicitud de producto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 288 | emailSubject: "Richiesta prodotto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 337 | emailSubject: "Pedido de produto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 386 | emailSubject: "طلب منتج من TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 435 | emailSubject: "TSB Store ürün talebi",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\contact.ts | ligne 484 | emailSubject: "TSB Store 产品咨询",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 18 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 50 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 82 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 114 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 146 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 178 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 210 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 242 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 274 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 306 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 23 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 59 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 95 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 131 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 167 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 203 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 239 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 275 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 311 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 347 | store: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 23 | "Notre architecture modulaire permettra d’intégrer progressivement TSB Academy, TSB Store, l’espace client, le support et de nouveaux services numériques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 54 | "Onze modulaire architectuur maakt het mogelijk om geleidelijk TSB Academy, TSB Store, de klantenzone, support en nieuwe digitale diensten te integreren.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 85 | "Our modular architecture will progressively integrate TSB Academy, TSB Store, the client area, support and new digital services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 116 | "Unsere modulare Architektur ermöglicht die schrittweise Integration von TSB Academy, TSB Store, Kundenbereich, Support und neuen digitalen Diensten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 147 | "Nuestra arquitectura modular permitirá integrar progresivamente TSB Academy, TSB Store, el espacio cliente, soporte y nuevos servicios digitales.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 178 | "La nostra architettura modulare consentirà di integrare progressivamente TSB Academy, TSB Store, area clienti, supporto e nuovi servizi digitali.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 209 | "A nossa arquitetura modular permitirá integrar progressivamente a TSB Academy, a TSB Store, a área de cliente, o suporte e novos serviços digitais.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 240 | "ستتيح بنيتنا المعيارية دمج TSB Academy وTSB Store ومنطقة العملاء والدعم وخدمات رقمية جديدة بشكل تدريجي.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 271 | "Modüler mimarimiz TSB Academy, TSB Store, müşteri alanı, destek ve yeni dijital hizmetlerin kademeli olarak entegre edilmesini sağlayacak.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 302 | "我们的模块化架构将逐步整合 TSB Academy、TSB Store、客户空间、支持以及新的数字服务。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 35 | "Notre architecture modulaire permettra d’intégrer progressivement TSB Academy, TSB Store, l’espace client, le support et de nouveaux services numériques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 39 | "TSB Academy, TSB Store, l’espace client, le support et les futurs projets pourront ainsi être intégrés progressivement.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 90 | "Onze modulaire architectuur maakt het mogelijk om geleidelijk TSB Academy, TSB Store, de klantenzone, support en nieuwe digitale diensten te integreren.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 94 | "TSB Academy, TSB Store, de klantenzone, support en toekomstige projecten kunnen zo stap voor stap worden geïntegreerd.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 145 | "Our modular architecture will progressively integrate TSB Academy, TSB Store, the client area, support and new digital services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 149 | "TSB Academy, TSB Store, the client area, support and future projects can therefore be integrated progressively.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 200 | "Unsere modulare Architektur ermöglicht die schrittweise Integration von TSB Academy, TSB Store, Kundenbereich, Support und neuen digitalen Diensten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 204 | "TSB Academy, TSB Store, Kundenbereich, Support und zukünftige Projekte können so schrittweise integriert werden.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 255 | "Nuestra arquitectura modular permitirá integrar progresivamente TSB Academy, TSB Store, el área de cliente, soporte y nuevos servicios digitales.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 259 | "TSB Academy, TSB Store, el área de cliente, soporte y futuros proyectos podrán integrarse paso a paso.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 310 | "La nostra architettura modulare permetterà di integrare progressivamente TSB Academy, TSB Store, area clienti, supporto e nuovi servizi digitali.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 314 | "TSB Academy, TSB Store, area clienti, supporto e progetti futuri potranno così essere integrati gradualmente.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 365 | "A nossa arquitetura modular permitirá integrar progressivamente TSB Academy, TSB Store, área de cliente, suporte e novos serviços digitais.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 369 | "TSB Academy, TSB Store, área de cliente, suporte e futuros projetos poderão assim ser integrados gradualmente.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 420 | "ستسمح بنيتنا المعيارية بدمج TSB Academy وTSB Store ومساحة العميل والدعم وخدمات رقمية جديدة تدريجيًا.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 424 | "يمكن بذلك دمج TSB Academy وTSB Store ومساحة العميل والدعم والمشاريع المستقبلية تدريجيًا.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 475 | "Modüler mimarimiz TSB Academy, TSB Store, müşteri alanı, destek ve yeni dijital hizmetlerin aşamalı entegrasyonunu sağlayacak.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 479 | "TSB Academy, TSB Store, müşteri alanı, destek ve gelecekteki projeler böylece adım adım entegre edilebilecek.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 530 | "我们的模块化架构将逐步整合 TSB Academy、TSB Store、客户空间、支持以及新的数字服务。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 534 | "TSB Academy、TSB Store、客户空间、支持以及未来项目都可以逐步集成。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 60 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 81 | "cartTitle": "Demande panier TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 91 | "productRequestTitle": "Demande produit TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 153 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 174 | "cartTitle": "TSB Store winkelwagenaanvraag",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 184 | "productRequestTitle": "TSB Store productaanvraag",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 246 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 267 | "cartTitle": "TSB Store cart request",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 277 | "productRequestTitle": "TSB Store product request",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 339 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 360 | "cartTitle": "TSB Store Warenkorbanfrage",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 370 | "productRequestTitle": "TSB Store Produktanfrage",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 432 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 453 | "cartTitle": "Solicitud de carrito TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 463 | "productRequestTitle": "Solicitud de producto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 525 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 546 | "cartTitle": "Richiesta carrello TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 556 | "productRequestTitle": "Richiesta prodotto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 618 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 639 | "cartTitle": "Pedido do carrinho TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 649 | "productRequestTitle": "Pedido de produto TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 711 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 732 | "cartTitle": "طلب سلة TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 742 | "productRequestTitle": "طلب منتج من TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 804 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 825 | "cartTitle": "TSB Store sepet talebi",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 835 | "productRequestTitle": "TSB Store ürün talebi",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 897 | "store": "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 918 | "cartTitle": "TSB Store 购物车询价",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 928 | "productRequestTitle": "TSB Store 产品询价",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 90 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 196 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 302 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 408 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 514 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 620 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 726 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 832 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 938 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 1044 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 74 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 165 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 256 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 347 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 438 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 529 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 620 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 711 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 802 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 893 | title: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 6 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 9 | "intro": "TSB Store est l’espace commercial de TSB Tech Group dédié aux équipements, outils, accessoires et solutions sélectionnés pour les particuliers et les professionnels.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 13 | "launchTitle": "Le catalogue TSB Store prend forme",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 102 | "description": "Produits, accessoires, équipements et solutions complémentaires ne relevant pas directement des autres domaines du TSB Store."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 109 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 112 | "intro": "TSB Store is de commerciële ruimte van TSB Tech Group voor apparatuur, tools, accessoires en geselecteerde oplossingen voor particulieren en professionals.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 116 | "launchTitle": "De TSB Store-catalogus krijgt vorm",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 205 | "description": "Aanvullende producten, accessoires, apparatuur en oplossingen die niet rechtstreeks onder de andere TSB Store-domeinen vallen."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 212 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 215 | "intro": "TSB Store is the commercial space of TSB Tech Group dedicated to equipment, tools, accessories and selected solutions for individuals and professionals.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 219 | "launchTitle": "The TSB Store catalogue is taking shape",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 308 | "description": "Additional products, accessories, equipment and solutions that do not directly fall under the other TSB Store sectors."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 315 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 318 | "intro": "TSB Store ist der Handelsbereich von TSB Tech Group für ausgewählte Ausrüstung, Werkzeuge, Zubehör und Lösungen für Privatpersonen und Fachleute.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 418 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 421 | "intro": "TSB Store es el espacio comercial de TSB Tech Group dedicado a equipos, herramientas, accesorios y soluciones seleccionadas para particulares y profesionales.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 425 | "launchTitle": "El catálogo de TSB Store va tomando forma",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 514 | "description": "Productos, accesorios, equipos y soluciones complementarias fuera de las demás áreas de TSB Store."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 521 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 524 | "intro": "TSB Store è lo spazio commerciale di TSB Tech Group dedicato ad attrezzature, strumenti, accessori e soluzioni selezionate per privati e professionisti.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 528 | "launchTitle": "Il catalogo TSB Store prende forma",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 617 | "description": "Prodotti, accessori, attrezzature e soluzioni complementari fuori dalle altre aree del TSB Store."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 624 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 627 | "intro": "A TSB Store é o espaço comercial da TSB Tech Group dedicado a equipamentos, ferramentas, acessórios e soluções selecionadas para particulares e profissionais.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 631 | "launchTitle": "O catálogo TSB Store está a ganhar forma",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 720 | "description": "Produtos, acessórios, equipamentos e soluções complementares fora das restantes áreas da TSB Store."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 727 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 730 | "intro": "TSB Store هي المساحة التجارية التابعة لـ TSB Tech Group والمخصصة للمعدات والأدوات والملحقات والحلول المختارة للأفراد والمهنيين.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 734 | "launchTitle": "كتالوج TSB Store يتوسع تدريجيًا",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 823 | "description": "منتجات وملحقات ومعدات وحلول إضافية لا تندرج مباشرة ضمن أقسام TSB Store الأخرى."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 830 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 833 | "intro": "TSB Store, TSB Tech Group’un bireyler ve profesyoneller için seçilmiş ekipman, araç, aksesuar ve çözümlere ayrılmış ticari alanıdır.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 837 | "launchTitle": "TSB Store kataloğu şekilleniyor",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 926 | "description": "TSB Store’un diğer alanlarına doğrudan girmeyen tamamlayıcı ürünler, aksesuarlar, ekipmanlar ve çözümler."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 933 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 936 | "intro": "TSB Store 是 TSB Tech Group 面向个人和专业用户提供精选设备、工具、配件和解决方案的商业空间。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 940 | "launchTitle": "TSB Store 目录正在逐步完善",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 1029 | "description": "不直接属于 TSB Store 其他类别的补充产品、配件、设备和解决方案。"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 3 | export const storeMiniCartTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 5 | storeMiniCart: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 7 | title: "Mini-panier TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 28 | storeMiniCart: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 30 | title: "TSB Store mini-winkelwagen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 51 | storeMiniCart: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 53 | title: "TSB Store mini cart",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 74 | storeMiniCart: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 76 | title: "TSB Store Mini-Warenkorb",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 97 | storeMiniCart: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 99 | title: "Mini carrito TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 120 | storeMiniCart: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 122 | title: "Mini carrello TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 143 | storeMiniCart: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 145 | title: "Mini carrinho TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 166 | storeMiniCart: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 168 | title: "سلة TSB Store المصغرة",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 189 | storeMiniCart: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 191 | title: "TSB Store mini sepet",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 212 | storeMiniCart: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeMiniCart.ts | ligne 214 | title: "TSB Store 迷你购物车",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 3 | export const storeProductTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 5 | "storeProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 6 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 11 | "backStore": "Retour à TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 32 | "relatedIntro": "Découvrez d’autres références disponibles dans le même domaine TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 52 | "storeProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 53 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 58 | "backStore": "Terug naar TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 79 | "relatedIntro": "Ontdek andere beschikbare referenties binnen hetzelfde TSB Store-domein.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 99 | "storeProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 100 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 105 | "backStore": "Back to TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 126 | "relatedIntro": "Discover other available references in the same TSB Store sector.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 146 | "storeProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 147 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 152 | "backStore": "Zurück zum TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 193 | "storeProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 194 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 199 | "backStore": "Volver a TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 220 | "relatedIntro": "Descubra otras referencias disponibles en la misma categoría de TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 240 | "storeProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 241 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 246 | "backStore": "Torna a TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 267 | "relatedIntro": "Scopri altri riferimenti disponibili nello stesso settore TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 287 | "storeProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 288 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 293 | "backStore": "Voltar à TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 314 | "relatedIntro": "Descubra outras referências disponíveis na mesma área da TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 334 | "storeProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 335 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 340 | "backStore": "العودة إلى TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 361 | "relatedIntro": "اكتشف مراجع أخرى متاحة في نفس مجال TSB Store.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 381 | "storeProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 382 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 387 | "backStore": "TSB Store’a dön",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 408 | "relatedIntro": "Aynı TSB Store alanındaki diğer mevcut ürünleri keşfedin.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 428 | "storeProduct": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 429 | "eyebrow": "TSB STORE",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 434 | "backStore": "返回 TSB Store",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\storeProduct.ts | ligne 455 | "relatedIntro": "查看 TSB Store 同一类别中的其他可用产品。",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 42 | import StoreProductsPanel from "../../components/admin/StoreProductsPanel";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 154 | type StoreProductTranslation = {
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 791 | storeProductTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 792 | setStoreProductTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 793 | ] = useState<StoreProductTranslation[]>([]);
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 805 | storeProductsResult,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 881 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1010 | if (storeProductsResult.error) {
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1012 | "Traductions TSB Store indisponibles :",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1013 | storeProductsResult.error
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1016 | setStoreProductTranslations([]);
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1018 | setStoreProductTranslations(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1019 | (storeProductsResult.data ??
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1020 | []) as StoreProductTranslation[]
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2929 | "tsb store"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2958 | storeProductTranslations.find(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3021 | at("storeProductRequestTitle"),
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3029 | at("storeProductRequestClosing"),
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9977 | <StoreProductsPanel />
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 144 | type StoreProductTranslation = {
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 375 | storeProductTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 376 | setStoreProductTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 377 | ] = useState<StoreProductTranslation[]>([]);
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 785 | storeProductsResult,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 871 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 881 | .from("store_orders")
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 894 | .from("store_invoices")
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 944 | if (storeProductsResult.error) {
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 946 | "Traductions TSB Store indisponibles :",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 947 | storeProductsResult.error
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 950 | setStoreProductTranslations([]);
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 952 | setStoreProductTranslations(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 953 | (storeProductsResult.data ??
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 954 | []) as StoreProductTranslation[]
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1317 | "TSB Store": "services.tsbStore",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1420 | storeProductTranslations.find(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1549 | return `TSB Store - ${productCount} ${productUnit}`;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1553 | storeProductTranslations.find(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1958 | return `TSB Store - ${productCount} ${productUnit}`;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1962 | storeProductTranslations.find(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 3477 | table: "store_orders",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 3561 | table: "store_invoices",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4403 | "tsb store"
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4432 | storeProductTranslations.find(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5011 | href="/store"
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 31 | type StoreProduct = {
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 82 | useState<StoreProduct | null>(null);
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 107 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 127 | (data ?? null) as StoreProduct | null
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 26 | import StoreMiniCart, {
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 28 | } from "../../components/StoreMiniCart";
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 31 | import { storeTranslations } from "../../i18n/locales/store";
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 56 | type StoreProduct = {
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 83 | | StoreProduct["availability"];
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 130 | product: StoreProduct,
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 174 | product: StoreProduct,
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 311 | const [storeProducts, setStoreProducts] =
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 312 | useState<StoreProduct[]>([]);
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 365 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 383 | "Erreur chargement produits TSB Store :",
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 386 | setStoreProducts([]);
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 391 | setStoreProducts(
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 392 | (data ?? []) as StoreProduct[]
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 420 | product: StoreProduct
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 428 | storeProducts.filter((product) => {
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 564 | storeProducts,
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 607 | ? storeProducts.length
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 608 | : storeProducts.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 616 | StoreProduct["availability"]
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 709 | /* TSB Store Premium UI */
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 1627 | {storeProducts.length > 0 ? (
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 1628 | storeProducts.slice(0, 3).map((product) => {
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 2056 | href={`/store/product/${encodeURIComponent(
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 2258 | <StoreMiniCart language={language} />
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 22 | import StoreMiniCart, {
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 24 | } from "../../components/StoreMiniCart";
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 29 | import { storeProductTranslations } from "../../i18n/locales/storeProduct";
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 45 | type StoreProductData = {
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 84 | product: StoreProductData,
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 115 | product: StoreProductData,
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 202 | function StoreProduct() {
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 211 | storeProductTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 213 | `storeProduct.${key}`
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 263 | useState<StoreProductData | null>(null);
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 277 | ] = useState<StoreProductData[]>([]);
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 320 | const prefix = "/store/product/";
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 353 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 380 | data as StoreProductData
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 404 | .from("store_products")
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 433 | (data ?? []) as StoreProductData[]
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 456 | `${name} | TSB Store`;
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 502 | href="/store#catalogue"
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 578 | href="/store#catalogue"
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 648 | TSB STORE
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 1312 | href="/store#catalogue"
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 1442 | href={`/store/product/${encodeURIComponent(
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 1660 | href={`/store/product/${encodeURIComponent(
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 1758 | <StoreMiniCart language={language} />
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 1764 | export default StoreProduct;
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 241 | label: "TSB Store",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 244 | services: ["Store", "TSB Store", "Boutique", "Boutique en ligne"],
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 21 | const Store = lazy(() => import("./pages/Store"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 23 | const StoreProduct = lazy(
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 24 | () => import("./pages/StoreProduct")
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 77 | const isStoreProductPath =
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 78 | path.startsWith("/store/product/") &&
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 79 | path.length > "/store/product/".length;
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 103 | } else if (path === "/store") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 105 | } else if (isStoreProductPath) {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 106 | page = <StoreProduct />;

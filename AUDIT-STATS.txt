@@ -1,0 +1,1098 @@
+﻿===== STATS COMPONENT =====
+import {
+  Headphones,
+  LayoutGrid,
+  ShieldCheck,
+  Users,
+  Wrench,
+} from "lucide-react";
+
+import { useLanguage } from "../../context/LanguageContext";
+import { translate } from "../../i18n";
+import { statsTranslations } from "../../i18n/locales/stats";
+
+const statConfig = [
+  {
+    id: "interventions",
+    value: "+5000",
+    icon: Wrench,
+  },
+  {
+    id: "clients",
+    value: "+3500",
+    icon: Users,
+  },
+  {
+    id: "domains",
+    value: "Multi",
+    icon: LayoutGrid,
+  },
+  {
+    id: "support",
+    value: "24/7",
+    icon: Headphones,
+  },
+  {
+    id: "quality",
+    value: "100%",
+    icon: ShieldCheck,
+  },
+] as const;
+
+function Stats() {
+  const { locale } = useLanguage();
+
+  const t = (key: string) =>
+    translate(
+      statsTranslations,
+      locale,
+      `stats.${key}`
+    );
+
+  return (
+    <section
+      className="stats-section"
+      aria-label={t("ariaLabel")}
+    >
+      <div className="container stats-grid">
+        {statConfig.map(({ id, value, icon: Icon }) => (
+          <article className="stat-item" key={id}>
+            <div className="stat-icon">
+              <Icon size={30} strokeWidth={1.7} />
+            </div>
+
+            <div>
+              <strong>{value}</strong>
+              <span>{t(`labels.${id}`)}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export default Stats;
+
+
+===== STATS I18N / REFERENCES =====
+C:\TSB\TSB-Tech-Group\src\components\admin\AdminNavigation.tsx | ligne 22 | | "clients"
+C:\TSB\TSB-Tech-Group\src\components\admin\AdminNavigation.tsx | ligne 50 | id: "clients",
+C:\TSB\TSB-Tech-Group\src\components\admin\AdminNavigation.tsx | ligne 51 | labelKey: "clients",
+C:\TSB\TSB-Tech-Group\src\components\admin\AdminNavigation.tsx | ligne 197 | ? "99+"
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 43 | type ClientService = {
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 71 | const CLIENTS_PER_PAGE = 8;
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 73 | type ClientsPanelProps = {
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 76 | services?: ClientService[];
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 88 | function ClientsPanel({
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 94 | }: ClientsPanelProps) {
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 231 | Math.ceil(organizedProfiles.length / CLIENTS_PER_PAGE)
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 241 | (safeClientPage - 1) * CLIENTS_PER_PAGE;
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 245 | start + CLIENTS_PER_PAGE
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 468 | {at("backToClients")}
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 865 | {at("clientServices")}
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1022 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1156 | LISTE DES CLIENTS
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1178 | <span className="login-card__eyebrow">{at("clientsUpper")}</span>
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1229 | top: "50%",
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1230 | transform: "translateY(-50%)",
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1245 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1320 | ? at("registeredClientSingular")
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1321 | : at("registeredClientsPlural")}
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1619 | {organizedProfiles.length > CLIENTS_PER_PAGE && (
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1687 | Math.min(totalClientPages, page + 1)
+C:\TSB\TSB-Tech-Group\src\components\admin\ClientsPanel.tsx | ligne 1717 | export default ClientsPanel;
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 50 | type ClientService = {
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 138 | clientServices,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 139 | setClientServices,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 140 | ] = useState<ClientService[]>([]);
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 262 | CLIENTS
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 467 | const filteredClientServices = useMemo(() => {
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 472 | return clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 473 | (clientService) => {
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 475 | clientService.status === "completed" ||
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 476 | clientService.status === "cancelled";
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 494 | clientService.status !==
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 505 | clientService.user_id
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 509 | clientService.service,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 511 | clientService.service
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 513 | clientService.title,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 514 | clientService.description ?? "",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 515 | clientService.status,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 517 | clientService.status
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 531 | clientServices,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 540 | clientService: ClientService
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 542 | serviceStatusDrafts[clientService.id] ?? clientService.status;
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 545 | all: clientServices.length,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 546 | planned: clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 547 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 548 | getEffectiveServiceStatus(clientService) === "planned"
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 550 | scheduled: clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 551 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 552 | getEffectiveServiceStatus(clientService) === "scheduled"
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 554 | in_progress: clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 555 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 556 | getEffectiveServiceStatus(clientService) === "in_progress"
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 558 | completed: clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 559 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 560 | getEffectiveServiceStatus(clientService) === "completed"
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 562 | cancelled: clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 563 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 564 | getEffectiveServiceStatus(clientService) === "cancelled"
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 569 | serviceStatusCounts.planned +
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 570 | serviceStatusCounts.scheduled +
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 574 | serviceStatusCounts.completed +
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 580 | filteredClientServices.length /
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 590 | const paginatedClientServices =
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 591 | filteredClientServices.slice(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 632 | setClientServices(data ?? []);
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 745 | setClientServices(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 767 | : at("serviceAddedToClientSuccess")
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 780 | clientService: ClientService,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 791 | clientService.id
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 801 | ? clientService.completed_at ||
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 812 | .eq("id", clientService.id);
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 829 | setClientServices((previous) =>
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 832 | clientService.id
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 846 | delete next[clientService.id];
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 850 | onStatusUpdated?.(clientService.id, newStatus);
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 864 | clientService: ClientService
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 867 | clientService.id
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 871 | clientService.title
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 875 | clientService.description || ""
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 879 | clientService.status
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 884 | clientService.scheduled_at
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 907 | clientService: ClientService
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 953 | ? clientService.completed_at ||
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 970 | .eq("id", clientService.id);
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 987 | setClientServices((previous) =>
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 990 | clientService.id
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1062 | {clientServices.length}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1215 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1294 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1334 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1391 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1460 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1541 | ["all", at("allServicesView"), clientServices.length, "rgba(255,255,255,0.72)"],
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1617 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1668 | clientServices.length > 0 && (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1677 | {filteredClientServices.length}{" "}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1679 | filteredClientServices.length === 1
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1690 | ) : clientServices.length === 0 ? (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1692 | {at("noClientServiceIsCurrentlyRecorded")}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1694 | ) : filteredClientServices.length === 0 ? (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1705 | {paginatedClientServices.map(
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1706 | (clientService) => {
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1709 | clientService.service
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1714 | clientService.user_id
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1718 | clientService.quote_request_id
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1720 | clientService.quote_request_id
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1726 | clientService.id;
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1730 | key={clientService.id}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1762 | clientService.service
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1773 | {clientService.title}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1790 | : clientService.user_id}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1793 | {clientService.quote_request_id && (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1833 | serviceStatusDrafts[clientService.id] ??
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1834 | clientService.status
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1839 | [clientService.id]: event.target.value,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1844 | clientService.id ||
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1853 | serviceStatusDrafts[clientService.id] &&
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1854 | serviceStatusDrafts[clientService.id] !==
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1855 | clientService.status
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1884 | clientService,
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1885 | serviceStatusDrafts[clientService.id] ??
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1886 | clientService.status
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1890 | updatingServiceId === clientService.id ||
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1892 | !serviceStatusDrafts[clientService.id] ||
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1893 | serviceStatusDrafts[clientService.id] ===
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1894 | clientService.status
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1902 | serviceStatusDrafts[clientService.id] &&
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1903 | serviceStatusDrafts[clientService.id] !==
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1904 | clientService.status
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1908 | serviceStatusDrafts[clientService.id] &&
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1909 | serviceStatusDrafts[clientService.id] !==
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1910 | clientService.status
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1916 | {updatingServiceId === clientService.id
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1926 | clientService
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1932 | clientService.id
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1959 | clientService
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1979 | htmlFor={`edit-title-${clientService.id}`}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 1985 | id={`edit-title-${clientService.id}`}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2001 | htmlFor={`edit-status-${clientService.id}`}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2007 | id={`edit-status-${clientService.id}`}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2018 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2051 | htmlFor={`edit-date-${clientService.id}`}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2057 | id={`edit-date-${clientService.id}`}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2081 | htmlFor={`edit-description-${clientService.id}`}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2087 | id={`edit-description-${clientService.id}`}
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2099 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2168 | {clientService.description && (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2180 | clientService.description
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2208 | clientService.status
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2212 | {clientService.scheduled_at && (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2227 | clientService.scheduled_at
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2232 | {clientService.completed_at && (
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2249 | clientService.completed_at
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2264 | filteredClientServices.length >
+C:\TSB\TSB-Tech-Group\src\components\admin\ServicesPanel.tsx | ligne 2317 | page + 1
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 76 | offset += chunkSize
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 78 | binary +=
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 83 | offset +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 395 | .replace(/[^a-z0-9]+/g, "-")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 396 | .replace(/^-+|-+$/g, "");
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 474 | fr.match(/^Facture (.+) émise\.$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 484 | fr.match(/^TVA mise à jour à (.+) %\.$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 494 | fr.match(/^Une facture existe déjà : (.+)\.$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 504 | fr.match(/^Brouillon de facture créé : (.+)\.$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 514 | fr.match(/^Impossible de créer la commande : (.+)$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 524 | fr.match(/^La commande n’a pas pu être finalisée : (.+)$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 534 | fr.match(/^Commande (.+) créée avec (\d+) produits\.$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 547 | fr.match(/^Commande (.+) créée avec succès\.$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 557 | fr.match(/^Erreur pendant la création de la commande : (.+)$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 567 | fr.match(/^La quantité de « (.+) » doit être un entier supérieur à 0\.$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 577 | fr.match(/^Ajoutez un prix unitaire valide pour « (.+) »\.$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 587 | fr.match(/^Impossible d’enregistrer les modifications : (.+)$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 597 | fr.match(/^Traduction automatique indisponible : (.+)$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 607 | fr.match(/^(\d+) produits dans cette commande$/);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 697 | /^TSB\s+Store\s*[-–—·]\s*(\d+)(?:\s+.*)?$/iu
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 923 | .replace(/\s+/g, " ");
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 976 | /^(?:Référence|Reference|Referentie|Referenz|Referencia|Riferimento|Referência|المرجع|Referans|参考)\s*[:：]\s*(.+)$/im
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 981 | /^(?:Produit|Product|Produkt|Producto|Prodotto|Produto|المنتج|Ürün|产品)\s*[:：]\s*(.+)$/im
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1061 | .filter(({ line }) => /^\d+\.\s+/.test(line));
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1098 | starts[itemIndex + 1]?.index ?? lines.length;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1101 | .replace(/^\d+\.\s+/, "")
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1112 | quantityLine?.match(/:\s*(\d+)/)?.[1] ?? "1",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1422 | value.getMonth() + 1
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1437 | dueDate.getDate() +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1703 | invoice.discount_amount +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1719 | taxableBase +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1787 | `TVA mise à jour à ${nextRate} %.`,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1788 | `Btw bijgewerkt naar ${nextRate} %.`,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1789 | `VAT updated to ${nextRate}%.`
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1884 | total +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1896 | 0) +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 1897 | (order.fees_amount ?? 0) +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2149 | y + index * lineHeight,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2172 | /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+|[^\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+/gu
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2201 | sum + width,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2212 | ? x + totalWidth / 2
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2286 | cursor + width,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2305 | cursor += width;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2461 | date.getMonth() + 1
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2589 | pdfText("S", logoX + tW, logoY);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2593 | pdfText("B", logoX + tW + sW, logoY);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2597 | const techX = logoX + tW + sW + bW + 4;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2603 | pdfText("GROUP", techX + techW + 2.3, logoY);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2612 | margin + mottoW,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2625 | "GSM +32466327536  |  WhatsApp +32493964587",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2641 | boxX + boxW - 4,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2648 | boxX + boxW - 4,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2658 | boxX + boxW - 4,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2664 | boxX + boxW - 4,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2675 | const rightX = margin + colW + gap;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2686 | margin + colW - 1.8,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2693 | rightX + colW - 1.8,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2722 | ? margin + colW - 6
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2723 | : margin + 6,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2724 | infoY + 7,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2736 | ? rightX + colW - 6
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2737 | : rightX + 6,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2738 | infoY + 7,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2769 | ? margin + colW - 6
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2770 | : margin + 6,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2771 | infoY +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2772 | 14 +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2792 | ? rightX + colW - 6
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2793 | : rightX + 6,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2794 | infoY +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2795 | 13 +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2809 | rightX + 6,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2810 | infoY + 31,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2822 | rightX + 29.5,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2823 | infoY + 35.1,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2964 | let y = (tableDoc.lastAutoTable?.finalY ?? 120) + 8;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2969 | if (y + summaryRequiredHeight > pageHeight - 10) {
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 2975 | // INFORMATIONS + TOTAUX
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3002 | margin + 5,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3003 | y + 7
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3020 | margin + 5,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3021 | y + 14
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3046 | `${it("TVA", "BTW", "VAT")} ${invoice.tax_rate}%`,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3095 | (totalsDoc.lastAutoTable?.finalY ?? y + 26) + 1;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3107 | totalY + 8
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3113 | totalY + 8,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3117 | y = Math.max(y + 45, totalY + 14);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3143 | margin + 5,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3144 | y + 8
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3175 | const x = sx + index * (sw + sg);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3194 | doc.roundedRect(x, y + 3, sw, 7, 1.7, 1.7, "FD");
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3207 | x + sw / 2,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3208 | y + 7.5,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3213 | y += 19;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3218 | if (y + 38 > pageHeight - 12) {
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3241 | y + 7,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3248 | ["GSM", "+32466327536"],
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3249 | ["WHATSAPP", "+32493964587"],
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3258 | margin + 4 + contactW * index + contactW / 2;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3263 | margin + 4 + contactW * index,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3264 | y + 11,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3265 | margin + 4 + contactW * index,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3266 | y + 26
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3273 | pdfText(item[0], x, y + 15, {
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3286 | pdfText(wrapped, x, y + 21, {
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3294 | const footerY = y + 36;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3309 | footerY + 7.5,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3425 | total +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3892 | subtotal +=
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3898 | discount +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 3924 | discount +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4080 | subtotal +=
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4540 | : total +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4634 | logoX + tWidth,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4648 | logoX +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4649 | tWidth +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4662 | logoX +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4663 | tWidth +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4664 | sWidth +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4665 | bWidth +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4691 | techX +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4692 | techWidth +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4726 | margin +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4785 | orderBoxX +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4802 | orderBoxX +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4830 | orderBoxX +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4894 | y += 7;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4915 | y + index * 5
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4957 | y + index * 5
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4963 | y +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 4968 | 5 +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5056 | tableStartY + 25) +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5062 | totalsLabelWidth +
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5224 | totalsStartY + 28);
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5227 | totalsY += 6;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5245 | totalsY += 5;
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5266 | totalsY +=
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 5616 | /\.[^/.]+$/,
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 6097 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 6197 | "Suivez les demandes de produits envoyées par les clients et mettez leur statut à jour.",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 6199 | "Track product requests sent by clients and update their status."
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 6202 | "Suivez les commandes créées depuis les demandes clients.",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 7125 | top: "50%",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 7127 | "translateY(-50%)",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 7284 | "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 7286 | "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 7620 | page + 1
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 8533 | {index + 1}.{" "}
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 8634 | "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 8720 | "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 9452 | "100%",
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 9691 | 0 %
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 9694 | 6 %
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 9697 | 12 %
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 9700 | 21 %
+C:\TSB\TSB-Tech-Group\src\components\admin\StoreProductsPanel.tsx | ligne 9806 | +
+C:\TSB\TSB-Tech-Group\src\components\common\ScrollToTop.tsx | ligne 47 | borderRadius: "50%",
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 25 | borderRadius: "50%",
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 93 | "linear-gradient(135deg, #833AB4 0%, #C13584 35%, #E1306C 55%, #FD1D1D 72%, #FCAF45 100%)",
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 184 | href="https://t.me/+32493964587"
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 208 | <a href="/projects">{t("projects")}</a>
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 285 | <a href="tel:+32466327536">
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 286 | +32 466 32 75 36
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 219 | border-radius: 50%;
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 229 | top: calc(100% + 9px);
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 258 | width: 100%;
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 399 | top: calc(100% + 9px);
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 449 | border-radius: 50%;
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 451 | radial-gradient(circle at 35% 30%, rgba(134,239,172,0.22), transparent 42%),
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 476 | border-radius: 50%;
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 482 | 0%, 100% {
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 487 | 50% {
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 495 | 0% {
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 499 | 70% {
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 503 | 100% {
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 654 | <a href="/projects" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 655 | {navT("projects")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 867 | <a href="/projects" onClick={closeMobile}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 868 | {navT("projects")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 3 | import { projectsTranslations } from "../../i18n/locales/projects";
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 23 | function Projects() {
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 28 | projectsTranslations,
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 30 | `projects.${key}`
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 34 | <section id="projects" className="projects-section">
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 36 | <div className="projects-heading">
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 48 | <div className="projects-grid">
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 80 | <div className="projects-actions">
+C:\TSB\TSB-Tech-Group\src\components\layout\Projects.tsx | ligne 202 | export default Projects;
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 316 | index + 1
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1038 | ) +
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1043 | onRequestQuantity +=
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1077 | `${index + 1}. ${productName}`,
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 1630 | q("clientSuccess")
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 2053 | "100%",
+C:\TSB\TSB-Tech-Group\src\components\layout\Stats.tsx | ligne 11 | import { statsTranslations } from "../../i18n/locales/stats";
+C:\TSB\TSB-Tech-Group\src\components\layout\Stats.tsx | ligne 16 | value: "+5000",
+C:\TSB\TSB-Tech-Group\src\components\layout\Stats.tsx | ligne 20 | id: "clients",
+C:\TSB\TSB-Tech-Group\src\components\layout\Stats.tsx | ligne 21 | value: "+3500",
+C:\TSB\TSB-Tech-Group\src\components\layout\Stats.tsx | ligne 36 | value: "100%",
+C:\TSB\TSB-Tech-Group\src\components\layout\Stats.tsx | ligne 41 | function Stats() {
+C:\TSB\TSB-Tech-Group\src\components\layout\Stats.tsx | ligne 46 | statsTranslations,
+C:\TSB\TSB-Tech-Group\src\components\layout\Stats.tsx | ligne 48 | `stats.${key}`
+C:\TSB\TSB-Tech-Group\src\components\layout\Stats.tsx | ligne 53 | className="stats-section"
+C:\TSB\TSB-Tech-Group\src\components\layout\Stats.tsx | ligne 56 | <div className="container stats-grid">
+C:\TSB\TSB-Tech-Group\src\components\layout\Stats.tsx | ligne 102 | export default Stats;
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 151 | cartItem.quantity + 1,
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 266 | sum + item.quantity,
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 277 | ? sum + item.quantity
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 300 | (grouped.get(currency) ?? 0) +
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 491 | ? "99+"
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 721 | "100%",
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 723 | "100%",
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 936 | item.quantity +
+C:\TSB\TSB-Tech-Group\src\components\StoreMiniCart.tsx | ligne 1130 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\context\LanguageContext.tsx | ligne 183 | * locale + t(...).
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 40 | "clients": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 41 | fr: "Clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 43 | en: "Clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 113 | fr: "Documents clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 748 | "clientSchedule": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 749 | fr: "Planning clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 977 | fr: "FILTRER LES RÉPONSES CLIENTS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 1420 | "noClientService": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 1516 | "backToClients": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 1517 | fr: "Retour aux clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 1519 | en: "Back to clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 1576 | "clientServices": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 1649 | fr: "Gestion des clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 1768 | "clientSupport": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2177 | fr: "Rechercher dans les documents clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2392 | "noClientServiceIsCurrentlyRecorded": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2681 | fr: "Gérez les demandes clients, l’assistance et les documents depuis un espace centralisé.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2741 | fr: "Demandes clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2788 | "searchClientSubjectServiceMessage": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2813 | fr: "Planifiez et suivez les rendez-vous clients dans un espace unique.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2968 | "clientsLoadError": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 2969 | fr: "Impossible de charger la liste des clients.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3917 | fr: "Suivez les documents actifs et les archives clients dans un espace unique.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3964 | "clientsUpper": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3965 | fr: "CLIENTS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 3967 | en: "CLIENTS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4169 | fr: "Recherchez, consultez et suivez les comptes clients dans un espace unique.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4264 | "registeredClientSingular": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4276 | "registeredClientsPlural": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4277 | fr: "clients enregistrés",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4279 | en: "registered clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4325 | fr: "clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4327 | en: "clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4337 | fr: "Créez, recherchez et suivez les interventions clients dans un espace unique.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 4576 | "serviceAddedToClientSuccess": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5332 | "storeTrackProductRequestsSentByClientsAndUpdateTheirStatus": {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5333 | fr: "Suivez les demandes de produits envoyées par les clients et mettez leur statut à jour.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5335 | en: "Track product requests sent by clients and update their status.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 5345 | fr: "Suivez les commandes créées depuis les demandes clients.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6569 | fr: "TVA mise à jour à {rate} %.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6570 | nl: "Btw bijgewerkt naar {rate} %.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6571 | en: "VAT updated to {rate}%.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6572 | de: "MwSt. auf {rate} % aktualisiert.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6573 | es: "IVA actualizado al {rate}%.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6574 | it: "IVA aggiornata al {rate}%.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6575 | pt: "IVA atualizado para {rate}%.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6576 | ar: "تم تحديث ضريبة القيمة المضافة إلى {rate}%.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6577 | tr: "KDV %{rate} olarak güncellendi.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6578 | zh: "增值税已更新为 {rate}%。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\admin.ts | ligne 6990 | value.replace(/\s+/g, " ").trim();
+C:\TSB\TSB-Tech-Group\src\i18n\locales\brands.ts | ligne 10 | "Selon les projets et les équipements, TSB Tech Group utilise ou intègre des solutions issues de marques et technologies reconnues dans différents secteurs professionnels.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 9 | intro: "TSB Tech Group accompagne les entreprises, professionnels, institutions, partenaires et porteurs de projets avec des solutions techniques, des collaborations stratégiques et des opportunités de développement à l’échelle internationale.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 27 | investIntro: "TSB Business ouvre un espace dédié aux partenariats stratégiques, aux investissements, aux projets communs et au développement de nouvelles activités.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 29 | investment: { title: "Investissement", description: "Étude d’opportunités d’investissement, de financement de projets et de développement d’activités à potentiel." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 31 | jointVenture: { title: "Joint-venture & projets communs", description: "Création ou développement de projets communs avec partage de compétences, moyens et objectifs." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 33 | institutions: { title: "Institutions & grands projets", description: "Coopération avec organismes, collectivités, institutions et structures portant des projets structurants." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 34 | international: { title: "Développement international", description: "Recherche de partenaires et opportunités pour accompagner l’expansion de projets sur plusieurs marchés." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 39 | opportunities: { automotive: "Automobile & mobilité", energy: "Énergie", water: "Eau & forage", security: "Sécurité", automation: "Automatisation", networks: "Réseaux & télécommunications", digital: "Digital & technologies", academy: "TSB Academy", store: "TSB Store", projects: "Projets spéciaux" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 87 | opportunities: { automotive: "Automotive & mobiliteit", energy: "Energie", water: "Water & boringen", security: "Beveiliging", automation: "Automatisering", networks: "Netwerken & telecom", digital: "Digital & technologie", academy: "TSB Academy", store: "TSB Store", projects: "Speciale projecten" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 91 | discover: { title: "Project voorstellen", description: "U deelt uw behoefte, voorstel of kans." }, review: { title: "TSB-studie", description: "We analyseren context, doelstellingen, middelen en mogelijkheden." }, exchange: { title: "Overleg", description: "De partijen verduidelijken verwachtingen, verantwoordelijkheden en voorwaarden." }, proposal: { title: "Voorstel", description: "Een samenwerkings- of projectstructuur kan worden geformaliseerd." }, collaboration: { title: "Samenwerking", description: "Na validatie gaat het project naar uitvoering en opvolging." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 109 | investEyebrow: "BUSINESS & INVEST", investTitle1: "Building opportunities", investTitle2: "together", investIntro: "TSB Business creates a dedicated space for strategic partnerships, investment, joint projects and new activities.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 113 | jointVenture: { title: "Joint ventures & shared projects", description: "Developing projects together by combining expertise, resources and objectives." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 115 | institutions: { title: "Institutions & major projects", description: "Cooperation with organizations, public bodies and institutions carrying structuring projects." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 116 | international: { title: "International development", description: "Identifying partners and opportunities to support projects across multiple markets." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 119 | opportunities: { automotive: "Automotive & mobility", energy: "Energy", water: "Water & drilling", security: "Security", automation: "Automation", networks: "Networks & telecom", digital: "Digital & technology", academy: "TSB Academy", store: "TSB Store", projects: "Special projects" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 135 | opportunitiesEyebrow: "CHANCENBEREICHE", opportunitiesTitle: "Ein multisektorales Ökosystem", opportunitiesIntro: "Chancen können mehrere aktuelle oder zukünftige Bereiche der TSB Tech Group betreffen.", opportunities: { automotive: "Automotive & Mobilität", energy: "Energie", water: "Wasser & Bohrungen", security: "Sicherheit", automation: "Automatisierung", networks: "Netzwerke & Telekom", digital: "Digital & Technologie", academy: "TSB Academy", store: "TSB Store", projects: "Sonderprojekte" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 148 | opportunitiesEyebrow: "SECTORES DE OPORTUNIDAD", opportunitiesTitle: "Un ecosistema multisectorial", opportunitiesIntro: "Las oportunidades pueden abarcar varias áreas actuales o futuras de TSB Tech Group.", opportunities: { automotive: "Automoción y movilidad", energy: "Energía", water: "Agua y perforación", security: "Seguridad", automation: "Automatización", networks: "Redes y telecom", digital: "Digital y tecnología", academy: "TSB Academy", store: "TSB Store", projects: "Proyectos especiales" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 161 | opportunitiesEyebrow: "SETTORI DI OPPORTUNITÀ", opportunitiesTitle: "Un ecosistema multisettoriale", opportunitiesIntro: "Le opportunità possono riguardare diversi poli attuali o futuri di TSB Tech Group.", opportunities: { automotive: "Automotive & mobilità", energy: "Energia", water: "Acqua & perforazione", security: "Sicurezza", automation: "Automazione", networks: "Reti & telecom", digital: "Digitale & tecnologia", academy: "TSB Academy", store: "TSB Store", projects: "Progetti speciali" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 174 | opportunitiesEyebrow: "SETORES DE OPORTUNIDADE", opportunitiesTitle: "Um ecossistema multissetorial", opportunitiesIntro: "As oportunidades podem envolver vários polos atuais ou futuros da TSB Tech Group.", opportunities: { automotive: "Automóvel & mobilidade", energy: "Energia", water: "Água & perfuração", security: "Segurança", automation: "Automação", networks: "Redes & telecom", digital: "Digital & tecnologia", academy: "TSB Academy", store: "TSB Store", projects: "Projetos especiais" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 187 | opportunitiesEyebrow: "قطاعات الفرص", opportunitiesTitle: "منظومة متعددة القطاعات", opportunitiesIntro: "يمكن أن تشمل الفرص عدة مجالات حالية أو مستقبلية في TSB Tech Group.", opportunities: { automotive: "السيارات والتنقل", energy: "الطاقة", water: "المياه والحفر", security: "الأمن", automation: "الأتمتة", networks: "الشبكات والاتصالات", digital: "الرقمنة والتكنولوجيا", academy: "TSB Academy", store: "TSB Store", projects: "مشاريع خاصة" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 200 | opportunitiesEyebrow: "FIRSAT ALANLARI", opportunitiesTitle: "Çok sektörlü bir ekosistem", opportunitiesIntro: "Fırsatlar TSB Tech Group’un mevcut veya gelecekteki farklı alanlarını kapsayabilir.", opportunities: { automotive: "Otomotiv & mobilite", energy: "Enerji", water: "Su & sondaj", security: "Güvenlik", automation: "Otomasyon", networks: "Ağlar & telekom", digital: "Dijital & teknoloji", academy: "TSB Academy", store: "TSB Store", projects: "Özel projeler" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 213 | opportunitiesEyebrow: "机会领域", opportunitiesTitle: "多行业生态体系", opportunitiesIntro: "机会可涉及 TSB Tech Group 当前或未来的多个业务板块。", opportunities: { automotive: "汽车与出行", energy: "能源", water: "水务与钻探", security: "安全", automation: "自动化", networks: "网络与通信", digital: "数字与技术", academy: "TSB Academy", store: "TSB Store", projects: "专项项目" },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 256 | "innovation": "Innovation & projets",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 940 | "innovation": "Innovation & projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 13 | projects: "Réalisations",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 45 | projects: "Realisaties",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 77 | projects: "Projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 109 | projects: "Projekte",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 141 | projects: "Proyectos",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 173 | projects: "Progetti",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 205 | projects: "Projetos",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 237 | projects: "المشاريع",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 269 | projects: "Projeler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 301 | projects: "项目",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 6 | eyebrow: "INNOVATION & PROJETS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 42 | title: "Projets d’avenir",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 98 | eyebrow: "INNOVATION & PROJECTS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 134 | title: "Future projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 23 | paragraph4: "Téléphone : +32 466 32 75 36.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 86 | paragraph4: "Telefoon: +32 466 32 75 36.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 149 | paragraph4: "Phone: +32 466 32 75 36.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 212 | paragraph4: "Telefon: +32 466 32 75 36.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 275 | paragraph4: "Teléfono: +32 466 32 75 36.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 338 | paragraph4: "Telefono: +32 466 32 75 36.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 401 | paragraph4: "Telefone: +32 466 32 75 36.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 464 | paragraph4: "الهاتف: +32 466 32 75 36.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 527 | paragraph4: "Telefon: +32 466 32 75 36.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\legal.ts | ligne 590 | paragraph4: "电话：+32 466 32 75 36。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 61 | clientSuccess:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 134 | clientSuccess:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 207 | clientSuccess:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 280 | clientSuccess:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 353 | clientSuccess:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 426 | clientSuccess:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 499 | clientSuccess:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 572 | clientSuccess:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 645 | clientSuccess:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\login.ts | ligne 718 | clientSuccess:
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 26 | innovation: "Innovation & projets",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 28 | projects: "Réalisations",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 64 | innovation: "Innovation & projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 66 | projects: "Projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 104 | projects: "Realisaties",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 142 | projects: "Projekte",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 180 | projects: "Proyectos",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 218 | projects: "Progetti",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 256 | projects: "Projetos",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 294 | projects: "المشاريع",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 332 | projects: "Projeler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 370 | projects: "项目",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 10 | "Suivez l’évolution de nos projets, de notre plateforme et de l’écosystème TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 17 | "TSB Tech Group construit progressivement une plateforme numérique destinée à réunir ses services, ses clients et ses futures solutions technologiques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 72 | "Follow the progress of our projects, our platform and the TSB Tech Group ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 79 | "TSB Tech Group is progressively building a digital platform designed to bring together its services, clients and future technology solutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 10 | "Suivez l’évolution de nos projets, de notre plateforme et de l’écosystème TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 23 | "TSB Tech Group construit progressivement une plateforme numérique destinée à réunir ses services, ses clients et ses futures solutions technologiques dans un même environnement.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 39 | "TSB Academy, TSB Store, l’espace client, le support et les futurs projets pourront ainsi être intégrés progressivement.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 120 | "Follow the progress of our projects, our platform and the TSB Tech Group ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 133 | "TSB Tech Group is progressively building a digital platform designed to bring together its services, clients and future technology solutions in one environment.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 149 | "TSB Academy, TSB Store, the client area, support and future projects can therefore be integrated progressively.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 10 | "TSB Tech Group développe un réseau de collaborations fiables afin de renforcer ses capacités, créer de nouvelles opportunités et construire des projets à long terme.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 30 | "TSB Tech Group est ouvert à différentes formes de collaboration selon les secteurs, les marchés et les projets.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 46 | "Collaboration commerciale, sous-traitance, développement de services, projets communs et solutions complémentaires.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 59 | title: "Projets & coopération internationale",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 61 | "Développement de projets communs, coopération internationale et création d’opportunités entre plusieurs marchés et régions du monde.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 67 | "Notre modèle multisectoriel permet de construire des collaborations adaptées à différents projets, marchés et niveaux de développement.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 85 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 86 | title: "Projets & opportunités communes",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 88 | "Développer ensemble des solutions, services, marchés et projets créateurs de valeur à long terme.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 182 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 205 | "TSB Tech Group is developing a reliable collaboration network to strengthen its capabilities, create new opportunities and build long-term projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 224 | "TSB Tech Group is open to different forms of collaboration depending on sectors, markets and projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 240 | "Commercial collaboration, subcontracting, service development, joint projects and complementary solutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 253 | title: "Projects & international cooperation",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 255 | "Development of joint projects, international cooperation and opportunities across multiple markets and regions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 261 | "Our multisector model enables collaborations adapted to different projects, markets and levels of development.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 279 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 280 | title: "Joint projects & opportunities",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 282 | "Building solutions, services, markets and long-term value-creating projects together.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 376 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 473 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 570 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 667 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 764 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 861 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 958 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 3 | export const projectsTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 5 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 10 | "Découvrez quelques exemples de projets réalisés dans nos différents domaines d’expertise.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 43 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 81 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 84 | title2: "projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 86 | "Discover some examples of projects completed across our different areas of expertise.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 87 | viewAll: "View all our projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 119 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 157 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 195 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 233 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 271 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 309 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projects.ts | ligne 347 | projects: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 5 | eyebrow: "RÉALISATIONS & PROJETS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 14 | domainsIntro: "Nos projets peuvent mobiliser une ou plusieurs expertises selon le contexte, les objectifs et les contraintes du client.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 18 | energy: { category: "Énergie", title: "Électricité & énergie", description: "Installations électriques, solutions énergétiques, optimisation de consommation et accompagnement de projets d’autonomie." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 20 | digital: { category: "Digital", title: "Sites web & plateformes", description: "Sites web, plateformes professionnelles, espaces clients et solutions numériques évolutives conçues autour des besoins métier." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 39 | showcaseInternalDescription: "Conception et développement progressif de la plateforme numérique TSB Tech Group afin de réunir services, demandes, espaces clients, support, Store, Academy et futurs outils de gestion dans un même écosystème.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 41 | referencesNote: "Les références terrain détaillées seront ajoutées progressivement lorsque les projets sont suffisamment documentés et peuvent être publiés.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 95 | eyebrow: "PROJECTS & DELIVERY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 104 | domainsIntro: "Projects can combine one or several areas of expertise depending on the context, objectives and constraints.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 108 | energy: { category: "Energy", title: "Electricity & energy", description: "Electrical installations, energy solutions, consumption optimization and support for autonomy projects." },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 131 | referencesNote: "Detailed field references will be added progressively when projects are sufficiently documented and can be published.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 455 | export const projectsPageTranslations: TranslationResources =
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 457 | Object.entries(localeData).map(([locale, projectsPage]) => [
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 459 | { projectsPage },
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 46 | "clientSuccess": "Votre demande a bien été enregistrée. Vous pourrez la suivre depuis votre espace client.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 139 | "clientSuccess": "Uw aanvraag is opgeslagen. U kunt deze volgen vanuit uw klantenzone.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 232 | "clientSuccess": "Your request has been saved. You can track it from your client area.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 325 | "clientSuccess": "Ihre Anfrage wurde gespeichert. Sie können sie in Ihrem Kundenbereich verfolgen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 418 | "clientSuccess": "Su solicitud se ha guardado. Puede seguirla desde su área de cliente.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 511 | "clientSuccess": "La tua richiesta è stata salvata. Puoi seguirla dalla tua area cliente.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 604 | "clientSuccess": "O seu pedido foi guardado. Pode acompanhá-lo na sua área de cliente.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 697 | "clientSuccess": "تم حفظ طلبك. يمكنك متابعته من مساحة العميل.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 790 | "clientSuccess": "Talebiniz kaydedildi. Müşteri alanınızdan takip edebilirsiniz.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 883 | "clientSuccess": "您的申请已保存。您可以在客户空间中跟踪进度。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 6 | eyebrow: "NOS CLIENTS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 50 | eyebrow: "OUR CLIENTS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 44 | "Solutions photovoltaïques, optimisation énergétique, autonomie, gestion de consommation et accompagnement de projets énergétiques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 74 | "Création de sites web, plateformes professionnelles, espaces clients et solutions numériques évolutives.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 98 | "Accompagnement global des entreprises avec des solutions techniques, numériques et opérationnelles adaptées à leurs projets.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 102 | title: "Innovation & projets",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 256 | "Photovoltaic solutions, energy optimization, autonomy, consumption management and support for energy projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 310 | "Comprehensive support for businesses with technical, digital and operational solutions tailored to their projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 314 | title: "Innovation & projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 525 | category: "I+D",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 82 | "Accompagnement global des entreprises avec des solutions techniques adaptées à leurs infrastructures et projets.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 86 | title: "Innovation & projets",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 264 | "Comprehensive support for businesses with technical solutions tailored to their infrastructure and projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 268 | title: "Innovation & projects",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 453 | category: "I+D",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 3 | export const statsTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 5 | stats: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 9 | clients: "Clients satisfaits",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 18 | stats: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 22 | clients: "Tevreden klanten",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 31 | stats: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 35 | clients: "Satisfied clients",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 44 | stats: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 48 | clients: "Zufriedene Kunden",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 57 | stats: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 61 | clients: "Clientes satisfechos",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 70 | stats: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 74 | clients: "Clienti soddisfatti",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 83 | stats: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 87 | clients: "Clientes satisfeitos",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 96 | stats: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 100 | clients: "عملاء راضون",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 109 | stats: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 113 | clients: "Memnun müşteriler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 122 | stats: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\stats.ts | ligne 126 | clients: "满意客户",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 94 | "description": "Composants, câbles, connectique, accessoires et matériel pour projets et réparations électroniques."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\store.ts | ligne 300 | "description": "Components, cables, connectors, accessories and equipment for electronic projects and repairs."
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 30 | "Pour toute demande concernant nos services, nos activités, nos projets ou nos solutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\support.ts | ligne 134 | "For questions about our services, activities, projects or solutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\translator.ts | ligne 45 | /\{\{(\w+)\}\}/g,
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 358 | {String(index + 1).padStart(2, "0")}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 38 | import ClientsPanel from "../../components/admin/ClientsPanel";
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 107 | type ClientService = {
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 255 | .replace(/\s+/g, " ")
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 271 | /^(?:Page|Pagina|Seite|Página|صفحة|Sayfa|页)\s+(\d+)\s*\/\s*(\d+)(?:\s*[·•]\s*(\d+)\s+(.+))?$/i
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 305 | /^(\d+)\s+(?:résultat\(s\)|resultaat\/resultaten|result\(s\)|Ergebnis\(se\)|resultado\(s\)|risultato\/i|نتيجة\/نتائج|sonuç|结果)$/i
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 471 | const [clientServices, setClientServices] = useState<
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 472 | ClientService[]
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 599 | selectedClientServiceId,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 600 | setSelectedClientServiceId,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 942 | setClientServices(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 964 | "Erreur chargement clients :",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 969 | "Impossible de charger la liste des clients."
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1703 | selectedClientServiceId ||
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1745 | setSelectedClientServiceId("");
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1762 | selectedClientServiceId
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1820 | clientServices.find(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1821 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 1822 | clientService.id ===
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2237 | setActiveSection("clients");
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2275 | ? "admin-clients"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2329 | ? "admin-clients"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2370 | attempt + 1
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2510 | clientServices.find(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2511 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2512 | clientService.id ===
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2920 | .replace(/\s+/g, " ");
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2936 | /^(?:Référence|Reference|Referentie)\s*:\s*(.+)$/im
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 2941 | /^(?:Produit|Product)\s*:\s*(.+)$/im
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3187 | const getClientServiceLabel = (
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3188 | clientService: ClientService
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3190 | return `${clientService.title} — ${clientService.service} — ${getServiceStatusLabel(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3191 | clientService.status
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3195 | const selectedClientServices =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3197 | ? clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3198 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3199 | clientService.user_id ===
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3204 | const appointmentClientServices =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3206 | ? clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3207 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3208 | clientService.user_id ===
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3213 | const clientServiceById = new Map(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3214 | clientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3215 | (clientService) => [
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3216 | clientService.id,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3217 | clientService,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3429 | const organizedSupportClients =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3522 | const linkedService = clientServiceById.get(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3572 | ? clientServiceById.get(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3708 | clients: "admin-clients",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 3957 | clients: unreadNotifications.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4108 | const stats = [
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4110 | label: tr("Clients", "Klanten", "Clients"),
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4111 | eyebrow: "CLIENTS",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4114 | section: "clients" as AdminSection,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4115 | targetId: "admin-clients",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4140 | value: clientServices.length,
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4158 | label: tr("Documents clients", "Klantdocumenten", "Client documents"),
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4196 | clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4197 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4199 | clientService.service
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4209 | ? clientServiceById.get(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4244 | quoteCount +
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4245 | serviceCount +
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4280 | "min(1280px, 100%)",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4402 | "50%",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4452 | ? "99+"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4530 | "Gérez les demandes clients, l’assistance et les documents depuis un espace centralisé.",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4636 | className="tsb-admin-stats-grid"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 4645 | {stats.map((stat) => {
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5179 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5525 | page + 1
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5643 | setSelectedClientServiceId(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5659 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5705 | selectedClientServiceId
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5710 | setSelectedClientServiceId(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5727 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5748 | {selectedClientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5750 | clientService
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5754 | clientService.id
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5757 | clientService.id
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5760 | {getClientServiceLabel(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5761 | clientService
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 5795 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 6004 | {tr("Demandes clients", "Klantaanvragen", "Client requests")}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 6132 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 6481 | Math.min(quoteTotalPages, page + 1)
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 6578 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 6672 | {organizedSupportClients.map(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7294 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7474 | Math.min(supportTotalPages, page + 1)
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7518 | {tr("Documents clients", "Klantdocumenten", "Client documents")}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7521 | Suivez les documents actifs et les archives clients dans un espace unique.
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7853 | aria-label="Rechercher dans les documents clients"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7922 | const documentClientServices =
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7923 | clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7925 | clientService
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7927 | clientService.user_id ===
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 7933 | ? clientServiceById.get(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8114 | "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8180 | "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8199 | {documentClientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8201 | clientService
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8205 | clientService.id
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8208 | clientService.id
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8211 | {getClientServiceLabel(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8212 | clientService
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8498 | ? getClientServiceLabel(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8618 | safeDocumentPage +
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8697 | "Planning clients",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8710 | "Planifiez et suivez les rendez-vous clients dans un espace unique.",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8914 | {appointmentClientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8915 | (clientService) => (
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8918 | clientService.id
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8921 | clientService.id
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8924 | {getClientServiceLabel(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 8925 | clientService
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9227 | FILTRER LES RÉPONSES CLIENTS
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9444 | ? clientServiceById.get(
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9912 | safeAppointmentPage + 1
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9949 | {/* GESTION CLIENTS */}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9964 | setClientServices((previous) =>
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9965 | previous.map((clientService) =>
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9966 | clientService.id === serviceId
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9967 | ? { ...clientService, status }
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9968 | : clientService
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9980 | {activeSection === "clients" && (
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9982 | id="admin-clients"
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9987 | <ClientsPanel
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 9992 | services={clientServices}
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 10437 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Admin\index.tsx | ligne 10673 | "50%",
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 58 | { id: "projects", icon: Rocket },
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 190 | <div style={{ fontSize: "0.82rem", opacity: 0.72, marginBottom: "12px" }}>{String(index + 1).padStart(2, "0")}</div>
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 77 | offset += chunkSize
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 79 | binary +=
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 84 | offset +
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 267 | type ClientService = {
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 351 | type ClientSection =
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 364 | useState<ClientSection>("dashboard");
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 435 | clientServices,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 436 | setClientServices,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 437 | ] = useState<ClientService[]>([]);
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1024 | setClientServices(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1534 | /^TSB\s+Store\s*[-–—·]\s*(\d+)(?:\s+.*)?$/iu
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1647 | y + index * lineHeight,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1670 | /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+|[^\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]+/gu
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1699 | sum + width,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1710 | ? x + totalWidth / 2
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1784 | cursor + width,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1803 | cursor += width;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1937 | /^TSB\s+Store\s*[-–—·]\s*(\d+)(?:\s+.*)?$/iu
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2023 | date.getMonth() + 1
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2147 | pdfText("S", logoX + tW, logoY);
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2151 | pdfText("B", logoX + tW + sW, logoY);
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2155 | const techX = logoX + tW + sW + bW + 4;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2161 | pdfText("GROUP", techX + techW + 2.3, logoY);
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2170 | margin + mottoW,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2183 | "GSM +32466327536  |  WhatsApp +32493964587",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2199 | boxX + boxW - 4,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2206 | boxX + boxW - 4,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2216 | boxX + boxW - 4,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2222 | boxX + boxW - 4,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2233 | const rightX = margin + colW + gap;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2244 | margin + colW - 1.8,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2251 | rightX + colW - 1.8,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2280 | ? margin + colW - 6
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2281 | : margin + 6,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2282 | infoY + 7,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2290 | ? rightX + colW - 6
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2291 | : rightX + 6,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2292 | infoY + 7,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2323 | ? margin + colW - 6
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2324 | : margin + 6,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2325 | infoY +
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2326 | 14 +
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2346 | ? rightX + colW - 6
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2347 | : rightX + 6,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2348 | infoY +
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2349 | 13 +
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2363 | rightX + 6,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2364 | infoY + 31,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2376 | rightX + 29.5,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2377 | infoY + 35.1,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2518 | let y = (tableDoc.lastAutoTable?.finalY ?? 120) + 8;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2523 | if (y + summaryRequiredHeight > pageHeight - 10) {
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2529 | // INFORMATIONS + TOTAUX
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2552 | margin + 5,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2553 | y + 7
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2566 | margin + 5,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2567 | y + 14
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2592 | `${ipt("vat")} ${invoice.tax_rate}%`,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2641 | (totalsDoc.lastAutoTable?.finalY ?? y + 26) + 1;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2653 | totalY + 8
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2659 | totalY + 8,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2663 | y = Math.max(y + 45, totalY + 14);
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2685 | margin + 5,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2686 | y + 8
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2713 | const x = sx + index * (sw + sg);
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2732 | doc.roundedRect(x, y + 3, sw, 7, 1.7, 1.7, "FD");
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2745 | x + sw / 2,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2746 | y + 7.5,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2751 | y += 19;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2756 | if (y + 38 > pageHeight - 12) {
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2779 | y + 7,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2786 | ["GSM", "+32466327536"],
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2787 | ["WHATSAPP", "+32493964587"],
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2796 | margin + 4 + contactW * index + contactW / 2;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2801 | margin + 4 + contactW * index,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2802 | y + 11,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2803 | margin + 4 + contactW * index,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2804 | y + 26
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2811 | pdfText(item[0], x, y + 15, {
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2824 | pdfText(wrapped, x, y + 21, {
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2832 | const footerY = y + 36;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2847 | footerY + 7.5,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 2854 | const getClientServiceStatusLabel = (
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 3342 | const targetSection: ClientSection =
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4303 | section: ClientSection
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4370 | const clientServiceById =
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4372 | clientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4373 | (clientService) => [
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4374 | clientService.id,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4375 | clientService,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4391 | .replace(/\s+/g, " ");
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4410 | /^(?:Référence|Reference|Referentie|Referenz|Referencia|Riferimento|Referência|المرجع|Referans|参考编号)\s*[:：]\s*(.+)$/im
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4415 | /^(?:Produit|Product|Produkt|Producto|Prodotto|Produto|المنتج|Ürün|产品)\s*[:：]\s*(.+)$/im
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4518 | const visibleClientServices =
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4520 | ? clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4521 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4523 | clientService.service
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4527 | : clientServices;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4605 | ? clientServiceById.get(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4726 | "min(1180px, 100%)",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4767 | maxWidth: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4860 | "50%",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 4912 | ? "99+"
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5116 | key: "dashboard" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5121 | key: "quotes" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5126 | key: "orders" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5131 | key: "invoices" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5136 | key: "services" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5141 | key: "appointments" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5146 | key: "documents" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5151 | key: "support" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5156 | key: "notifications" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5161 | key: "profile" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5259 | ? "99+"
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5279 | className="tsb-client-stats-grid"
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5294 | section: "quotes" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5301 | section: "orders" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5308 | section: "invoices" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5313 | value: clientServices.length,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5315 | section: "services" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5322 | section: "appointments" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5329 | section: "documents" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5336 | section: "support" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5343 | section: "notifications" as ClientSection,
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5619 | clientServices.filter(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5620 | (clientService) =>
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5621 | clientService.quote_request_id ===
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5775 | clientService
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5779 | clientService.service
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5785 | clientService.id
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5826 | clientService.title
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5842 | clientService.service
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5857 | {getClientServiceStatusLabel(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5858 | clientService.status
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5863 | {clientService.description && (
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5879 | clientService.description
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5884 | {clientService.scheduled_at && (
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5907 | clientService.scheduled_at
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5912 | {clientService.completed_at && (
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 5935 | clientService.completed_at
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 6824 | `${invoice.tax_rate}% · ${formatOrderMoney(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7109 | clientServices.length ===
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7139 | visibleClientServices.length >
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7150 | {visibleClientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7151 | (clientService) => {
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7154 | clientService.service
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7163 | clientService.id
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7168 | id={`client-service-${clientService.id}`}
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7170 | clientService.id
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7209 | clientService.service
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7223 | clientService.title
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7233 | {getClientServiceStatusLabel(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7234 | clientService.status
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7239 | {clientService.description && (
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7253 | clientService.description
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7265 | {clientService.scheduled_at && (
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7285 | clientService.scheduled_at
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7290 | {clientService.completed_at && (
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7310 | clientService.completed_at
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7334 | clientService.created_at
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7685 | ? clientServiceById.get(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 7952 | currentDate.getMonth() + 1
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 8453 | {clientServices.map(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 8455 | clientService
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 8459 | clientService.id
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 8462 | clientService.id
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 8467 | clientService.service
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 8472 | clientService.title
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 8538 | ? clientServiceById.get(
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 8691 | "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 8800 | safeDocumentPage +
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 9006 | "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 9046 | "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 9756 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 9829 | borderRadius: "50%",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 10339 | "50%",
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 23 | const PHONE_NUMBER = "+32466327536";
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 24 | const PHONE_DISPLAY = "+32 466 32 75 36";
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 26 | const WHATSAPP_DISPLAY = "+32 493 96 45 87";
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 59 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 455 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 465 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 508 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 518 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 564 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 565 | maxWidth: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 589 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 632 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Contact\index.tsx | ligne 642 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 6 | import Projects from "../../components/layout/Projects";
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 9 | import Stats from "../../components/layout/Stats";
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 171 | <Stats />
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 173 | <Projects />
+C:\TSB\TSB-Tech-Group\src\pages\Legal\index.tsx | ligne 157 | index + 1
+C:\TSB\TSB-Tech-Group\src\pages\Login\index.tsx | ligne 559 | t("messages.clientSuccess")
+C:\TSB\TSB-Tech-Group\src\pages\Login\index.tsx | ligne 822 | "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 72 | id: "projects",
+C:\TSB\TSB-Tech-Group\src\pages\Privacy\index.tsx | ligne 169 | index + 1
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 20 | import { projectsPageTranslations } from "../../i18n/locales/projectsPage";
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 39 | function Projects() {
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 44 | projectsPageTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 46 | `projectsPage.${key}`
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 215 | {String(index + 1).padStart(2, "0")}
+C:\TSB\TSB-Tech-Group\src\pages\Projects\index.tsx | ligne 343 | export default Projects;
+C:\TSB\TSB-Tech-Group\src\pages\Register\index.tsx | ligne 900 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\ResetPassword\index.tsx | ligne 36 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\ResetPassword\index.tsx | ligne 47 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\ResetPassword\index.tsx | ligne 53 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\ResetPassword\index.tsx | ligne 62 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\ResetPassword\index.tsx | ligne 70 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\ResetPassword\index.tsx | ligne 86 | top: "50%",
+C:\TSB\TSB-Tech-Group\src\pages\ResetPassword\index.tsx | ligne 88 | transform: "translateY(-50%)",
+C:\TSB\TSB-Tech-Group\src\pages\ResetPassword\index.tsx | ligne 218 | attempt += 1
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 721 | radial-gradient(circle at 82% 8%, rgba(0,112,255,.09), transparent 26%),
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 722 | radial-gradient(circle at 12% 46%, rgba(0,212,255,.045), transparent 24%),
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 753 | radial-gradient(circle at 82% 46%, rgba(0,112,255,.23), transparent 38%),
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 769 | mask-image: linear-gradient(to left, rgba(0,0,0,.7), transparent 68%);
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 805 | background: linear-gradient(90deg, #fff 8%, #bfeaff 48%, #38bdf8 100%);
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 852 | radial-gradient(circle at 50% 55%, rgba(22,136,255,.18), transparent 55%),
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 864 | left: 12%;
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 865 | right: 12%;
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 868 | border-radius: 50%;
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 874 | width: 86%;
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 875 | height: 86%;
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 984 | top: 50%;
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 985 | transform: translateY(-50%);
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 991 | width: 100%;
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 1220 | radial-gradient(circle at 50% 60%, rgba(0,112,255,.12), transparent 58%),
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 1226 | width: 88%;
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 1227 | height: 88%;
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 1559 | width: 100%;
+C:\TSB\TSB-Tech-Group\src\pages\Store\index.tsx | ligne 2136 | Math.min(totalProductPages, page + 1)
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 323 | window.location.pathname.replace(/\/+$/, "");
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 621 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 622 | height: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 725 | {/* PRIX + ACTION */}
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 834 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 886 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 935 | width: "100%",
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 1478 | "100%",
+C:\TSB\TSB-Tech-Group\src\pages\StoreProduct\index.tsx | ligne 1480 | "100%",
+C:\TSB\TSB-Tech-Group\src\pages\Support\index.tsx | ligne 20 | const PHONE_NUMBER = "+32466327536";
+C:\TSB\TSB-Tech-Group\src\pages\Support\index.tsx | ligne 21 | const PHONE_DISPLAY = "+32 466 32 75 36";
+C:\TSB\TSB-Tech-Group\src\pages\Support\index.tsx | ligne 24 | const WHATSAPP_DISPLAY = "+32 493 96 45 87";
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 19 | const Projects = lazy(() => import("./pages/Projects"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 70 | window.location.pathname.replace(/\/+$/, "") || "/";
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 99 | } else if (path === "/projects") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 100 | page = <Projects />;

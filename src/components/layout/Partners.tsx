@@ -2,9 +2,9 @@ import { ArrowRight } from "lucide-react";
 
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../i18n";
-import { partnersTranslations } from "../../i18n/locales/partners";
+import { brandsTranslations } from "../../i18n/locales/brands";
 
-const partners = [
+const technologies = [
   "XHORSE",
   "AUTEL",
   "CGDI",
@@ -20,9 +20,9 @@ function Partners() {
 
   const t = (key: string) =>
     translate(
-      partnersTranslations,
+      brandsTranslations,
       locale,
-      `partners.${key}`
+      `brands.${key}`
     );
 
   return (
@@ -37,19 +37,20 @@ function Partners() {
           </span>
 
           <h2>
-            {t("title1")} <span>{t("title2")}</span>
+            {t("title1")}{" "}
+            <span>{t("title2")}</span>
           </h2>
 
           <p>{t("description")}</p>
         </div>
 
         <div className="partners-grid">
-          {partners.map((partner) => (
+          {technologies.map((technology) => (
             <article
               className="partner-card"
-              key={partner}
+              key={technology}
             >
-              <span>{partner}</span>
+              <span>{technology}</span>
             </article>
           ))}
 
@@ -70,6 +71,7 @@ function Partners() {
             className="button button--primary"
           >
             {t("discover")}
+
             <ArrowRight
               size={17}
               aria-hidden="true"
@@ -80,30 +82,5 @@ function Partners() {
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export default Partners;

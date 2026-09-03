@@ -1,9 +1,12 @@
 import {
   ArrowLeft,
   ArrowRight,
-  Cpu,
-  Layers3,
-  Rocket,
+  ClipboardCheck,
+  Code2,
+  Database,
+  Languages,
+  ShoppingBag,
+  Smartphone,
 } from "lucide-react";
 
 import Navbar from "../../components/layout/Navbar";
@@ -14,14 +17,39 @@ import { translate } from "../../i18n";
 import { newsPageTranslations } from "../../i18n/locales/newsPage";
 
 const newsConfig = [
-  { id: "platform", icon: Rocket, color: "blue" },
-  { id: "evolution", icon: Layers3, color: "cyan" },
-  { id: "engineering", icon: Cpu, color: "purple" },
+  {
+    id: "multilingual",
+    icon: Languages,
+    color: "cyan",
+  },
+  {
+    id: "store",
+    icon: ShoppingBag,
+    color: "blue",
+  },
+  {
+    id: "android",
+    icon: Smartphone,
+    color: "purple",
+  },
+  {
+    id: "supabase",
+    icon: Database,
+    color: "cyan",
+  },
+  {
+    id: "coding",
+    icon: Code2,
+    color: "blue",
+  },
+  {
+    id: "blueprint",
+    icon: ClipboardCheck,
+    color: "purple",
+  },
 ] as const;
 
 type NewsId = (typeof newsConfig)[number]["id"];
-
-
 
 function News() {
   const { locale } = useLanguage();
@@ -47,10 +75,19 @@ function News() {
     const item = newsConfig.find(
       (entry) => entry.id === selectedId
     )!;
+
     const Icon = item.icon;
 
     const category = t(
       `items.${selectedId}.category`
+    );
+
+    const date = t(
+      `items.${selectedId}.date`
+    );
+
+    const status = t(
+      `items.${selectedId}.status`
     );
 
     const title = t(
@@ -88,6 +125,21 @@ function News() {
                   <span className="domain-category">
                     {category}
                   </span>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "8px",
+                    marginTop: "16px",
+                    fontSize: ".82rem",
+                    opacity: 0.82,
+                  }}
+                >
+                  <span>{date}</span>
+                  <span aria-hidden="true">•</span>
+                  <span>{status}</span>
                 </div>
 
                 <h1 style={{ marginTop: "18px" }}>
@@ -241,6 +293,14 @@ function News() {
                   `items.${item.id}.category`
                 );
 
+                const date = t(
+                  `items.${item.id}.date`
+                );
+
+                const status = t(
+                  `items.${item.id}.status`
+                );
+
                 const title = t(
                   `items.${item.id}.title`
                 );
@@ -254,7 +314,7 @@ function News() {
                     key={item.id}
                     className={`domain-card domain-${item.color}`}
                     style={{
-                      minHeight: "245px",
+                      minHeight: "280px",
                       padding: "20px",
                     }}
                   >
@@ -266,6 +326,21 @@ function News() {
                       <span className="domain-category">
                         {category}
                       </span>
+                    </div>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: "8px",
+                        margin: "14px 0 10px",
+                        fontSize: ".78rem",
+                        opacity: 0.82,
+                      }}
+                    >
+                      <span>{date}</span>
+                      <span aria-hidden="true">•</span>
+                      <span>{status}</span>
                     </div>
 
                     <h3>{title}</h3>
@@ -291,122 +366,5 @@ function News() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export default News;

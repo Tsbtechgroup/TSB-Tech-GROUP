@@ -1,0 +1,453 @@
+﻿===== DOSSIERS ET FICHIERS =====
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts
+C:\TSB\TSB-Tech-Group\src\pages\Academy
+C:\TSB\TSB-Tech-Group\src\pages\Business
+C:\TSB\TSB-Tech-Group\src\pages\Partners
+
+===== REFERENCES DANS LE CODE =====
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 210 | <a href="/partners">{t("partners")}</a>
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 216 | <a href="/academy">
+C:\TSB\TSB-Tech-Group\src\components\layout\Footer.tsx | ligne 217 | {t("academy")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 554 | <a href="/academy" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 555 | {navT("academy")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 562 | <a href="/business" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 563 | {navT("business")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 589 | <a href="/academy" onClick={closeDropdowns}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 590 | {navT("academy")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 791 | <a href="/academy" onClick={closeMobile}>
+C:\TSB\TSB-Tech-Group\src\components\layout\Navbar.tsx | ligne 792 | {navT("academy")}
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 5 | import { partnersTranslations } from "../../i18n/locales/partners";
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 7 | const partners = [
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 18 | function Partners() {
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 23 | partnersTranslations,
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 25 | `partners.${key}`
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 30 | id="partners"
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 31 | className="partners-section"
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 34 | <div className="partners-heading">
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 46 | <div className="partners-grid">
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 47 | {partners.map((partner) => (
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 49 | className="partner-card"
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 50 | key={partner}
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 52 | <span>{partner}</span>
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 56 | <article className="partner-card">
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 69 | href="/partners"
+C:\TSB\TSB-Tech-Group\src\components\layout\Partners.tsx | ligne 109 | export default Partners;
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 14 | BriefcaseBusiness,
+C:\TSB\TSB-Tech-Group\src\components\layout\QuoteFlow.tsx | ligne 69 | "Autres services": BriefcaseBusiness,
+C:\TSB\TSB-Tech-Group\src\components\layout\Sectors.tsx | ligne 20 | { id: "businesses", icon: Building2 },
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 31 | { id: "academy", icon: GraduationCap, color: "purple" },
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 33 | { id: "business", icon: Building2, color: "blue" },
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 105 | : service.id === "academy"
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 106 | ? "/academy"
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 107 | : service.id === "business"
+C:\TSB\TSB-Tech-Group\src\components\layout\ServicesGrid.tsx | ligne 108 | ? "/business"
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 9 | "intro": "TSB Tech Group développe un écosystème de services techniques, technologiques et numériques pensé pour accompagner les particuliers, les professionnels, les entreprises et les institutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 15 | "whoText2": "Cette approche permet de proposer des solutions adaptées à chaque besoin tout en construisant progressivement un écosystème cohérent autour de la marque TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 93 | "intro": "TSB Tech Group is developing an ecosystem of technical, technological and digital services for individuals, professionals, businesses and institutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 99 | "whoText2": "This approach allows us to provide solutions tailored to each need while progressively building a coherent ecosystem around the TSB Tech Group brand.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\about.ts | ligne 124 | "audienceText": "Individuals • Professionals • Businesses • Institutions",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 3 | export const academyTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 4 | fr: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 5 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 8 | intro: "TSB Academy est l’espace de formation de TSB Tech Group destiné au développement des compétences techniques, technologiques et professionnelles.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 12 | comingSoonTitle: "TSB Academy est en préparation",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 25 | nl: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 26 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 29 | intro: "TSB Academy is de opleidingsruimte van TSB Tech Group voor de ontwikkeling van technische, technologische en professionele vaardigheden.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 33 | comingSoonTitle: "TSB Academy is in voorbereiding",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 46 | en: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 47 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 50 | intro: "TSB Academy is the training space of TSB Tech Group dedicated to developing technical, technological and professional skills.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 54 | comingSoonTitle: "TSB Academy is being prepared",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 67 | de: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 68 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 71 | intro: "TSB Academy ist der Schulungsbereich von TSB Tech Group zur Entwicklung technischer, technologischer und beruflicher Kompetenzen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 75 | comingSoonTitle: "TSB Academy wird vorbereitet",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 88 | es: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 89 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 92 | intro: "TSB Academy es el espacio de formación de TSB Tech Group dedicado al desarrollo de competencias técnicas, tecnológicas y profesionales.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 96 | comingSoonTitle: "TSB Academy está en preparación",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 109 | it: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 110 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 113 | intro: "TSB Academy è lo spazio formativo di TSB Tech Group dedicato allo sviluppo di competenze tecniche, tecnologiche e professionali.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 117 | comingSoonTitle: "TSB Academy è in preparazione",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 130 | pt: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 131 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 134 | intro: "A TSB Academy é o espaço de formação da TSB Tech Group dedicado ao desenvolvimento de competências técnicas, tecnológicas e profissionais.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 138 | comingSoonTitle: "A TSB Academy está em preparação",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 151 | ar: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 152 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 155 | intro: "TSB Academy هي مساحة التدريب التابعة لـ TSB Tech Group والمخصصة لتطوير المهارات التقنية والتكنولوجية والمهنية.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 159 | comingSoonTitle: "TSB Academy قيد الإعداد",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 172 | tr: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 173 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 176 | intro: "TSB Academy, TSB Tech Group’un teknik, teknolojik ve mesleki becerilerin geliştirilmesine adanmış eğitim alanıdır.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 180 | comingSoonTitle: "TSB Academy hazırlanıyor",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 193 | zh: { academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 194 | eyebrow: "TSB ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 197 | intro: "TSB Academy 是 TSB Tech Group 的培训空间，致力于发展技术、科技和职业技能。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\academy.ts | ligne 201 | comingSoonTitle: "TSB Academy 正在筹备中",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 3 | export const businessTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 5 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 51 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 97 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 98 | eyebrow: "BUSINESS SOLUTIONS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 102 | "TSB Tech Group supports businesses, professionals and institutions with technical, technological and operational solutions tailored to their needs.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 143 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 189 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 235 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 281 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 327 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 373 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\business.ts | ligne 419 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 253 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 255 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 595 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 597 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 937 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 939 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1279 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1281 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1621 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1623 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1963 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 1965 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2305 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2307 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2647 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2649 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2989 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 2991 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3331 | "academy": "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\client.ts | ligne 3333 | "business": "TSB Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 15 | partners: "Partenaires",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 17 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 47 | partners: "Partners",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 49 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 72 | "TSB Tech Group supports individuals, businesses and institutions with technological, technical and professional solutions in Belgium, across Europe and internationally.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 79 | partners: "Partners",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 81 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 111 | partners: "Partner",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 113 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 143 | partners: "Socios",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 145 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 175 | partners: "Partner",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 177 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 207 | partners: "Parceiros",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 209 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 239 | partners: "الشركاء",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 241 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 271 | partners: "Ortaklar",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 273 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 303 | partners: "合作伙伴",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\footer.ts | ligne 305 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 17 | aboutTitle2: "Un écosystème de",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 20 | "TSB Tech Group réunit différentes expertises technologiques et techniques au sein d’un même écosystème.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 79 | aboutTitle2: "An ecosystem of",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 82 | "TSB Tech Group brings together a wide range of technological and technical expertise within a single ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\home.ts | ligne 84 | "Our goal is to support individuals, professionals, businesses and institutions with tailored, scalable and sustainable solutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 216 | title: "Investigación y experimentación",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\innovation.ts | ligne 308 | title: "Investigação e experimentação",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 22 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 24 | business: "Solutions entreprises",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 58 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 60 | business: "Business solutions",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 94 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 96 | business: "Bedrijfsoplossingen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 130 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 132 | business: "Unternehmenslösungen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 166 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 168 | business: "Soluciones para empresas",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 202 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 204 | business: "Soluzioni aziendali",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 238 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 240 | business: "Soluções empresariais",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 274 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 276 | business: "حلول الأعمال",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 310 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 312 | business: "Kurumsal çözümler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 346 | academy: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\navbar.ts | ligne 348 | business: "企业解决方案",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 10 | "Suivez l’évolution de nos projets, de notre plateforme et de l’écosystème TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 23 | "Notre architecture modulaire permettra d’intégrer progressivement TSB Academy, TSB Store, l’espace client, le support et de nouveaux services numériques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 54 | "Onze modulaire architectuur maakt het mogelijk om geleidelijk TSB Academy, TSB Store, de klantenzone, support en nieuwe digitale diensten te integreren.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 72 | "Follow the progress of our projects, our platform and the TSB Tech Group ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 85 | "Our modular architecture will progressively integrate TSB Academy, TSB Store, the client area, support and new digital services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 116 | "Unsere modulare Architektur ermöglicht die schrittweise Integration von TSB Academy, TSB Store, Kundenbereich, Support und neuen digitalen Diensten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 147 | "Nuestra arquitectura modular permitirá integrar progresivamente TSB Academy, TSB Store, el espacio cliente, soporte y nuevos servicios digitales.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 178 | "La nostra architettura modulare consentirà di integrare progressivamente TSB Academy, TSB Store, area clienti, supporto e nuovi servizi digitali.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 209 | "A nossa arquitetura modular permitirá integrar progressivamente a TSB Academy, a TSB Store, a área de cliente, o suporte e novos serviços digitais.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 240 | "ستتيح بنيتنا المعيارية دمج TSB Academy وTSB Store ومنطقة العملاء والدعم وخدمات رقمية جديدة بشكل تدريجي.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 271 | "Modüler mimarimiz TSB Academy, TSB Store, müşteri alanı, destek ve yeni dijital hizmetlerin kademeli olarak entegre edilmesini sağlayacak.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\news.ts | ligne 302 | "我们的模块化架构将逐步整合 TSB Academy、TSB Store、客户空间、支持以及新的数字服务。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 10 | "Suivez l’évolution de nos projets, de notre plateforme et de l’écosystème TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 25 | "La TSB Digital Platform est conçue comme le futur point central de l’écosystème TSB Tech Group.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 35 | "Notre architecture modulaire permettra d’intégrer progressivement TSB Academy, TSB Store, l’espace client, le support et de nouveaux services numériques.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 39 | "TSB Academy, TSB Store, l’espace client, le support et les futurs projets pourront ainsi être intégrés progressivement.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 90 | "Onze modulaire architectuur maakt het mogelijk om geleidelijk TSB Academy, TSB Store, de klantenzone, support en nieuwe digitale diensten te integreren.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 94 | "TSB Academy, TSB Store, de klantenzone, support en toekomstige projecten kunnen zo stap voor stap worden geïntegreerd.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 120 | "Follow the progress of our projects, our platform and the TSB Tech Group ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 135 | "The TSB Digital Platform is being designed as the future central hub of the TSB Tech Group ecosystem.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 145 | "Our modular architecture will progressively integrate TSB Academy, TSB Store, the client area, support and new digital services.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 149 | "TSB Academy, TSB Store, the client area, support and future projects can therefore be integrated progressively.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 200 | "Unsere modulare Architektur ermöglicht die schrittweise Integration von TSB Academy, TSB Store, Kundenbereich, Support und neuen digitalen Diensten.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 204 | "TSB Academy, TSB Store, Kundenbereich, Support und zukünftige Projekte können so schrittweise integriert werden.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 255 | "Nuestra arquitectura modular permitirá integrar progresivamente TSB Academy, TSB Store, el área de cliente, soporte y nuevos servicios digitales.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 259 | "TSB Academy, TSB Store, el área de cliente, soporte y futuros proyectos podrán integrarse paso a paso.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 310 | "La nostra architettura modulare permetterà di integrare progressivamente TSB Academy, TSB Store, area clienti, supporto e nuovi servizi digitali.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 314 | "TSB Academy, TSB Store, area clienti, supporto e progetti futuri potranno così essere integrati gradualmente.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 365 | "A nossa arquitetura modular permitirá integrar progressivamente TSB Academy, TSB Store, área de cliente, suporte e novos serviços digitais.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 369 | "TSB Academy, TSB Store, área de cliente, suporte e futuros projetos poderão assim ser integrados gradualmente.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 420 | "ستسمح بنيتنا المعيارية بدمج TSB Academy وTSB Store ومساحة العميل والدعم وخدمات رقمية جديدة تدريجيًا.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 424 | "يمكن بذلك دمج TSB Academy وTSB Store ومساحة العميل والدعم والمشاريع المستقبلية تدريجيًا.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 475 | "Modüler mimarimiz TSB Academy, TSB Store, müşteri alanı, destek ve yeni dijital hizmetlerin aşamalı entegrasyonunu sağlayacak.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 479 | "TSB Academy, TSB Store, müşteri alanı, destek ve gelecekteki projeler böylece adım adım entegre edilebilecek.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 530 | "我们的模块化架构将逐步整合 TSB Academy、TSB Store、客户空间、支持以及新的数字服务。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\newsPage.ts | ligne 534 | "TSB Academy、TSB Store、客户空间、支持以及未来项目都可以逐步集成。",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 3 | export const partnersTranslations: TranslationResources = {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 5 | partners: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 6 | eyebrow: "PARTENAIRES",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 10 | "TSB Tech Group souhaite développer un réseau de partenaires fiables afin d’élargir ses capacités, renforcer ses services et créer de nouvelles opportunités.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 13 | networkTitle: "Notre réseau de partenaires",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 15 | "Cette page accueillera progressivement les partenaires officiels de TSB Tech Group. Nous n’affichons ici que les collaborations réellement validées.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 16 | comingSoon: "Partenaires officiels à venir",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 18 | "Les premiers partenaires seront ajoutés au fur et à mesure de la validation des accords et collaborations.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 33 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 44 | ctaTitle: "Vous souhaitez devenir partenaire ?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 53 | partners: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 54 | eyebrow: "PARTNERS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 58 | "TSB Tech Group wil een betrouwbaar partnernetwerk ontwikkelen om zijn mogelijkheden uit te breiden, diensten te versterken en nieuwe kansen te creëren.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 61 | networkTitle: "Ons partnernetwerk",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 63 | "Deze pagina zal geleidelijk de officiële partners van TSB Tech Group tonen. Alleen werkelijk bevestigde samenwerkingen worden gepubliceerd.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 64 | comingSoon: "Officiële partners binnenkort",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 66 | "De eerste partners worden toegevoegd zodra overeenkomsten en samenwerkingen officieel zijn bevestigd.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 67 | typesTitle: "Gezochte partnerschappen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 79 | "Partnerschappen rond digitaal, elektronica, automatisering, netwerken en nieuwe technologieën.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 81 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 92 | ctaTitle: "Partner worden?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 94 | "Stel uw activiteit, voorstel en gewenste samenwerking aan ons voor. We bekijken de mogelijke partnerschapsvormen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 95 | ctaButton: "Partnerschap voorstellen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 101 | partners: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 102 | eyebrow: "PARTNERS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 106 | "TSB Tech Group aims to develop a reliable partner network to expand its capabilities, strengthen its services and create new opportunities.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 109 | networkTitle: "Our partner network",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 111 | "This page will progressively feature official TSB Tech Group partners. Only genuinely validated collaborations will be displayed.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 112 | comingSoon: "Official partners coming soon",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 114 | "The first partners will be added as agreements and collaborations are formally validated.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 115 | typesTitle: "Partnerships we are looking for",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 127 | "Partnerships around digital, electronics, automation, networks and emerging technologies.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 129 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 130 | title: "Businesses & professionals",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 140 | ctaTitle: "Interested in becoming a partner?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 142 | "Tell us about your activity, proposal and the type of collaboration you have in mind. We will review the partnership opportunities.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 143 | ctaButton: "Propose a partnership",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 149 | partners: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 150 | eyebrow: "PARTNER",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 154 | "TSB Tech Group möchte ein zuverlässiges Partnernetzwerk aufbauen, um seine Möglichkeiten zu erweitern, seine Dienstleistungen zu stärken und neue Chancen zu schaffen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 157 | networkTitle: "Unser Partnernetzwerk",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 159 | "Auf dieser Seite werden nach und nach die offiziellen Partner von TSB Tech Group vorgestellt. Wir zeigen nur tatsächlich bestätigte Kooperationen.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 160 | comingSoon: "Offizielle Partner folgen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 162 | "Die ersten Partner werden hinzugefügt, sobald Vereinbarungen und Kooperationen offiziell bestätigt wurden.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 163 | typesTitle: "Gesuchte Partnerschaften",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 175 | "Partnerschaften rund um Digitales, Elektronik, Automatisierung, Netzwerke und neue Technologien.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 177 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 188 | ctaTitle: "Möchten Sie Partner werden?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 190 | "Stellen Sie uns Ihre Tätigkeit, Ihren Vorschlag und die gewünschte Form der Zusammenarbeit vor. Wir prüfen die Möglichkeiten einer Partnerschaft.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 191 | ctaButton: "Partnerschaft vorschlagen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 197 | partners: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 225 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 245 | partners: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 246 | eyebrow: "PARTNER",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 250 | "TSB Tech Group intende sviluppare una rete di partner affidabili per ampliare le proprie capacità, rafforzare i servizi e creare nuove opportunità.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 253 | networkTitle: "La nostra rete di partner",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 255 | "Questa pagina presenterà progressivamente i partner ufficiali di TSB Tech Group. Mostriamo solo collaborazioni realmente validate.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 256 | comingSoon: "Partner ufficiali in arrivo",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 258 | "I primi partner saranno aggiunti man mano che accordi e collaborazioni verranno ufficialmente convalidati.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 259 | typesTitle: "Tipi di partnership ricercati",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 271 | "Partnership nei settori digitale, elettronica, automazione, reti e nuove tecnologie.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 273 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 284 | ctaTitle: "Vuoi diventare partner?",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 286 | "Presentaci la tua attività, la tua proposta e il tipo di collaborazione che immagini. Valuteremo le opportunità di partnership.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 287 | ctaButton: "Proporre una partnership",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 293 | partners: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 321 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 341 | partners: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 369 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 389 | partners: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 417 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 437 | partners: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\partners.ts | ligne 465 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\projectsPage.ts | ligne 115 | "Video surveillance, access control, alarms and protection solutions for individuals, businesses and institutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 74 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 76 | "business": "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 167 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 169 | "business": "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 260 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 262 | "business": "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 353 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 355 | "business": "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 446 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 448 | "business": "EMPRESA",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 539 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 541 | "business": "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 632 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 634 | "business": "EMPRESAS",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 725 | "academy": "الأكاديمية",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 727 | "business": "الأعمال",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 818 | "academy": "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 820 | "business": "KURUMSAL",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 911 | "academy": "学院",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\quoteFlow.ts | ligne 913 | "business": "企业",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 13 | businesses: "Entreprises",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 35 | businesses: "Bedrijven",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 57 | businesses: "Businesses",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 59 | shops: "Retail businesses",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 63 | agriculture: "Agricultural businesses",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 79 | businesses: "Unternehmen",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 101 | businesses: "Empresas",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 123 | businesses: "Aziende",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 145 | businesses: "Empresas",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 167 | businesses: "الشركات",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 189 | businesses: "Şirketler",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\sectors.ts | ligne 211 | businesses: "企业",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 7 | title1: "Un écosystème de",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 82 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 84 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 94 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 95 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 188 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 190 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 200 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 201 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 219 | title1: "An ecosystem of",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 222 | "Discover TSB Tech Group’s areas of expertise. Each service is designed to address real needs for individuals, businesses and institutions.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 244 | "Video surveillance, access control, alarm systems and security solutions for individuals and businesses.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 294 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 296 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 306 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 307 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 308 | title: "Business solutions",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 310 | "Comprehensive support for businesses with technical, digital and operational solutions tailored to their projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 400 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 402 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 412 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 413 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 506 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 508 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 518 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 612 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 614 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 624 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 625 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 718 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 720 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 730 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 824 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 826 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 836 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 930 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 932 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 942 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 1036 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 1038 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\services.ts | ligne 1048 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 10 | "Un écosystème de compétences réunies autour d’une même vision : proposer des solutions techniques, technologiques et professionnelles adaptées à chaque projet.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 67 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 68 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 79 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 83 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 158 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 159 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 170 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 174 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 192 | "An ecosystem of expertise built around one vision: delivering technical, technological and professional solutions tailored to every project.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 210 | "Video surveillance, access control, alarm systems and protection solutions for individuals and businesses.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 249 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 250 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 261 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 262 | title: "Business solutions",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 264 | "Comprehensive support for businesses with technical solutions tailored to their infrastructure and projects.",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 265 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 340 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 341 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 352 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 356 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 431 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 432 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 443 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 522 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 523 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 534 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 538 | category: "Business",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 613 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 614 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 625 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 704 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 705 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 716 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 795 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 796 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 807 | business: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 886 | academy: {
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 887 | title: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\i18n\locales\servicesGrid.ts | ligne 898 | business: {
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 15 | import { academyTranslations } from "../../i18n/locales/academy";
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 26 | function Academy() {
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 31 | academyTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 33 | `academy.${key}`
+C:\TSB\TSB-Tech-Group\src\pages\Academy\index.tsx | ligne 331 | export default Academy;
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 15 | import { businessTranslations } from "../../i18n/locales/business";
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 27 | function Business() {
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 32 | businessTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 34 | `business.${key}`
+C:\TSB\TSB-Tech-Group\src\pages\Business\index.tsx | ligne 325 | export default Business;
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1280 | academy: "domains.academy",
+C:\TSB\TSB-Tech-Group\src\pages\Client\index.tsx | ligne 1282 | business: "domains.business",
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 5 | import Partners from "../../components/layout/Partners";
+C:\TSB\TSB-Tech-Group\src\pages\Home\index.tsx | ligne 175 | <Partners />
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 16 | import { partnersTranslations } from "../../i18n/locales/partners";
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 18 | const partnerTypes = [
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 21 | { id: "business", icon: Building2, color: "purple" },
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 25 | function Partners() {
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 30 | partnersTranslations,
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 32 | `partners.${key}`
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 177 | {partnerTypes.map((partner) => {
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 178 | const Icon = partner.icon;
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 182 | key={partner.id}
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 183 | className={`domain-card domain-${partner.color}`}
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 196 | {t(`items.${partner.id}.title`)}
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 199 | {t(`items.${partner.id}.description`)}
+C:\TSB\TSB-Tech-Group\src\pages\Partners\index.tsx | ligne 278 | export default Partners;
+C:\TSB\TSB-Tech-Group\src\pages\Services\index.tsx | ligne 97 | id: "academy",
+C:\TSB\TSB-Tech-Group\src\pages\Services\index.tsx | ligne 109 | id: "business",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 25 | | "academy"
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 27 | | "business"
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 79 | const academyTheme = makeTheme("#d4a017", "#f4c430", "212,160,23");
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 81 | const businessTheme = makeTheme("#f59e0b", "#fbbf24", "245,158,11");
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 232 | key: "academy",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 233 | label: "TSB Academy",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 234 | shortLabel: "ACADEMY",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 235 | theme: academyTheme,
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 236 | services: ["Academy", "TSB Academy", "Formation", "Formations"],
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 248 | key: "business",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 249 | label: "TSB Business",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 250 | shortLabel: "BUSINESS",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 251 | theme: businessTheme,
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 253 | "Business",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 254 | "TSB Business",
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 404 | if (includesAny(normalized, ["academy", "formation"])) {
+C:\TSB\TSB-Tech-Group\src\utils\serviceTheme.ts | ligne 412 | if (includesAny(normalized, ["business", "entreprise"])) {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 27 | const Academy = lazy(() => import("./pages/Academy"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 28 | const Business = lazy(() => import("./pages/Business"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 36 | const Partners = lazy(() => import("./pages/Partners"));
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 107 | } else if (path === "/academy") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 108 | page = <Academy />;
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 109 | } else if (path === "/business") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 110 | page = <Business />;
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 117 | } else if (path === "/partners") {
+C:\TSB\TSB-Tech-Group\src\App.tsx | ligne 118 | page = <Partners />;
+
+===== FIN AUDIT =====

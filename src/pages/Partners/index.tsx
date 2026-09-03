@@ -1,9 +1,13 @@
 import {
   Building2,
+  Cpu,
   Globe2,
   Handshake,
   Network,
+  PackageCheck,
+  Rocket,
   ShieldCheck,
+  Store,
   Wrench,
 } from "lucide-react";
 
@@ -16,10 +20,59 @@ import { translate } from "../../i18n";
 import { partnersTranslations } from "../../i18n/locales/partners";
 
 const partnerTypes = [
-  { id: "suppliers", icon: Wrench, color: "blue" },
-  { id: "technology", icon: Network, color: "cyan" },
-  { id: "business", icon: Building2, color: "purple" },
-  { id: "institutions", icon: ShieldCheck, color: "green" },
+  {
+    id: "suppliers",
+    icon: Wrench,
+    color: "blue",
+  },
+  {
+    id: "technology",
+    icon: Network,
+    color: "cyan",
+  },
+  {
+    id: "business",
+    icon: Building2,
+    color: "purple",
+  },
+  {
+    id: "institutions",
+    icon: ShieldCheck,
+    color: "green",
+  },
+  {
+    id: "distribution",
+    icon: Store,
+    color: "orange",
+  },
+  {
+    id: "international",
+    icon: Globe2,
+    color: "blue",
+  },
+] as const;
+
+const whyItems = [
+  {
+    id: "ecosystem",
+    icon: PackageCheck,
+    color: "blue",
+  },
+  {
+    id: "expertise",
+    icon: Cpu,
+    color: "cyan",
+  },
+  {
+    id: "international",
+    icon: Globe2,
+    color: "green",
+  },
+  {
+    id: "projects",
+    icon: Rocket,
+    color: "purple",
+  },
 ] as const;
 
 function Partners() {
@@ -37,6 +90,7 @@ function Partners() {
       <Navbar />
 
       <main>
+        {/* HERO */}
         <section className="section section--about">
           <div className="container">
             <div
@@ -52,7 +106,8 @@ function Partners() {
               </span>
 
               <h1>
-                {t("title1")} <span>{t("title2")}</span>
+                {t("title1")}{" "}
+                <span>{t("title2")}</span>
               </h1>
 
               <p
@@ -92,14 +147,15 @@ function Partners() {
           </div>
         </section>
 
+        {/* PARTENAIRES OFFICIELS */}
         <section className="section">
           <div className="container">
             <div
               style={{
                 maxWidth: "920px",
-                margin: "0 auto 42px",
-                padding: "28px",
-                borderRadius: "20px",
+                margin: "0 auto",
+                padding: "30px",
+                borderRadius: "22px",
                 border:
                   "1px solid rgba(56,189,248,0.24)",
                 background:
@@ -109,26 +165,29 @@ function Partners() {
             >
               <div
                 style={{
-                  width: "58px",
-                  height: "58px",
-                  margin: "0 auto 16px",
+                  width: "60px",
+                  height: "60px",
+                  margin: "0 auto 18px",
                   display: "grid",
                   placeItems: "center",
-                  borderRadius: "16px",
+                  borderRadius: "17px",
                   background:
                     "rgba(14,165,233,0.12)",
                   border:
                     "1px solid rgba(125,211,252,0.28)",
                 }}
               >
-                <Handshake size={28} strokeWidth={1.8} />
+                <Handshake
+                  size={29}
+                  strokeWidth={1.8}
+                />
               </div>
 
               <h2>{t("networkTitle")}</h2>
 
               <p
                 style={{
-                  maxWidth: "740px",
+                  maxWidth: "760px",
                   margin: "12px auto 0",
                 }}
               >
@@ -137,29 +196,45 @@ function Partners() {
 
               <div
                 style={{
-                  marginTop: "22px",
-                  padding: "16px 18px",
-                  borderRadius: "14px",
+                  marginTop: "24px",
+                  padding: "18px 20px",
+                  borderRadius: "15px",
                   border:
                     "1px dashed rgba(148,163,184,0.30)",
+                  background:
+                    "rgba(15,23,42,0.24)",
                 }}
               >
-                <strong>{t("comingSoon")}</strong>
-                <p style={{ marginTop: "8px" }}>
+                <strong>
+                  {t("comingSoon")}
+                </strong>
+
+                <p
+                  style={{
+                    marginTop: "8px",
+                    marginBottom: 0,
+                  }}
+                >
                   {t("comingSoonText")}
                 </p>
               </div>
             </div>
+          </div>
+        </section>
 
+        {/* TYPES DE PARTENARIATS */}
+        <section className="section section--domains">
+          <div className="container">
             <div
               className="section-heading"
               style={{
                 textAlign: "center",
-                maxWidth: "780px",
-                margin: "0 auto 30px",
+                maxWidth: "800px",
+                margin: "0 auto 34px",
               }}
             >
               <h2>{t("typesTitle")}</h2>
+
               <p>{t("typesIntro")}</p>
             </div>
 
@@ -168,9 +243,9 @@ function Partners() {
               style={{
                 display: "grid",
                 gridTemplateColumns:
-                  "repeat(auto-fit, minmax(230px, 1fr))",
-                gap: "16px",
-                maxWidth: "1120px",
+                  "repeat(auto-fit, minmax(260px, 1fr))",
+                gap: "18px",
+                maxWidth: "1180px",
                 margin: "0 auto",
               }}
             >
@@ -182,21 +257,29 @@ function Partners() {
                     key={partner.id}
                     className={`domain-card domain-${partner.color}`}
                     style={{
-                      minHeight: "210px",
-                      padding: "20px",
+                      minHeight: "225px",
+                      padding: "22px",
                     }}
                   >
                     <div className="domain-card__top">
                       <div className="domain-icon">
-                        <Icon size={23} strokeWidth={1.8} />
+                        <Icon
+                          size={24}
+                          strokeWidth={1.8}
+                        />
                       </div>
                     </div>
 
                     <h3>
-                      {t(`items.${partner.id}.title`)}
+                      {t(
+                        `items.${partner.id}.title`
+                      )}
                     </h3>
+
                     <p>
-                      {t(`items.${partner.id}.description`)}
+                      {t(
+                        `items.${partner.id}.description`
+                      )}
                     </p>
                   </article>
                 );
@@ -205,14 +288,85 @@ function Partners() {
           </div>
         </section>
 
+        {/* POURQUOI COLLABORER */}
+        <section className="section">
+          <div className="container">
+            <div
+              className="section-heading"
+              style={{
+                textAlign: "center",
+                maxWidth: "820px",
+                margin: "0 auto 34px",
+              }}
+            >
+              <span className="section__eyebrow">
+                TSB TECH GROUP
+              </span>
+
+              <h2>{t("whyTitle")}</h2>
+
+              <p>{t("whyIntro")}</p>
+            </div>
+
+            <div
+              className="domains-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fit, minmax(240px, 1fr))",
+                gap: "18px",
+                maxWidth: "1120px",
+                margin: "0 auto",
+              }}
+            >
+              {whyItems.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <article
+                    key={item.id}
+                    className={`domain-card domain-${item.color}`}
+                    style={{
+                      minHeight: "210px",
+                      padding: "22px",
+                    }}
+                  >
+                    <div className="domain-card__top">
+                      <div className="domain-icon">
+                        <Icon
+                          size={24}
+                          strokeWidth={1.8}
+                        />
+                      </div>
+                    </div>
+
+                    <h3>
+                      {t(
+                        `whyItems.${item.id}.title`
+                      )}
+                    </h3>
+
+                    <p>
+                      {t(
+                        `whyItems.${item.id}.description`
+                      )}
+                    </p>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA PARTENAIRE */}
         <section className="section">
           <div className="container">
             <div
               style={{
-                maxWidth: "900px",
+                maxWidth: "920px",
                 margin: "0 auto",
-                padding: "28px",
-                borderRadius: "20px",
+                padding: "32px",
+                borderRadius: "22px",
                 border:
                   "1px solid rgba(34,197,94,0.22)",
                 background:
@@ -222,26 +376,29 @@ function Partners() {
             >
               <div
                 style={{
-                  width: "56px",
-                  height: "56px",
-                  margin: "0 auto 16px",
+                  width: "60px",
+                  height: "60px",
+                  margin: "0 auto 18px",
                   display: "grid",
                   placeItems: "center",
-                  borderRadius: "16px",
+                  borderRadius: "17px",
                   background:
                     "rgba(34,197,94,0.10)",
                   border:
                     "1px solid rgba(74,222,128,0.25)",
                 }}
               >
-                <Globe2 size={26} strokeWidth={1.8} />
+                <Globe2
+                  size={28}
+                  strokeWidth={1.8}
+                />
               </div>
 
               <h2>{t("ctaTitle")}</h2>
 
               <p
                 style={{
-                  maxWidth: "700px",
+                  maxWidth: "720px",
                   margin: "12px auto 0",
                 }}
               >
@@ -250,8 +407,9 @@ function Partners() {
 
               <p
                 style={{
-                  marginTop: "14px",
+                  marginTop: "18px",
                   fontWeight: 700,
+                  lineHeight: 1.8,
                 }}
               >
                 {t("reach")}
@@ -260,7 +418,9 @@ function Partners() {
               <a
                 href="/contact"
                 className="button button--primary"
-                style={{ marginTop: "22px" }}
+                style={{
+                  marginTop: "22px",
+                }}
               >
                 {t("ctaButton")}
               </a>
@@ -270,6 +430,7 @@ function Partners() {
       </main>
 
       <Footer />
+
       <ScrollToTop />
     </div>
   );

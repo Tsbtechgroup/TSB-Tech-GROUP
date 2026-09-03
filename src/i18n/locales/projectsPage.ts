@@ -1,453 +1,461 @@
 import type { TranslationResources } from "../types";
 
-export const projectsPageTranslations: TranslationResources = {
+const localeData = {
   fr: {
-    projectsPage: {
-      eyebrow: "NOS RÉALISATIONS",
-      title1: "Des solutions",
-      title2: "concrètes",
-      intro:
-        "Découvrez une sélection de domaines dans lesquels TSB Tech Group développe et met en œuvre des solutions techniques, technologiques et professionnelles.",
-      backHome: "Retour à l’accueil",
-      quote: "Demander un devis",
-      discuss: "Parler de ce projet",
-      items: {
-        automobile: {
-          category: "Automobile",
-          title: "Serrurerie automobile",
-          description:
-            "Programmation de clés, duplication, solutions toutes clés perdues, télécommandes, transpondeurs et interventions spécialisées.",
-        },
-        security: {
-          category: "Sécurité",
-          title: "Systèmes de sécurité",
-          description:
-            "Vidéosurveillance, contrôle d’accès, alarmes et solutions de protection pour particuliers, entreprises et institutions.",
-        },
-        solar: {
-          category: "Énergie",
-          title: "Installation photovoltaïque",
-          description:
-            "Solutions énergétiques, installations solaires, optimisation de consommation et accompagnement vers davantage d’autonomie.",
-        },
-        industry: {
-          category: "Industrie",
-          title: "Électricité & automatisation",
-          description:
-            "Installation, maintenance, dépannage, automatisation et intégration de solutions techniques pour les environnements professionnels.",
-        },
-        digital: {
-          category: "Digital",
-          title: "Solutions digitales",
-          description:
-            "Sites web, plateformes professionnelles, espaces clients et solutions numériques évolutives adaptées aux besoins des organisations.",
-        },
-      },
+    eyebrow: "RÉALISATIONS & PROJETS",
+    title1: "Des solutions",
+    title2: "pensées pour le terrain",
+    intro: "TSB Tech Group accompagne des besoins techniques, technologiques et numériques avec une approche structurée : comprendre, concevoir, réaliser et faire évoluer la solution.",
+    backHome: "Retour à l’accueil",
+    quote: "Demander un devis",
+    discuss: "Parler de ce besoin",
+    domainsEyebrow: "DOMAINES D’INTERVENTION",
+    domainsTitle: "Un savoir-faire multisectoriel",
+    domainsIntro: "Nos projets peuvent mobiliser une ou plusieurs expertises selon le contexte, les objectifs et les contraintes du client.",
+    items: {
+      automobile: { category: "Automobile", title: "Serrurerie & diagnostic automobile", description: "Programmation et duplication de clés, solutions toutes clés perdues, diagnostic, électronique embarquée et interventions spécialisées." },
+      security: { category: "Sécurité", title: "Sécurité & vidéosurveillance", description: "Caméras, contrôle d’accès, alarmes, protection de sites et intégration de solutions adaptées aux particuliers, entreprises et institutions." },
+      energy: { category: "Énergie", title: "Électricité & énergie", description: "Installations électriques, solutions énergétiques, optimisation de consommation et accompagnement de projets d’autonomie." },
+      industry: { category: "Technique", title: "Maintenance & automatisation", description: "Dépannage, maintenance, automatisation, intégration d’équipements et amélioration de solutions techniques pour environnements professionnels." },
+      digital: { category: "Digital", title: "Sites web & plateformes", description: "Sites web, plateformes professionnelles, espaces clients et solutions numériques évolutives conçues autour des besoins métier." },
+      networks: { category: "Réseaux", title: "Réseaux & télécommunications", description: "Connectivité, réseaux, équipements communicants et intégration de solutions de télécommunication pour environnements professionnels." }
     },
+    methodEyebrow: "MÉTHODE PROJET",
+    methodTitle: "De l’idée à la mise en œuvre",
+    methodIntro: "Chaque projet suit une logique claire afin de limiter les risques, cadrer les besoins et construire une solution réellement exploitable.",
+    steps: {
+      need: { title: "Comprendre le besoin", description: "Identifier le problème, le contexte, les objectifs et les contraintes prioritaires." },
+      study: { title: "Étudier", description: "Analyser les options techniques, les ressources nécessaires et la faisabilité." },
+      solution: { title: "Concevoir la solution", description: "Définir une réponse adaptée, évolutive et cohérente avec le besoin réel." },
+      execution: { title: "Réaliser", description: "Mettre en œuvre, intégrer, configurer et tester la solution retenue." },
+      followup: { title: "Suivre & faire évoluer", description: "Assurer le suivi, les ajustements et l’évolution lorsque le projet le nécessite." }
+    },
+    showcaseEyebrow: "PROJET INTERNE",
+    showcaseTitle: "Une réalisation que nous construisons nous-mêmes",
+    showcaseIntro: "Nous publions uniquement des références que nous pouvons présenter de manière claire et responsable.",
+    showcaseInternalCategory: "Digital • Projet interne",
+    showcaseInternalTitle: "TSB Digital Platform",
+    showcaseInternalMeta: "Plateforme web • Multilingue • Architecture évolutive",
+    showcaseInternalDescription: "Conception et développement progressif de la plateforme numérique TSB Tech Group afin de réunir services, demandes, espaces clients, support, Store, Academy et futurs outils de gestion dans un même écosystème.",
+    showcaseInternalLink: "Suivre l’évolution du projet",
+    referencesNote: "Les références terrain détaillées seront ajoutées progressivement lorsque les projets sont suffisamment documentés et peuvent être publiés.",
+    ctaEyebrow: "VOTRE PROJET",
+    ctaTitle: "Un besoin concret à transformer en solution ?",
+    ctaText: "Présentez votre besoin à TSB Tech Group. Nous pouvons étudier le contexte et identifier la meilleure manière d’avancer.",
+    ctaQuote: "Demander un devis",
+    ctaContact: "Présenter mon projet"
   },
 
   nl: {
-    projectsPage: {
-      eyebrow: "ONZE REALISATIES",
-      title1: "Concrete",
-      title2: "oplossingen",
-      intro:
-        "Ontdek een selectie van domeinen waarin TSB Tech Group technische, technologische en professionele oplossingen ontwikkelt en implementeert.",
-      backHome: "Terug naar home",
-      quote: "Offerte aanvragen",
-      discuss: "Bespreek dit project",
-      items: {
-        automobile: {
-          category: "Automobiel",
-          title: "Autosleutels & voertuigbeveiliging",
-          description:
-            "Sleutelprogrammering, duplicatie, oplossingen bij verlies van alle sleutels, afstandsbedieningen, transponders en gespecialiseerde interventies.",
-        },
-        security: {
-          category: "Beveiliging",
-          title: "Beveiligingssystemen",
-          description:
-            "Camerabewaking, toegangscontrole, alarmsystemen en beveiligingsoplossingen voor particulieren, bedrijven en instellingen.",
-        },
-        solar: {
-          category: "Energie",
-          title: "Fotovoltaïsche installaties",
-          description:
-            "Energieoplossingen, zonne-installaties, optimalisatie van verbruik en begeleiding naar meer energieautonomie.",
-        },
-        industry: {
-          category: "Industrie",
-          title: "Elektriciteit & automatisering",
-          description:
-            "Installatie, onderhoud, herstelling, automatisering en integratie van technische oplossingen voor professionele omgevingen.",
-        },
-        digital: {
-          category: "Digitaal",
-          title: "Digitale oplossingen",
-          description:
-            "Websites, professionele platforms, klantenzones en schaalbare digitale oplossingen aangepast aan organisaties.",
-        },
-      },
+    eyebrow: "REALISATIES & PROJECTEN",
+    title1: "Oplossingen",
+    title2: "voor de praktijk",
+    intro: "TSB Tech Group ondersteunt technische, technologische en digitale behoeften met een gestructureerde aanpak: begrijpen, ontwerpen, realiseren en verder ontwikkelen.",
+    backHome: "Terug naar home",
+    quote: "Offerte aanvragen",
+    discuss: "Deze behoefte bespreken",
+    domainsEyebrow: "WERKGEBIEDEN",
+    domainsTitle: "Multisectorale expertise",
+    domainsIntro: "Projecten kunnen één of meerdere expertises combineren, afhankelijk van context, doelstellingen en beperkingen.",
+    items: {
+      automobile: { category: "Automotive", title: "Autosleutels & diagnose", description: "Sleutelprogrammering en duplicatie, all-keys-lost oplossingen, diagnose, voertuigelektronica en gespecialiseerde interventies." },
+      security: { category: "Beveiliging", title: "Beveiliging & camerabewaking", description: "Camera’s, toegangscontrole, alarmen, sitebeveiliging en geïntegreerde oplossingen voor particulieren, bedrijven en instellingen." },
+      energy: { category: "Energie", title: "Elektriciteit & energie", description: "Elektrische installaties, energieoplossingen, verbruiksoptimalisatie en begeleiding van autonomieprojecten." },
+      industry: { category: "Techniek", title: "Onderhoud & automatisering", description: "Herstelling, onderhoud, automatisering, integratie van apparatuur en verbetering van technische oplossingen voor professionele omgevingen." },
+      digital: { category: "Digitaal", title: "Websites & platforms", description: "Websites, professionele platforms, klantenzones en schaalbare digitale oplossingen rond bedrijfsbehoeften." },
+      networks: { category: "Netwerken", title: "Netwerken & telecom", description: "Connectiviteit, netwerken, communicerende apparatuur en telecomoplossingen voor professionele omgevingen." }
     },
+    methodEyebrow: "PROJECTMETHODE",
+    methodTitle: "Van idee naar uitvoering",
+    methodIntro: "Elk project volgt een duidelijke logica om risico’s te beperken, behoeften te kaderen en een bruikbare oplossing te bouwen.",
+    steps: {
+      need: { title: "Behoefte begrijpen", description: "Probleem, context, doelen en belangrijkste beperkingen identificeren." },
+      study: { title: "Onderzoeken", description: "Technische opties, benodigde middelen en haalbaarheid analyseren." },
+      solution: { title: "Oplossing ontwerpen", description: "Een passende, schaalbare en coherente oplossing definiëren." },
+      execution: { title: "Realiseren", description: "De gekozen oplossing uitvoeren, integreren, configureren en testen." },
+      followup: { title: "Opvolgen & evolueren", description: "Opvolging, aanpassingen en verdere evolutie voorzien wanneer nodig." }
+    },
+    showcaseEyebrow: "INTERN PROJECT",
+    showcaseTitle: "Een realisatie die we zelf bouwen",
+    showcaseIntro: "We publiceren alleen referenties die we duidelijk en verantwoord kunnen presenteren.",
+    showcaseInternalCategory: "Digitaal • Intern project",
+    showcaseInternalTitle: "TSB Digital Platform",
+    showcaseInternalMeta: "Webplatform • Meertalig • Schaalbare architectuur",
+    showcaseInternalDescription: "Stapsgewijze ontwikkeling van het digitale TSB Tech Group-platform om diensten, aanvragen, klantenzones, support, Store, Academy en toekomstige beheertools in één ecosysteem samen te brengen.",
+    showcaseInternalLink: "Volg de evolutie van het project",
+    referencesNote: "Gedetailleerde terreinreferenties worden geleidelijk toegevoegd wanneer projecten voldoende gedocumenteerd zijn en gepubliceerd mogen worden.",
+    ctaEyebrow: "UW PROJECT",
+    ctaTitle: "Een concrete behoefte omzetten in een oplossing?",
+    ctaText: "Leg uw behoefte voor aan TSB Tech Group. We kunnen de context analyseren en bepalen hoe we het best verdergaan.",
+    ctaQuote: "Offerte aanvragen",
+    ctaContact: "Mijn project voorstellen"
   },
 
   en: {
-    projectsPage: {
-      eyebrow: "OUR PROJECTS",
-      title1: "Concrete",
-      title2: "solutions",
-      intro:
-        "Discover a selection of areas in which TSB Tech Group develops and implements technical, technological and professional solutions.",
-      backHome: "Back to home",
-      quote: "Request a quote",
-      discuss: "Discuss this project",
-      items: {
-        automobile: {
-          category: "Automotive",
-          title: "Automotive locksmithing",
-          description:
-            "Key programming, duplication, all-keys-lost solutions, remotes, transponders and specialized automotive interventions.",
-        },
-        security: {
-          category: "Security",
-          title: "Security systems",
-          description:
-            "Video surveillance, access control, alarms and protection solutions for individuals, businesses and institutions.",
-        },
-        solar: {
-          category: "Energy",
-          title: "Photovoltaic installations",
-          description:
-            "Energy solutions, solar installations, consumption optimization and support toward greater energy independence.",
-        },
-        industry: {
-          category: "Industry",
-          title: "Electricity & automation",
-          description:
-            "Installation, maintenance, troubleshooting, automation and integration of technical solutions for professional environments.",
-        },
-        digital: {
-          category: "Digital",
-          title: "Digital solutions",
-          description:
-            "Websites, professional platforms, client areas and scalable digital solutions tailored to organizations.",
-        },
-      },
+    eyebrow: "PROJECTS & DELIVERY",
+    title1: "Solutions",
+    title2: "built for real needs",
+    intro: "TSB Tech Group supports technical, technological and digital needs through a structured approach: understand, design, implement and evolve the solution.",
+    backHome: "Back to home",
+    quote: "Request a quote",
+    discuss: "Discuss this need",
+    domainsEyebrow: "AREAS OF DELIVERY",
+    domainsTitle: "Multisector expertise",
+    domainsIntro: "Projects can combine one or several areas of expertise depending on the context, objectives and constraints.",
+    items: {
+      automobile: { category: "Automotive", title: "Automotive locksmithing & diagnostics", description: "Key programming and duplication, all-keys-lost solutions, diagnostics, vehicle electronics and specialized interventions." },
+      security: { category: "Security", title: "Security & video surveillance", description: "Cameras, access control, alarms, site protection and integrated solutions for individuals, businesses and institutions." },
+      energy: { category: "Energy", title: "Electricity & energy", description: "Electrical installations, energy solutions, consumption optimization and support for autonomy projects." },
+      industry: { category: "Technical", title: "Maintenance & automation", description: "Troubleshooting, maintenance, automation, equipment integration and improvement of technical solutions for professional environments." },
+      digital: { category: "Digital", title: "Websites & platforms", description: "Websites, professional platforms, client areas and scalable digital solutions designed around operational needs." },
+      networks: { category: "Networks", title: "Networks & telecommunications", description: "Connectivity, networks, communicating equipment and telecommunications integration for professional environments." }
     },
+    methodEyebrow: "PROJECT METHOD",
+    methodTitle: "From idea to implementation",
+    methodIntro: "Each project follows a clear process to reduce risk, frame requirements and build a solution that can actually be used.",
+    steps: {
+      need: { title: "Understand the need", description: "Identify the problem, context, objectives and priority constraints." },
+      study: { title: "Assess", description: "Analyze technical options, required resources and feasibility." },
+      solution: { title: "Design the solution", description: "Define an adapted, scalable and coherent response to the real need." },
+      execution: { title: "Implement", description: "Deploy, integrate, configure and test the selected solution." },
+      followup: { title: "Follow up & evolve", description: "Provide follow-up, adjustments and evolution when the project requires it." }
+    },
+    showcaseEyebrow: "INTERNAL PROJECT",
+    showcaseTitle: "A project we are building ourselves",
+    showcaseIntro: "We only publish references that we can present clearly and responsibly.",
+    showcaseInternalCategory: "Digital • Internal project",
+    showcaseInternalTitle: "TSB Digital Platform",
+    showcaseInternalMeta: "Web platform • Multilingual • Scalable architecture",
+    showcaseInternalDescription: "Progressive design and development of the TSB Tech Group digital platform to bring services, requests, client areas, support, Store, Academy and future management tools into one ecosystem.",
+    showcaseInternalLink: "Follow the project’s progress",
+    referencesNote: "Detailed field references will be added progressively when projects are sufficiently documented and can be published.",
+    ctaEyebrow: "YOUR PROJECT",
+    ctaTitle: "A real need to turn into a solution?",
+    ctaText: "Present your need to TSB Tech Group. We can assess the context and identify the best way forward.",
+    ctaQuote: "Request a quote",
+    ctaContact: "Present my project"
   },
 
   de: {
-    projectsPage: {
-      eyebrow: "UNSERE PROJEKTE",
-      title1: "Konkrete",
-      title2: "Lösungen",
-      intro:
-        "Entdecken Sie ausgewählte Bereiche, in denen TSB Tech Group technische, technologische und professionelle Lösungen entwickelt und umsetzt.",
-      backHome: "Zurück zur Startseite",
-      quote: "Angebot anfordern",
-      discuss: "Über dieses Projekt sprechen",
-      items: {
-        automobile: {
-          category: "Automobil",
-          title: "Autoschlüssel & Fahrzeugsicherheit",
-          description:
-            "Schlüsselprogrammierung, Duplizierung, Lösungen bei vollständigem Schlüsselverlust, Fernbedienungen, Transponder und spezialisierte Eingriffe.",
-        },
-        security: {
-          category: "Sicherheit",
-          title: "Sicherheitssysteme",
-          description:
-            "Videoüberwachung, Zugangskontrolle, Alarmanlagen und Schutzlösungen für Privatpersonen, Unternehmen und Institutionen.",
-        },
-        solar: {
-          category: "Energie",
-          title: "Photovoltaikanlagen",
-          description:
-            "Energielösungen, Solaranlagen, Verbrauchsoptimierung und Unterstützung auf dem Weg zu mehr Energieautonomie.",
-        },
-        industry: {
-          category: "Industrie",
-          title: "Elektrik & Automatisierung",
-          description:
-            "Installation, Wartung, Fehlerbehebung, Automatisierung und Integration technischer Lösungen für professionelle Umgebungen.",
-        },
-        digital: {
-          category: "Digital",
-          title: "Digitale Lösungen",
-          description:
-            "Websites, professionelle Plattformen, Kundenbereiche und skalierbare digitale Lösungen für Organisationen.",
-        },
-      },
+    eyebrow: "PROJEKTE & UMSETZUNG",
+    title1: "Lösungen",
+    title2: "für reale Anforderungen",
+    intro: "TSB Tech Group unterstützt technische, technologische und digitale Anforderungen mit einem strukturierten Ansatz: verstehen, konzipieren, umsetzen und weiterentwickeln.",
+    backHome: "Zurück zur Startseite",
+    quote: "Angebot anfordern",
+    discuss: "Diesen Bedarf besprechen",
+    domainsEyebrow: "LEISTUNGSBEREICHE",
+    domainsTitle: "Branchenübergreifende Kompetenz",
+    domainsIntro: "Projekte können je nach Kontext, Zielen und Einschränkungen eine oder mehrere Kompetenzen kombinieren.",
+    items: {
+      automobile: { category: "Automotive", title: "Autoschlüssel & Fahrzeugdiagnose", description: "Schlüsselprogrammierung und Duplizierung, All-Keys-Lost-Lösungen, Diagnose, Fahrzeugelektronik und spezialisierte Eingriffe." },
+      security: { category: "Sicherheit", title: "Sicherheit & Videoüberwachung", description: "Kameras, Zugangskontrolle, Alarmanlagen, Standortschutz und integrierte Lösungen für Privatkunden, Unternehmen und Institutionen." },
+      energy: { category: "Energie", title: "Elektrik & Energie", description: "Elektroinstallationen, Energielösungen, Verbrauchsoptimierung und Begleitung von Autonomieprojekten." },
+      industry: { category: "Technik", title: "Wartung & Automatisierung", description: "Fehlerbehebung, Wartung, Automatisierung, Geräteintegration und Optimierung technischer Lösungen für professionelle Umgebungen." },
+      digital: { category: "Digital", title: "Websites & Plattformen", description: "Websites, professionelle Plattformen, Kundenbereiche und skalierbare digitale Lösungen für betriebliche Anforderungen." },
+      networks: { category: "Netzwerke", title: "Netzwerke & Telekommunikation", description: "Konnektivität, Netzwerke, kommunizierende Geräte und Telekommunikationslösungen für professionelle Umgebungen." }
     },
+    methodEyebrow: "PROJEKTMETHODE",
+    methodTitle: "Von der Idee zur Umsetzung",
+    methodIntro: "Jedes Projekt folgt einem klaren Ablauf, um Risiken zu reduzieren, Anforderungen zu strukturieren und eine nutzbare Lösung zu schaffen.",
+    steps: {
+      need: { title: "Bedarf verstehen", description: "Problem, Kontext, Ziele und wichtigste Einschränkungen identifizieren." },
+      study: { title: "Prüfen", description: "Technische Optionen, benötigte Ressourcen und Machbarkeit analysieren." },
+      solution: { title: "Lösung konzipieren", description: "Eine passende, skalierbare und stimmige Antwort auf den realen Bedarf definieren." },
+      execution: { title: "Umsetzen", description: "Die gewählte Lösung implementieren, integrieren, konfigurieren und testen." },
+      followup: { title: "Begleiten & weiterentwickeln", description: "Nachverfolgung, Anpassungen und Weiterentwicklung bei Bedarf sicherstellen." }
+    },
+    showcaseEyebrow: "INTERNES PROJEKT",
+    showcaseTitle: "Ein Projekt, das wir selbst aufbauen",
+    showcaseIntro: "Wir veröffentlichen nur Referenzen, die wir klar und verantwortungsvoll darstellen können.",
+    showcaseInternalCategory: "Digital • Internes Projekt",
+    showcaseInternalTitle: "TSB Digital Platform",
+    showcaseInternalMeta: "Webplattform • Mehrsprachig • Skalierbare Architektur",
+    showcaseInternalDescription: "Schrittweise Konzeption und Entwicklung der digitalen TSB-Tech-Group-Plattform, um Services, Anfragen, Kundenbereiche, Support, Store, Academy und zukünftige Verwaltungstools in einem Ökosystem zu vereinen.",
+    showcaseInternalLink: "Projektfortschritt verfolgen",
+    referencesNote: "Detaillierte Praxisreferenzen werden schrittweise ergänzt, sobald Projekte ausreichend dokumentiert sind und veröffentlicht werden dürfen.",
+    ctaEyebrow: "IHR PROJEKT",
+    ctaTitle: "Einen konkreten Bedarf in eine Lösung verwandeln?",
+    ctaText: "Stellen Sie TSB Tech Group Ihren Bedarf vor. Wir können den Kontext prüfen und den besten nächsten Schritt bestimmen.",
+    ctaQuote: "Angebot anfordern",
+    ctaContact: "Projekt vorstellen"
   },
 
   es: {
-    projectsPage: {
-      eyebrow: "NUESTROS PROYECTOS",
-      title1: "Soluciones",
-      title2: "concretas",
-      intro:
-        "Descubra una selección de áreas en las que TSB Tech Group desarrolla e implementa soluciones técnicas, tecnológicas y profesionales.",
-      backHome: "Volver al inicio",
-      quote: "Solicitar presupuesto",
-      discuss: "Hablar de este proyecto",
-      items: {
-        automobile: {
-          category: "Automóvil",
-          title: "Cerrajería del automóvil",
-          description:
-            "Programación de llaves, duplicación, soluciones por pérdida total de llaves, mandos, transpondedores e intervenciones especializadas.",
-        },
-        security: {
-          category: "Seguridad",
-          title: "Sistemas de seguridad",
-          description:
-            "Videovigilancia, control de acceso, alarmas y soluciones de protección para particulares, empresas e instituciones.",
-        },
-        solar: {
-          category: "Energía",
-          title: "Instalaciones fotovoltaicas",
-          description:
-            "Soluciones energéticas, instalaciones solares, optimización del consumo y acompañamiento hacia una mayor autonomía energética.",
-        },
-        industry: {
-          category: "Industria",
-          title: "Electricidad y automatización",
-          description:
-            "Instalación, mantenimiento, reparación, automatización e integración de soluciones técnicas para entornos profesionales.",
-        },
-        digital: {
-          category: "Digital",
-          title: "Soluciones digitales",
-          description:
-            "Sitios web, plataformas profesionales, áreas de clientes y soluciones digitales escalables adaptadas a las organizaciones.",
-        },
-      },
+    eyebrow: "PROYECTOS & REALIZACIÓN",
+    title1: "Soluciones",
+    title2: "para necesidades reales",
+    intro: "TSB Tech Group acompaña necesidades técnicas, tecnológicas y digitales con un enfoque estructurado: comprender, diseñar, ejecutar y hacer evolucionar la solución.",
+    backHome: "Volver al inicio",
+    quote: "Solicitar presupuesto",
+    discuss: "Hablar de esta necesidad",
+    domainsEyebrow: "ÁREAS DE INTERVENCIÓN",
+    domainsTitle: "Experiencia multisectorial",
+    domainsIntro: "Los proyectos pueden combinar una o varias áreas de experiencia según el contexto, los objetivos y las limitaciones.",
+    items: {
+      automobile: { category: "Automoción", title: "Cerrajería & diagnóstico del automóvil", description: "Programación y duplicación de llaves, soluciones de pérdida total, diagnóstico, electrónica del vehículo e intervenciones especializadas." },
+      security: { category: "Seguridad", title: "Seguridad & videovigilancia", description: "Cámaras, control de acceso, alarmas, protección de sitios y soluciones integradas para particulares, empresas e instituciones." },
+      energy: { category: "Energía", title: "Electricidad & energía", description: "Instalaciones eléctricas, soluciones energéticas, optimización del consumo y apoyo a proyectos de autonomía." },
+      industry: { category: "Técnica", title: "Mantenimiento & automatización", description: "Reparación, mantenimiento, automatización, integración de equipos y mejora de soluciones técnicas para entornos profesionales." },
+      digital: { category: "Digital", title: "Sitios web & plataformas", description: "Sitios web, plataformas profesionales, áreas de clientes y soluciones digitales escalables centradas en necesidades operativas." },
+      networks: { category: "Redes", title: "Redes & telecomunicaciones", description: "Conectividad, redes, equipos comunicantes e integración de telecomunicaciones para entornos profesionales." }
     },
+    methodEyebrow: "MÉTODO DE PROYECTO",
+    methodTitle: "De la idea a la ejecución",
+    methodIntro: "Cada proyecto sigue un proceso claro para reducir riesgos, estructurar necesidades y construir una solución realmente utilizable.",
+    steps: {
+      need: { title: "Comprender la necesidad", description: "Identificar el problema, el contexto, los objetivos y las limitaciones prioritarias." },
+      study: { title: "Estudiar", description: "Analizar opciones técnicas, recursos necesarios y viabilidad." },
+      solution: { title: "Diseñar la solución", description: "Definir una respuesta adaptada, escalable y coherente con la necesidad real." },
+      execution: { title: "Realizar", description: "Implementar, integrar, configurar y probar la solución seleccionada." },
+      followup: { title: "Seguir & evolucionar", description: "Asegurar seguimiento, ajustes y evolución cuando el proyecto lo requiera." }
+    },
+    showcaseEyebrow: "PROYECTO INTERNO",
+    showcaseTitle: "Un proyecto que construimos nosotros mismos",
+    showcaseIntro: "Solo publicamos referencias que podamos presentar de forma clara y responsable.",
+    showcaseInternalCategory: "Digital • Proyecto interno",
+    showcaseInternalTitle: "TSB Digital Platform",
+    showcaseInternalMeta: "Plataforma web • Multilingüe • Arquitectura escalable",
+    showcaseInternalDescription: "Diseño y desarrollo progresivo de la plataforma digital TSB Tech Group para reunir servicios, solicitudes, áreas de clientes, soporte, Store, Academy y futuras herramientas de gestión en un solo ecosistema.",
+    showcaseInternalLink: "Seguir la evolución del proyecto",
+    referencesNote: "Las referencias detalladas de campo se añadirán progresivamente cuando los proyectos estén suficientemente documentados y puedan publicarse.",
+    ctaEyebrow: "SU PROYECTO",
+    ctaTitle: "¿Una necesidad concreta que transformar en solución?",
+    ctaText: "Presente su necesidad a TSB Tech Group. Podemos estudiar el contexto e identificar la mejor forma de avanzar.",
+    ctaQuote: "Solicitar presupuesto",
+    ctaContact: "Presentar mi proyecto"
   },
 
   it: {
-    projectsPage: {
-      eyebrow: "I NOSTRI PROGETTI",
-      title1: "Soluzioni",
-      title2: "concrete",
-      intro:
-        "Scopri una selezione di ambiti in cui TSB Tech Group sviluppa e realizza soluzioni tecniche, tecnologiche e professionali.",
-      backHome: "Torna alla home",
-      quote: "Richiedi un preventivo",
-      discuss: "Parla di questo progetto",
-      items: {
-        automobile: {
-          category: "Automotive",
-          title: "Chiavi e sicurezza auto",
-          description:
-            "Programmazione chiavi, duplicazione, soluzioni per perdita totale delle chiavi, telecomandi, transponder e interventi specializzati.",
-        },
-        security: {
-          category: "Sicurezza",
-          title: "Sistemi di sicurezza",
-          description:
-            "Videosorveglianza, controllo accessi, allarmi e soluzioni di protezione per privati, aziende e istituzioni.",
-        },
-        solar: {
-          category: "Energia",
-          title: "Impianti fotovoltaici",
-          description:
-            "Soluzioni energetiche, impianti solari, ottimizzazione dei consumi e supporto verso una maggiore autonomia energetica.",
-        },
-        industry: {
-          category: "Industria",
-          title: "Elettricità e automazione",
-          description:
-            "Installazione, manutenzione, riparazione, automazione e integrazione di soluzioni tecniche per ambienti professionali.",
-        },
-        digital: {
-          category: "Digitale",
-          title: "Soluzioni digitali",
-          description:
-            "Siti web, piattaforme professionali, aree clienti e soluzioni digitali scalabili adatte alle organizzazioni.",
-        },
-      },
+    eyebrow: "PROGETTI & REALIZZAZIONI",
+    title1: "Soluzioni",
+    title2: "per esigenze reali",
+    intro: "TSB Tech Group affronta esigenze tecniche, tecnologiche e digitali con un metodo strutturato: comprendere, progettare, realizzare ed evolvere la soluzione.",
+    backHome: "Torna alla home",
+    quote: "Richiedi un preventivo",
+    discuss: "Parla di questa esigenza",
+    domainsEyebrow: "AMBITI DI INTERVENTO",
+    domainsTitle: "Competenze multisettoriali",
+    domainsIntro: "I progetti possono combinare una o più competenze in base al contesto, agli obiettivi e ai vincoli.",
+    items: {
+      automobile: { category: "Automotive", title: "Chiavi auto & diagnostica", description: "Programmazione e duplicazione chiavi, soluzioni all-keys-lost, diagnostica, elettronica veicolo e interventi specializzati." },
+      security: { category: "Sicurezza", title: "Sicurezza & videosorveglianza", description: "Telecamere, controllo accessi, allarmi, protezione siti e soluzioni integrate per privati, aziende e istituzioni." },
+      energy: { category: "Energia", title: "Elettricità & energia", description: "Impianti elettrici, soluzioni energetiche, ottimizzazione dei consumi e supporto a progetti di autonomia." },
+      industry: { category: "Tecnica", title: "Manutenzione & automazione", description: "Riparazione, manutenzione, automazione, integrazione di apparecchiature e miglioramento di soluzioni tecniche per ambienti professionali." },
+      digital: { category: "Digitale", title: "Siti web & piattaforme", description: "Siti web, piattaforme professionali, aree clienti e soluzioni digitali scalabili basate sulle esigenze operative." },
+      networks: { category: "Reti", title: "Reti & telecomunicazioni", description: "Connettività, reti, dispositivi comunicanti e integrazione di telecomunicazioni per ambienti professionali." }
     },
+    methodEyebrow: "METODO DI PROGETTO",
+    methodTitle: "Dall’idea alla realizzazione",
+    methodIntro: "Ogni progetto segue un processo chiaro per ridurre i rischi, definire i requisiti e costruire una soluzione realmente utilizzabile.",
+    steps: {
+      need: { title: "Comprendere l’esigenza", description: "Identificare problema, contesto, obiettivi e vincoli prioritari." },
+      study: { title: "Studiare", description: "Analizzare opzioni tecniche, risorse necessarie e fattibilità." },
+      solution: { title: "Progettare la soluzione", description: "Definire una risposta adatta, scalabile e coerente con l’esigenza reale." },
+      execution: { title: "Realizzare", description: "Implementare, integrare, configurare e testare la soluzione scelta." },
+      followup: { title: "Seguire & far evolvere", description: "Garantire follow-up, adeguamenti ed evoluzione quando il progetto lo richiede." }
+    },
+    showcaseEyebrow: "PROGETTO INTERNO",
+    showcaseTitle: "Un progetto che stiamo costruendo noi stessi",
+    showcaseIntro: "Pubblichiamo solo referenze che possiamo presentare in modo chiaro e responsabile.",
+    showcaseInternalCategory: "Digitale • Progetto interno",
+    showcaseInternalTitle: "TSB Digital Platform",
+    showcaseInternalMeta: "Piattaforma web • Multilingue • Architettura scalabile",
+    showcaseInternalDescription: "Progettazione e sviluppo progressivo della piattaforma digitale TSB Tech Group per riunire servizi, richieste, aree clienti, supporto, Store, Academy e futuri strumenti di gestione in un unico ecosistema.",
+    showcaseInternalLink: "Segui l’evoluzione del progetto",
+    referencesNote: "Le referenze operative dettagliate saranno aggiunte progressivamente quando i progetti saranno sufficientemente documentati e pubblicabili.",
+    ctaEyebrow: "IL TUO PROGETTO",
+    ctaTitle: "Un’esigenza concreta da trasformare in soluzione?",
+    ctaText: "Presenta la tua esigenza a TSB Tech Group. Possiamo analizzare il contesto e individuare il modo migliore per procedere.",
+    ctaQuote: "Richiedi un preventivo",
+    ctaContact: "Presenta il mio progetto"
   },
 
   pt: {
-    projectsPage: {
-      eyebrow: "OS NOSSOS PROJETOS",
-      title1: "Soluções",
-      title2: "concretas",
-      intro:
-        "Descubra uma seleção de áreas em que a TSB Tech Group desenvolve e implementa soluções técnicas, tecnológicas e profissionais.",
-      backHome: "Voltar ao início",
-      quote: "Pedir orçamento",
-      discuss: "Falar sobre este projeto",
-      items: {
-        automobile: {
-          category: "Automóvel",
-          title: "Chaves e segurança automóvel",
-          description:
-            "Programação de chaves, duplicação, soluções para perda total de chaves, comandos, transponders e intervenções especializadas.",
-        },
-        security: {
-          category: "Segurança",
-          title: "Sistemas de segurança",
-          description:
-            "Videovigilância, controlo de acesso, alarmes e soluções de proteção para particulares, empresas e instituições.",
-        },
-        solar: {
-          category: "Energia",
-          title: "Instalações fotovoltaicas",
-          description:
-            "Soluções energéticas, instalações solares, otimização do consumo e acompanhamento para uma maior autonomia energética.",
-        },
-        industry: {
-          category: "Indústria",
-          title: "Eletricidade e automação",
-          description:
-            "Instalação, manutenção, reparação, automação e integração de soluções técnicas para ambientes profissionais.",
-        },
-        digital: {
-          category: "Digital",
-          title: "Soluções digitais",
-          description:
-            "Sites, plataformas profissionais, áreas de cliente e soluções digitais escaláveis adaptadas às organizações.",
-        },
-      },
+    eyebrow: "PROJETOS & REALIZAÇÕES",
+    title1: "Soluções",
+    title2: "para necessidades reais",
+    intro: "A TSB Tech Group acompanha necessidades técnicas, tecnológicas e digitais com uma abordagem estruturada: compreender, conceber, executar e evoluir a solução.",
+    backHome: "Voltar ao início",
+    quote: "Pedir orçamento",
+    discuss: "Falar desta necessidade",
+    domainsEyebrow: "ÁREAS DE INTERVENÇÃO",
+    domainsTitle: "Competência multissetorial",
+    domainsIntro: "Os projetos podem combinar uma ou várias áreas de especialização conforme o contexto, os objetivos e as limitações.",
+    items: {
+      automobile: { category: "Automóvel", title: "Chaves auto & diagnóstico", description: "Programação e duplicação de chaves, soluções all-keys-lost, diagnóstico, eletrónica automóvel e intervenções especializadas." },
+      security: { category: "Segurança", title: "Segurança & videovigilância", description: "Câmaras, controlo de acesso, alarmes, proteção de locais e soluções integradas para particulares, empresas e instituições." },
+      energy: { category: "Energia", title: "Eletricidade & energia", description: "Instalações elétricas, soluções energéticas, otimização do consumo e apoio a projetos de autonomia." },
+      industry: { category: "Técnica", title: "Manutenção & automação", description: "Reparação, manutenção, automação, integração de equipamentos e melhoria de soluções técnicas para ambientes profissionais." },
+      digital: { category: "Digital", title: "Sites & plataformas", description: "Sites, plataformas profissionais, áreas de cliente e soluções digitais escaláveis orientadas para necessidades operacionais." },
+      networks: { category: "Redes", title: "Redes & telecomunicações", description: "Conectividade, redes, equipamentos comunicantes e integração de telecomunicações para ambientes profissionais." }
     },
+    methodEyebrow: "MÉTODO DE PROJETO",
+    methodTitle: "Da ideia à implementação",
+    methodIntro: "Cada projeto segue um processo claro para reduzir riscos, enquadrar necessidades e construir uma solução realmente utilizável.",
+    steps: {
+      need: { title: "Compreender a necessidade", description: "Identificar o problema, o contexto, os objetivos e as limitações prioritárias." },
+      study: { title: "Estudar", description: "Analisar opções técnicas, recursos necessários e viabilidade." },
+      solution: { title: "Conceber a solução", description: "Definir uma resposta adequada, escalável e coerente com a necessidade real." },
+      execution: { title: "Executar", description: "Implementar, integrar, configurar e testar a solução selecionada." },
+      followup: { title: "Acompanhar & evoluir", description: "Garantir acompanhamento, ajustes e evolução quando o projeto o exigir." }
+    },
+    showcaseEyebrow: "PROJETO INTERNO",
+    showcaseTitle: "Um projeto que estamos a construir nós próprios",
+    showcaseIntro: "Publicamos apenas referências que podemos apresentar de forma clara e responsável.",
+    showcaseInternalCategory: "Digital • Projeto interno",
+    showcaseInternalTitle: "TSB Digital Platform",
+    showcaseInternalMeta: "Plataforma web • Multilingue • Arquitetura escalável",
+    showcaseInternalDescription: "Conceção e desenvolvimento progressivo da plataforma digital TSB Tech Group para reunir serviços, pedidos, áreas de cliente, suporte, Store, Academy e futuras ferramentas de gestão num único ecossistema.",
+    showcaseInternalLink: "Acompanhar a evolução do projeto",
+    referencesNote: "As referências de campo detalhadas serão adicionadas progressivamente quando os projetos estiverem suficientemente documentados e puderem ser publicados.",
+    ctaEyebrow: "O SEU PROJETO",
+    ctaTitle: "Uma necessidade concreta para transformar em solução?",
+    ctaText: "Apresente a sua necessidade à TSB Tech Group. Podemos estudar o contexto e identificar a melhor forma de avançar.",
+    ctaQuote: "Pedir orçamento",
+    ctaContact: "Apresentar o meu projeto"
   },
 
   ar: {
-    projectsPage: {
-      eyebrow: "مشاريعنا",
-      title1: "حلول",
-      title2: "ملموسة",
-      intro:
-        "اكتشف مجموعة من المجالات التي تطوّر فيها TSB Tech Group حلولًا تقنية وتكنولوجية ومهنية وتنفذها.",
-      backHome: "العودة إلى الرئيسية",
-      quote: "طلب عرض سعر",
-      discuss: "تحدث عن هذا المشروع",
-      items: {
-        automobile: {
-          category: "السيارات",
-          title: "مفاتيح وأقفال السيارات",
-          description:
-            "برمجة المفاتيح والنسخ وحلول فقدان جميع المفاتيح وأجهزة التحكم والترانسبوندر والتدخلات المتخصصة.",
-        },
-        security: {
-          category: "الأمن",
-          title: "أنظمة الأمن",
-          description:
-            "المراقبة بالفيديو والتحكم في الدخول والإنذارات وحلول الحماية للأفراد والشركات والمؤسسات.",
-        },
-        solar: {
-          category: "الطاقة",
-          title: "التركيبات الكهروضوئية",
-          description:
-            "حلول الطاقة والتركيبات الشمسية وتحسين الاستهلاك والمرافقة نحو مزيد من الاستقلالية في الطاقة.",
-        },
-        industry: {
-          category: "الصناعة",
-          title: "الكهرباء والأتمتة",
-          description:
-            "التركيب والصيانة وإصلاح الأعطال والأتمتة ودمج الحلول التقنية للبيئات المهنية.",
-        },
-        digital: {
-          category: "رقمي",
-          title: "الحلول الرقمية",
-          description:
-            "المواقع والمنصات المهنية ومساحات العملاء والحلول الرقمية القابلة للتوسع والمناسبة للمؤسسات.",
-        },
-      },
+    eyebrow: "المشاريع والتنفيذ",
+    title1: "حلول",
+    title2: "مصممة للاحتياجات الواقعية",
+    intro: "تدعم TSB Tech Group الاحتياجات التقنية والتكنولوجية والرقمية من خلال منهج منظم: فهم الحاجة، تصميم الحل، تنفيذه ثم تطويره.",
+    backHome: "العودة إلى الرئيسية",
+    quote: "طلب عرض سعر",
+    discuss: "مناقشة هذا الاحتياج",
+    domainsEyebrow: "مجالات التنفيذ",
+    domainsTitle: "خبرة متعددة القطاعات",
+    domainsIntro: "يمكن أن يجمع المشروع مجالاً واحداً أو عدة مجالات خبرة وفقاً للسياق والأهداف والقيود.",
+    items: {
+      automobile: { category: "السيارات", title: "مفاتيح السيارات والتشخيص", description: "برمجة ونسخ المفاتيح، حلول فقدان جميع المفاتيح، التشخيص، إلكترونيات المركبات والتدخلات المتخصصة." },
+      security: { category: "الأمن", title: "الأمن والمراقبة بالفيديو", description: "الكاميرات، التحكم في الدخول، الإنذارات، حماية المواقع وحلول متكاملة للأفراد والشركات والمؤسسات." },
+      energy: { category: "الطاقة", title: "الكهرباء والطاقة", description: "التركيبات الكهربائية، حلول الطاقة، تحسين الاستهلاك ودعم مشاريع الاستقلالية." },
+      industry: { category: "تقني", title: "الصيانة والأتمتة", description: "إصلاح الأعطال، الصيانة، الأتمتة، دمج المعدات وتحسين الحلول التقنية للبيئات المهنية." },
+      digital: { category: "رقمي", title: "المواقع والمنصات", description: "مواقع الويب، المنصات المهنية، مساحات العملاء وحلول رقمية قابلة للتوسع حسب الاحتياجات التشغيلية." },
+      networks: { category: "الشبكات", title: "الشبكات والاتصالات", description: "الاتصال، الشبكات، الأجهزة المتصلة ودمج حلول الاتصالات للبيئات المهنية." }
     },
+    methodEyebrow: "منهج المشروع",
+    methodTitle: "من الفكرة إلى التنفيذ",
+    methodIntro: "يتبع كل مشروع مساراً واضحاً لتقليل المخاطر وتحديد المتطلبات وبناء حل قابل للاستخدام فعلياً.",
+    steps: {
+      need: { title: "فهم الاحتياج", description: "تحديد المشكلة والسياق والأهداف والقيود ذات الأولوية." },
+      study: { title: "الدراسة", description: "تحليل الخيارات التقنية والموارد المطلوبة وإمكانية التنفيذ." },
+      solution: { title: "تصميم الحل", description: "تحديد حل مناسب وقابل للتوسع ومتوافق مع الاحتياج الحقيقي." },
+      execution: { title: "التنفيذ", description: "تنفيذ الحل المختار ودمجه وضبطه واختباره." },
+      followup: { title: "المتابعة والتطوير", description: "توفير المتابعة والتعديلات والتطوير عندما يتطلب المشروع ذلك." }
+    },
+    showcaseEyebrow: "مشروع داخلي",
+    showcaseTitle: "مشروع نقوم ببنائه بأنفسنا",
+    showcaseIntro: "ننشر فقط المراجع التي يمكننا عرضها بوضوح ومسؤولية.",
+    showcaseInternalCategory: "رقمي • مشروع داخلي",
+    showcaseInternalTitle: "TSB Digital Platform",
+    showcaseInternalMeta: "منصة ويب • متعددة اللغات • بنية قابلة للتوسع",
+    showcaseInternalDescription: "التصميم والتطوير التدريجي لمنصة TSB Tech Group الرقمية لجمع الخدمات والطلبات ومساحات العملاء والدعم وStore وAcademy وأدوات الإدارة المستقبلية ضمن منظومة واحدة.",
+    showcaseInternalLink: "متابعة تطور المشروع",
+    referencesNote: "ستتم إضافة المراجع الميدانية التفصيلية تدريجياً عندما تكون المشاريع موثقة بشكل كافٍ ويمكن نشرها.",
+    ctaEyebrow: "مشروعك",
+    ctaTitle: "هل لديك احتياج واقعي تريد تحويله إلى حل؟",
+    ctaText: "قدّم احتياجك إلى TSB Tech Group. يمكننا دراسة السياق وتحديد أفضل طريقة للتقدم.",
+    ctaQuote: "طلب عرض سعر",
+    ctaContact: "تقديم مشروعي"
   },
 
   tr: {
-    projectsPage: {
-      eyebrow: "PROJELERİMİZ",
-      title1: "Somut",
-      title2: "çözümler",
-      intro:
-        "TSB Tech Group’un teknik, teknolojik ve profesyonel çözümler geliştirip uyguladığı seçili alanları keşfedin.",
-      backHome: "Ana sayfaya dön",
-      quote: "Teklif iste",
-      discuss: "Bu projeyi görüşelim",
-      items: {
-        automobile: {
-          category: "Otomotiv",
-          title: "Otomotiv anahtar ve güvenlik",
-          description:
-            "Anahtar programlama, çoğaltma, tüm anahtarların kaybı için çözümler, kumandalar, transponderler ve uzman müdahaleler.",
-        },
-        security: {
-          category: "Güvenlik",
-          title: "Güvenlik sistemleri",
-          description:
-            "Bireyler, şirketler ve kurumlar için video gözetim, erişim kontrolü, alarm ve koruma çözümleri.",
-        },
-        solar: {
-          category: "Enerji",
-          title: "Fotovoltaik kurulumlar",
-          description:
-            "Enerji çözümleri, güneş enerjisi kurulumları, tüketim optimizasyonu ve daha fazla enerji bağımsızlığına yönelik destek.",
-        },
-        industry: {
-          category: "Endüstri",
-          title: "Elektrik ve otomasyon",
-          description:
-            "Profesyonel ortamlar için kurulum, bakım, arıza giderme, otomasyon ve teknik çözüm entegrasyonu.",
-        },
-        digital: {
-          category: "Dijital",
-          title: "Dijital çözümler",
-          description:
-            "Web siteleri, profesyonel platformlar, müşteri alanları ve kuruluşlara uyarlanmış ölçeklenebilir dijital çözümler.",
-        },
-      },
+    eyebrow: "PROJELER & UYGULAMA",
+    title1: "Gerçek ihtiyaçlar için",
+    title2: "çözümler",
+    intro: "TSB Tech Group teknik, teknolojik ve dijital ihtiyaçları yapılandırılmış bir yaklaşımla ele alır: anlamak, tasarlamak, uygulamak ve geliştirmek.",
+    backHome: "Ana sayfaya dön",
+    quote: "Teklif iste",
+    discuss: "Bu ihtiyacı görüşelim",
+    domainsEyebrow: "UYGULAMA ALANLARI",
+    domainsTitle: "Çok sektörlü uzmanlık",
+    domainsIntro: "Projeler; bağlama, hedeflere ve kısıtlara göre bir veya birden fazla uzmanlık alanını bir araya getirebilir.",
+    items: {
+      automobile: { category: "Otomotiv", title: "Otomotiv anahtar & teşhis", description: "Anahtar programlama ve çoğaltma, tüm anahtar kaybı çözümleri, teşhis, araç elektroniği ve uzman müdahaleler." },
+      security: { category: "Güvenlik", title: "Güvenlik & video gözetim", description: "Kameralar, erişim kontrolü, alarm sistemleri, saha güvenliği ve bireyler, şirketler ve kurumlar için entegre çözümler." },
+      energy: { category: "Enerji", title: "Elektrik & enerji", description: "Elektrik tesisatları, enerji çözümleri, tüketim optimizasyonu ve enerji bağımsızlığı projelerine destek." },
+      industry: { category: "Teknik", title: "Bakım & otomasyon", description: "Arıza giderme, bakım, otomasyon, ekipman entegrasyonu ve profesyonel ortamlar için teknik çözüm iyileştirmeleri." },
+      digital: { category: "Dijital", title: "Web siteleri & platformlar", description: "Web siteleri, profesyonel platformlar, müşteri alanları ve operasyonel ihtiyaçlara göre ölçeklenebilir dijital çözümler." },
+      networks: { category: "Ağlar", title: "Ağlar & telekomünikasyon", description: "Bağlantı, ağlar, haberleşen ekipmanlar ve profesyonel ortamlar için telekomünikasyon entegrasyonu." }
     },
+    methodEyebrow: "PROJE YÖNTEMİ",
+    methodTitle: "Fikirden uygulamaya",
+    methodIntro: "Her proje riskleri azaltmak, ihtiyaçları netleştirmek ve gerçekten kullanılabilir bir çözüm oluşturmak için açık bir süreç izler.",
+    steps: {
+      need: { title: "İhtiyacı anlamak", description: "Sorunu, bağlamı, hedefleri ve öncelikli kısıtları belirlemek." },
+      study: { title: "İncelemek", description: "Teknik seçenekleri, gerekli kaynakları ve uygulanabilirliği analiz etmek." },
+      solution: { title: "Çözümü tasarlamak", description: "Gerçek ihtiyaca uygun, ölçeklenebilir ve tutarlı bir çözüm tanımlamak." },
+      execution: { title: "Uygulamak", description: "Seçilen çözümü hayata geçirmek, entegre etmek, yapılandırmak ve test etmek." },
+      followup: { title: "Takip etmek & geliştirmek", description: "Proje gerektiğinde takip, ayarlama ve geliştirme sağlamak." }
+    },
+    showcaseEyebrow: "İÇ PROJE",
+    showcaseTitle: "Kendi geliştirdiğimiz bir proje",
+    showcaseIntro: "Yalnızca açık ve sorumlu şekilde sunabileceğimiz referansları yayınlıyoruz.",
+    showcaseInternalCategory: "Dijital • İç proje",
+    showcaseInternalTitle: "TSB Digital Platform",
+    showcaseInternalMeta: "Web platformu • Çok dilli • Ölçeklenebilir mimari",
+    showcaseInternalDescription: "Hizmetleri, talepleri, müşteri alanlarını, desteği, Store’u, Academy’yi ve gelecekteki yönetim araçlarını tek bir ekosistemde birleştirmek için TSB Tech Group dijital platformunun aşamalı tasarımı ve geliştirilmesi.",
+    showcaseInternalLink: "Projenin gelişimini takip et",
+    referencesNote: "Detaylı saha referansları, projeler yeterince belgelenip yayınlanabilir olduğunda aşamalı olarak eklenecektir.",
+    ctaEyebrow: "PROJENİZ",
+    ctaTitle: "Çözüme dönüştürmek istediğiniz gerçek bir ihtiyaç mı var?",
+    ctaText: "İhtiyacınızı TSB Tech Group’a sunun. Bağlamı inceleyip en uygun ilerleme yolunu belirleyebiliriz.",
+    ctaQuote: "Teklif iste",
+    ctaContact: "Projemi sun"
   },
 
   zh: {
-    projectsPage: {
-      eyebrow: "我们的项目",
-      title1: "具体的",
-      title2: "解决方案",
-      intro:
-        "了解 TSB Tech Group 开发并实施技术、科技和专业解决方案的部分重点领域。",
-      backHome: "返回首页",
-      quote: "申请报价",
-      discuss: "咨询此项目",
-      items: {
-        automobile: {
-          category: "汽车",
-          title: "汽车钥匙与车辆安全",
-          description:
-            "钥匙编程、复制、全钥匙丢失解决方案、遥控器、芯片以及专业汽车服务。",
-        },
-        security: {
-          category: "安全",
-          title: "安全系统",
-          description:
-            "为个人、企业和机构提供视频监控、门禁控制、报警和保护解决方案。",
-        },
-        solar: {
-          category: "能源",
-          title: "光伏安装",
-          description:
-            "能源解决方案、太阳能安装、能耗优化以及提升能源自主性的支持。",
-        },
-        industry: {
-          category: "工业",
-          title: "电气与自动化",
-          description:
-            "面向专业环境的安装、维护、故障排查、自动化和技术解决方案集成。",
-        },
-        digital: {
-          category: "数字技术",
-          title: "数字解决方案",
-          description:
-            "网站、专业平台、客户空间以及适用于组织的可扩展数字解决方案。",
-        },
-      },
+    eyebrow: "项目与实施",
+    title1: "面向真实需求的",
+    title2: "解决方案",
+    intro: "TSB Tech Group 通过结构化方法支持技术、科技与数字化需求：理解需求、设计方案、实施并持续演进。",
+    backHome: "返回首页",
+    quote: "申请报价",
+    discuss: "讨论此需求",
+    domainsEyebrow: "实施领域",
+    domainsTitle: "多行业专业能力",
+    domainsIntro: "项目可根据实际背景、目标与限制组合一个或多个专业领域。",
+    items: {
+      automobile: { category: "汽车", title: "汽车钥匙与诊断", description: "钥匙编程与复制、全钥匙丢失解决方案、车辆诊断、车载电子及专业汽车服务。" },
+      security: { category: "安全", title: "安全与视频监控", description: "摄像头、门禁控制、报警系统、场所保护，以及面向个人、企业和机构的集成解决方案。" },
+      energy: { category: "能源", title: "电气与能源", description: "电气安装、能源解决方案、能耗优化以及能源自主项目支持。" },
+      industry: { category: "技术", title: "维护与自动化", description: "故障排查、维护、自动化、设备集成以及专业环境中的技术方案优化。" },
+      digital: { category: "数字", title: "网站与平台", description: "网站、专业平台、客户空间以及围绕业务需求设计的可扩展数字解决方案。" },
+      networks: { category: "网络", title: "网络与通信", description: "连接、网络、通信设备以及面向专业环境的电信解决方案集成。" }
     },
-  },
-};
+    methodEyebrow: "项目方法",
+    methodTitle: "从构想到实施",
+    methodIntro: "每个项目都遵循清晰流程，以降低风险、明确需求并构建真正可用的解决方案。",
+    steps: {
+      need: { title: "理解需求", description: "识别问题、背景、目标与优先限制。" },
+      study: { title: "评估", description: "分析技术选项、所需资源与可行性。" },
+      solution: { title: "设计方案", description: "针对真实需求定义适合、可扩展且一致的解决方案。" },
+      execution: { title: "实施", description: "部署、集成、配置并测试选定方案。" },
+      followup: { title: "跟进与演进", description: "在项目需要时提供跟进、调整与持续演进。" }
+    },
+    showcaseEyebrow: "内部项目",
+    showcaseTitle: "我们正在亲自打造的项目",
+    showcaseIntro: "我们只发布能够清晰、负责地展示的项目参考。",
+    showcaseInternalCategory: "数字 • 内部项目",
+    showcaseInternalTitle: "TSB Digital Platform",
+    showcaseInternalMeta: "Web 平台 • 多语言 • 可扩展架构",
+    showcaseInternalDescription: "逐步设计和开发 TSB Tech Group 数字平台，将服务、申请、客户空间、支持、Store、Academy 以及未来管理工具整合到同一生态体系中。",
+    showcaseInternalLink: "查看项目进展",
+    referencesNote: "当现场项目得到充分记录并允许公开时，将逐步补充详细项目参考。",
+    ctaEyebrow: "您的项目",
+    ctaTitle: "有一个真实需求需要转化为解决方案？",
+    ctaText: "向 TSB Tech Group 提交您的需求。我们可以评估背景并确定最佳推进方式。",
+    ctaQuote: "申请报价",
+    ctaContact: "提交我的项目"
+  }
+} as const;
+
+export const projectsPageTranslations: TranslationResources =
+  Object.fromEntries(
+    Object.entries(localeData).map(([locale, projectsPage]) => [
+      locale,
+      { projectsPage },
+    ])
+  ) as TranslationResources;

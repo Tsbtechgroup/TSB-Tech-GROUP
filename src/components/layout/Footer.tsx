@@ -6,8 +6,6 @@ import { footerTranslations } from "../../i18n/locales/footer";
 import {
   FaFacebookF,
   FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
   FaTiktok,
   FaWhatsapp,
   FaSnapchatGhost,
@@ -16,8 +14,6 @@ import {
 } from "react-icons/fa";
 
 const WHATSAPP_URL = "https://wa.me/32493964587";
-
-
 
 const socialIconBaseStyle = {
   width: "40px",
@@ -30,6 +26,329 @@ const socialIconBaseStyle = {
   transition:
     "transform 180ms ease, box-shadow 180ms ease, filter 180ms ease",
 } as const;
+
+const paymentBadgeBase = {
+  minHeight: "46px",
+  minWidth: "92px",
+  padding: "8px 12px",
+  borderRadius: "12px",
+  border: "1px solid rgba(148, 163, 184, 0.20)",
+  background: "rgba(255,255,255,0.96)",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "8px",
+  overflow: "hidden",
+  boxShadow: "0 8px 22px rgba(2, 6, 23, 0.18)",
+} as const;
+
+function VisaLogo() {
+  return (
+    <span
+      aria-label="Visa"
+      title="Visa"
+      style={{
+        ...paymentBadgeBase,
+        color: "#1434CB",
+        fontSize: "24px",
+        fontWeight: 950,
+        fontStyle: "italic",
+        letterSpacing: "-1px",
+      }}
+    >
+      VISA
+    </span>
+  );
+}
+
+function MastercardLogo() {
+  return (
+    <span
+      aria-label="Mastercard"
+      title="Mastercard"
+      style={{
+        ...paymentBadgeBase,
+        flexDirection: "column",
+        gap: "2px",
+      }}
+    >
+      <span
+        aria-hidden="true"
+        style={{
+          position: "relative",
+          width: "42px",
+          height: "24px",
+          display: "inline-block",
+        }}
+      >
+        <span
+          style={{
+            position: "absolute",
+            left: "2px",
+            top: "1px",
+            width: "23px",
+            height: "23px",
+            borderRadius: "50%",
+            background: "#EB001B",
+          }}
+        />
+        <span
+          style={{
+            position: "absolute",
+            right: "2px",
+            top: "1px",
+            width: "23px",
+            height: "23px",
+            borderRadius: "50%",
+            background: "#F79E1B",
+            opacity: 0.94,
+          }}
+        />
+      </span>
+      <span
+        style={{
+          color: "#111827",
+          fontSize: "10px",
+          fontWeight: 800,
+          lineHeight: 1,
+        }}
+      >
+        mastercard
+      </span>
+    </span>
+  );
+}
+
+function PayPalLogo() {
+  return (
+    <span
+      aria-label="PayPal"
+      title="PayPal"
+      style={{
+        ...paymentBadgeBase,
+        color: "#003087",
+        fontWeight: 900,
+        fontSize: "18px",
+        letterSpacing: "-0.4px",
+      }}
+    >
+      <span
+        aria-hidden="true"
+        style={{
+          position: "relative",
+          width: "22px",
+          height: "27px",
+          display: "inline-block",
+        }}
+      >
+        <span
+          style={{
+            position: "absolute",
+            left: "1px",
+            top: 0,
+            fontSize: "27px",
+            fontWeight: 950,
+            color: "#003087",
+            lineHeight: 1,
+          }}
+        >
+          P
+        </span>
+        <span
+          style={{
+            position: "absolute",
+            left: "7px",
+            top: "4px",
+            fontSize: "23px",
+            fontWeight: 950,
+            color: "#009CDE",
+            lineHeight: 1,
+            opacity: 0.9,
+          }}
+        >
+          P
+        </span>
+      </span>
+      PayPal
+    </span>
+  );
+}
+
+function BancontactLogo() {
+  return (
+    <span
+      aria-label="Bancontact"
+      title="Bancontact"
+      style={{
+        ...paymentBadgeBase,
+        color: "#1A1F71",
+        fontWeight: 900,
+        fontSize: "13px",
+      }}
+    >
+      <span
+        aria-hidden="true"
+        style={{
+          width: "31px",
+          height: "24px",
+          borderRadius: "6px",
+          display: "inline-flex",
+          overflow: "hidden",
+          transform: "skewX(-8deg)",
+          boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.05)",
+        }}
+      >
+        <span
+          style={{
+            width: "50%",
+            height: "100%",
+            background: "#005498",
+          }}
+        />
+        <span
+          style={{
+            width: "50%",
+            height: "100%",
+            background: "#F5A623",
+          }}
+        />
+      </span>
+      Bancontact
+    </span>
+  );
+}
+
+function WaveLogo() {
+  return (
+    <span
+      aria-label="Wave"
+      title="Wave"
+      style={{
+        ...paymentBadgeBase,
+        color: "#172554",
+        fontWeight: 950,
+        fontSize: "17px",
+      }}
+    >
+      <span
+        aria-hidden="true"
+        style={{
+          width: "29px",
+          height: "29px",
+          borderRadius: "50%",
+          background: "#00C2FF",
+          color: "#ffffff",
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "20px",
+          fontWeight: 900,
+          lineHeight: 1,
+        }}
+      >
+        ≋
+      </span>
+      Wave
+    </span>
+  );
+}
+
+function OrangeMoneyLogo() {
+  return (
+    <span
+      aria-label="Orange Money"
+      title="Orange Money"
+      style={{
+        ...paymentBadgeBase,
+        background: "#111111",
+        color: "#ffffff",
+        justifyContent: "flex-start",
+      }}
+    >
+      <span
+        aria-hidden="true"
+        style={{
+          width: "27px",
+          height: "27px",
+          background: "#FF7900",
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#111111",
+          fontSize: "10px",
+          fontWeight: 950,
+        }}
+      >
+        OM
+      </span>
+      <span
+        style={{
+          display: "inline-flex",
+          flexDirection: "column",
+          lineHeight: 1,
+          textAlign: "left",
+        }}
+      >
+        <strong style={{ fontSize: "12px" }}>Orange</strong>
+        <strong style={{ fontSize: "11px", color: "#FF7900" }}>
+          Money
+        </strong>
+      </span>
+    </span>
+  );
+}
+
+function TsbWalletLogo() {
+  return (
+    <span
+      aria-label="Wallet TSB"
+      title="Wallet TSB"
+      style={{
+        ...paymentBadgeBase,
+        background:
+          "linear-gradient(135deg, rgba(2,6,23,0.98), rgba(15,23,42,0.98))",
+        border: "1px solid rgba(56,189,248,0.42)",
+        color: "#ffffff",
+      }}
+    >
+      <span
+        aria-hidden="true"
+        style={{
+          width: "31px",
+          height: "31px",
+          borderRadius: "9px",
+          border: "1px solid rgba(56,189,248,0.70)",
+          background:
+            "linear-gradient(135deg, rgba(14,165,233,0.35), rgba(37,99,235,0.18))",
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#38BDF8",
+          fontWeight: 950,
+          fontSize: "11px",
+          boxShadow: "0 0 18px rgba(56,189,248,0.18)",
+        }}
+      >
+        TSB
+      </span>
+      <span
+        style={{
+          display: "inline-flex",
+          flexDirection: "column",
+          lineHeight: 1,
+          textAlign: "left",
+        }}
+      >
+        <strong style={{ fontSize: "11px", color: "#94A3B8" }}>
+          Wallet
+        </strong>
+        <strong style={{ fontSize: "14px", color: "#38BDF8" }}>
+          TSB
+        </strong>
+      </span>
+    </span>
+  );
+}
 
 function Footer() {
   const { locale } = useLanguage();
@@ -98,34 +417,6 @@ function Footer() {
             >
               <FaInstagram />
             </a>
-
-            <span
-              aria-label="LinkedIn"
-              title="LinkedIn"
-              style={{
-                ...socialIconBaseStyle,
-                background: "#0A66C2",
-                color: "#ffffff",
-                boxShadow:
-                  "0 8px 20px rgba(10,102,194,0.28)",
-              }}
-            >
-              <FaLinkedinIn />
-            </span>
-
-            <span
-              aria-label="YouTube"
-              title="YouTube"
-              style={{
-                ...socialIconBaseStyle,
-                background: "#FF0000",
-                color: "#ffffff",
-                boxShadow:
-                  "0 8px 20px rgba(255,0,0,0.26)",
-              }}
-            >
-              <FaYoutube />
-            </span>
 
             <a
               href="https://www.tiktok.com/@ib50293"
@@ -200,30 +491,30 @@ function Footer() {
         </div>
 
         <div className="tsb-footer-column">
-          <h3>{t("quickLinks")}</h3>
+          <h3>{t("navigation")}</h3>
 
           <a href="/#top">{t("home")}</a>
           <a href="/about">{t("about")}</a>
           <a href="/services">{t("services")}</a>
           <a href="/projects">{t("projects")}</a>
           <a href="/news">{t("news")}</a>
+          <a href="/contact">{t("contact")}</a>
+        </div>
+
+        <div className="tsb-footer-column">
+          <h3>{t("ecosystem")}</h3>
+
+          <a href="/business">{t("business")}</a>
+          <a href="/academy">{t("academy")}</a>
+          <a href="/store">{t("store")}</a>
+          <a href="/innovation">{t("innovation")}</a>
           <a href="/partners">{t("partners")}</a>
         </div>
 
         <div className="tsb-footer-column">
-          <h3>{t("platform")}</h3>
+          <h3>{t("accessContact")}</h3>
 
-          <a href="/academy">
-            {t("academy")}
-          </a>
-
-          <a href="/store">
-            {t("store")}
-          </a>
-
-          <a href="/support">
-            {t("support")}
-          </a>
+          <a href="/support">{t("support")}</a>
 
           <a
             href="/client"
@@ -246,37 +537,12 @@ function Footer() {
               textDecoration: "none",
               boxShadow:
                 "0 10px 28px rgba(14,165,233,0.18), inset 0 1px 0 rgba(255,255,255,0.08)",
-              transition:
-                "transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease",
-            }}
-            onMouseEnter={(event) => {
-              event.currentTarget.style.transform =
-                "translateY(-2px)";
-              event.currentTarget.style.boxShadow =
-                "0 14px 34px rgba(14,165,233,0.28), inset 0 1px 0 rgba(255,255,255,0.10)";
-              event.currentTarget.style.borderColor =
-                "rgba(125, 211, 252, 0.9)";
-            }}
-            onMouseLeave={(event) => {
-              event.currentTarget.style.transform =
-                "translateY(0)";
-              event.currentTarget.style.boxShadow =
-                "0 10px 28px rgba(14,165,233,0.18), inset 0 1px 0 rgba(255,255,255,0.08)";
-              event.currentTarget.style.borderColor =
-                "rgba(56, 189, 248, 0.55)";
             }}
           >
             <FaUserAlt aria-hidden="true" />
             <span>{t("clientArea")}</span>
             <span aria-hidden="true">→</span>
           </a>
-
-        </div>
-
-        <div className="tsb-footer-column">
-          <h3>{t("contactUs")}</h3>
-
-          <span>{t("location")}</span>
 
           <a href="mailto:contact@tsbtechgroup.com">
             contact@tsbtechgroup.com
@@ -286,7 +552,12 @@ function Footer() {
             +32 466 32 75 36
           </a>
 
-          <span>{t("hours")}</span>
+          <span>{t("location")}</span>
+
+          <span>
+            <strong>{t("availabilityLabel")}:</strong>{" "}
+            {t("availability")}
+          </span>
 
           <a
             className="tsb-footer-quote"
@@ -300,17 +571,35 @@ function Footer() {
       <div className="tsb-footer-payments">
         <strong>{t("payments")}</strong>
 
-        <div className="tsb-footer-payment-list">
-          <span>Visa</span>
-          <span>Mastercard</span>
-          <span>PayPal</span>
-          <span>Bancontact</span>
-          <span>Wave</span>
-          <span>Orange Money</span>
-          <span className="tsb-wallet">
-            Wallet TSB
-          </span>
+        <div
+          className="tsb-footer-payment-list"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "10px",
+            alignItems: "center",
+            marginTop: "12px",
+          }}
+        >
+          <VisaLogo />
+          <MastercardLogo />
+          <PayPalLogo />
+          <BancontactLogo />
+          <WaveLogo />
+          <OrangeMoneyLogo />
+          <TsbWalletLogo />
         </div>
+
+        <span
+          style={{
+            display: "block",
+            marginTop: "10px",
+            fontSize: ".82rem",
+            opacity: 0.72,
+          }}
+        >
+          {t("paymentsNote")}
+        </span>
       </div>
 
       <div className="tsb-footer-bottom">
@@ -322,20 +611,6 @@ function Footer() {
             color: "#38bdf8",
             fontWeight: 700,
             textDecoration: "none",
-            transition:
-              "transform 180ms ease, filter 180ms ease",
-          }}
-          onMouseEnter={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(-3px)";
-            event.currentTarget.style.filter =
-              "brightness(1.25)";
-          }}
-          onMouseLeave={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(0)";
-            event.currentTarget.style.filter =
-              "brightness(1)";
           }}
         >
           {t("privacy")}
@@ -347,20 +622,6 @@ function Footer() {
             color: "#f59e0b",
             fontWeight: 700,
             textDecoration: "none",
-            transition:
-              "transform 180ms ease, filter 180ms ease",
-          }}
-          onMouseEnter={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(-3px)";
-            event.currentTarget.style.filter =
-              "brightness(1.25)";
-          }}
-          onMouseLeave={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(0)";
-            event.currentTarget.style.filter =
-              "brightness(1)";
           }}
         >
           {t("cookies")}
@@ -372,20 +633,6 @@ function Footer() {
             color: "#a78bfa",
             fontWeight: 700,
             textDecoration: "none",
-            transition:
-              "transform 180ms ease, filter 180ms ease",
-          }}
-          onMouseEnter={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(-3px)";
-            event.currentTarget.style.filter =
-              "brightness(1.25)";
-          }}
-          onMouseLeave={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(0)";
-            event.currentTarget.style.filter =
-              "brightness(1)";
           }}
         >
           {t("legal")}
@@ -397,23 +644,20 @@ function Footer() {
             color: "#4ade80",
             fontWeight: 700,
             textDecoration: "none",
-            transition:
-              "transform 180ms ease, filter 180ms ease",
-          }}
-          onMouseEnter={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(-3px)";
-            event.currentTarget.style.filter =
-              "brightness(1.25)";
-          }}
-          onMouseLeave={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(0)";
-            event.currentTarget.style.filter =
-              "brightness(1)";
           }}
         >
           {t("terms")}
+        </a>
+
+        <a
+          href="/delete-account"
+          style={{
+            color: "#fb7185",
+            fontWeight: 700,
+            textDecoration: "none",
+          }}
+        >
+          {t("deleteAccount")}
         </a>
 
         <button
@@ -427,139 +671,21 @@ function Footer() {
             border: "none",
             padding: 0,
             background: "transparent",
-            color: "#fb7185",
+            color: "#f8fafc",
             font: "inherit",
             fontWeight: 700,
             cursor: "pointer",
-            transition:
-              "transform 180ms ease, filter 180ms ease",
-          }}
-          onMouseEnter={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(-3px)";
-            event.currentTarget.style.filter =
-              "brightness(1.25)";
-          }}
-          onMouseLeave={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(0)";
-            event.currentTarget.style.filter =
-              "brightness(1)";
           }}
         >
           {t("manageCookies")}
         </button>
 
-        <span
-          style={{
-            color: "#94a3b8",
-            transition:
-              "transform 180ms ease, color 180ms ease",
-          }}
-          onMouseEnter={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(-3px)";
-            event.currentTarget.style.color =
-              "#e2e8f0";
-          }}
-          onMouseLeave={(event) => {
-            event.currentTarget.style.transform =
-              "translateY(0)";
-            event.currentTarget.style.color =
-              "#94a3b8";
-          }}
-        >
+        <span style={{ color: "#94a3b8" }}>
           {t("digitalPlatform")}
         </span>
       </div>
     </footer>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 export default Footer;

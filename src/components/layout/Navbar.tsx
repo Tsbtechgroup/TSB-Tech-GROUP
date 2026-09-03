@@ -7,7 +7,6 @@ import {
 import {
   FileText,
   MessageCircle,
-  ShoppingBag,
   UserRound,
 } from "lucide-react";
 
@@ -24,6 +23,8 @@ const WHATSAPP_URL = "https://wa.me/32493964587";
 
 function Navbar() {
   const [servicesOpen, setServicesOpen] =
+    useState(false);
+  const [ecosystemOpen, setEcosystemOpen] =
     useState(false);
   const [languageOpen, setLanguageOpen] =
     useState(false);
@@ -60,6 +61,16 @@ function Navbar() {
     setServicesOpen(
       (previous) => !previous
     );
+    setEcosystemOpen(false);
+    setLanguageOpen(false);
+    setAccountOpen(false);
+  };
+
+  const toggleEcosystem = () => {
+    setEcosystemOpen(
+      (previous) => !previous
+    );
+    setServicesOpen(false);
     setLanguageOpen(false);
     setAccountOpen(false);
   };
@@ -69,6 +80,7 @@ function Navbar() {
       (previous) => !previous
     );
     setServicesOpen(false);
+    setEcosystemOpen(false);
     setAccountOpen(false);
   };
 
@@ -77,6 +89,7 @@ function Navbar() {
       (previous) => !previous
     );
     setServicesOpen(false);
+    setEcosystemOpen(false);
     setLanguageOpen(false);
   };
 
@@ -85,12 +98,14 @@ function Navbar() {
       (previous) => !previous
     );
     setServicesOpen(false);
+    setEcosystemOpen(false);
     setLanguageOpen(false);
     setAccountOpen(false);
   };
 
   const closeDropdowns = () => {
     setServicesOpen(false);
+    setEcosystemOpen(false);
     setLanguageOpen(false);
     setAccountOpen(false);
   };
@@ -297,6 +312,51 @@ function Navbar() {
           font-size: 0.76rem;
           font-weight: 900;
           text-align: center;
+        }
+
+        .tsb-mobile-ecosystem {
+          margin: 4px 0 8px;
+          padding: 12px;
+          border: 1px solid rgba(56,189,248,0.16);
+          border-radius: 14px;
+          background:
+            linear-gradient(135deg, rgba(14,165,233,0.08), rgba(59,130,246,0.04));
+        }
+
+        .tsb-mobile-ecosystem__label {
+          display: block;
+          margin-bottom: 8px;
+          color: #7dd3fc;
+          font-size: 0.68rem;
+          font-weight: 900;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        .tsb-mobile-ecosystem__links {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 7px;
+        }
+
+        .tsb-mobile-ecosystem__links a {
+          min-height: 40px;
+          display: inline-flex;
+          align-items: center;
+          padding: 0 10px;
+          border: 1px solid rgba(255,255,255,0.09);
+          border-radius: 10px;
+          background: rgba(255,255,255,0.03);
+          color: rgba(255,255,255,0.88);
+          font-size: 0.76rem;
+          font-weight: 800;
+          text-decoration: none;
+        }
+
+        .tsb-mobile-ecosystem__links a:hover {
+          border-color: rgba(56,189,248,0.26);
+          background: rgba(56,189,248,0.08);
+          color: #ffffff;
         }
 
         .tsb-mobile-language-grid {
@@ -551,6 +611,27 @@ function Navbar() {
                   {navT("maintenance")}
                 </a>
 
+              </div>
+            )}
+          </div>
+
+          <div className="tsb-nav-dropdown">
+            <button
+              type="button"
+              className="tsb-nav-dropdown-button"
+              onClick={toggleEcosystem}
+              aria-expanded={ecosystemOpen}
+            >
+              {navT("ecosystem")}
+              <span>⌄</span>
+            </button>
+
+            {ecosystemOpen && (
+              <div className="tsb-nav-dropdown-menu">
+                <a href="/business" onClick={closeDropdowns}>
+                  {navT("business")}
+                </a>
+
                 <a href="/academy" onClick={closeDropdowns}>
                   {navT("academy")}
                 </a>
@@ -559,36 +640,16 @@ function Navbar() {
                   {navT("store")}
                 </a>
 
-                <a href="/business" onClick={closeDropdowns}>
-                  {navT("business")}
-                </a>
-
                 <a href="/innovation" onClick={closeDropdowns}>
                   {navT("innovation")}
+                </a>
+
+                <a href="/partners" onClick={closeDropdowns}>
+                  {navT("partners")}
                 </a>
               </div>
             )}
           </div>
-
-          <a
-            href="/store"
-            onClick={closeDropdowns}
-            aria-label={navT("store")}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "6px",
-              color: "#38bdf8",
-              fontWeight: 800,
-            }}
-          >
-            <ShoppingBag size={15} strokeWidth={2} />
-            {navT("store")}
-          </a>
-
-          <a href="/academy" onClick={closeDropdowns}>
-            {navT("academy")}
-          </a>
 
           <a href="/projects" onClick={closeDropdowns}>
             {navT("projects")}
@@ -775,22 +836,33 @@ function Navbar() {
             {navT("services")}
           </a>
 
-          <a
-            href="/store"
-            onClick={closeMobile}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-            }}
-          >
-            <ShoppingBag size={17} strokeWidth={2} />
-            {navT("store")}
-          </a>
+          <div className="tsb-mobile-ecosystem">
+            <span className="tsb-mobile-ecosystem__label">
+              {navT("ecosystem")}
+            </span>
 
-          <a href="/academy" onClick={closeMobile}>
-            {navT("academy")}
-          </a>
+            <div className="tsb-mobile-ecosystem__links">
+              <a href="/business" onClick={closeMobile}>
+                {navT("business")}
+              </a>
+
+              <a href="/academy" onClick={closeMobile}>
+                {navT("academy")}
+              </a>
+
+              <a href="/store" onClick={closeMobile}>
+                {navT("store")}
+              </a>
+
+              <a href="/innovation" onClick={closeMobile}>
+                {navT("innovation")}
+              </a>
+
+              <a href="/partners" onClick={closeMobile}>
+                {navT("partners")}
+              </a>
+            </div>
+          </div>
 
           <a href="/projects" onClick={closeMobile}>
             {navT("projects")}

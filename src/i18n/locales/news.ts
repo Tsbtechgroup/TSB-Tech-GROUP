@@ -4,29 +4,32 @@ export const newsTranslations: TranslationResources = {
   fr: {
     news: {
       eyebrow: "ACTUALITÉS",
-      title1: "Les dernières nouvelles de",
+      title1: "Les derniers jalons de",
       title2: "TSB Tech Group",
-      intro:
-        "Suivez l’évolution de nos projets, de notre plateforme et de l’écosystème TSB Tech Group.",
+      intro: "Des avancées réelles et vérifiables de la TSB Digital Platform et de son écosystème.",
       learnMore: "En savoir plus",
+      viewAll: "Voir toutes les actualités",
       items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Lancement de la TSB Digital Platform",
-          description:
-            "TSB Tech Group construit progressivement une plateforme numérique destinée à réunir ses services, ses clients et ses futures solutions technologiques.",
+        multilingual: {
+          category: "Plateforme",
+          date: "Septembre 2026",
+          status: "Intégré",
+          title: "La plateforme est disponible en 10 langues",
+          description: "L’architecture multilingue couvre désormais le français, néerlandais, anglais, allemand, espagnol, italien, portugais, arabe, turc et chinois.",
         },
-        evolution: {
-          category: "Innovation",
-          title: "Une plateforme pensée pour évoluer",
-          description:
-            "Notre architecture modulaire permettra d’intégrer progressivement TSB Academy, TSB Store, l’espace client, le support et de nouveaux services numériques.",
+        store: {
+          category: "Écosystème",
+          date: "Septembre 2026",
+          status: "Intégré",
+          title: "TSB Store et les espaces Client/Admin sont reliés",
+          description: "Le Store, le suivi client et les outils d’administration font désormais partie du même environnement numérique.",
         },
-        engineering: {
-          category: "Développement",
-          title: "Le projet entre dans sa phase Engineering",
-          description:
-            "Après la définition du Blueprint officiel, TSB Tech Group est désormais entré dans la phase de développement concret de sa plateforme.",
+        android: {
+          category: "Mobile",
+          date: "Août 2026",
+          status: "Préparation Google Play",
+          title: "La version Android entre dans sa phase Google Play",
+          description: "Le projet Android basé sur Capacitor a été généré, synchronisé et ouvert dans Android Studio avec les premiers éléments Google Play préparés.",
         },
       },
     },
@@ -35,29 +38,32 @@ export const newsTranslations: TranslationResources = {
   nl: {
     news: {
       eyebrow: "NIEUWS",
-      title1: "Het laatste nieuws van",
+      title1: "De nieuwste mijlpalen van",
       title2: "TSB Tech Group",
-      intro:
-        "Volg de ontwikkeling van onze projecten, ons platform en het TSB Tech Group-ecosysteem.",
+      intro: "Echte en verifieerbare vooruitgang van het TSB Digital Platform en zijn ecosysteem.",
       learnMore: "Meer informatie",
+      viewAll: "Alle nieuwsberichten bekijken",
       items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Lancering van het TSB Digital Platform",
-          description:
-            "TSB Tech Group bouwt stap voor stap aan een digitaal platform dat zijn diensten, klanten en toekomstige technologische oplossingen samenbrengt.",
+        multilingual: {
+          category: "Platform",
+          date: "September 2026",
+          status: "Geïntegreerd",
+          title: "Het platform is beschikbaar in 10 talen",
+          description: "De meertalige architectuur ondersteunt nu Frans, Nederlands, Engels, Duits, Spaans, Italiaans, Portugees, Arabisch, Turks en Chinees.",
         },
-        evolution: {
-          category: "Innovatie",
-          title: "Een platform ontworpen om mee te groeien",
-          description:
-            "Onze modulaire architectuur maakt het mogelijk om geleidelijk TSB Academy, TSB Store, de klantenzone, support en nieuwe digitale diensten te integreren.",
+        store: {
+          category: "Ecosysteem",
+          date: "September 2026",
+          status: "Geïntegreerd",
+          title: "TSB Store en de Client/Admin-ruimtes zijn gekoppeld",
+          description: "De Store, klantopvolging en beheertools maken nu deel uit van dezelfde digitale omgeving.",
         },
-        engineering: {
-          category: "Ontwikkeling",
-          title: "Het project gaat de Engineering-fase in",
-          description:
-            "Na de definitie van de officiële Blueprint is TSB Tech Group nu gestart met de concrete ontwikkelingsfase van het platform.",
+        android: {
+          category: "Mobiel",
+          date: "Augustus 2026",
+          status: "Google Play-voorbereiding",
+          title: "De Android-versie gaat de Google Play-fase in",
+          description: "Het Android-project op basis van Capacitor is gegenereerd, gesynchroniseerd en geopend in Android Studio, met de eerste Google Play-assets voorbereid.",
         },
       },
     },
@@ -66,29 +72,32 @@ export const newsTranslations: TranslationResources = {
   en: {
     news: {
       eyebrow: "NEWS",
-      title1: "Latest news from",
+      title1: "Latest milestones from",
       title2: "TSB Tech Group",
-      intro:
-        "Follow the progress of our projects, our platform and the TSB Tech Group ecosystem.",
+      intro: "Real and verifiable progress across the TSB Digital Platform and its ecosystem.",
       learnMore: "Learn more",
+      viewAll: "View all news",
       items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Launch of the TSB Digital Platform",
-          description:
-            "TSB Tech Group is progressively building a digital platform designed to bring together its services, clients and future technology solutions.",
+        multilingual: {
+          category: "Platform",
+          date: "September 2026",
+          status: "Integrated",
+          title: "The platform is now available in 10 languages",
+          description: "The multilingual architecture now supports French, Dutch, English, German, Spanish, Italian, Portuguese, Arabic, Turkish and Chinese.",
         },
-        evolution: {
-          category: "Innovation",
-          title: "A platform designed to evolve",
-          description:
-            "Our modular architecture will progressively integrate TSB Academy, TSB Store, the client area, support and new digital services.",
+        store: {
+          category: "Ecosystem",
+          date: "September 2026",
+          status: "Integrated",
+          title: "TSB Store and the Client/Admin areas are connected",
+          description: "The Store, client follow-up and administration tools are now part of the same digital environment.",
         },
-        engineering: {
-          category: "Development",
-          title: "The project enters the Engineering phase",
-          description:
-            "Following the definition of the official Blueprint, TSB Tech Group has now entered the concrete development phase of its platform.",
+        android: {
+          category: "Mobile",
+          date: "August 2026",
+          status: "Google Play preparation",
+          title: "The Android version enters its Google Play phase",
+          description: "The Capacitor-based Android project has been generated, synchronized and opened in Android Studio, with initial Google Play assets prepared.",
         },
       },
     },
@@ -97,29 +106,32 @@ export const newsTranslations: TranslationResources = {
   de: {
     news: {
       eyebrow: "AKTUELLES",
-      title1: "Neuigkeiten von",
+      title1: "Die neuesten Meilensteine von",
       title2: "TSB Tech Group",
-      intro:
-        "Verfolgen Sie die Entwicklung unserer Projekte, unserer Plattform und des TSB-Tech-Group-Ökosystems.",
+      intro: "Reale und überprüfbare Fortschritte der TSB Digital Platform und ihres Ökosystems.",
       learnMore: "Mehr erfahren",
+      viewAll: "Alle Neuigkeiten anzeigen",
       items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Start der TSB Digital Platform",
-          description:
-            "TSB Tech Group entwickelt schrittweise eine digitale Plattform, die Dienstleistungen, Kunden und zukünftige Technologielösungen zusammenführt.",
+        multilingual: {
+          category: "Plattform",
+          date: "September 2026",
+          status: "Integriert",
+          title: "Die Plattform ist jetzt in 10 Sprachen verfügbar",
+          description: "Die mehrsprachige Architektur unterstützt jetzt Französisch, Niederländisch, Englisch, Deutsch, Spanisch, Italienisch, Portugiesisch, Arabisch, Türkisch und Chinesisch.",
         },
-        evolution: {
-          category: "Innovation",
-          title: "Eine Plattform, die mitwächst",
-          description:
-            "Unsere modulare Architektur ermöglicht die schrittweise Integration von TSB Academy, TSB Store, Kundenbereich, Support und neuen digitalen Diensten.",
+        store: {
+          category: "Ökosystem",
+          date: "September 2026",
+          status: "Integriert",
+          title: "TSB Store und Client/Admin-Bereiche sind verbunden",
+          description: "Store, Kundenbetreuung und Verwaltungstools sind nun Teil derselben digitalen Umgebung.",
         },
-        engineering: {
-          category: "Entwicklung",
-          title: "Das Projekt geht in die Engineering-Phase",
-          description:
-            "Nach der Definition des offiziellen Blueprints ist TSB Tech Group nun in die konkrete Entwicklungsphase seiner Plattform eingetreten.",
+        android: {
+          category: "Mobil",
+          date: "August 2026",
+          status: "Google-Play-Vorbereitung",
+          title: "Die Android-Version geht in die Google-Play-Phase",
+          description: "Das auf Capacitor basierende Android-Projekt wurde erstellt, synchronisiert und in Android Studio geöffnet; erste Google-Play-Assets wurden vorbereitet.",
         },
       },
     },
@@ -128,29 +140,32 @@ export const newsTranslations: TranslationResources = {
   es: {
     news: {
       eyebrow: "ACTUALIDAD",
-      title1: "Las últimas noticias de",
+      title1: "Los últimos hitos de",
       title2: "TSB Tech Group",
-      intro:
-        "Siga la evolución de nuestros proyectos, nuestra plataforma y el ecosistema de TSB Tech Group.",
+      intro: "Avances reales y verificables de la TSB Digital Platform y su ecosistema.",
       learnMore: "Más información",
+      viewAll: "Ver todas las noticias",
       items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Lanzamiento de la TSB Digital Platform",
-          description:
-            "TSB Tech Group desarrolla progresivamente una plataforma digital destinada a reunir sus servicios, clientes y futuras soluciones tecnológicas.",
+        multilingual: {
+          category: "Plataforma",
+          date: "Septiembre de 2026",
+          status: "Integrado",
+          title: "La plataforma ya está disponible en 10 idiomas",
+          description: "La arquitectura multilingüe admite francés, neerlandés, inglés, alemán, español, italiano, portugués, árabe, turco y chino.",
         },
-        evolution: {
-          category: "Innovación",
-          title: "Una plataforma diseñada para evolucionar",
-          description:
-            "Nuestra arquitectura modular permitirá integrar progresivamente TSB Academy, TSB Store, el espacio cliente, soporte y nuevos servicios digitales.",
+        store: {
+          category: "Ecosistema",
+          date: "Septiembre de 2026",
+          status: "Integrado",
+          title: "TSB Store y las áreas Cliente/Admin están conectadas",
+          description: "La tienda, el seguimiento de clientes y las herramientas de administración forman parte del mismo entorno digital.",
         },
-        engineering: {
-          category: "Desarrollo",
-          title: "El proyecto entra en la fase Engineering",
-          description:
-            "Tras la definición del Blueprint oficial, TSB Tech Group ha entrado en la fase concreta de desarrollo de su plataforma.",
+        android: {
+          category: "Móvil",
+          date: "Agosto de 2026",
+          status: "Preparación Google Play",
+          title: "La versión Android entra en su fase Google Play",
+          description: "El proyecto Android basado en Capacitor se ha generado, sincronizado y abierto en Android Studio, con los primeros recursos de Google Play preparados.",
         },
       },
     },
@@ -159,29 +174,32 @@ export const newsTranslations: TranslationResources = {
   it: {
     news: {
       eyebrow: "NOTIZIE",
-      title1: "Le ultime notizie di",
+      title1: "Gli ultimi traguardi di",
       title2: "TSB Tech Group",
-      intro:
-        "Segui l’evoluzione dei nostri progetti, della nostra piattaforma e dell’ecosistema TSB Tech Group.",
+      intro: "Progressi reali e verificabili della TSB Digital Platform e del suo ecosistema.",
       learnMore: "Scopri di più",
+      viewAll: "Vedi tutte le notizie",
       items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Lancio della TSB Digital Platform",
-          description:
-            "TSB Tech Group sta sviluppando progressivamente una piattaforma digitale per riunire servizi, clienti e future soluzioni tecnologiche.",
+        multilingual: {
+          category: "Piattaforma",
+          date: "Settembre 2026",
+          status: "Integrato",
+          title: "La piattaforma è ora disponibile in 10 lingue",
+          description: "L’architettura multilingue supporta francese, olandese, inglese, tedesco, spagnolo, italiano, portoghese, arabo, turco e cinese.",
         },
-        evolution: {
-          category: "Innovazione",
-          title: "Una piattaforma progettata per evolvere",
-          description:
-            "La nostra architettura modulare consentirà di integrare progressivamente TSB Academy, TSB Store, area clienti, supporto e nuovi servizi digitali.",
+        store: {
+          category: "Ecosistema",
+          date: "Settembre 2026",
+          status: "Integrato",
+          title: "TSB Store e le aree Client/Admin sono collegate",
+          description: "Store, monitoraggio clienti e strumenti di amministrazione fanno ora parte dello stesso ambiente digitale.",
         },
-        engineering: {
-          category: "Sviluppo",
-          title: "Il progetto entra nella fase Engineering",
-          description:
-            "Dopo la definizione del Blueprint ufficiale, TSB Tech Group è entrato nella fase concreta di sviluppo della propria piattaforma.",
+        android: {
+          category: "Mobile",
+          date: "Agosto 2026",
+          status: "Preparazione Google Play",
+          title: "La versione Android entra nella fase Google Play",
+          description: "Il progetto Android basato su Capacitor è stato generato, sincronizzato e aperto in Android Studio, con i primi asset Google Play preparati.",
         },
       },
     },
@@ -190,29 +208,32 @@ export const newsTranslations: TranslationResources = {
   pt: {
     news: {
       eyebrow: "NOTÍCIAS",
-      title1: "As últimas notícias da",
+      title1: "Os últimos marcos da",
       title2: "TSB Tech Group",
-      intro:
-        "Acompanhe a evolução dos nossos projetos, da nossa plataforma e do ecossistema TSB Tech Group.",
+      intro: "Avanços reais e verificáveis da TSB Digital Platform e do seu ecossistema.",
       learnMore: "Saber mais",
+      viewAll: "Ver todas as notícias",
       items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "Lançamento da TSB Digital Platform",
-          description:
-            "A TSB Tech Group está a desenvolver progressivamente uma plataforma digital para reunir os seus serviços, clientes e futuras soluções tecnológicas.",
+        multilingual: {
+          category: "Plataforma",
+          date: "Setembro de 2026",
+          status: "Integrado",
+          title: "A plataforma está agora disponível em 10 idiomas",
+          description: "A arquitetura multilingue suporta francês, neerlandês, inglês, alemão, espanhol, italiano, português, árabe, turco e chinês.",
         },
-        evolution: {
-          category: "Inovação",
-          title: "Uma plataforma concebida para evoluir",
-          description:
-            "A nossa arquitetura modular permitirá integrar progressivamente a TSB Academy, a TSB Store, a área de cliente, o suporte e novos serviços digitais.",
+        store: {
+          category: "Ecossistema",
+          date: "Setembro de 2026",
+          status: "Integrado",
+          title: "TSB Store e as áreas Cliente/Admin estão ligadas",
+          description: "A Store, o acompanhamento de clientes e as ferramentas de administração fazem agora parte do mesmo ambiente digital.",
         },
-        engineering: {
-          category: "Desenvolvimento",
-          title: "O projeto entra na fase Engineering",
-          description:
-            "Após a definição do Blueprint oficial, a TSB Tech Group entrou agora na fase concreta de desenvolvimento da sua plataforma.",
+        android: {
+          category: "Mobile",
+          date: "Agosto de 2026",
+          status: "Preparação Google Play",
+          title: "A versão Android entra na fase Google Play",
+          description: "O projeto Android baseado em Capacitor foi gerado, sincronizado e aberto no Android Studio, com os primeiros recursos Google Play preparados.",
         },
       },
     },
@@ -221,29 +242,32 @@ export const newsTranslations: TranslationResources = {
   ar: {
     news: {
       eyebrow: "الأخبار",
-      title1: "آخر أخبار",
+      title1: "أحدث محطات",
       title2: "TSB Tech Group",
-      intro:
-        "تابع تطور مشاريعنا ومنصتنا ومنظومة TSB Tech Group.",
+      intro: "تقدم حقيقي وقابل للتحقق في TSB Digital Platform ومنظومتها.",
       learnMore: "معرفة المزيد",
+      viewAll: "عرض جميع الأخبار",
       items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "إطلاق TSB Digital Platform",
-          description:
-            "تعمل TSB Tech Group تدريجيًا على بناء منصة رقمية تجمع خدماتها وعملاءها وحلولها التكنولوجية المستقبلية.",
+        multilingual: {
+          category: "المنصة",
+          date: "سبتمبر 2026",
+          status: "مدمج",
+          title: "المنصة متاحة الآن بـ10 لغات",
+          description: "تدعم البنية متعددة اللغات الفرنسية والهولندية والإنجليزية والألمانية والإسبانية والإيطالية والبرتغالية والعربية والتركية والصينية.",
         },
-        evolution: {
-          category: "الابتكار",
-          title: "منصة مصممة للتطور",
-          description:
-            "ستتيح بنيتنا المعيارية دمج TSB Academy وTSB Store ومنطقة العملاء والدعم وخدمات رقمية جديدة بشكل تدريجي.",
+        store: {
+          category: "المنظومة",
+          date: "سبتمبر 2026",
+          status: "مدمج",
+          title: "تم ربط TSB Store ومساحتي العميل والإدارة",
+          description: "أصبح المتجر ومتابعة العملاء وأدوات الإدارة جزءًا من نفس البيئة الرقمية.",
         },
-        engineering: {
-          category: "التطوير",
-          title: "المشروع يدخل مرحلة Engineering",
-          description:
-            "بعد تحديد الـ Blueprint الرسمي، دخلت TSB Tech Group الآن مرحلة التطوير الفعلي لمنصتها.",
+        android: {
+          category: "الهاتف المحمول",
+          date: "أغسطس 2026",
+          status: "إعداد Google Play",
+          title: "نسخة Android تدخل مرحلة Google Play",
+          description: "تم إنشاء مشروع Android المبني على Capacitor ومزامنته وفتحه في Android Studio مع إعداد أول موارد Google Play.",
         },
       },
     },
@@ -252,29 +276,32 @@ export const newsTranslations: TranslationResources = {
   tr: {
     news: {
       eyebrow: "HABERLER",
-      title1: "TSB Tech Group'tan",
-      title2: "son haberler",
-      intro:
-        "Projelerimizin, platformumuzun ve TSB Tech Group ekosisteminin gelişimini takip edin.",
+      title1: "TSB Tech Group’un son",
+      title2: "kilometre taşları",
+      intro: "TSB Digital Platform ve ekosistemindeki gerçek ve doğrulanabilir ilerlemeler.",
       learnMore: "Daha fazla bilgi",
+      viewAll: "Tüm haberleri görüntüle",
       items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "TSB Digital Platform'un lansmanı",
-          description:
-            "TSB Tech Group, hizmetlerini, müşterilerini ve gelecekteki teknoloji çözümlerini bir araya getirecek dijital bir platformu adım adım geliştiriyor.",
+        multilingual: {
+          category: "Platform",
+          date: "Eylül 2026",
+          status: "Entegre",
+          title: "Platform artık 10 dilde kullanılabilir",
+          description: "Çok dilli mimari Fransızca, Hollandaca, İngilizce, Almanca, İspanyolca, İtalyanca, Portekizce, Arapça, Türkçe ve Çinceyi destekliyor.",
         },
-        evolution: {
-          category: "İnovasyon",
-          title: "Gelişmek üzere tasarlanmış bir platform",
-          description:
-            "Modüler mimarimiz TSB Academy, TSB Store, müşteri alanı, destek ve yeni dijital hizmetlerin kademeli olarak entegre edilmesini sağlayacak.",
+        store: {
+          category: "Ekosistem",
+          date: "Eylül 2026",
+          status: "Entegre",
+          title: "TSB Store ile Müşteri/Admin alanları birbirine bağlandı",
+          description: "Store, müşteri takibi ve yönetim araçları artık aynı dijital ortamın parçası.",
         },
-        engineering: {
-          category: "Geliştirme",
-          title: "Proje Engineering aşamasına giriyor",
-          description:
-            "Resmî Blueprint'in tanımlanmasının ardından TSB Tech Group, platformunun somut geliştirme aşamasına geçti.",
+        android: {
+          category: "Mobil",
+          date: "Ağustos 2026",
+          status: "Google Play hazırlığı",
+          title: "Android sürümü Google Play aşamasına giriyor",
+          description: "Capacitor tabanlı Android projesi oluşturuldu, senkronize edildi ve Android Studio’da açıldı; ilk Google Play varlıkları hazırlandı.",
         },
       },
     },
@@ -284,28 +311,31 @@ export const newsTranslations: TranslationResources = {
     news: {
       eyebrow: "新闻",
       title1: "TSB Tech Group",
-      title2: "最新动态",
-      intro:
-        "关注我们的项目、平台以及 TSB Tech Group 生态系统的发展。",
+      title2: "最新里程碑",
+      intro: "TSB Digital Platform 及其生态系统中真实且可验证的进展。",
       learnMore: "了解更多",
+      viewAll: "查看全部新闻",
       items: {
-        platform: {
-          category: "TSB Tech Group",
-          title: "TSB Digital Platform 正式启动",
-          description:
-            "TSB Tech Group 正在逐步建设一个数字平台，用于整合服务、客户以及未来的技术解决方案。",
+        multilingual: {
+          category: "平台",
+          date: "2026年9月",
+          status: "已集成",
+          title: "平台现已支持10种语言",
+          description: "多语言架构现支持法语、荷兰语、英语、德语、西班牙语、意大利语、葡萄牙语、阿拉伯语、土耳其语和中文。",
         },
-        evolution: {
-          category: "创新",
-          title: "为持续发展而设计的平台",
-          description:
-            "我们的模块化架构将逐步整合 TSB Academy、TSB Store、客户空间、支持以及新的数字服务。",
+        store: {
+          category: "生态系统",
+          date: "2026年9月",
+          status: "已集成",
+          title: "TSB Store 已与客户和管理区域连接",
+          description: "商店、客户跟进和管理工具现已成为同一数字环境的一部分。",
         },
-        engineering: {
-          category: "开发",
-          title: "项目进入 Engineering 阶段",
-          description:
-            "在完成官方 Blueprint 的定义后，TSB Tech Group 已进入平台的实际开发阶段。",
+        android: {
+          category: "移动端",
+          date: "2026年8月",
+          status: "Google Play 准备中",
+          title: "Android 版本进入 Google Play 阶段",
+          description: "基于 Capacitor 的 Android 项目已生成、同步并在 Android Studio 中打开，首批 Google Play 素材也已准备。",
         },
       },
     },

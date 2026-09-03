@@ -1,0 +1,454 @@
+﻿import type { TranslationResources } from "../types";
+
+export const projectsPageTranslations: TranslationResources = {
+  fr: {
+    projectsPage: {
+      eyebrow: "NOS RÃ‰ALISATIONS",
+      title1: "Des solutions",
+      title2: "concrÃ¨tes",
+      intro:
+        "DÃ©couvrez une sÃ©lection de domaines dans lesquels TSB Tech Group dÃ©veloppe et met en Å“uvre des solutions techniques, technologiques et professionnelles.",
+      backHome: "Retour Ã  lâ€™accueil",
+      quote: "Demander un devis",
+      discuss: "Parler de ce projet",
+      items: {
+        automobile: {
+          category: "Automobile",
+          title: "Serrurerie automobile",
+          description:
+            "Programmation de clÃ©s, duplication, solutions toutes clÃ©s perdues, tÃ©lÃ©commandes, transpondeurs et interventions spÃ©cialisÃ©es.",
+        },
+        security: {
+          category: "SÃ©curitÃ©",
+          title: "SystÃ¨mes de sÃ©curitÃ©",
+          description:
+            "VidÃ©osurveillance, contrÃ´le dâ€™accÃ¨s, alarmes et solutions de protection pour particuliers, entreprises et institutions.",
+        },
+        solar: {
+          category: "Ã‰nergie",
+          title: "Installation photovoltaÃ¯que",
+          description:
+            "Solutions Ã©nergÃ©tiques, installations solaires, optimisation de consommation et accompagnement vers davantage dâ€™autonomie.",
+        },
+        industry: {
+          category: "Industrie",
+          title: "Ã‰lectricitÃ© & automatisation",
+          description:
+            "Installation, maintenance, dÃ©pannage, automatisation et intÃ©gration de solutions techniques pour les environnements professionnels.",
+        },
+        digital: {
+          category: "Digital",
+          title: "Solutions digitales",
+          description:
+            "Sites web, plateformes professionnelles, espaces clients et solutions numÃ©riques Ã©volutives adaptÃ©es aux besoins des organisations.",
+        },
+      },
+    },
+  },
+
+  nl: {
+    projectsPage: {
+      eyebrow: "ONZE REALISATIES",
+      title1: "Concrete",
+      title2: "oplossingen",
+      intro:
+        "Ontdek een selectie van domeinen waarin TSB Tech Group technische, technologische en professionele oplossingen ontwikkelt en implementeert.",
+      backHome: "Terug naar home",
+      quote: "Offerte aanvragen",
+      discuss: "Bespreek dit project",
+      items: {
+        automobile: {
+          category: "Automobiel",
+          title: "Autosleutels & voertuigbeveiliging",
+          description:
+            "Sleutelprogrammering, duplicatie, oplossingen bij verlies van alle sleutels, afstandsbedieningen, transponders en gespecialiseerde interventies.",
+        },
+        security: {
+          category: "Beveiliging",
+          title: "Beveiligingssystemen",
+          description:
+            "Camerabewaking, toegangscontrole, alarmsystemen en beveiligingsoplossingen voor particulieren, bedrijven en instellingen.",
+        },
+        solar: {
+          category: "Energie",
+          title: "FotovoltaÃ¯sche installaties",
+          description:
+            "Energieoplossingen, zonne-installaties, optimalisatie van verbruik en begeleiding naar meer energieautonomie.",
+        },
+        industry: {
+          category: "Industrie",
+          title: "Elektriciteit & automatisering",
+          description:
+            "Installatie, onderhoud, herstelling, automatisering en integratie van technische oplossingen voor professionele omgevingen.",
+        },
+        digital: {
+          category: "Digitaal",
+          title: "Digitale oplossingen",
+          description:
+            "Websites, professionele platforms, klantenzones en schaalbare digitale oplossingen aangepast aan organisaties.",
+        },
+      },
+    },
+  },
+
+  en: {
+    projectsPage: {
+      eyebrow: "OUR PROJECTS",
+      title1: "Concrete",
+      title2: "solutions",
+      intro:
+        "Discover a selection of areas in which TSB Tech Group develops and implements technical, technological and professional solutions.",
+      backHome: "Back to home",
+      quote: "Request a quote",
+      discuss: "Discuss this project",
+      items: {
+        automobile: {
+          category: "Automotive",
+          title: "Automotive locksmithing",
+          description:
+            "Key programming, duplication, all-keys-lost solutions, remotes, transponders and specialized automotive interventions.",
+        },
+        security: {
+          category: "Security",
+          title: "Security systems",
+          description:
+            "Video surveillance, access control, alarms and protection solutions for individuals, businesses and institutions.",
+        },
+        solar: {
+          category: "Energy",
+          title: "Photovoltaic installations",
+          description:
+            "Energy solutions, solar installations, consumption optimization and support toward greater energy independence.",
+        },
+        industry: {
+          category: "Industry",
+          title: "Electricity & automation",
+          description:
+            "Installation, maintenance, troubleshooting, automation and integration of technical solutions for professional environments.",
+        },
+        digital: {
+          category: "Digital",
+          title: "Digital solutions",
+          description:
+            "Websites, professional platforms, client areas and scalable digital solutions tailored to organizations.",
+        },
+      },
+    },
+  },
+
+  de: {
+    projectsPage: {
+      eyebrow: "UNSERE PROJEKTE",
+      title1: "Konkrete",
+      title2: "LÃ¶sungen",
+      intro:
+        "Entdecken Sie ausgewÃ¤hlte Bereiche, in denen TSB Tech Group technische, technologische und professionelle LÃ¶sungen entwickelt und umsetzt.",
+      backHome: "ZurÃ¼ck zur Startseite",
+      quote: "Angebot anfordern",
+      discuss: "Ãœber dieses Projekt sprechen",
+      items: {
+        automobile: {
+          category: "Automobil",
+          title: "AutoschlÃ¼ssel & Fahrzeugsicherheit",
+          description:
+            "SchlÃ¼sselprogrammierung, Duplizierung, LÃ¶sungen bei vollstÃ¤ndigem SchlÃ¼sselverlust, Fernbedienungen, Transponder und spezialisierte Eingriffe.",
+        },
+        security: {
+          category: "Sicherheit",
+          title: "Sicherheitssysteme",
+          description:
+            "VideoÃ¼berwachung, Zugangskontrolle, Alarmanlagen und SchutzlÃ¶sungen fÃ¼r Privatpersonen, Unternehmen und Institutionen.",
+        },
+        solar: {
+          category: "Energie",
+          title: "Photovoltaikanlagen",
+          description:
+            "EnergielÃ¶sungen, Solaranlagen, Verbrauchsoptimierung und UnterstÃ¼tzung auf dem Weg zu mehr Energieautonomie.",
+        },
+        industry: {
+          category: "Industrie",
+          title: "Elektrik & Automatisierung",
+          description:
+            "Installation, Wartung, Fehlerbehebung, Automatisierung und Integration technischer LÃ¶sungen fÃ¼r professionelle Umgebungen.",
+        },
+        digital: {
+          category: "Digital",
+          title: "Digitale LÃ¶sungen",
+          description:
+            "Websites, professionelle Plattformen, Kundenbereiche und skalierbare digitale LÃ¶sungen fÃ¼r Organisationen.",
+        },
+      },
+    },
+  },
+
+  es: {
+    projectsPage: {
+      eyebrow: "NUESTROS PROYECTOS",
+      title1: "Soluciones",
+      title2: "concretas",
+      intro:
+        "Descubra una selecciÃ³n de Ã¡reas en las que TSB Tech Group desarrolla e implementa soluciones tÃ©cnicas, tecnolÃ³gicas y profesionales.",
+      backHome: "Volver al inicio",
+      quote: "Solicitar presupuesto",
+      discuss: "Hablar de este proyecto",
+      items: {
+        automobile: {
+          category: "AutomÃ³vil",
+          title: "CerrajerÃ­a del automÃ³vil",
+          description:
+            "ProgramaciÃ³n de llaves, duplicaciÃ³n, soluciones por pÃ©rdida total de llaves, mandos, transpondedores e intervenciones especializadas.",
+        },
+        security: {
+          category: "Seguridad",
+          title: "Sistemas de seguridad",
+          description:
+            "Videovigilancia, control de acceso, alarmas y soluciones de protecciÃ³n para particulares, empresas e instituciones.",
+        },
+        solar: {
+          category: "EnergÃ­a",
+          title: "Instalaciones fotovoltaicas",
+          description:
+            "Soluciones energÃ©ticas, instalaciones solares, optimizaciÃ³n del consumo y acompaÃ±amiento hacia una mayor autonomÃ­a energÃ©tica.",
+        },
+        industry: {
+          category: "Industria",
+          title: "Electricidad y automatizaciÃ³n",
+          description:
+            "InstalaciÃ³n, mantenimiento, reparaciÃ³n, automatizaciÃ³n e integraciÃ³n de soluciones tÃ©cnicas para entornos profesionales.",
+        },
+        digital: {
+          category: "Digital",
+          title: "Soluciones digitales",
+          description:
+            "Sitios web, plataformas profesionales, Ã¡reas de clientes y soluciones digitales escalables adaptadas a las organizaciones.",
+        },
+      },
+    },
+  },
+
+  it: {
+    projectsPage: {
+      eyebrow: "I NOSTRI PROGETTI",
+      title1: "Soluzioni",
+      title2: "concrete",
+      intro:
+        "Scopri una selezione di ambiti in cui TSB Tech Group sviluppa e realizza soluzioni tecniche, tecnologiche e professionali.",
+      backHome: "Torna alla home",
+      quote: "Richiedi un preventivo",
+      discuss: "Parla di questo progetto",
+      items: {
+        automobile: {
+          category: "Automotive",
+          title: "Chiavi e sicurezza auto",
+          description:
+            "Programmazione chiavi, duplicazione, soluzioni per perdita totale delle chiavi, telecomandi, transponder e interventi specializzati.",
+        },
+        security: {
+          category: "Sicurezza",
+          title: "Sistemi di sicurezza",
+          description:
+            "Videosorveglianza, controllo accessi, allarmi e soluzioni di protezione per privati, aziende e istituzioni.",
+        },
+        solar: {
+          category: "Energia",
+          title: "Impianti fotovoltaici",
+          description:
+            "Soluzioni energetiche, impianti solari, ottimizzazione dei consumi e supporto verso una maggiore autonomia energetica.",
+        },
+        industry: {
+          category: "Industria",
+          title: "ElettricitÃ  e automazione",
+          description:
+            "Installazione, manutenzione, riparazione, automazione e integrazione di soluzioni tecniche per ambienti professionali.",
+        },
+        digital: {
+          category: "Digitale",
+          title: "Soluzioni digitali",
+          description:
+            "Siti web, piattaforme professionali, aree clienti e soluzioni digitali scalabili adatte alle organizzazioni.",
+        },
+      },
+    },
+  },
+
+  pt: {
+    projectsPage: {
+      eyebrow: "OS NOSSOS PROJETOS",
+      title1: "SoluÃ§Ãµes",
+      title2: "concretas",
+      intro:
+        "Descubra uma seleÃ§Ã£o de Ã¡reas em que a TSB Tech Group desenvolve e implementa soluÃ§Ãµes tÃ©cnicas, tecnolÃ³gicas e profissionais.",
+      backHome: "Voltar ao inÃ­cio",
+      quote: "Pedir orÃ§amento",
+      discuss: "Falar sobre este projeto",
+      items: {
+        automobile: {
+          category: "AutomÃ³vel",
+          title: "Chaves e seguranÃ§a automÃ³vel",
+          description:
+            "ProgramaÃ§Ã£o de chaves, duplicaÃ§Ã£o, soluÃ§Ãµes para perda total de chaves, comandos, transponders e intervenÃ§Ãµes especializadas.",
+        },
+        security: {
+          category: "SeguranÃ§a",
+          title: "Sistemas de seguranÃ§a",
+          description:
+            "VideovigilÃ¢ncia, controlo de acesso, alarmes e soluÃ§Ãµes de proteÃ§Ã£o para particulares, empresas e instituiÃ§Ãµes.",
+        },
+        solar: {
+          category: "Energia",
+          title: "InstalaÃ§Ãµes fotovoltaicas",
+          description:
+            "SoluÃ§Ãµes energÃ©ticas, instalaÃ§Ãµes solares, otimizaÃ§Ã£o do consumo e acompanhamento para uma maior autonomia energÃ©tica.",
+        },
+        industry: {
+          category: "IndÃºstria",
+          title: "Eletricidade e automaÃ§Ã£o",
+          description:
+            "InstalaÃ§Ã£o, manutenÃ§Ã£o, reparaÃ§Ã£o, automaÃ§Ã£o e integraÃ§Ã£o de soluÃ§Ãµes tÃ©cnicas para ambientes profissionais.",
+        },
+        digital: {
+          category: "Digital",
+          title: "SoluÃ§Ãµes digitais",
+          description:
+            "Sites, plataformas profissionais, Ã¡reas de cliente e soluÃ§Ãµes digitais escalÃ¡veis adaptadas Ã s organizaÃ§Ãµes.",
+        },
+      },
+    },
+  },
+
+  ar: {
+    projectsPage: {
+      eyebrow: "Ù…Ø´Ø§Ø±ÙŠØ¹Ù†Ø§",
+      title1: "Ø­Ù„ÙˆÙ„",
+      title2: "Ù…Ù„Ù…ÙˆØ³Ø©",
+      intro:
+        "Ø§ÙƒØªØ´Ù Ù…Ø¬Ù…ÙˆØ¹Ø© Ù…Ù† Ø§Ù„Ù…Ø¬Ø§Ù„Ø§Øª Ø§Ù„ØªÙŠ ØªØ·ÙˆÙ‘Ø± ÙÙŠÙ‡Ø§ TSB Tech Group Ø­Ù„ÙˆÙ„Ù‹Ø§ ØªÙ‚Ù†ÙŠØ© ÙˆØªÙƒÙ†ÙˆÙ„ÙˆØ¬ÙŠØ© ÙˆÙ…Ù‡Ù†ÙŠØ© ÙˆØªÙ†ÙØ°Ù‡Ø§.",
+      backHome: "Ø§Ù„Ø¹ÙˆØ¯Ø© Ø¥Ù„Ù‰ Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©",
+      quote: "Ø·Ù„Ø¨ Ø¹Ø±Ø¶ Ø³Ø¹Ø±",
+      discuss: "ØªØ­Ø¯Ø« Ø¹Ù† Ù‡Ø°Ø§ Ø§Ù„Ù…Ø´Ø±ÙˆØ¹",
+      items: {
+        automobile: {
+          category: "Ø§Ù„Ø³ÙŠØ§Ø±Ø§Øª",
+          title: "Ù…ÙØ§ØªÙŠØ­ ÙˆØ£Ù‚ÙØ§Ù„ Ø§Ù„Ø³ÙŠØ§Ø±Ø§Øª",
+          description:
+            "Ø¨Ø±Ù…Ø¬Ø© Ø§Ù„Ù…ÙØ§ØªÙŠØ­ ÙˆØ§Ù„Ù†Ø³Ø® ÙˆØ­Ù„ÙˆÙ„ ÙÙ‚Ø¯Ø§Ù† Ø¬Ù…ÙŠØ¹ Ø§Ù„Ù…ÙØ§ØªÙŠØ­ ÙˆØ£Ø¬Ù‡Ø²Ø© Ø§Ù„ØªØ­ÙƒÙ… ÙˆØ§Ù„ØªØ±Ø§Ù†Ø³Ø¨ÙˆÙ†Ø¯Ø± ÙˆØ§Ù„ØªØ¯Ø®Ù„Ø§Øª Ø§Ù„Ù…ØªØ®ØµØµØ©.",
+        },
+        security: {
+          category: "Ø§Ù„Ø£Ù…Ù†",
+          title: "Ø£Ù†Ø¸Ù…Ø© Ø§Ù„Ø£Ù…Ù†",
+          description:
+            "Ø§Ù„Ù…Ø±Ø§Ù‚Ø¨Ø© Ø¨Ø§Ù„ÙÙŠØ¯ÙŠÙˆ ÙˆØ§Ù„ØªØ­ÙƒÙ… ÙÙŠ Ø§Ù„Ø¯Ø®ÙˆÙ„ ÙˆØ§Ù„Ø¥Ù†Ø°Ø§Ø±Ø§Øª ÙˆØ­Ù„ÙˆÙ„ Ø§Ù„Ø­Ù…Ø§ÙŠØ© Ù„Ù„Ø£ÙØ±Ø§Ø¯ ÙˆØ§Ù„Ø´Ø±ÙƒØ§Øª ÙˆØ§Ù„Ù…Ø¤Ø³Ø³Ø§Øª.",
+        },
+        solar: {
+          category: "Ø§Ù„Ø·Ø§Ù‚Ø©",
+          title: "Ø§Ù„ØªØ±ÙƒÙŠØ¨Ø§Øª Ø§Ù„ÙƒÙ‡Ø±ÙˆØ¶ÙˆØ¦ÙŠØ©",
+          description:
+            "Ø­Ù„ÙˆÙ„ Ø§Ù„Ø·Ø§Ù‚Ø© ÙˆØ§Ù„ØªØ±ÙƒÙŠØ¨Ø§Øª Ø§Ù„Ø´Ù…Ø³ÙŠØ© ÙˆØªØ­Ø³ÙŠÙ† Ø§Ù„Ø§Ø³ØªÙ‡Ù„Ø§Ùƒ ÙˆØ§Ù„Ù…Ø±Ø§ÙÙ‚Ø© Ù†Ø­Ùˆ Ù…Ø²ÙŠØ¯ Ù…Ù† Ø§Ù„Ø§Ø³ØªÙ‚Ù„Ø§Ù„ÙŠØ© ÙÙŠ Ø§Ù„Ø·Ø§Ù‚Ø©.",
+        },
+        industry: {
+          category: "Ø§Ù„ØµÙ†Ø§Ø¹Ø©",
+          title: "Ø§Ù„ÙƒÙ‡Ø±Ø¨Ø§Ø¡ ÙˆØ§Ù„Ø£ØªÙ…ØªØ©",
+          description:
+            "Ø§Ù„ØªØ±ÙƒÙŠØ¨ ÙˆØ§Ù„ØµÙŠØ§Ù†Ø© ÙˆØ¥ØµÙ„Ø§Ø­ Ø§Ù„Ø£Ø¹Ø·Ø§Ù„ ÙˆØ§Ù„Ø£ØªÙ…ØªØ© ÙˆØ¯Ù…Ø¬ Ø§Ù„Ø­Ù„ÙˆÙ„ Ø§Ù„ØªÙ‚Ù†ÙŠØ© Ù„Ù„Ø¨ÙŠØ¦Ø§Øª Ø§Ù„Ù…Ù‡Ù†ÙŠØ©.",
+        },
+        digital: {
+          category: "Ø±Ù‚Ù…ÙŠ",
+          title: "Ø§Ù„Ø­Ù„ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠØ©",
+          description:
+            "Ø§Ù„Ù…ÙˆØ§Ù‚Ø¹ ÙˆØ§Ù„Ù…Ù†ØµØ§Øª Ø§Ù„Ù…Ù‡Ù†ÙŠØ© ÙˆÙ…Ø³Ø§Ø­Ø§Øª Ø§Ù„Ø¹Ù…Ù„Ø§Ø¡ ÙˆØ§Ù„Ø­Ù„ÙˆÙ„ Ø§Ù„Ø±Ù‚Ù…ÙŠØ© Ø§Ù„Ù‚Ø§Ø¨Ù„Ø© Ù„Ù„ØªÙˆØ³Ø¹ ÙˆØ§Ù„Ù…Ù†Ø§Ø³Ø¨Ø© Ù„Ù„Ù…Ø¤Ø³Ø³Ø§Øª.",
+        },
+      },
+    },
+  },
+
+  tr: {
+    projectsPage: {
+      eyebrow: "PROJELERÄ°MÄ°Z",
+      title1: "Somut",
+      title2: "Ã§Ã¶zÃ¼mler",
+      intro:
+        "TSB Tech Groupâ€™un teknik, teknolojik ve profesyonel Ã§Ã¶zÃ¼mler geliÅŸtirip uyguladÄ±ÄŸÄ± seÃ§ili alanlarÄ± keÅŸfedin.",
+      backHome: "Ana sayfaya dÃ¶n",
+      quote: "Teklif iste",
+      discuss: "Bu projeyi gÃ¶rÃ¼ÅŸelim",
+      items: {
+        automobile: {
+          category: "Otomotiv",
+          title: "Otomotiv anahtar ve gÃ¼venlik",
+          description:
+            "Anahtar programlama, Ã§oÄŸaltma, tÃ¼m anahtarlarÄ±n kaybÄ± iÃ§in Ã§Ã¶zÃ¼mler, kumandalar, transponderler ve uzman mÃ¼dahaleler.",
+        },
+        security: {
+          category: "GÃ¼venlik",
+          title: "GÃ¼venlik sistemleri",
+          description:
+            "Bireyler, ÅŸirketler ve kurumlar iÃ§in video gÃ¶zetim, eriÅŸim kontrolÃ¼, alarm ve koruma Ã§Ã¶zÃ¼mleri.",
+        },
+        solar: {
+          category: "Enerji",
+          title: "Fotovoltaik kurulumlar",
+          description:
+            "Enerji Ã§Ã¶zÃ¼mleri, gÃ¼neÅŸ enerjisi kurulumlarÄ±, tÃ¼ketim optimizasyonu ve daha fazla enerji baÄŸÄ±msÄ±zlÄ±ÄŸÄ±na yÃ¶nelik destek.",
+        },
+        industry: {
+          category: "EndÃ¼stri",
+          title: "Elektrik ve otomasyon",
+          description:
+            "Profesyonel ortamlar iÃ§in kurulum, bakÄ±m, arÄ±za giderme, otomasyon ve teknik Ã§Ã¶zÃ¼m entegrasyonu.",
+        },
+        digital: {
+          category: "Dijital",
+          title: "Dijital Ã§Ã¶zÃ¼mler",
+          description:
+            "Web siteleri, profesyonel platformlar, mÃ¼ÅŸteri alanlarÄ± ve kuruluÅŸlara uyarlanmÄ±ÅŸ Ã¶lÃ§eklenebilir dijital Ã§Ã¶zÃ¼mler.",
+        },
+      },
+    },
+  },
+
+  zh: {
+    projectsPage: {
+      eyebrow: "æˆ‘ä»¬çš„é¡¹ç›®",
+      title1: "å…·ä½“çš„",
+      title2: "è§£å†³æ–¹æ¡ˆ",
+      intro:
+        "äº†è§£ TSB Tech Group å¼€å‘å¹¶å®žæ–½æŠ€æœ¯ã€ç§‘æŠ€å’Œä¸“ä¸šè§£å†³æ–¹æ¡ˆçš„éƒ¨åˆ†é‡ç‚¹é¢†åŸŸã€‚",
+      backHome: "è¿”å›žé¦–é¡µ",
+      quote: "ç”³è¯·æŠ¥ä»·",
+      discuss: "å’¨è¯¢æ­¤é¡¹ç›®",
+      items: {
+        automobile: {
+          category: "æ±½è½¦",
+          title: "æ±½è½¦é’¥åŒ™ä¸Žè½¦è¾†å®‰å…¨",
+          description:
+            "é’¥åŒ™ç¼–ç¨‹ã€å¤åˆ¶ã€å…¨é’¥åŒ™ä¸¢å¤±è§£å†³æ–¹æ¡ˆã€é¥æŽ§å™¨ã€èŠ¯ç‰‡ä»¥åŠä¸“ä¸šæ±½è½¦æœåŠ¡ã€‚",
+        },
+        security: {
+          category: "å®‰å…¨",
+          title: "å®‰å…¨ç³»ç»Ÿ",
+          description:
+            "ä¸ºä¸ªäººã€ä¼ä¸šå’Œæœºæž„æä¾›è§†é¢‘ç›‘æŽ§ã€é—¨ç¦æŽ§åˆ¶ã€æŠ¥è­¦å’Œä¿æŠ¤è§£å†³æ–¹æ¡ˆã€‚",
+        },
+        solar: {
+          category: "èƒ½æº",
+          title: "å…‰ä¼å®‰è£…",
+          description:
+            "èƒ½æºè§£å†³æ–¹æ¡ˆã€å¤ªé˜³èƒ½å®‰è£…ã€èƒ½è€—ä¼˜åŒ–ä»¥åŠæå‡èƒ½æºè‡ªä¸»æ€§çš„æ”¯æŒã€‚",
+        },
+        industry: {
+          category: "å·¥ä¸š",
+          title: "ç”µæ°”ä¸Žè‡ªåŠ¨åŒ–",
+          description:
+            "é¢å‘ä¸“ä¸šçŽ¯å¢ƒçš„å®‰è£…ã€ç»´æŠ¤ã€æ•…éšœæŽ’æŸ¥ã€è‡ªåŠ¨åŒ–å’ŒæŠ€æœ¯è§£å†³æ–¹æ¡ˆé›†æˆã€‚",
+        },
+        digital: {
+          category: "æ•°å­—æŠ€æœ¯",
+          title: "æ•°å­—è§£å†³æ–¹æ¡ˆ",
+          description:
+            "ç½‘ç«™ã€ä¸“ä¸šå¹³å°ã€å®¢æˆ·ç©ºé—´ä»¥åŠé€‚ç”¨äºŽç»„ç»‡çš„å¯æ‰©å±•æ•°å­—è§£å†³æ–¹æ¡ˆã€‚",
+        },
+      },
+    },
+  },
+};
+
