@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 
 import {
@@ -121,6 +121,35 @@ const labelStyle = {
   fontWeight: 700,
 } as const;
 
+const TURNSTILE_SITE_KEY =
+  import.meta.env
+    .VITE_TURNSTILE_SITE_KEY as
+    | string
+    | undefined;
+
+type TurnstileApi = {
+  render: (
+    container: HTMLElement,
+    options: {
+      sitekey: string;
+      theme?: "auto" | "light" | "dark";
+      language?: string;
+      callback: (token: string) => void;
+      "expired-callback"?: () => void;
+      "error-callback"?: () => void;
+    }
+  ) => string;
+  reset: (widgetId?: string) => void;
+  remove: (widgetId: string) => void;
+};
+
+const getTurnstileApi = () =>
+  (
+    window as Window & {
+      turnstile?: TurnstileApi;
+    }
+  ).turnstile;
+
 function Business() {
   const { locale } = useLanguage();
 
@@ -148,8 +177,142 @@ function Business() {
 
   const [formStatus, setFormStatus] =
     useState<
-      "idle" | "success" | "error" | "rate"
+      | "idle"
+      | "success"
+      | "error"
+      | "rate"
+      | "security"
     >("idle");
+
+  const [turnstileToken, setTurnstileToken] =
+    useState("");
+
+  const turnstileContainerRef =
+    useRef<HTMLDivElement | null>(null);
+
+  const turnstileWidgetIdRef =
+    useRef<string | null>(null);
+
+  useEffect(() => {
+    setTurnstileToken("");
+
+    if (!TURNSTILE_SITE_KEY) {
+      console.error(
+        "VITE_TURNSTILE_SITE_KEY manquante."
+      );
+
+      return;
+    }
+
+    let cancelled = false;
+
+    const renderTurnstile = () => {
+      const turnstile = getTurnstileApi();
+
+      if (
+        cancelled ||
+        !turnstileContainerRef.current ||
+        !turnstile ||
+        turnstileWidgetIdRef.current
+      ) {
+        return;
+      }
+
+      turnstileWidgetIdRef.current =
+        turnstile.render(
+          turnstileContainerRef.current,
+          {
+            sitekey: TURNSTILE_SITE_KEY,
+            theme: "dark",
+            language: locale,
+            callback: (token) => {
+              setTurnstileToken(token);
+            },
+            "expired-callback": () => {
+              setTurnstileToken("");
+            },
+            "error-callback": () => {
+              setTurnstileToken("");
+            },
+          }
+        );
+    };
+
+    let script =
+      document.querySelector<HTMLScriptElement>(
+        'script[data-tsb-turnstile="true"]'
+      );
+
+    if (!script) {
+      script = document.createElement("script");
+      script.src =
+        "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.dataset.tsbTurnstile = "true";
+      document.head.appendChild(script);
+    }
+
+    if (getTurnstileApi()) {
+      renderTurnstile();
+    } else {
+      script.addEventListener(
+        "load",
+        renderTurnstile
+      );
+    }
+
+    return () => {
+      cancelled = true;
+
+      script?.removeEventListener(
+        "load",
+        renderTurnstile
+      );
+
+      const turnstile = getTurnstileApi();
+
+      if (
+        turnstileWidgetIdRef.current &&
+        turnstile
+      ) {
+        try {
+          turnstile.remove(
+            turnstileWidgetIdRef.current
+          );
+        } catch (error) {
+          console.warn(
+            "Nettoyage Turnstile Business :",
+            error
+          );
+        }
+      }
+
+      turnstileWidgetIdRef.current = null;
+    };
+  }, [locale]);
+
+  const resetTurnstile = () => {
+    setTurnstileToken("");
+
+    const turnstile = getTurnstileApi();
+
+    if (
+      turnstileWidgetIdRef.current &&
+      turnstile
+    ) {
+      try {
+        turnstile.reset(
+          turnstileWidgetIdRef.current
+        );
+      } catch (error) {
+        console.warn(
+          "Réinitialisation Turnstile Business :",
+          error
+        );
+      }
+    }
+  };
 
   const updateBusinessForm = (
     key: keyof BusinessInquiryForm,
@@ -174,35 +337,98 @@ function Business() {
       return;
     }
 
+    if (
+      !TURNSTILE_SITE_KEY ||
+      !turnstileToken
+    ) {
+      setFormStatus("security");
+      return;
+    }
+
     setSending(true);
     setFormStatus("idle");
 
-    const { error } = await supabase.rpc(
-      "submit_business_inquiry",
-      {
-        p_inquiry_type:
-          businessForm.inquiryType,
-        p_name: businessForm.name,
-        p_email: businessForm.email,
-        p_phone: businessForm.phone,
-        p_company:
-          businessForm.company || null,
-        p_country:
-          businessForm.country || null,
-        p_message: businessForm.message,
-        p_preferred_language: locale,
-      }
-    );
+    const { data, error } =
+      await supabase.functions.invoke(
+        "submit-business-inquiry",
+        {
+          body: {
+            inquiry_type:
+              businessForm.inquiryType,
+            name:
+              businessForm.name.trim(),
+            email:
+              businessForm.email.trim(),
+            phone:
+              businessForm.phone.trim(),
+            company:
+              businessForm.company.trim() ||
+              null,
+            country:
+              businessForm.country.trim() ||
+              null,
+            message:
+              businessForm.message.trim(),
+            preferred_language: locale,
+            turnstileToken,
+          },
+        }
+      );
 
     setSending(false);
 
-    if (error) {
-      if (
-        error.message.includes(
-          "rate_limited"
-        )
-      ) {
+    let errorCode =
+      typeof data?.code === "string"
+        ? data.code
+        : "";
+
+    if (
+      !errorCode &&
+      error &&
+      typeof error === "object" &&
+      "context" in error
+    ) {
+      const context = (
+        error as {
+          context?: Response;
+        }
+      ).context;
+
+      if (context) {
+        try {
+          const payload =
+            (await context
+              .clone()
+              .json()) as {
+              code?: unknown;
+            };
+
+          if (
+            typeof payload.code ===
+            "string"
+          ) {
+            errorCode = payload.code;
+          }
+        } catch {
+          // Le statut générique sera utilisé.
+        }
+      }
+    }
+
+    if (error || data?.ok !== true) {
+      resetTurnstile();
+
+      if (errorCode === "rate_limited") {
         setFormStatus("rate");
+      } else if (
+        [
+          "security_required",
+          "security_failed",
+          "security_unavailable",
+          "antibot_config",
+        ].includes(errorCode)
+      ) {
+        setFormStatus("security");
       } else {
         setFormStatus("error");
       }
@@ -210,6 +436,7 @@ function Business() {
       return;
     }
 
+    resetTurnstile();
     setFormStatus("success");
     setBusinessForm(
       initialBusinessInquiry
@@ -605,6 +832,59 @@ function Business() {
                   />
                 </label>
 
+                <div
+                  style={{
+                    display: "grid",
+                    gap: "10px",
+                    justifyItems: "center",
+                    padding: "16px",
+                    borderRadius: "14px",
+                    border:
+                      "1px solid rgba(56,189,248,0.22)",
+                    background:
+                      "rgba(14,165,233,0.055)",
+                    textAlign: "center",
+                  }}
+                >
+                  <strong
+                    style={{
+                      color: "#ffffff",
+                      fontSize: "0.9rem",
+                    }}
+                  >
+                    {bf("securityTitle")}
+                  </strong>
+
+                  <p
+                    style={{
+                      margin: 0,
+                      color:
+                        "rgba(255,255,255,0.62)",
+                      fontSize: "0.82rem",
+                      lineHeight: 1.55,
+                    }}
+                  >
+                    {bf("securityText")}
+                  </p>
+
+                  {!TURNSTILE_SITE_KEY ? (
+                    <p
+                      role="alert"
+                      style={{
+                        margin: 0,
+                        color: "#fca5a5",
+                        fontSize: "0.82rem",
+                      }}
+                    >
+                      {bf("antibotMissing")}
+                    </p>
+                  ) : (
+                    <div
+                      ref={turnstileContainerRef}
+                    />
+                  )}
+                </div>
+
                 <p
                   style={{
                     margin: 0,
@@ -670,6 +950,33 @@ function Business() {
                 )}
 
                 {formStatus ===
+                  "security" && (
+                  <div
+                    role="alert"
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      alignItems: "flex-start",
+                      padding: "14px 16px",
+                      borderRadius: "14px",
+                      border:
+                        "1px solid rgba(56,189,248,0.28)",
+                      background:
+                        "rgba(56,189,248,0.08)",
+                      color: "#bae6fd",
+                    }}
+                  >
+                    <AlertCircle
+                      size={20}
+                      aria-hidden="true"
+                    />
+                    <span>
+                      {bf("securityError")}
+                    </span>
+                  </div>
+                )}
+
+                {formStatus ===
                   "error" && (
                   <div
                     role="alert"
@@ -705,12 +1012,20 @@ function Business() {
                 >
                   <button
                     type="submit"
-                    disabled={sending}
+                    disabled={
+                      sending ||
+                      !TURNSTILE_SITE_KEY ||
+                      !turnstileToken
+                    }
                     className="button button--primary"
                     style={{
                       minWidth: "220px",
                       opacity:
-                        sending ? 0.68 : 1,
+                        sending ||
+                        !TURNSTILE_SITE_KEY ||
+                        !turnstileToken
+                          ? 0.68
+                          : 1,
                     }}
                   >
                     <Send

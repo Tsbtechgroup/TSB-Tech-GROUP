@@ -24,6 +24,13 @@ export const businessFormTranslations: TranslationResources = {
         "Décrivez le projet, l’opportunité, les objectifs, les partenaires éventuels et les informations utiles.",
       privacyNote:
         "Les informations envoyées sont utilisées uniquement pour étudier votre demande et vous recontacter.",
+      securityTitle: "Vérification de sécurité",
+      securityText:
+        "Confirmez la vérification anti-bot avant d’envoyer votre proposition.",
+      antibotMissing:
+        "La protection anti-bot n’est pas disponible. Rechargez la page puis réessayez.",
+      securityError:
+        "La vérification de sécurité n’a pas pu être validée. Réessayez.",
       submit: "Envoyer la proposition",
       sending: "Envoi...",
       success:
@@ -68,6 +75,13 @@ export const businessFormTranslations: TranslationResources = {
         "Beschrijf het project, de opportuniteit, doelstellingen, mogelijke partners en nuttige informatie.",
       privacyNote:
         "De verzonden gegevens worden alleen gebruikt om uw aanvraag te beoordelen en contact met u op te nemen.",
+      securityTitle: "Beveiligingscontrole",
+      securityText:
+        "Voltooi de anti-botcontrole voordat u uw voorstel verzendt.",
+      antibotMissing:
+        "De anti-botbeveiliging is niet beschikbaar. Vernieuw de pagina en probeer opnieuw.",
+      securityError:
+        "De beveiligingscontrole kon niet worden gevalideerd. Probeer opnieuw.",
       submit: "Voorstel verzenden",
       sending: "Verzenden...",
       success:
@@ -112,6 +126,13 @@ export const businessFormTranslations: TranslationResources = {
         "Describe the project, opportunity, objectives, possible partners and any useful information.",
       privacyNote:
         "The information you submit is used only to review your request and contact you.",
+      securityTitle: "Security check",
+      securityText:
+        "Complete the anti-bot check before sending your proposal.",
+      antibotMissing:
+        "The anti-bot protection is unavailable. Reload the page and try again.",
+      securityError:
+        "The security check could not be validated. Please try again.",
       submit: "Send proposal",
       sending: "Sending...",
       success:
@@ -156,6 +177,13 @@ export const businessFormTranslations: TranslationResources = {
         "Beschreiben Sie Projekt, Chance, Ziele, mögliche Partner und relevante Informationen.",
       privacyNote:
         "Die übermittelten Informationen werden nur zur Prüfung Ihrer Anfrage und zur Kontaktaufnahme verwendet.",
+      securityTitle: "Sicherheitsprüfung",
+      securityText:
+        "Schließen Sie die Anti-Bot-Prüfung ab, bevor Sie Ihren Vorschlag senden.",
+      antibotMissing:
+        "Der Anti-Bot-Schutz ist nicht verfügbar. Laden Sie die Seite neu und versuchen Sie es erneut.",
+      securityError:
+        "Die Sicherheitsprüfung konnte nicht bestätigt werden. Bitte versuchen Sie es erneut.",
       submit: "Vorschlag senden",
       sending: "Wird gesendet...",
       success:
@@ -200,6 +228,13 @@ export const businessFormTranslations: TranslationResources = {
         "Describa el proyecto, la oportunidad, los objetivos, los posibles socios y la información útil.",
       privacyNote:
         "La información enviada se utiliza únicamente para estudiar su solicitud y contactar con usted.",
+      securityTitle: "Verificación de seguridad",
+      securityText:
+        "Complete la verificación anti-bot antes de enviar su propuesta.",
+      antibotMissing:
+        "La protección anti-bot no está disponible. Recargue la página e inténtelo de nuevo.",
+      securityError:
+        "No se pudo validar la verificación de seguridad. Inténtelo de nuevo.",
       submit: "Enviar propuesta",
       sending: "Enviando...",
       success:
@@ -244,6 +279,13 @@ export const businessFormTranslations: TranslationResources = {
         "Descrivete il progetto, l’opportunità, gli obiettivi, eventuali partner e le informazioni utili.",
       privacyNote:
         "Le informazioni inviate sono utilizzate solo per valutare la richiesta e ricontattarvi.",
+      securityTitle: "Verifica di sicurezza",
+      securityText:
+        "Completate la verifica anti-bot prima di inviare la proposta.",
+      antibotMissing:
+        "La protezione anti-bot non è disponibile. Ricaricate la pagina e riprovate.",
+      securityError:
+        "Non è stato possibile convalidare la verifica di sicurezza. Riprovate.",
       submit: "Invia proposta",
       sending: "Invio...",
       success:
@@ -288,6 +330,13 @@ export const businessFormTranslations: TranslationResources = {
         "Descreva o projeto, a oportunidade, os objetivos, possíveis parceiros e informações úteis.",
       privacyNote:
         "As informações enviadas são utilizadas apenas para analisar o pedido e entrar em contacto consigo.",
+      securityTitle: "Verificação de segurança",
+      securityText:
+        "Conclua a verificação anti-bot antes de enviar a sua proposta.",
+      antibotMissing:
+        "A proteção anti-bot não está disponível. Recarregue a página e tente novamente.",
+      securityError:
+        "Não foi possível validar a verificação de segurança. Tente novamente.",
       submit: "Enviar proposta",
       sending: "A enviar...",
       success:
@@ -332,6 +381,13 @@ export const businessFormTranslations: TranslationResources = {
         "اشرح المشروع أو الفرصة والأهداف والشركاء المحتملين وأي معلومات مفيدة.",
       privacyNote:
         "تُستخدم المعلومات المرسلة فقط لدراسة طلبك والتواصل معك.",
+      securityTitle: "التحقق الأمني",
+      securityText:
+        "أكمل التحقق من الحماية ضد الروبوتات قبل إرسال مقترحك.",
+      antibotMissing:
+        "حماية مكافحة الروبوتات غير متاحة. أعد تحميل الصفحة ثم حاول مرة أخرى.",
+      securityError:
+        "تعذر التحقق من اختبار الأمان. حاول مرة أخرى.",
       submit: "إرسال المقترح",
       sending: "جارٍ الإرسال...",
       success:
@@ -376,6 +432,13 @@ export const businessFormTranslations: TranslationResources = {
         "Projeyi, fırsatı, hedefleri, olası ortakları ve yararlı bilgileri açıklayın.",
       privacyNote:
         "Gönderilen bilgiler yalnızca talebinizi değerlendirmek ve sizinle iletişime geçmek için kullanılır.",
+      securityTitle: "Güvenlik doğrulaması",
+      securityText:
+        "Teklifinizi göndermeden önce bot koruması doğrulamasını tamamlayın.",
+      antibotMissing:
+        "Bot koruması kullanılamıyor. Sayfayı yenileyip tekrar deneyin.",
+      securityError:
+        "Güvenlik doğrulaması onaylanamadı. Lütfen tekrar deneyin.",
       submit: "Teklifi gönder",
       sending: "Gönderiliyor...",
       success:
@@ -420,6 +483,13 @@ export const businessFormTranslations: TranslationResources = {
         "请说明项目、机会、目标、潜在合作伙伴以及其他有用信息。",
       privacyNote:
         "提交的信息仅用于评估您的请求并与您联系。",
+      securityTitle: "安全验证",
+      securityText:
+        "请先完成反机器人验证，再发送您的方案。",
+      antibotMissing:
+        "反机器人保护暂不可用。请刷新页面后重试。",
+      securityError:
+        "安全验证未能通过，请重试。",
       submit: "发送方案",
       sending: "发送中...",
       success:
