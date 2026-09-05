@@ -1,0 +1,46 @@
+﻿original,fichier_final,domaine,type,son_supprime,visages_anonymises
+07C5EA1A-E67C-4263-89D6-D285197B84CF.jpeg,energy/01-cablage-coffret-electrique.webp,energy,photo,sans objet,aucun detecte
+08B76387-3640-448E-85F4-4699A96A28C5.jpeg,energy/02-alimentation-protection-electrique.webp,energy,photo,sans objet,aucun detecte
+1425FB08-3C41-41C2-809B-7B1CF1060B1D.jpeg,energy/03-tableau-electrique-industriel.webp,energy,photo,sans objet,aucun detecte
+200DDA91-47E3-4A1A-BAA6-D8AF31FC8B17.jpeg,energy/04-controle-installation-electrique.webp,energy,photo,sans objet,oui
+AEF3B32F-0504-4735-A0DE-A6EBBE5B04CE.jpeg,energy/05-bornier-distribution-electrique.webp,energy,photo,sans objet,aucun detecte
+FB552023-A233-451A-B4F0-A0C7C710F4D7.jpeg,energy/06-driver-eclairage-tridonic.webp,energy,photo,sans objet,aucun detecte
+FB72E8F6-0E9E-4ED5-93AB-E06494407EB3.jpeg,energy/07-cellules-distribution-electrique.webp,energy,photo,sans objet,aucun detecte
+233CD45E-B6B6-4281-8C5A-67366F072E6E.jpeg,industry/01-actionneur-pneumatique-industriel.webp,industry,photo,sans objet,aucun detecte
+4001FF5F-0055-4368-B08F-4D42FA3EF1B6.jpeg,industry/02-regulation-installation-frigorifique.webp,industry,photo,sans objet,aucun detecte
+51814FB5-C73D-4C00-900F-8A2622535AD0.jpeg,industry/03-cablage-automatisme-industriel.webp,industry,photo,sans objet,aucun detecte
+5504B8C7-BA08-499E-A2AF-6D32A826B2E7.jpeg,industry/04-automate-schneider-electric.webp,industry,photo,sans objet,aucun detecte
+5DEF4C85-DEFC-4BF0-A2E5-8F1760F8D6D9.jpeg,industry/05-coffret-commande-industriel.webp,industry,photo,sans objet,aucun detecte
+6441940C-E3DA-4B69-BEB7-69961AAF01EE.jpeg,industry/06-regulateur-frigorifique-connecte.webp,industry,photo,sans objet,aucun detecte
+D4DA99E8-622F-4255-9750-FB9FC1F6C266.jpeg,industry/07-relais-automatisme-industriel.webp,industry,photo,sans objet,aucun detecte
+4559F14D-782B-4A57-A91A-32C48F13A539.jpeg,security/01-controle-acces-interphone.webp,security,photo,sans objet,aucun detecte
+469CCEBA-8ED0-4FD7-A6C3-6AFC9F77A0F6.jpeg,automobile/01-clonage-transpondeur-id46.webp,automobile,photo,sans objet,aucun detecte
+9C9C0C07-CB20-41E2-B950-BD30D9B71905.jpeg,automobile/02-barillet-serrure-automobile.webp,automobile,photo,sans objet,aucun detecte
+A823227E-24DF-4BF8-9300-9D9E0F5B4E3A.jpeg,automobile/03-cle-automobile-xhorse.webp,automobile,photo,sans objet,aucun detecte
+D68784B2-56DD-43F9-B977-AFF077919BA9.jpeg,automobile/04-diagnostic-immobilisation-citroen.webp,automobile,photo,sans objet,aucun detecte
+F3C74C63-5AA1-448F-95FD-CF26DCBA9DDD.jpeg,automobile/05-interface-diagnostic-multimarque.webp,automobile,photo,sans objet,aucun detecte
+4794CBD2-294E-426D-9D7C-2B11A7166674.jpeg,digital/01-reparation-smartphone-en-atelier.webp,digital,photo,sans objet,aucun detecte
+639CCB19-1D2F-4D08-9755-7EEAD43CBC4D.jpeg,digital/02-diagnostic-carte-electronique.webp,digital,photo,sans objet,aucun detecte
+FB5965F7-89B5-4FDD-945D-394A995A3242.jpeg,digital/03-composant-memoire-carte-electronique.webp,digital,photo,sans objet,aucun detecte
+4DDEA077-46E7-4165-B07F-07751DAD94B0.jpeg,networks/01-test-signal-coaxial.webp,networks,photo,sans objet,aucun detecte
+C17F5978-C6E7-4FC8-BC13-BA915A221572.jpeg,networks/02-cablage-reseau-ethernet.webp,networks,photo,sans objet,aucun detecte
+CE319D31-485F-4C08-B095-849AE9519D0D.jpeg,networks/03-installation-cables-reseau.webp,networks,photo,sans objet,aucun detecte
+099CD710-AD9D-45F9-8B86-1AE04E03C8EAsegment_video_2.mp4,automobile/06-programmation-cle-autel.mp4,automobile,video,oui,aucun detecte
+1c26a223c7c14f289394e9261d14668c.mp4,automobile/07-programmation-et-taille-cle.mp4,automobile,video,oui,aucun detecte
+2b86184d613d4226a539d5d3f57e1f7f.mp4,automobile/08-test-cle-xhorse.mp4,automobile,video,oui,aucun detecte
+46E56682-DF72-464B-9EEA-2ED43E1C1C4D.mp4,automobile/09-lecture-ecriture-calculateur.mp4,automobile,video,oui,aucun detecte
+9193bff2d3c14f61b6ba15382c6a2b57.mp4,automobile/10-test-verrouillage-mercedes.mp4,automobile,video,oui,aucun detecte
+IMG_7583.mp4,automobile/11-test-cle-mazda.mp4,automobile,video,oui,aucun detecte
+IMG_7767.mp4,automobile/12-taille-cle-automobile.mp4,automobile,video,oui,aucun detecte
+IMG_8474.mp4,automobile/13-diagnostic-ordinateur-embarque.mp4,automobile,video,oui,aucun detecte
+e6871e73ec4a4fe79f239fd94036e4a7.mp4,automobile/14-lecture-eeprom-peugeot.mp4,automobile,video,oui,aucun detecte
+2cc539480acc4f4cbd5a6a8a6aac1487.mp4,automobile/15-diagnostic-automobile-renault.mp4,automobile,video,oui,oui (208 images video)
+0d8285e4-9b4e-4023-b508-73a5a8bc1c4a.mov,digital/04-reparation-smartphone.mp4,digital,video,oui,aucun detecte
+2f809f5d-9e80-4b75-8ad3-a18db8a249c6.mp4,digital/05-maintenance-smartphone.mp4,digital,video,oui,aucun detecte
+447fa2ba8265418c81138d3ed0e27a49.mp4,digital/06-maintenance-ordinateur-portable.mp4,digital,video,oui,aucun detecte
+B251EEB1-6593-41B1-AEB0-09179155E662.mp4,digital/07-remplacement-ecran-smartphone.mp4,digital,video,oui,aucun detecte
+c555766d-1d30-4dd8-b312-0f8b82f076d5.mov,digital/08-intervention-carte-smartphone.mp4,digital,video,oui,aucun detecte
+IMG_0742.mp4,industry/08-montage-automatisme-pneumatique.mp4,industry,video,oui,aucun detecte
+IMG_0890.mp4,industry/09-banc-didactique-automatisation.mp4,industry,video,oui,aucun detecte
+IMG_0957.mp4,industry/10-maintenance-machine-industrielle.mp4,industry,video,oui,sequences avec visages retirees
+IMG_8388.mp4,industry/11-diagnostic-armoire-electrique.mp4,industry,video,oui,oui (120 images video)

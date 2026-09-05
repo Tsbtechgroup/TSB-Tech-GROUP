@@ -15,6 +15,7 @@ import {
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 import ScrollToTop from "../../components/common/ScrollToTop";
+import ProjectsMediaGallery from "../../components/projects/ProjectsMediaGallery";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../i18n";
 import { projectsPageTranslations } from "../../i18n/locales/projectsPage";
@@ -36,8 +37,27 @@ const methodConfig = [
   { id: "followup", icon: CheckCircle2 },
 ] as const;
 
+const realizationLabels: Record<
+  string,
+  { view: string; contact: string }
+> = {
+  fr: { view: "Voir nos réalisations", contact: "Nous contacter" },
+  nl: { view: "Bekijk onze realisaties", contact: "Contacteer ons" },
+  en: { view: "View our projects", contact: "Contact us" },
+  de: { view: "Unsere Projekte ansehen", contact: "Kontakt aufnehmen" },
+  es: { view: "Ver nuestros proyectos", contact: "Contáctenos" },
+  it: { view: "Vedi i nostri progetti", contact: "Contattaci" },
+  pt: { view: "Ver os nossos projetos", contact: "Contacte-nos" },
+  ar: { view: "عرض مشاريعنا", contact: "تواصل معنا" },
+  tr: { view: "Projelerimizi görün", contact: "Bize ulaşın" },
+  zh: { view: "查看我们的项目", contact: "联系我们" },
+};
+
 function Projects() {
   const { locale } = useLanguage();
+  const labels =
+    realizationLabels[locale] ??
+    realizationLabels.fr;
 
   const t = (key: string) =>
     translate(
@@ -93,8 +113,8 @@ function Projects() {
                   ← {t("backHome")}
                 </a>
 
-                <a href="/#quote" className="button button--primary">
-                  {t("quote")}
+                <a href="#realisations" className="button button--primary">
+                  {labels.view}
                 </a>
               </div>
             </div>
@@ -154,8 +174,8 @@ function Projects() {
                     <h3>{t(`items.${domain.id}.title`)}</h3>
                     <p>{t(`items.${domain.id}.description`)}</p>
 
-                    <a href="/#quote">
-                      {t("discuss")}
+                    <a href="#realisations">
+                      {labels.view}
                       <span aria-hidden="true">
                         <ArrowRight size={15} />
                       </span>
@@ -225,7 +245,11 @@ function Projects() {
           </div>
         </section>
 
-        <section className="section section--domains">
+        <section
+          id="realisations"
+          className="section section--domains"
+          style={{ scrollMarginTop: "92px" }}
+        >
           <div className="container">
             <div
               className="section-heading"
@@ -241,6 +265,12 @@ function Projects() {
               <h2>{t("showcaseTitle")}</h2>
               <p>{t("showcaseIntro")}</p>
             </div>
+
+            <ProjectsMediaGallery
+              getDomainLabel={(domain) =>
+                t(`items.${domain}.title`)
+              }
+            />
 
             <article
               className="domain-card domain-cyan"
@@ -321,12 +351,8 @@ function Projects() {
                   marginTop: "24px",
                 }}
               >
-                <a href="/#quote" className="button button--primary">
-                  {t("ctaQuote")}
-                </a>
-
-                <a href="/contact" className="button button--secondary">
-                  {t("ctaContact")}
+                <a href="/contact" className="button button--primary">
+                  {labels.contact}
                 </a>
               </div>
             </div>

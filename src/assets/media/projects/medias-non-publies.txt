@@ -1,0 +1,31 @@
+MEDIAS NON PUBLIES
+
+- 6B2F4076-4AD2-4F59-BE0C-144A88F1E7F0.jpeg : capture d'ecran peu exploitable
+- 6C854CA6-6F45-45BC-AF3E-49A7A99BC143.jpeg : capture d'ecran peu exploitable
+- 728368A3-350D-44FC-AE38-A07D40FD830F.jpeg : autoportrait non necessaire au portfolio
+- 7B08DF62-30D8-4C64-AB3B-A76733015162.jpeg : capture de reseau social avec visage
+- 7F46FB08-46E5-4396-A021-B2E3E15A8149.jpeg : identifiants Wi-Fi visibles
+- 8338A8AC-1CC2-410D-8FB0-834F49E7A708.jpeg : informations reseau potentiellement sensibles
+- C24BF7BE-CB2C-43B0-9D06-F96C5A593763.jpeg : schema tiers avec filigrane, pas une realisation
+- EF51688D-028E-4A44-AF27-9C18AE6E2CE7.jpeg : numero de serie et mot de passe visibles
+- 0B3595E9-A613-483E-AB37-1F3A6AC65B3A.mp4 : presentation d'outil, moins pertinente
+- 0d88fcf8-14b9-48f1-bb04-29c480f481b0.mov : doublon de reparation smartphone
+- 18d0de9ac6294a7ba260fe0595338f93(1).mp4 : sequence automobile peu lisible
+- 1b8d49976e8e464c98e2c208af525ec2.mp4 : capture de catalogue, pas une realisation
+- 489c2b8f-a4dd-4024-a493-a3874b1dca5c.mov : doublon de reparation smartphone
+- 874ac9f9-3729-4c77-99fb-906038f20d8e.mov : doublon de reparation smartphone
+- 9CAF4EBE-2FD9-481F-ADE5-0602C19E8F77.mp4 : autoportrait, contenu technique limite
+- 9f7e4720001341a4b7fc2acfa9ed0bee.mp4 : visage et doublon de reparation smartphone
+- AB61A42B-C17F-4717-8AFD-E51B34FC71ED.mp4 : autoportrait, contenu technique limite
+- C9376374-75F0-4850-83AA-B94887F8DA6A.mp4 : atelier suivi d'un autoportrait
+- IMG_7582.mp4 : doublon de taille de cle
+- IMG_7584.mp4 : presentation d'outil, moins pertinente
+- IMG_7971.mp4 : presentation d'adaptateurs, pas une realisation
+- IMG_8491.mp4 : doublon de taille de cle
+- IMG_8492.mp4 : doublon long de taille de cle
+- IMG_8493.mp4 : reflets de visages et doublon long
+- IMG_8564.mp4 : doublon de programmation automobile
+- IMG_8565.mp4 : doublon tres court de programmation automobile
+- IMG_8574.mp4 : doublon long de programmation automobile
+- b43e531fad094e099e99edba29ec997e.mp4 : doublon de lecture calculateur
+- dc9e88cb42114cff88c89d8d107ce968.mp4 : doublon tres long de reparation smartphone

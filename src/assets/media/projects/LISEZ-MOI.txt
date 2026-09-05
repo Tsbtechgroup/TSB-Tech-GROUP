@@ -1,0 +1,21 @@
+TSB TECH GROUP - MEDIAS DES REALISATIONS
+
+Copiez les six dossiers dans :
+src/assets/media/projects/
+
+Traitement applique :
+- photos converties en WebP et metadonnees supprimees ;
+- videos converties en MP4 H.264 sans piste audio ;
+- visages detectes pixelises et floutes, ou sequences concernees retirees ;
+- donnees techniques sensibles visibles masquees ;
+- doublons et contenus inadaptés exclus.
+
+Medias publies par domaine :
+- automobile: 15
+- security: 1
+- energy: 7
+- industry: 11
+- digital: 8
+- networks: 3
+
+TOTAL : 45 medias

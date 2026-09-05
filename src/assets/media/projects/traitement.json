@@ -1,0 +1,13 @@
+{
+  "total_recus": 74,
+  "total_publies": 45,
+  "total_exclus": 29,
+  "domaines": {
+    "automobile": 15,
+    "security": 1,
+    "energy": 7,
+    "industry": 11,
+    "digital": 8,
+    "networks": 3
+  }
+}

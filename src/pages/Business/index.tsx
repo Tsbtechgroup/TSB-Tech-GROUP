@@ -1,10 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import type { FormEvent } from "react";
-
 import {
-  AlertCircle,
-  ArrowRight,
-  CheckCircle2,
   BriefcaseBusiness,
   Building2,
   Car,
@@ -19,7 +13,6 @@ import {
   Radio,
   Rocket,
   ShieldCheck,
-  Send,
   ShoppingBag,
   Store,
   Users,
@@ -33,8 +26,6 @@ import ScrollToTop from "../../components/common/ScrollToTop";
 import { useLanguage } from "../../context/LanguageContext";
 import { translate } from "../../i18n";
 import { businessTranslations } from "../../i18n/locales/business";
-import { businessFormTranslations } from "../../i18n/locales/businessForm";
-import { supabase } from "../../services/supabase";
 
 const solutions = [
   { id: "audit", icon: ClipboardCheck, color: "blue" },
@@ -68,90 +59,65 @@ const opportunities = [
 
 const processItems = ["discover", "review", "exchange", "proposal", "collaboration"] as const;
 
-const inquiryTypes = [
-  "solutions",
-  "investment",
-  "strategic",
-  "joint_venture",
-  "distribution",
-  "institutions",
-  "international",
-  "other",
-] as const;
-
-type InquiryType = (typeof inquiryTypes)[number];
-
-type BusinessInquiryForm = {
-  inquiryType: InquiryType;
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  country: string;
-  message: string;
+const businessCtaCopy: Record<
+  string,
+  { title: string; text: string; button: string }
+> = {
+  fr: {
+    title: "Vous avez une proposition business ?",
+    text: "Présentez votre idée, votre projet ou votre opportunité directement à TSB Tech Group depuis notre formulaire dédié à l’écosystème.",
+    button: "Proposer votre business",
+  },
+  nl: {
+    title: "Hebt u een businessvoorstel?",
+    text: "Stel uw idee, project of opportuniteit rechtstreeks voor aan TSB Tech Group via ons formulier voor het ecosysteem.",
+    button: "Uw business voorstellen",
+  },
+  en: {
+    title: "Do you have a business proposal?",
+    text: "Present your idea, project or opportunity directly to TSB Tech Group through our dedicated ecosystem form.",
+    button: "Submit your business",
+  },
+  de: {
+    title: "Haben Sie einen Businessvorschlag?",
+    text: "Präsentieren Sie Ihre Idee, Ihr Projekt oder Ihre Chance direkt der TSB Tech Group über unser Ökosystem-Formular.",
+    button: "Business vorschlagen",
+  },
+  es: {
+    title: "¿Tiene una propuesta de negocio?",
+    text: "Presente su idea, proyecto u oportunidad directamente a TSB Tech Group mediante nuestro formulario del ecosistema.",
+    button: "Proponer su negocio",
+  },
+  it: {
+    title: "Avete una proposta business?",
+    text: "Presentate la vostra idea, progetto o opportunità direttamente a TSB Tech Group tramite il modulo dedicato all’ecosistema.",
+    button: "Proponete il vostro business",
+  },
+  pt: {
+    title: "Tem uma proposta de negócio?",
+    text: "Apresente a sua ideia, projeto ou oportunidade diretamente à TSB Tech Group através do formulário do ecossistema.",
+    button: "Propor o seu negócio",
+  },
+  ar: {
+    title: "هل لديكم مقترح أعمال؟",
+    text: "قدّموا فكرتكم أو مشروعكم أو فرصتكم مباشرة إلى TSB Tech Group عبر نموذج المنظومة المخصص.",
+    button: "تقديم مشروعكم التجاري",
+  },
+  tr: {
+    title: "Bir iş teklifiniz mi var?",
+    text: "Fikrinizi, projenizi veya fırsatınızı ekosistem formumuz üzerinden doğrudan TSB Tech Group’a sunun.",
+    button: "İş teklifinizi sunun",
+  },
+  zh: {
+    title: "您有商业提案吗？",
+    text: "通过我们的生态系统专用表单，直接向 TSB Tech Group 提交您的想法、项目或机会。",
+    button: "提交商业提案",
+  },
 };
-
-const initialBusinessInquiry: BusinessInquiryForm = {
-  inquiryType: "investment",
-  name: "",
-  email: "",
-  phone: "",
-  company: "",
-  country: "",
-  message: "",
-};
-
-const fieldStyle = {
-  width: "100%",
-  minHeight: "48px",
-  padding: "12px 14px",
-  borderRadius: "12px",
-  border: "1px solid rgba(148,163,184,0.25)",
-  background: "rgba(2,6,23,0.62)",
-  color: "#ffffff",
-  outline: "none",
-  font: "inherit",
-} as const;
-
-const labelStyle = {
-  display: "grid",
-  gap: "8px",
-  color: "rgba(255,255,255,0.82)",
-  fontSize: "0.86rem",
-  fontWeight: 700,
-} as const;
-
-const TURNSTILE_SITE_KEY =
-  import.meta.env
-    .VITE_TURNSTILE_SITE_KEY as
-    | string
-    | undefined;
-
-type TurnstileApi = {
-  render: (
-    container: HTMLElement,
-    options: {
-      sitekey: string;
-      theme?: "auto" | "light" | "dark";
-      language?: string;
-      callback: (token: string) => void;
-      "expired-callback"?: () => void;
-      "error-callback"?: () => void;
-    }
-  ) => string;
-  reset: (widgetId?: string) => void;
-  remove: (widgetId: string) => void;
-};
-
-const getTurnstileApi = () =>
-  (
-    window as Window & {
-      turnstile?: TurnstileApi;
-    }
-  ).turnstile;
 
 function Business() {
   const { locale } = useLanguage();
+  const ctaCopy = businessCtaCopy[locale] ?? businessCtaCopy.fr;
 
   const t = (key: string) =>
     translate(
@@ -159,289 +125,6 @@ function Business() {
       locale,
       `business.${key}`
     );
-
-  const bf = (key: string) =>
-    translate(
-      businessFormTranslations,
-      locale,
-      `businessForm.${key}`
-    );
-
-  const [businessForm, setBusinessForm] =
-    useState<BusinessInquiryForm>(
-      initialBusinessInquiry
-    );
-
-  const [sending, setSending] =
-    useState(false);
-
-  const [formStatus, setFormStatus] =
-    useState<
-      | "idle"
-      | "success"
-      | "error"
-      | "rate"
-      | "security"
-    >("idle");
-
-  const [turnstileToken, setTurnstileToken] =
-    useState("");
-
-  const turnstileContainerRef =
-    useRef<HTMLDivElement | null>(null);
-
-  const turnstileWidgetIdRef =
-    useRef<string | null>(null);
-
-  useEffect(() => {
-    setTurnstileToken("");
-
-    if (!TURNSTILE_SITE_KEY) {
-      console.error(
-        "VITE_TURNSTILE_SITE_KEY manquante."
-      );
-
-      return;
-    }
-
-    let cancelled = false;
-
-    const renderTurnstile = () => {
-      const turnstile = getTurnstileApi();
-
-      if (
-        cancelled ||
-        !turnstileContainerRef.current ||
-        !turnstile ||
-        turnstileWidgetIdRef.current
-      ) {
-        return;
-      }
-
-      turnstileWidgetIdRef.current =
-        turnstile.render(
-          turnstileContainerRef.current,
-          {
-            sitekey: TURNSTILE_SITE_KEY,
-            theme: "dark",
-            language: locale,
-            callback: (token) => {
-              setTurnstileToken(token);
-            },
-            "expired-callback": () => {
-              setTurnstileToken("");
-            },
-            "error-callback": () => {
-              setTurnstileToken("");
-            },
-          }
-        );
-    };
-
-    let script =
-      document.querySelector<HTMLScriptElement>(
-        'script[data-tsb-turnstile="true"]'
-      );
-
-    if (!script) {
-      script = document.createElement("script");
-      script.src =
-        "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-      script.async = true;
-      script.defer = true;
-      script.dataset.tsbTurnstile = "true";
-      document.head.appendChild(script);
-    }
-
-    if (getTurnstileApi()) {
-      renderTurnstile();
-    } else {
-      script.addEventListener(
-        "load",
-        renderTurnstile
-      );
-    }
-
-    return () => {
-      cancelled = true;
-
-      script?.removeEventListener(
-        "load",
-        renderTurnstile
-      );
-
-      const turnstile = getTurnstileApi();
-
-      if (
-        turnstileWidgetIdRef.current &&
-        turnstile
-      ) {
-        try {
-          turnstile.remove(
-            turnstileWidgetIdRef.current
-          );
-        } catch (error) {
-          console.warn(
-            "Nettoyage Turnstile Business :",
-            error
-          );
-        }
-      }
-
-      turnstileWidgetIdRef.current = null;
-    };
-  }, [locale]);
-
-  const resetTurnstile = () => {
-    setTurnstileToken("");
-
-    const turnstile = getTurnstileApi();
-
-    if (
-      turnstileWidgetIdRef.current &&
-      turnstile
-    ) {
-      try {
-        turnstile.reset(
-          turnstileWidgetIdRef.current
-        );
-      } catch (error) {
-        console.warn(
-          "Réinitialisation Turnstile Business :",
-          error
-        );
-      }
-    }
-  };
-
-  const updateBusinessForm = (
-    key: keyof BusinessInquiryForm,
-    value: string
-  ) => {
-    setBusinessForm((current) => ({
-      ...current,
-      [key]: value,
-    }));
-
-    if (formStatus !== "idle") {
-      setFormStatus("idle");
-    }
-  };
-
-  const submitBusinessInquiry = async (
-    event: FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
-
-    if (sending) {
-      return;
-    }
-
-    if (
-      !TURNSTILE_SITE_KEY ||
-      !turnstileToken
-    ) {
-      setFormStatus("security");
-      return;
-    }
-
-    setSending(true);
-    setFormStatus("idle");
-
-    const { data, error } =
-      await supabase.functions.invoke(
-        "submit-business-inquiry",
-        {
-          body: {
-            inquiry_type:
-              businessForm.inquiryType,
-            name:
-              businessForm.name.trim(),
-            email:
-              businessForm.email.trim(),
-            phone:
-              businessForm.phone.trim(),
-            company:
-              businessForm.company.trim() ||
-              null,
-            country:
-              businessForm.country.trim() ||
-              null,
-            message:
-              businessForm.message.trim(),
-            preferred_language: locale,
-            turnstileToken,
-          },
-        }
-      );
-
-    setSending(false);
-
-    let errorCode =
-      typeof data?.code === "string"
-        ? data.code
-        : "";
-
-    if (
-      !errorCode &&
-      error &&
-      typeof error === "object" &&
-      "context" in error
-    ) {
-      const context = (
-        error as {
-          context?: Response;
-        }
-      ).context;
-
-      if (context) {
-        try {
-          const payload =
-            (await context
-              .clone()
-              .json()) as {
-              code?: unknown;
-            };
-
-          if (
-            typeof payload.code ===
-            "string"
-          ) {
-            errorCode = payload.code;
-          }
-        } catch {
-          // Le statut générique sera utilisé.
-        }
-      }
-    }
-
-    if (error || data?.ok !== true) {
-      resetTurnstile();
-
-      if (errorCode === "rate_limited") {
-        setFormStatus("rate");
-      } else if (
-        [
-          "security_required",
-          "security_failed",
-          "security_unavailable",
-          "antibot_config",
-        ].includes(errorCode)
-      ) {
-        setFormStatus("security");
-      } else {
-        setFormStatus("error");
-      }
-
-      return;
-    }
-
-    resetTurnstile();
-    setFormStatus("success");
-    setBusinessForm(
-      initialBusinessInquiry
-    );
-  };
 
   return (
     <div>
@@ -455,8 +138,7 @@ function Business() {
               <p style={{ maxWidth: "790px", marginLeft: "auto", marginRight: "auto" }}>{t("intro")}</p>
               <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "12px", marginTop: "24px" }}>
                 <a href="/#top" className="button button--secondary">← {t("backHome")}</a>
-                <a href="#solutions" className="button button--secondary">{t("solutionsButton")}</a>
-                <a href="#invest" className="button button--primary">{t("investButton")} <ArrowRight size={17} aria-hidden="true" /></a>
+                <a href="/contact" className="button button--primary">{t("contact")}</a>
               </div>
             </div>
           </div>
@@ -484,9 +166,6 @@ function Business() {
                   </article>
                 );
               })}
-            </div>
-            <div style={{ display: "flex", justifyContent: "center", marginTop: "28px" }}>
-              <a href="/#quote" className="button button--primary">{t("quote")}</a>
             </div>
           </div>
         </section>
@@ -578,469 +257,15 @@ function Business() {
                 <Building2 size={27} strokeWidth={1.8} />
               </div>
               <span className="section__eyebrow">{t("ctaEyebrow")}</span>
-              <h2>{t("ctaTitle")}</h2>
-              <p style={{ maxWidth: "720px", margin: "12px auto 0" }}>{t("ctaText")}</p>
+              <h2>{ctaCopy.title}</h2>
+              <p style={{ maxWidth: "720px", margin: "12px auto 0" }}>{ctaCopy.text}</p>
               <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "12px", marginTop: "24px" }}>
-                <a href="/#quote" className="button button--secondary">{t("ctaQuote")}</a>
-                <a href="#business-form" className="button button--primary">{t("ctaProject")} <ArrowRight size={17} aria-hidden="true" /></a>
+                <a href="/ecosystem-request" className="button button--primary">{ctaCopy.button}</a>
               </div>
             </div>
           </div>
         </section>
 
-        <section
-          id="business-form"
-          className="section section--domains"
-        >
-          <div className="container">
-            <div
-              style={{
-                maxWidth: "980px",
-                margin: "0 auto",
-                padding: "30px",
-                borderRadius: "22px",
-                border:
-                  "1px solid rgba(56,189,248,0.26)",
-                background:
-                  "linear-gradient(135deg, rgba(2,6,23,0.90), rgba(14,165,233,0.07))",
-                boxShadow:
-                  "0 24px 70px rgba(2,6,23,0.28)",
-              }}
-            >
-              <div
-                className="section-heading"
-                style={{
-                  textAlign: "center",
-                  maxWidth: "760px",
-                  margin: "0 auto 26px",
-                }}
-              >
-                <span className="section__eyebrow">
-                  {bf("eyebrow")}
-                </span>
-
-                <h2>
-                  {bf("title1")}{" "}
-                  <span>{bf("title2")}</span>
-                </h2>
-
-                <p>{bf("intro")}</p>
-              </div>
-
-              <form
-                onSubmit={
-                  submitBusinessInquiry
-                }
-                style={{
-                  display: "grid",
-                  gap: "16px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns:
-                      "repeat(auto-fit, minmax(230px, 1fr))",
-                    gap: "16px",
-                  }}
-                >
-                  <label style={labelStyle}>
-                    {bf("typeLabel")}
-                    <select
-                      value={
-                        businessForm.inquiryType
-                      }
-                      onChange={(event) =>
-                        updateBusinessForm(
-                          "inquiryType",
-                          event.target.value
-                        )
-                      }
-                      style={fieldStyle}
-                    >
-                      {inquiryTypes.map(
-                        (type) => (
-                          <option
-                            key={type}
-                            value={type}
-                          >
-                            {bf(
-                              `types.${type}`
-                            )}
-                          </option>
-                        )
-                      )}
-                    </select>
-                  </label>
-
-                  <label style={labelStyle}>
-                    {bf("companyLabel")}
-                    <input
-                      type="text"
-                      value={
-                        businessForm.company
-                      }
-                      onChange={(event) =>
-                        updateBusinessForm(
-                          "company",
-                          event.target.value
-                        )
-                      }
-                      placeholder={bf(
-                        "companyPlaceholder"
-                      )}
-                      maxLength={160}
-                      style={fieldStyle}
-                    />
-                  </label>
-                </div>
-
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns:
-                      "repeat(auto-fit, minmax(230px, 1fr))",
-                    gap: "16px",
-                  }}
-                >
-                  <label style={labelStyle}>
-                    {bf("nameLabel")}
-                    <input
-                      type="text"
-                      required
-                      minLength={2}
-                      maxLength={120}
-                      value={
-                        businessForm.name
-                      }
-                      onChange={(event) =>
-                        updateBusinessForm(
-                          "name",
-                          event.target.value
-                        )
-                      }
-                      placeholder={bf(
-                        "namePlaceholder"
-                      )}
-                      autoComplete="name"
-                      style={fieldStyle}
-                    />
-                  </label>
-
-                  <label style={labelStyle}>
-                    {bf("emailLabel")}
-                    <input
-                      type="email"
-                      required
-                      maxLength={254}
-                      value={
-                        businessForm.email
-                      }
-                      onChange={(event) =>
-                        updateBusinessForm(
-                          "email",
-                          event.target.value
-                        )
-                      }
-                      placeholder={bf(
-                        "emailPlaceholder"
-                      )}
-                      autoComplete="email"
-                      style={fieldStyle}
-                    />
-                  </label>
-                </div>
-
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns:
-                      "repeat(auto-fit, minmax(230px, 1fr))",
-                    gap: "16px",
-                  }}
-                >
-                  <label style={labelStyle}>
-                    {bf("phoneLabel")}
-                    <input
-                      type="tel"
-                      required
-                      minLength={4}
-                      maxLength={40}
-                      value={
-                        businessForm.phone
-                      }
-                      onChange={(event) =>
-                        updateBusinessForm(
-                          "phone",
-                          event.target.value
-                        )
-                      }
-                      placeholder={bf(
-                        "phonePlaceholder"
-                      )}
-                      autoComplete="tel"
-                      style={fieldStyle}
-                    />
-                  </label>
-
-                  <label style={labelStyle}>
-                    {bf("countryLabel")}
-                    <input
-                      type="text"
-                      maxLength={120}
-                      value={
-                        businessForm.country
-                      }
-                      onChange={(event) =>
-                        updateBusinessForm(
-                          "country",
-                          event.target.value
-                        )
-                      }
-                      placeholder={bf(
-                        "countryPlaceholder"
-                      )}
-                      autoComplete="country-name"
-                      style={fieldStyle}
-                    />
-                  </label>
-                </div>
-
-                <label style={labelStyle}>
-                  {bf("messageLabel")}
-                  <textarea
-                    required
-                    minLength={10}
-                    maxLength={4000}
-                    value={
-                      businessForm.message
-                    }
-                    onChange={(event) =>
-                      updateBusinessForm(
-                        "message",
-                        event.target.value
-                      )
-                    }
-                    placeholder={bf(
-                      "messagePlaceholder"
-                    )}
-                    style={{
-                      ...fieldStyle,
-                      minHeight: "150px",
-                      resize: "vertical",
-                    }}
-                  />
-                </label>
-
-                <div
-                  style={{
-                    display: "grid",
-                    gap: "10px",
-                    justifyItems: "center",
-                    padding: "16px",
-                    borderRadius: "14px",
-                    border:
-                      "1px solid rgba(56,189,248,0.22)",
-                    background:
-                      "rgba(14,165,233,0.055)",
-                    textAlign: "center",
-                  }}
-                >
-                  <strong
-                    style={{
-                      color: "#ffffff",
-                      fontSize: "0.9rem",
-                    }}
-                  >
-                    {bf("securityTitle")}
-                  </strong>
-
-                  <p
-                    style={{
-                      margin: 0,
-                      color:
-                        "rgba(255,255,255,0.62)",
-                      fontSize: "0.82rem",
-                      lineHeight: 1.55,
-                    }}
-                  >
-                    {bf("securityText")}
-                  </p>
-
-                  {!TURNSTILE_SITE_KEY ? (
-                    <p
-                      role="alert"
-                      style={{
-                        margin: 0,
-                        color: "#fca5a5",
-                        fontSize: "0.82rem",
-                      }}
-                    >
-                      {bf("antibotMissing")}
-                    </p>
-                  ) : (
-                    <div
-                      ref={turnstileContainerRef}
-                    />
-                  )}
-                </div>
-
-                <p
-                  style={{
-                    margin: 0,
-                    fontSize: "0.82rem",
-                    color:
-                      "rgba(255,255,255,0.58)",
-                  }}
-                >
-                  {bf("privacyNote")}
-                </p>
-
-                {formStatus ===
-                  "success" && (
-                  <div
-                    role="status"
-                    style={{
-                      display: "flex",
-                      gap: "10px",
-                      alignItems: "flex-start",
-                      padding: "14px 16px",
-                      borderRadius: "14px",
-                      border:
-                        "1px solid rgba(74,222,128,0.28)",
-                      background:
-                        "rgba(74,222,128,0.08)",
-                      color: "#bbf7d0",
-                    }}
-                  >
-                    <CheckCircle2
-                      size={20}
-                      aria-hidden="true"
-                    />
-                    <span>
-                      {bf("success")}
-                    </span>
-                  </div>
-                )}
-
-                {formStatus === "rate" && (
-                  <div
-                    role="alert"
-                    style={{
-                      display: "flex",
-                      gap: "10px",
-                      alignItems: "flex-start",
-                      padding: "14px 16px",
-                      borderRadius: "14px",
-                      border:
-                        "1px solid rgba(251,191,36,0.28)",
-                      background:
-                        "rgba(251,191,36,0.08)",
-                      color: "#fde68a",
-                    }}
-                  >
-                    <AlertCircle
-                      size={20}
-                      aria-hidden="true"
-                    />
-                    <span>
-                      {bf("rateLimited")}
-                    </span>
-                  </div>
-                )}
-
-                {formStatus ===
-                  "security" && (
-                  <div
-                    role="alert"
-                    style={{
-                      display: "flex",
-                      gap: "10px",
-                      alignItems: "flex-start",
-                      padding: "14px 16px",
-                      borderRadius: "14px",
-                      border:
-                        "1px solid rgba(56,189,248,0.28)",
-                      background:
-                        "rgba(56,189,248,0.08)",
-                      color: "#bae6fd",
-                    }}
-                  >
-                    <AlertCircle
-                      size={20}
-                      aria-hidden="true"
-                    />
-                    <span>
-                      {bf("securityError")}
-                    </span>
-                  </div>
-                )}
-
-                {formStatus ===
-                  "error" && (
-                  <div
-                    role="alert"
-                    style={{
-                      display: "flex",
-                      gap: "10px",
-                      alignItems: "flex-start",
-                      padding: "14px 16px",
-                      borderRadius: "14px",
-                      border:
-                        "1px solid rgba(248,113,113,0.28)",
-                      background:
-                        "rgba(248,113,113,0.08)",
-                      color: "#fecaca",
-                    }}
-                  >
-                    <AlertCircle
-                      size={20}
-                      aria-hidden="true"
-                    />
-                    <span>
-                      {bf("error")}
-                    </span>
-                  </div>
-                )}
-
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "4px",
-                  }}
-                >
-                  <button
-                    type="submit"
-                    disabled={
-                      sending ||
-                      !TURNSTILE_SITE_KEY ||
-                      !turnstileToken
-                    }
-                    className="button button--primary"
-                    style={{
-                      minWidth: "220px",
-                      opacity:
-                        sending ||
-                        !TURNSTILE_SITE_KEY ||
-                        !turnstileToken
-                          ? 0.68
-                          : 1,
-                    }}
-                  >
-                    <Send
-                      size={17}
-                      aria-hidden="true"
-                    />
-                    {sending
-                      ? bf("sending")
-                      : bf("submit")}
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </section>
       </main>
       <Footer />
       <ScrollToTop />

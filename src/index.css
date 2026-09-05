@@ -3484,3 +3484,892 @@ button {
   font-size: 0.8rem;
   line-height: 1.5;
 }
+
+
+/* =========================================================
+   TSB TECH GROUP — HOME DYNAMIC HERO SAFE V1
+   Append this block AFTER the existing HERO styles.
+   The image files can be added later without changing TSX:
+   src/assets/images/hero-services/
+   ========================================================= */
+
+.hero--dynamic {
+  isolation: isolate;
+  background: #020711;
+}
+
+.hero__slides {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero__slide {
+  position: absolute;
+  inset: -3%;
+  opacity: 0;
+  transform: scale(1.035);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition:
+    opacity 1.15s ease,
+    transform 7.5s ease;
+  will-change: opacity, transform;
+}
+
+.hero__slide--active {
+  opacity: 1;
+  transform: scale(1.085);
+}
+
+/*
+  SAFE V1 fallback backgrounds.
+  When the final service photos are ready, replace only the
+  background-image declarations below with:
+  url("./assets/images/hero-services/automobile.webp"), ...
+*/
+
+.hero__slide--automobile {
+  background-image:
+    radial-gradient(circle at 22% 46%, rgba(19, 135, 255, 0.28), transparent 28%),
+    linear-gradient(120deg, rgba(2, 7, 17, 0.28), rgba(2, 7, 17, 0.82)),
+    linear-gradient(135deg, #07182b 0%, #0a2745 38%, #030915 100%);
+}
+
+.hero__slide--security {
+  background-image:
+    radial-gradient(circle at 72% 30%, rgba(0, 205, 255, 0.24), transparent 25%),
+    linear-gradient(120deg, rgba(2, 7, 17, 0.34), rgba(2, 7, 17, 0.84)),
+    linear-gradient(135deg, #061421 0%, #0d2635 42%, #020711 100%);
+}
+
+.hero__slide--energy {
+  background-image:
+    radial-gradient(circle at 58% 34%, rgba(255, 176, 43, 0.26), transparent 25%),
+    linear-gradient(120deg, rgba(2, 7, 17, 0.28), rgba(2, 7, 17, 0.84)),
+    linear-gradient(135deg, #0d1a22 0%, #18344c 42%, #03101a 100%);
+}
+
+.hero__slide--automation {
+  background-image:
+    radial-gradient(circle at 42% 36%, rgba(80, 110, 255, 0.28), transparent 25%),
+    linear-gradient(120deg, rgba(2, 7, 17, 0.28), rgba(2, 7, 17, 0.84)),
+    linear-gradient(135deg, #081429 0%, #112754 44%, #030711 100%);
+}
+
+.hero__slide--networks {
+  background-image:
+    radial-gradient(circle at 75% 44%, rgba(19, 135, 255, 0.32), transparent 24%),
+    linear-gradient(120deg, rgba(2, 7, 17, 0.3), rgba(2, 7, 17, 0.86)),
+    linear-gradient(135deg, #06101f 0%, #0b2244 45%, #020711 100%);
+}
+
+.hero__media-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 7, 17, 0.34) 0%,
+      rgba(2, 7, 17, 0.44) 42%,
+      rgba(2, 7, 17, 0.78) 100%
+    ),
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(2, 7, 17, 0.06),
+      rgba(2, 7, 17, 0.46) 72%
+    );
+}
+
+.hero--dynamic .hero__content {
+  z-index: 4;
+}
+
+.hero--dynamic .hero__logo {
+  border-radius: 18px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.24),
+    0 0 55px rgba(19, 135, 255, 0.08);
+}
+
+.hero__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(2, 7, 17, 0.48);
+  color: #ffffff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  transform: translateY(-50%);
+  backdrop-filter: blur(12px);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.hero__nav:hover,
+.hero__nav:focus-visible {
+  border-color: rgba(19, 135, 255, 0.78);
+  background: rgba(19, 135, 255, 0.18);
+  outline: none;
+}
+
+.hero__nav--prev {
+  left: clamp(16px, 3vw, 46px);
+}
+
+.hero__nav--next {
+  right: clamp(16px, 3vw, 46px);
+}
+
+.hero__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 26px;
+}
+
+.hero__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.34);
+  cursor: pointer;
+  transition:
+    width 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.hero__dot--active {
+  width: 30px;
+  background: #1387ff;
+  box-shadow: 0 0 18px rgba(19, 135, 255, 0.55);
+}
+
+.hero__dot:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
+}
+
+@media (max-width: 760px) {
+  .hero--dynamic {
+    min-height: min(760px, calc(100svh - 70px));
+  }
+
+  .hero__slide {
+    inset: 0;
+  }
+
+  .hero__nav {
+    top: auto;
+    bottom: 20px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.7rem;
+  }
+
+  .hero__nav--prev {
+    left: 18px;
+  }
+
+  .hero__nav--next {
+    right: 18px;
+  }
+
+  .hero__pagination {
+    margin-top: 20px;
+    padding-bottom: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__slide {
+    transition: opacity 0.25s linear;
+    transform: none;
+  }
+
+  .hero__slide--active {
+    transform: none;
+  }
+}
+
+/* =========================================================
+   TSB TECH GROUP — HERO REAL IMAGES SAFE V1
+   ========================================================= */
+
+.hero__slide--automobile {
+  background-image:
+    linear-gradient(
+      120deg,
+      rgba(2, 7, 17, 0.42),
+      rgba(2, 7, 17, 0.72)
+    ),
+    url("./assets/images/hero-services/automobile.png");
+}
+
+.hero__slide--security {
+  background-image:
+    linear-gradient(
+      120deg,
+      rgba(2, 7, 17, 0.42),
+      rgba(2, 7, 17, 0.72)
+    ),
+    url("./assets/images/hero-services/security.png");
+}
+
+.hero__slide--energy {
+  background-image:
+    linear-gradient(
+      120deg,
+      rgba(2, 7, 17, 0.38),
+      rgba(2, 7, 17, 0.72)
+    ),
+    url("./assets/images/hero-services/energy.png");
+}
+
+.hero__slide--automation {
+  background-image:
+    linear-gradient(
+      120deg,
+      rgba(2, 7, 17, 0.42),
+      rgba(2, 7, 17, 0.72)
+    ),
+    url("./assets/images/hero-services/automation.png");
+}
+
+.hero__slide--networks {
+  background-image:
+    linear-gradient(
+      120deg,
+      rgba(2, 7, 17, 0.42),
+      rgba(2, 7, 17, 0.72)
+    ),
+    url("./assets/images/hero-services/networks.png");
+}
+
+/* =========================================================
+   TSB TECH GROUP — HERO IMAGE IMPORT FIX SAFE V1.2
+   Append at the VERY END of src/index.css
+   ========================================================= */
+
+.hero__slide-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.hero__slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 7, 17, 0.18) 0%,
+      rgba(2, 7, 17, 0.30) 45%,
+      rgba(2, 7, 17, 0.64) 100%
+    );
+  pointer-events: none;
+}
+
+.hero__media-overlay {
+  z-index: 2;
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .hero__slide-image {
+    object-position: center center;
+  }
+}
+
+/* TSB HERO LOGO VISIBILITY FIX V1 */
+
+.hero--dynamic .hero__logo {
+  width: min(390px, 64vw);
+  max-height: 145px;
+  margin-bottom: 6px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+
+  filter:
+    drop-shadow(0 10px 25px rgba(0, 0, 0, 0.35))
+    drop-shadow(0 0 18px rgba(19, 135, 255, 0.16));
+
+  box-shadow: none;
+  border-radius: 0;
+}
+
+@media (max-width: 760px) {
+  .hero--dynamic .hero__logo {
+    width: min(300px, 78vw);
+    max-height: 115px;
+  }
+}
+
+
+/* TSB HERO VISIBILITY FINAL V1 */
+
+.hero__media-overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 7, 17, 0.06) 0%,
+      rgba(2, 7, 17, 0.12) 48%,
+      rgba(2, 7, 17, 0.30) 100%
+    ) !important;
+}
+
+.hero__slide::after {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 7, 17, 0.04) 0%,
+      rgba(2, 7, 17, 0.08) 48%,
+      rgba(2, 7, 17, 0.25) 100%
+    ) !important;
+}
+
+.hero--dynamic .hero__logo {
+  width: min(270px, 48vw);
+  max-height: 105px;
+  mix-blend-mode: normal;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  filter:
+    drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45))
+    drop-shadow(0 0 16px rgba(19, 135, 255, 0.20));
+}
+
+@media (max-width: 760px) {
+  .hero--dynamic .hero__logo {
+    width: min(220px, 60vw);
+    max-height: 85px;
+  }
+}
+
+/* =========================================================
+   TSB TECH GROUP — HOME DYNAMIC HERO SAFE V1.3
+   Append at the VERY END of src/index.css
+   ========================================================= */
+
+/* The navbar already carries the official brand.
+   Keep the hero center clean so the service images remain visible. */
+.hero--dynamic .hero__content {
+  padding-top: 18px;
+  padding-bottom: 6px;
+}
+
+.hero--dynamic .hero__title {
+  margin-top: 0;
+  text-shadow:
+    0 3px 16px rgba(0, 0, 0, 0.72),
+    0 0 28px rgba(0, 0, 0, 0.28);
+}
+
+/* Make service imagery more present while protecting text readability. */
+.hero--dynamic .hero__media-overlay {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 7, 17, 0.03) 0%,
+      rgba(2, 7, 17, 0.07) 42%,
+      rgba(2, 7, 17, 0.22) 100%
+    ) !important;
+}
+
+.hero--dynamic .hero__slide::after {
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(2, 7, 17, 0.22) 0%,
+      rgba(2, 7, 17, 0.08) 36%,
+      rgba(2, 7, 17, 0.02) 66%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(2, 7, 17, 0.02) 0%,
+      rgba(2, 7, 17, 0.05) 55%,
+      rgba(2, 7, 17, 0.20) 100%
+    ) !important;
+}
+
+/* Keep navigation controls clean and visible. */
+.hero--dynamic .hero__nav {
+  font-family: Arial, sans-serif;
+}
+
+@media (max-width: 760px) {
+  .hero--dynamic .hero__content {
+    padding-top: 12px;
+  }
+
+  .hero--dynamic .hero__title {
+    margin-top: 0;
+  }
+}
+
+/* =========================================================
+   TSB TECH GROUP
+   PUBLIC ASSISTANT SAFE V1
+   ========================================================= */
+
+.tsb-assistant {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 220;
+  font-family: inherit;
+}
+
+.tsb-assistant__launcher {
+  min-height: 52px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  padding: 0 18px;
+
+  border: 1px solid
+    rgba(83, 167, 255, 0.48);
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1387ff 0%,
+      #0756ce 100%
+    );
+
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 14px 38px
+      rgba(0, 0, 0, 0.38),
+    0 0 30px
+      rgba(19, 135, 255, 0.18);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tsb-assistant__launcher:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 18px 42px
+      rgba(0, 0, 0, 0.42),
+    0 0 35px
+      rgba(19, 135, 255, 0.25);
+}
+
+.tsb-assistant__panel {
+  width:
+    min(
+      390px,
+      calc(100vw - 28px)
+    );
+
+  margin-bottom: 12px;
+
+  overflow: hidden;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.11);
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8, 19, 35, 0.98)
+        0%,
+      rgba(2, 7, 17, 0.99)
+        100%
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 28px 70px
+      rgba(0, 0, 0, 0.52),
+    0 0 42px
+      rgba(19, 135, 255, 0.10);
+
+  backdrop-filter: blur(18px);
+}
+
+.tsb-assistant__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  padding: 16px;
+
+  border-bottom: 1px solid
+    rgba(255, 255, 255, 0.08);
+}
+
+.tsb-assistant__identity {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+}
+
+.tsb-assistant__identity > div {
+  display: grid;
+
+  gap: 3px;
+}
+
+.tsb-assistant__identity strong {
+  color: #ffffff;
+
+  font-size: 0.96rem;
+}
+
+.tsb-assistant__identity
+  > div
+  > span {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: #8fa2b8;
+
+  font-size: 0.72rem;
+}
+
+.tsb-assistant__online-dot {
+  width: 7px;
+  height: 7px;
+
+  display: inline-block;
+
+  border-radius: 50%;
+
+  background: #37d67a;
+
+  box-shadow:
+    0 0 8px
+      rgba(55, 214, 122, 0.6);
+}
+
+.tsb-assistant__avatar {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border: 1px solid
+    rgba(83, 167, 255, 0.24);
+
+  border-radius: 13px;
+
+  background:
+    rgba(19, 135, 255, 0.12);
+
+  color: #53a7ff;
+}
+
+.tsb-assistant__close {
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.09);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.02);
+
+  color: #cbd5e1;
+
+  cursor: pointer;
+}
+
+.tsb-assistant__close:hover {
+  border-color:
+    rgba(83, 167, 255, 0.4);
+
+  color: #ffffff;
+}
+
+.tsb-assistant__body {
+  display: grid;
+
+  gap: 15px;
+
+  padding: 16px;
+}
+
+.tsb-assistant__message {
+  display: grid;
+
+  grid-template-columns:
+    24px 1fr;
+
+  gap: 9px;
+
+  align-items: flex-start;
+
+  padding: 14px;
+
+  border: 1px solid
+    rgba(19, 135, 255, 0.16);
+
+  border-radius: 15px;
+
+  background:
+    rgba(19, 135, 255, 0.07);
+
+  color: #dbeafe;
+}
+
+.tsb-assistant__message svg {
+  margin-top: 2px;
+
+  color: #53a7ff;
+}
+
+.tsb-assistant__message p {
+  margin: 0;
+
+  font-size: 0.86rem;
+
+  line-height: 1.55;
+}
+
+.tsb-assistant__actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.tsb-assistant__actions button {
+  min-height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 0 10px;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.11);
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  color: #cbd5e1;
+
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.tsb-assistant__actions button:hover {
+  border-color:
+    rgba(83, 167, 255, 0.55);
+
+  background:
+    rgba(19, 135, 255, 0.08);
+
+  color: #ffffff;
+}
+
+.tsb-assistant__form {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr) 44px;
+
+  gap: 8px;
+
+  padding:
+    0 16px 14px;
+}
+
+.tsb-assistant__form input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+
+  padding: 0 13px;
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.11);
+
+  border-radius: 12px;
+
+  outline: none;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 0.82rem;
+}
+
+.tsb-assistant__form
+  input::placeholder {
+  color: #718096;
+}
+
+.tsb-assistant__form input:focus {
+  border-color:
+    rgba(83, 167, 255, 0.72);
+
+  box-shadow:
+    0 0 0 3px
+      rgba(19, 135, 255, 0.10);
+}
+
+.tsb-assistant__form button {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1387ff,
+      #0765dc
+    );
+
+  color: #ffffff;
+
+  cursor: pointer;
+}
+
+.tsb-assistant__form button:hover {
+  filter: brightness(1.08);
+}
+
+.tsb-assistant__footer {
+  padding:
+    11px 16px 13px;
+
+  border-top: 1px solid
+    rgba(255, 255, 255, 0.07);
+
+  color: #718096;
+
+  font-size: 0.66rem;
+
+  line-height: 1.45;
+}
+
+/* RTL */
+
+[dir="rtl"]
+  .tsb-assistant {
+  right: auto;
+  left: 22px;
+}
+
+/* MOBILE */
+
+@media (max-width: 640px) {
+  .tsb-assistant {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  [dir="rtl"]
+    .tsb-assistant {
+    right: auto;
+    left: 14px;
+  }
+
+  .tsb-assistant__panel {
+    width:
+      min(
+        360px,
+        calc(100vw - 28px)
+      );
+
+    max-height:
+      calc(100vh - 95px);
+
+    overflow-y: auto;
+  }
+
+  .tsb-assistant__launcher {
+    width: 54px;
+    height: 54px;
+
+    min-height: 54px;
+
+    padding: 0;
+  }
+
+  .tsb-assistant__launcher span {
+    display: none;
+  }
+}

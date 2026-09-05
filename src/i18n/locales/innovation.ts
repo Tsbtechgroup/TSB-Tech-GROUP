@@ -17,6 +17,17 @@ export const innovationTranslations: TranslationResources = {
       projectText:
         "Présentez-nous votre besoin, votre concept ou votre défi technique. Nous pouvons étudier sa faisabilité et définir les prochaines étapes.",
       projectButton: "Parler de mon projet",
+      processEyebrow: "DE L’IDÉE À LA SOLUTION",
+      processTitle: "Une méthode progressive et concrète",
+      processIntro: "Chaque projet avance par étapes afin de vérifier sa faisabilité, limiter les risques et construire une solution réellement utile.",
+      process: { idea: "Idée", study: "Étude", prototype: "Prototype", test: "Test & validation", deployment: "Déploiement" },
+      collaborationEyebrow: "INNOVATION OUVERTE",
+      collaborationTitle: "Innover avec les entreprises et les institutions",
+      collaborationText: "TSB Tech Group peut étudier un défi technique, construire un prototype ou développer une solution avec des entreprises, partenaires, écoles et institutions.",
+      collaborationPoints: { expertise: "Expertises techniques réunies", partnership: "Développement en partenariat", scalable: "Solutions évolutives et déployables" },
+      internationalEyebrow: "BELGIQUE • EUROPE • INTERNATIONAL",
+      internationalTitle: "Des innovations pensées pour plusieurs réalités",
+      internationalText: "Nos concepts sont conçus pour s’adapter aux besoins du terrain, aux marchés européens et aux contextes internationaux, notamment en Afrique.",
       items: {
         ideas: {
           title: "Étude d’idées",
@@ -63,6 +74,17 @@ export const innovationTranslations: TranslationResources = {
       projectText:
         "Vertel ons uw behoefte, concept of technische uitdaging. We kunnen de haalbaarheid bestuderen en de volgende stappen bepalen.",
       projectButton: "Mijn project bespreken",
+      processEyebrow: "VAN IDEE NAAR OPLOSSING",
+      processTitle: "Een stapsgewijze en concrete methode",
+      processIntro: "Elk project verloopt in fasen om de haalbaarheid te toetsen, risico’s te beperken en een echt bruikbare oplossing te bouwen.",
+      process: { idea: "Idee", study: "Onderzoek", prototype: "Prototype", test: "Test & validatie", deployment: "Uitrol" },
+      collaborationEyebrow: "OPEN INNOVATIE",
+      collaborationTitle: "Innoveren met bedrijven en instellingen",
+      collaborationText: "TSB Tech Group kan samen met bedrijven, partners, scholen en instellingen een technische uitdaging onderzoeken, een prototype bouwen of een oplossing ontwikkelen.",
+      collaborationPoints: { expertise: "Gebundelde technische expertise", partnership: "Ontwikkeling in partnerschap", scalable: "Schaalbare en inzetbare oplossingen" },
+      internationalEyebrow: "BELGIË • EUROPA • INTERNATIONAAL",
+      internationalTitle: "Innovaties voor uiteenlopende realiteiten",
+      internationalText: "Onze concepten worden ontworpen voor lokale behoeften, Europese markten en internationale contexten, waaronder Afrika.",
       items: {
         ideas: {
           title: "Ideestudie",
@@ -109,6 +131,17 @@ export const innovationTranslations: TranslationResources = {
       projectText:
         "Tell us about your need, concept or technical challenge. We can study its feasibility and define the next steps.",
       projectButton: "Discuss my project",
+      processEyebrow: "FROM IDEA TO SOLUTION",
+      processTitle: "A progressive and practical method",
+      processIntro: "Each project moves through clear stages to assess feasibility, reduce risk and build a genuinely useful solution.",
+      process: { idea: "Idea", study: "Study", prototype: "Prototype", test: "Testing & validation", deployment: "Deployment" },
+      collaborationEyebrow: "OPEN INNOVATION",
+      collaborationTitle: "Innovating with companies and institutions",
+      collaborationText: "TSB Tech Group can explore a technical challenge, build a prototype or develop a solution with companies, partners, schools and institutions.",
+      collaborationPoints: { expertise: "Combined technical expertise", partnership: "Partnership-based development", scalable: "Scalable, deployable solutions" },
+      internationalEyebrow: "BELGIUM • EUROPE • INTERNATIONAL",
+      internationalTitle: "Innovation designed for different realities",
+      internationalText: "Our concepts are designed for field needs, European markets and international contexts, including Africa.",
       items: {
         ideas: {
           title: "Idea study",
@@ -155,6 +188,17 @@ export const innovationTranslations: TranslationResources = {
       projectText:
         "Beschreiben Sie uns Ihren Bedarf, Ihr Konzept oder Ihre technische Herausforderung. Wir können die Machbarkeit prüfen und die nächsten Schritte definieren.",
       projectButton: "Mein Projekt besprechen",
+      processEyebrow: "VON DER IDEE ZUR LÖSUNG",
+      processTitle: "Eine schrittweise und konkrete Methode",
+      processIntro: "Jedes Projekt durchläuft klare Phasen, um Machbarkeit zu prüfen, Risiken zu begrenzen und eine wirklich nützliche Lösung zu entwickeln.",
+      process: { idea: "Idee", study: "Studie", prototype: "Prototyp", test: "Test & Validierung", deployment: "Einführung" },
+      collaborationEyebrow: "OFFENE INNOVATION",
+      collaborationTitle: "Innovation mit Unternehmen und Institutionen",
+      collaborationText: "TSB Tech Group kann mit Unternehmen, Partnern, Schulen und Institutionen technische Herausforderungen untersuchen, Prototypen bauen und Lösungen entwickeln.",
+      collaborationPoints: { expertise: "Gebündelte technische Kompetenzen", partnership: "Entwicklung in Partnerschaft", scalable: "Skalierbare und einsetzbare Lösungen" },
+      internationalEyebrow: "BELGIEN • EUROPA • INTERNATIONAL",
+      internationalTitle: "Innovationen für unterschiedliche Realitäten",
+      internationalText: "Unsere Konzepte werden für Anforderungen vor Ort, europäische Märkte und internationale Kontexte einschließlich Afrika entwickelt.",
       items: {
         ideas: {
           title: "Ideenstudie",
@@ -201,6 +245,17 @@ export const innovationTranslations: TranslationResources = {
       projectText:
         "Cuéntenos su necesidad, concepto o desafío técnico. Podemos estudiar su viabilidad y definir los próximos pasos.",
       projectButton: "Hablar de mi proyecto",
+      processEyebrow: "DE LA IDEA A LA SOLUCIÓN",
+      processTitle: "Un método progresivo y concreto",
+      processIntro: "Cada proyecto avanza por etapas para comprobar su viabilidad, limitar riesgos y construir una solución realmente útil.",
+      process: { idea: "Idea", study: "Estudio", prototype: "Prototipo", test: "Prueba y validación", deployment: "Despliegue" },
+      collaborationEyebrow: "INNOVACIÓN ABIERTA",
+      collaborationTitle: "Innovar con empresas e instituciones",
+      collaborationText: "TSB Tech Group puede estudiar un desafío técnico, crear un prototipo o desarrollar una solución con empresas, socios, escuelas e instituciones.",
+      collaborationPoints: { expertise: "Competencias técnicas reunidas", partnership: "Desarrollo en colaboración", scalable: "Soluciones escalables y desplegables" },
+      internationalEyebrow: "BÉLGICA • EUROPA • INTERNACIONAL",
+      internationalTitle: "Innovaciones pensadas para distintas realidades",
+      internationalText: "Nuestros conceptos se adaptan a las necesidades del terreno, los mercados europeos y los contextos internacionales, incluida África.",
       items: {
         ideas: {
           title: "Estudio de ideas",
@@ -247,6 +302,17 @@ export const innovationTranslations: TranslationResources = {
       projectText:
         "Presentaci la tua esigenza, il tuo concetto o la tua sfida tecnica. Possiamo studiarne la fattibilità e definire i prossimi passi.",
       projectButton: "Parla del mio progetto",
+      processEyebrow: "DALL’IDEA ALLA SOLUZIONE",
+      processTitle: "Un metodo progressivo e concreto",
+      processIntro: "Ogni progetto avanza per fasi per verificarne la fattibilità, ridurre i rischi e costruire una soluzione davvero utile.",
+      process: { idea: "Idea", study: "Studio", prototype: "Prototipo", test: "Test e validazione", deployment: "Implementazione" },
+      collaborationEyebrow: "INNOVAZIONE APERTA",
+      collaborationTitle: "Innovare con aziende e istituzioni",
+      collaborationText: "TSB Tech Group può studiare una sfida tecnica, costruire un prototipo o sviluppare una soluzione con aziende, partner, scuole e istituzioni.",
+      collaborationPoints: { expertise: "Competenze tecniche riunite", partnership: "Sviluppo in partnership", scalable: "Soluzioni scalabili e implementabili" },
+      internationalEyebrow: "BELGIO • EUROPA • INTERNAZIONALE",
+      internationalTitle: "Innovazioni pensate per realtà diverse",
+      internationalText: "I nostri concetti sono progettati per le esigenze sul campo, i mercati europei e i contesti internazionali, inclusa l’Africa.",
       items: {
         ideas: {
           title: "Studio delle idee",
@@ -293,6 +359,17 @@ export const innovationTranslations: TranslationResources = {
       projectText:
         "Apresente-nos a sua necessidade, conceito ou desafio técnico. Podemos estudar a sua viabilidade e definir os próximos passos.",
       projectButton: "Falar do meu projeto",
+      processEyebrow: "DA IDEIA À SOLUÇÃO",
+      processTitle: "Um método progressivo e concreto",
+      processIntro: "Cada projeto avança por etapas para verificar a viabilidade, reduzir riscos e construir uma solução realmente útil.",
+      process: { idea: "Ideia", study: "Estudo", prototype: "Protótipo", test: "Teste e validação", deployment: "Implementação" },
+      collaborationEyebrow: "INOVAÇÃO ABERTA",
+      collaborationTitle: "Inovar com empresas e instituições",
+      collaborationText: "A TSB Tech Group pode estudar um desafio técnico, construir um protótipo ou desenvolver uma solução com empresas, parceiros, escolas e instituições.",
+      collaborationPoints: { expertise: "Competências técnicas reunidas", partnership: "Desenvolvimento em parceria", scalable: "Soluções escaláveis e implementáveis" },
+      internationalEyebrow: "BÉLGICA • EUROPA • INTERNACIONAL",
+      internationalTitle: "Inovações pensadas para diferentes realidades",
+      internationalText: "Os nossos conceitos adaptam-se às necessidades locais, aos mercados europeus e aos contextos internacionais, incluindo África.",
       items: {
         ideas: {
           title: "Estudo de ideias",
@@ -339,6 +416,17 @@ export const innovationTranslations: TranslationResources = {
       projectText:
         "اعرض علينا احتياجك أو مفهومك أو تحديك التقني. يمكننا دراسة جدواه وتحديد الخطوات التالية.",
       projectButton: "تحدث عن مشروعي",
+      processEyebrow: "من الفكرة إلى الحل",
+      processTitle: "منهج تدريجي وعملي",
+      processIntro: "يمر كل مشروع بمراحل واضحة للتحقق من الجدوى وتقليل المخاطر وبناء حل مفيد فعليًا.",
+      process: { idea: "الفكرة", study: "الدراسة", prototype: "النموذج الأولي", test: "الاختبار والتحقق", deployment: "النشر" },
+      collaborationEyebrow: "الابتكار المفتوح",
+      collaborationTitle: "الابتكار مع الشركات والمؤسسات",
+      collaborationText: "يمكن لـ TSB Tech Group دراسة تحدٍ تقني أو بناء نموذج أولي أو تطوير حل مع الشركات والشركاء والمدارس والمؤسسات.",
+      collaborationPoints: { expertise: "خبرات تقنية متكاملة", partnership: "تطوير بالشراكة", scalable: "حلول قابلة للتوسع والتنفيذ" },
+      internationalEyebrow: "بلجيكا • أوروبا • دوليًا",
+      internationalTitle: "ابتكارات مصممة لواقع متنوع",
+      internationalText: "صُممت مفاهيمنا لتناسب احتياجات الميدان والأسواق الأوروبية والسياقات الدولية، بما في ذلك أفريقيا.",
       items: {
         ideas: {
           title: "دراسة الأفكار",
@@ -385,6 +473,17 @@ export const innovationTranslations: TranslationResources = {
       projectText:
         "İhtiyacınızı, konseptinizi veya teknik zorluğunuzu bize anlatın. Uygulanabilirliği inceleyebilir ve sonraki adımları belirleyebiliriz.",
       projectButton: "Projemi konuşalım",
+      processEyebrow: "FİKİRDEN ÇÖZÜME",
+      processTitle: "Aşamalı ve somut bir yöntem",
+      processIntro: "Her proje uygulanabilirliği doğrulamak, riskleri azaltmak ve gerçekten yararlı bir çözüm oluşturmak için aşamalar hâlinde ilerler.",
+      process: { idea: "Fikir", study: "İnceleme", prototype: "Prototip", test: "Test ve doğrulama", deployment: "Uygulama" },
+      collaborationEyebrow: "AÇIK İNOVASYON",
+      collaborationTitle: "Şirketler ve kurumlarla inovasyon",
+      collaborationText: "TSB Tech Group şirketler, ortaklar, okullar ve kurumlarla teknik bir zorluğu inceleyebilir, prototip kurabilir veya çözüm geliştirebilir.",
+      collaborationPoints: { expertise: "Birleşik teknik uzmanlık", partnership: "Ortak geliştirme", scalable: "Ölçeklenebilir ve uygulanabilir çözümler" },
+      internationalEyebrow: "BELÇİKA • AVRUPA • ULUSLARARASI",
+      internationalTitle: "Farklı gerçeklikler için tasarlanan inovasyon",
+      internationalText: "Konseptlerimiz saha ihtiyaçlarına, Avrupa pazarlarına ve Afrika dâhil uluslararası bağlamlara uyarlanır.",
       items: {
         ideas: {
           title: "Fikir çalışması",
@@ -431,6 +530,17 @@ export const innovationTranslations: TranslationResources = {
       projectText:
         "告诉我们您的需求、概念或技术挑战。我们可以研究其可行性并确定后续步骤。",
       projectButton: "讨论我的项目",
+      processEyebrow: "从创意到解决方案",
+      processTitle: "渐进且务实的方法",
+      processIntro: "每个项目都经过明确阶段，以验证可行性、降低风险并构建真正有用的解决方案。",
+      process: { idea: "创意", study: "研究", prototype: "原型", test: "测试与验证", deployment: "部署" },
+      collaborationEyebrow: "开放式创新",
+      collaborationTitle: "与企业和机构共同创新",
+      collaborationText: "TSB Tech Group 可与企业、合作伙伴、学校和机构共同研究技术挑战、制作原型或开发解决方案。",
+      collaborationPoints: { expertise: "整合技术专长", partnership: "合作开发", scalable: "可扩展、可部署的解决方案" },
+      internationalEyebrow: "比利时 • 欧洲 • 国际",
+      internationalTitle: "面向不同现实的创新",
+      internationalText: "我们的概念适应现场需求、欧洲市场以及包括非洲在内的国际环境。",
       items: {
         ideas: {
           title: "创意研究",

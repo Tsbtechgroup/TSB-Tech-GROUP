@@ -39,8 +39,8 @@ type StoreProduct = {
 
 
 const cardStyle = {
-  minHeight: "265px",
-  padding: "24px",
+  minHeight: "238px",
+  padding: "20px",
   display: "flex",
   flexDirection: "column" as const,
   alignItems: "center",
@@ -221,12 +221,22 @@ function Contact() {
     window.location.href = "/#quote";
   };
 
+  const handleEcosystemClick = () => {
+    window.location.href = "/ecosystem-request";
+  };
+
   return (
     <div>
       <Navbar />
 
       <main>
-        <section className="section section--about">
+        <section
+          className="section section--about"
+          style={{
+            paddingTop: "64px",
+            paddingBottom: "42px",
+          }}
+        >
           <div className="container">
             <div
               className="section-heading"
@@ -261,7 +271,7 @@ function Contact() {
                   justifyContent: "center",
                   flexWrap: "wrap",
                   gap: "12px",
-                  marginTop: "24px",
+                  marginTop: "18px",
                 }}
               >
                 <a
@@ -405,14 +415,20 @@ function Contact() {
           </section>
         )}
 
-        <section className="section section--domains">
+        <section
+          className="section section--domains"
+          style={{
+            paddingTop: "46px",
+            paddingBottom: "52px",
+          }}
+        >
           <div className="container">
             <div
               className="section-heading"
               style={{
                 textAlign: "center",
                 maxWidth: "760px",
-                margin: "0 auto 30px",
+                margin: "0 auto 22px",
               }}
             >
               <h2>{t("methodsTitle")}</h2>
@@ -427,7 +443,7 @@ function Contact() {
                 display: "grid",
                 gridTemplateColumns:
                   "repeat(auto-fit, minmax(240px, 1fr))",
-                gap: "18px",
+                  gap: "14px",
                 maxWidth: "1120px",
                 margin: "0 auto",
               }}
@@ -438,7 +454,7 @@ function Contact() {
               >
                 <div
                   className="domain-icon"
-                  style={{ marginBottom: "14px" }}
+                  style={{ marginBottom: "10px" }}
                 >
                   <Phone
                     size={23}
@@ -454,7 +470,7 @@ function Contact() {
                   style={{
                     width: "100%",
                     textAlign: "center",
-                    marginTop: "10px",
+                    marginTop: "7px",
                   }}
                 >
                   {PHONE_DISPLAY}
@@ -491,7 +507,7 @@ function Contact() {
               >
                 <div
                   className="domain-icon"
-                  style={{ marginBottom: "14px" }}
+                  style={{ marginBottom: "10px" }}
                 >
                   <MessageCircle
                     size={23}
@@ -507,7 +523,7 @@ function Contact() {
                   style={{
                     width: "100%",
                     textAlign: "center",
-                    marginTop: "10px",
+                    marginTop: "7px",
                   }}
                 >
                   {WHATSAPP_DISPLAY}
@@ -546,7 +562,7 @@ function Contact() {
               >
                 <div
                   className="domain-icon"
-                  style={{ marginBottom: "14px" }}
+                  style={{ marginBottom: "10px" }}
                 >
                   <Mail
                     size={23}
@@ -563,7 +579,7 @@ function Contact() {
                   style={{
                     width: "100%",
                     maxWidth: "100%",
-                    marginTop: "10px",
+                    marginTop: "7px",
                     display: "flex",
                     flexWrap: "wrap",
                     justifyContent: "center",
@@ -615,7 +631,7 @@ function Contact() {
               >
                 <div
                   className="domain-icon"
-                  style={{ marginBottom: "14px" }}
+                  style={{ marginBottom: "10px" }}
                 >
                   <Globe2
                     size={23}
@@ -631,7 +647,7 @@ function Contact() {
                   style={{
                     width: "100%",
                     textAlign: "center",
-                    marginTop: "10px",
+                    marginTop: "7px",
                   }}
                 >
                   {t("areaValue")}
@@ -650,13 +666,19 @@ function Contact() {
           </div>
         </section>
 
-        <section className="section">
+        <section
+          className="section"
+          style={{
+            paddingTop: "42px",
+            paddingBottom: "58px",
+          }}
+        >
           <div className="container">
             <div
               style={{
                 maxWidth: "900px",
                 margin: "0 auto",
-                padding: "28px",
+                padding: "24px",
                 borderRadius: "20px",
                 border:
                   "1px solid rgba(56,189,248,0.24)",
@@ -669,7 +691,7 @@ function Contact() {
                 style={{
                   width: "56px",
                   height: "56px",
-                  margin: "0 auto 16px",
+                  margin: "0 auto 12px",
                   display: "grid",
                   placeItems: "center",
                   borderRadius: "16px",
@@ -690,7 +712,7 @@ function Contact() {
               <p
                 style={{
                   maxWidth: "700px",
-                  margin: "12px auto 0",
+                  margin: "9px auto 0",
                   textAlign: "center",
                 }}
               >
@@ -699,9 +721,13 @@ function Contact() {
 
               <button
                 type="button"
-                onClick={handleQuoteClick}
+                onClick={
+                  selectedProduct
+                    ? handleQuoteClick
+                    : handleEcosystemClick
+                }
                 className="button button--primary"
-                style={{ marginTop: "22px" }}
+                style={{ marginTop: "18px" }}
               >
                 {selectedProduct
                   ? t("productQuote")

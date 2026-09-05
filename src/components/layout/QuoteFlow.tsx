@@ -1672,9 +1672,20 @@ function QuoteFlow() {
     <section
       className="section section--dark"
       id="quote"
+      style={{
+        paddingTop: "68px",
+        paddingBottom: "68px",
+      }}
     >
       <div className="container">
-        <div className="section__heading">
+        <div
+          className="section__heading"
+          style={{
+            maxWidth: "780px",
+            margin: "0 auto",
+            textAlign: "center",
+          }}
+        >
           <span className="section__eyebrow">
             {q("eyebrow")}
           </span>
@@ -1693,7 +1704,13 @@ function QuoteFlow() {
 
         {/* ÉTAPES */}
 
-        <div className="quote-steps">
+        <div
+          className="quote-steps"
+          style={{
+            maxWidth: "1080px",
+            margin: "28px auto 32px",
+          }}
+        >
           {localizedSteps.map(
             (step) => (
               <div
@@ -1726,13 +1743,13 @@ function QuoteFlow() {
         {currentStep === 1 && (
           <div
             style={{
-              maxWidth: "980px",
+              maxWidth: "1120px",
               margin: "0 auto",
             }}
           >
             <div
               style={{
-                marginBottom: "16px",
+                marginBottom: "22px",
                 textAlign: "center",
               }}
             >
@@ -1754,9 +1771,10 @@ function QuoteFlow() {
               style={{
                 display: "grid",
                 gridTemplateColumns:
-                  "repeat(auto-fit, minmax(220px, 1fr))",
-                gap: "13px",
-                maxWidth: "1020px",
+                  "repeat(auto-fit, minmax(245px, 1fr))",
+                alignItems: "stretch",
+                gap: "15px",
+                maxWidth: "1120px",
                 margin: "0 auto",
               }}
             >
@@ -1793,12 +1811,16 @@ function QuoteFlow() {
                       }
                       style={{
                         minHeight:
-                          "112px",
+                          "108px",
+                        width: "100%",
+                        height: "100%",
                         padding:
-                          "15px 16px",
+                          "16px 18px",
                         display: "flex",
                         alignItems:
                           "center",
+                        justifyContent:
+                          "flex-start",
                         gap: "12px",
                         textAlign:
                           "left",
@@ -1827,10 +1849,10 @@ function QuoteFlow() {
                       <span
                         className="quote-service__icon"
                         style={{
-                          width: "50px",
-                          height: "50px",
+                          width: "48px",
+                          height: "48px",
                           flex:
-                            "0 0 50px",
+                            "0 0 48px",
                           display:
                             "grid",
                           placeItems:
@@ -1856,6 +1878,7 @@ function QuoteFlow() {
                       <span
                         style={{
                           minWidth: 0,
+                          flex: 1,
                           display:
                             "flex",
                           flexDirection:

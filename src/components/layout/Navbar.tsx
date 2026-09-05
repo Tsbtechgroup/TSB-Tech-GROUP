@@ -558,7 +558,7 @@ function Navbar() {
               aria-expanded={servicesOpen}
             >
               {navT("services")}
-              <span>⌄</span>
+              <span aria-hidden="true">▾</span>
             </button>
 
             {servicesOpen && (
@@ -623,7 +623,7 @@ function Navbar() {
               aria-expanded={ecosystemOpen}
             >
               {navT("ecosystem")}
-              <span>⌄</span>
+              <span aria-hidden="true">▾</span>
             </button>
 
             {ecosystemOpen && (
@@ -679,10 +679,10 @@ function Navbar() {
                 className="tsb-language-globe"
                 aria-hidden="true"
               >
-                ◉
+                ◎
               </span>
               <span>{currentLocale.shortLabel}</span>
-              <span>⌄</span>
+              <span aria-hidden="true">▾</span>
             </button>
 
             {languageOpen && (
@@ -753,7 +753,7 @@ function Navbar() {
             >
               <UserRound size={16} strokeWidth={2} />
               <span>{navT("account")}</span>
-              <span>⌄</span>
+              <span aria-hidden="true">▾</span>
             </button>
 
             {accountOpen && (

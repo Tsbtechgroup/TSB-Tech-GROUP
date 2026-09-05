@@ -3,12 +3,14 @@ import type { TranslationResources } from "../types";
 export const businessFormTranslations: TranslationResources = {
   fr: {
     businessForm: {
-      eyebrow: "PROPOSER UN PROJET",
+      eyebrow: "DEMANDE ÉCOSYSTÈME",
+      back: "Retour",
       title1: "Présentez votre",
-      title2: "opportunité",
+      title2: "demande",
       intro:
-        "Partenariat, investissement, distribution, projet institutionnel ou développement international : envoyez votre proposition directement à TSB Tech Group. Aucun compte n’est nécessaire.",
+        "Business, partenariat, innovation, projet institutionnel ou développement international : envoyez votre demande directement à TSB Tech Group. Aucun compte n’est nécessaire.",
       typeLabel: "Type de demande",
+      typePlaceholder: "Sélectionnez un type de demande…",
       companyLabel: "Entreprise / organisation",
       companyPlaceholder: "Nom de l’entreprise (facultatif)",
       nameLabel: "Nom complet",
@@ -46,6 +48,7 @@ export const businessFormTranslations: TranslationResources = {
         joint_venture: "Joint-venture / projet commun",
         distribution: "Distribution / représentation",
         institutions: "Institutions / grand projet",
+        innovation: "Projet d’innovation",
         international: "Développement international",
         other: "Autre proposition",
       },
@@ -54,12 +57,14 @@ export const businessFormTranslations: TranslationResources = {
 
   nl: {
     businessForm: {
-      eyebrow: "EEN PROJECT VOORSTELLEN",
+      eyebrow: "ECOSYSTEEMAANVRAAG",
+      back: "Terug",
       title1: "Presenteer uw",
       title2: "opportuniteit",
       intro:
         "Partnerschap, investering, distributie, institutioneel project of internationale ontwikkeling: stuur uw voorstel rechtstreeks naar TSB Tech Group. Geen account nodig.",
       typeLabel: "Type aanvraag",
+      typePlaceholder: "Selecteer een type aanvraag…",
       companyLabel: "Bedrijf / organisatie",
       companyPlaceholder: "Bedrijfsnaam (optioneel)",
       nameLabel: "Volledige naam",
@@ -97,6 +102,7 @@ export const businessFormTranslations: TranslationResources = {
         joint_venture: "Joint venture / gezamenlijk project",
         distribution: "Distributie / vertegenwoordiging",
         institutions: "Instellingen / groot project",
+        innovation: "Innovatieproject",
         international: "Internationale ontwikkeling",
         other: "Ander voorstel",
       },
@@ -105,12 +111,14 @@ export const businessFormTranslations: TranslationResources = {
 
   en: {
     businessForm: {
-      eyebrow: "PRESENT A PROJECT",
+      eyebrow: "ECOSYSTEM REQUEST",
+      back: "Back",
       title1: "Present your",
       title2: "opportunity",
       intro:
         "Partnership, investment, distribution, institutional project or international development: send your proposal directly to TSB Tech Group. No account is required.",
       typeLabel: "Request type",
+      typePlaceholder: "Select a request type…",
       companyLabel: "Company / organization",
       companyPlaceholder: "Company name (optional)",
       nameLabel: "Full name",
@@ -148,6 +156,7 @@ export const businessFormTranslations: TranslationResources = {
         joint_venture: "Joint venture / shared project",
         distribution: "Distribution / representation",
         institutions: "Institutions / major project",
+        innovation: "Innovation project",
         international: "International development",
         other: "Other proposal",
       },
@@ -156,12 +165,14 @@ export const businessFormTranslations: TranslationResources = {
 
   de: {
     businessForm: {
-      eyebrow: "PROJEKT VORSTELLEN",
+      eyebrow: "ÖKOSYSTEM-ANFRAGE",
+      back: "Zurück",
       title1: "Stellen Sie Ihre",
       title2: "Chance vor",
       intro:
         "Partnerschaft, Investition, Vertrieb, institutionelles Projekt oder internationale Entwicklung: senden Sie Ihren Vorschlag direkt an TSB Tech Group. Kein Konto erforderlich.",
       typeLabel: "Art der Anfrage",
+      typePlaceholder: "Wählen Sie eine Anfrageart…",
       companyLabel: "Unternehmen / Organisation",
       companyPlaceholder: "Unternehmensname (optional)",
       nameLabel: "Vollständiger Name",
@@ -199,6 +210,7 @@ export const businessFormTranslations: TranslationResources = {
         joint_venture: "Joint Venture / gemeinsames Projekt",
         distribution: "Vertrieb / Vertretung",
         institutions: "Institutionen / Großprojekt",
+        innovation: "Innovationsprojekt",
         international: "Internationale Entwicklung",
         other: "Anderer Vorschlag",
       },
@@ -207,12 +219,14 @@ export const businessFormTranslations: TranslationResources = {
 
   es: {
     businessForm: {
-      eyebrow: "PRESENTAR UN PROYECTO",
+      eyebrow: "SOLICITUD DEL ECOSISTEMA",
+      back: "Volver",
       title1: "Presente su",
       title2: "oportunidad",
       intro:
         "Alianza, inversión, distribución, proyecto institucional o desarrollo internacional: envíe su propuesta directamente a TSB Tech Group. No se requiere cuenta.",
       typeLabel: "Tipo de solicitud",
+      typePlaceholder: "Seleccione un tipo de solicitud…",
       companyLabel: "Empresa / organización",
       companyPlaceholder: "Nombre de la empresa (opcional)",
       nameLabel: "Nombre completo",
@@ -250,6 +264,7 @@ export const businessFormTranslations: TranslationResources = {
         joint_venture: "Joint venture / proyecto común",
         distribution: "Distribución / representación",
         institutions: "Instituciones / gran proyecto",
+        innovation: "Proyecto de innovación",
         international: "Desarrollo internacional",
         other: "Otra propuesta",
       },
@@ -258,12 +273,14 @@ export const businessFormTranslations: TranslationResources = {
 
   it: {
     businessForm: {
-      eyebrow: "PRESENTA UN PROGETTO",
+      eyebrow: "RICHIESTA ECOSISTEMA",
+      back: "Indietro",
       title1: "Presentate la vostra",
       title2: "opportunità",
       intro:
         "Partnership, investimento, distribuzione, progetto istituzionale o sviluppo internazionale: inviate la proposta direttamente a TSB Tech Group. Non è necessario un account.",
       typeLabel: "Tipo di richiesta",
+      typePlaceholder: "Seleziona un tipo di richiesta…",
       companyLabel: "Azienda / organizzazione",
       companyPlaceholder: "Nome azienda (facoltativo)",
       nameLabel: "Nome completo",
@@ -301,6 +318,7 @@ export const businessFormTranslations: TranslationResources = {
         joint_venture: "Joint venture / progetto comune",
         distribution: "Distribuzione / rappresentanza",
         institutions: "Istituzioni / grande progetto",
+        innovation: "Progetto di innovazione",
         international: "Sviluppo internazionale",
         other: "Altra proposta",
       },
@@ -309,12 +327,14 @@ export const businessFormTranslations: TranslationResources = {
 
   pt: {
     businessForm: {
-      eyebrow: "APRESENTAR UM PROJETO",
+      eyebrow: "PEDIDO AO ECOSSISTEMA",
+      back: "Voltar",
       title1: "Apresente a sua",
       title2: "oportunidade",
       intro:
         "Parceria, investimento, distribuição, projeto institucional ou desenvolvimento internacional: envie a sua proposta diretamente à TSB Tech Group. Não é necessária uma conta.",
       typeLabel: "Tipo de pedido",
+      typePlaceholder: "Selecione um tipo de pedido…",
       companyLabel: "Empresa / organização",
       companyPlaceholder: "Nome da empresa (opcional)",
       nameLabel: "Nome completo",
@@ -352,6 +372,7 @@ export const businessFormTranslations: TranslationResources = {
         joint_venture: "Joint venture / projeto comum",
         distribution: "Distribuição / representação",
         institutions: "Instituições / grande projeto",
+        innovation: "Projeto de inovação",
         international: "Desenvolvimento internacional",
         other: "Outra proposta",
       },
@@ -360,12 +381,14 @@ export const businessFormTranslations: TranslationResources = {
 
   ar: {
     businessForm: {
-      eyebrow: "تقديم مشروع",
+      eyebrow: "طلب المنظومة",
+      back: "رجوع",
       title1: "قدّم",
       title2: "فرصتك",
       intro:
         "شراكة أو استثمار أو توزيع أو مشروع مؤسسي أو تطوير دولي: أرسل مقترحك مباشرة إلى TSB Tech Group. لا يلزم إنشاء حساب.",
       typeLabel: "نوع الطلب",
+      typePlaceholder: "اختر نوع الطلب…",
       companyLabel: "الشركة / المؤسسة",
       companyPlaceholder: "اسم الشركة (اختياري)",
       nameLabel: "الاسم الكامل",
@@ -403,6 +426,7 @@ export const businessFormTranslations: TranslationResources = {
         joint_venture: "مشروع مشترك / Joint venture",
         distribution: "توزيع / تمثيل",
         institutions: "مؤسسات / مشروع كبير",
+        innovation: "مشروع ابتكار",
         international: "تطوير دولي",
         other: "مقترح آخر",
       },
@@ -411,12 +435,14 @@ export const businessFormTranslations: TranslationResources = {
 
   tr: {
     businessForm: {
-      eyebrow: "PROJE SUNUN",
+      eyebrow: "EKOSİSTEM TALEBİ",
+      back: "Geri",
       title1: "Fırsatınızı",
       title2: "sunun",
       intro:
         "Ortaklık, yatırım, dağıtım, kurumsal proje veya uluslararası gelişim: teklifinizi doğrudan TSB Tech Group’a gönderin. Hesap gerekmez.",
       typeLabel: "Talep türü",
+      typePlaceholder: "Bir talep türü seçin…",
       companyLabel: "Şirket / kuruluş",
       companyPlaceholder: "Şirket adı (isteğe bağlı)",
       nameLabel: "Ad soyad",
@@ -454,6 +480,7 @@ export const businessFormTranslations: TranslationResources = {
         joint_venture: "Ortak girişim / ortak proje",
         distribution: "Dağıtım / temsil",
         institutions: "Kurumlar / büyük proje",
+        innovation: "İnovasyon projesi",
         international: "Uluslararası gelişim",
         other: "Diğer teklif",
       },
@@ -462,12 +489,14 @@ export const businessFormTranslations: TranslationResources = {
 
   zh: {
     businessForm: {
-      eyebrow: "提交项目",
+      eyebrow: "生态系统申请",
+      back: "返回",
       title1: "介绍您的",
       title2: "合作机会",
       intro:
         "合作、投资、分销、机构项目或国际发展：可直接向 TSB Tech Group 提交方案，无需注册账户。",
       typeLabel: "申请类型",
+      typePlaceholder: "请选择申请类型…",
       companyLabel: "公司 / 机构",
       companyPlaceholder: "公司名称（可选）",
       nameLabel: "姓名",
@@ -505,6 +534,7 @@ export const businessFormTranslations: TranslationResources = {
         joint_venture: "合资 / 联合项目",
         distribution: "分销 / 代表",
         institutions: "机构 / 大型项目",
+        innovation: "创新项目",
         international: "国际发展",
         other: "其他方案",
       },

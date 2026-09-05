@@ -9,7 +9,7 @@ export const contactTranslations: TranslationResources = {
       intro:
         "Une question, un besoin technique ou un projet à développer ? Contactez TSB Tech Group par le canal qui vous convient.",
       backHome: "Retour à l’accueil",
-      quote: "Demander un devis",
+      quote: "Devis service",
       productEyebrow: "PRODUIT SÉLECTIONNÉ",
       productTitle: "Votre demande concerne",
       productReference: "Référence",
@@ -36,10 +36,10 @@ export const contactTranslations: TranslationResources = {
       areaText:
         "TSB Tech Group développe ses activités depuis la Belgique vers l’Europe et l’international.",
       areaValue: "Belgique • Europe • International",
-      ctaTitle: "Vous avez déjà votre demande en tête ?",
+      ctaTitle: "Un projet, une innovation ou un partenariat ?",
       ctaText:
-        "Utilisez notre formulaire de devis pour nous transmettre directement votre besoin, le service concerné et les informations utiles.",
-      ctaButton: "Commencer ma demande",
+        "Pour une proposition Business, Innovation ou Partenaires, utilisez notre formulaire Écosystème dédié.",
+      ctaButton: "Présenter ma proposition",
       emailSubject: "Demande produit TSB Store",
       emailBody:
         "Bonjour TSB Tech Group,\n\nJe souhaite obtenir des informations concernant ce produit :",
@@ -58,7 +58,7 @@ export const contactTranslations: TranslationResources = {
       intro:
         "Een vraag, technische behoefte of project? Neem contact op met TSB Tech Group via het kanaal dat u het beste past.",
       backHome: "Terug naar home",
-      quote: "Offerte aanvragen",
+      quote: "Offerte voor diensten",
       productEyebrow: "GESELECTEERD PRODUCT",
       productTitle: "Uw aanvraag betreft",
       productReference: "Referentie",
@@ -85,10 +85,10 @@ export const contactTranslations: TranslationResources = {
       areaText:
         "TSB Tech Group ontwikkelt zijn activiteiten vanuit België naar Europa en internationaal.",
       areaValue: "België • Europa • Internationaal",
-      ctaTitle: "Weet u al wat u nodig hebt?",
+      ctaTitle: "Een project, innovatie of partnerschap?",
       ctaText:
-        "Gebruik ons offerteformulier om uw behoefte, de betrokken dienst en de nuttige informatie rechtstreeks door te sturen.",
-      ctaButton: "Mijn aanvraag starten",
+        "Gebruik voor een Business-, Innovatie- of Partnervoorstel ons speciale Ecosysteemformulier.",
+      ctaButton: "Mijn voorstel indienen",
       emailSubject: "Productaanvraag TSB Store",
       emailBody:
         "Hallo TSB Tech Group,\n\nIk wil graag informatie ontvangen over dit product:",
@@ -107,7 +107,7 @@ export const contactTranslations: TranslationResources = {
       intro:
         "Have a question, technical need or project to develop? Contact TSB Tech Group through the channel that works best for you.",
       backHome: "Back to home",
-      quote: "Request a quote",
+      quote: "Service quote",
       productEyebrow: "SELECTED PRODUCT",
       productTitle: "Your request concerns",
       productReference: "Reference",
@@ -134,10 +134,10 @@ export const contactTranslations: TranslationResources = {
       areaText:
         "TSB Tech Group is developing its activities from Belgium toward Europe and international markets.",
       areaValue: "Belgium • Europe • International",
-      ctaTitle: "Already know what you need?",
+      ctaTitle: "A project, innovation or partnership?",
       ctaText:
-        "Use our quote form to send us your needs, the relevant service and the useful details directly.",
-      ctaButton: "Start my request",
+        "For a Business, Innovation or Partners proposal, use our dedicated Ecosystem form.",
+      ctaButton: "Submit my proposal",
       emailSubject: "TSB Store product request",
       emailBody:
         "Hello TSB Tech Group,\n\nI would like information about this product:",
@@ -156,7 +156,7 @@ export const contactTranslations: TranslationResources = {
       intro:
         "Sie haben eine Frage, einen technischen Bedarf oder ein Projekt? Kontaktieren Sie TSB Tech Group über den für Sie passenden Kanal.",
       backHome: "Zurück zur Startseite",
-      quote: "Angebot anfordern",
+      quote: "Serviceangebot",
       productEyebrow: "AUSGEWÄHLTES PRODUKT",
       productTitle: "Ihre Anfrage betrifft",
       productReference: "Referenz",
@@ -183,10 +183,10 @@ export const contactTranslations: TranslationResources = {
       areaText:
         "TSB Tech Group entwickelt seine Aktivitäten von Belgien aus nach Europa und international.",
       areaValue: "Belgien • Europa • International",
-      ctaTitle: "Sie wissen bereits, was Sie benötigen?",
+      ctaTitle: "Ein Projekt, eine Innovation oder Partnerschaft?",
       ctaText:
-        "Nutzen Sie unser Angebotsformular, um uns Ihren Bedarf, den betreffenden Service und die wichtigsten Informationen direkt mitzuteilen.",
-      ctaButton: "Meine Anfrage starten",
+        "Für ein Business-, Innovations- oder Partnerangebot nutzen Sie bitte unser spezielles Ökosystem-Formular.",
+      ctaButton: "Vorschlag einreichen",
       emailSubject: "TSB Store Produktanfrage",
       emailBody:
         "Hallo TSB Tech Group,\n\nIch möchte Informationen zu diesem Produkt erhalten:",
@@ -205,7 +205,7 @@ export const contactTranslations: TranslationResources = {
       intro:
         "¿Tiene una pregunta, una necesidad técnica o un proyecto? Contacte con TSB Tech Group por el canal que más le convenga.",
       backHome: "Volver al inicio",
-      quote: "Solicitar presupuesto",
+      quote: "Presupuesto de servicio",
       productEyebrow: "PRODUCTO SELECCIONADO",
       productTitle: "Su solicitud se refiere a",
       productReference: "Referencia",
@@ -232,10 +232,10 @@ export const contactTranslations: TranslationResources = {
       areaText:
         "TSB Tech Group desarrolla sus actividades desde Bélgica hacia Europa y los mercados internacionales.",
       areaValue: "Bélgica • Europa • Internacional",
-      ctaTitle: "¿Ya sabe lo que necesita?",
+      ctaTitle: "¿Un proyecto, una innovación o una colaboración?",
       ctaText:
-        "Utilice nuestro formulario de presupuesto para enviarnos directamente su necesidad, el servicio correspondiente y la información útil.",
-      ctaButton: "Iniciar mi solicitud",
+        "Para una propuesta de Business, Innovación o Colaboración, utilice nuestro formulario específico del Ecosistema.",
+      ctaButton: "Presentar mi propuesta",
       emailSubject: "Solicitud de producto TSB Store",
       emailBody:
         "Hola TSB Tech Group,\n\nDeseo obtener información sobre este producto:",
@@ -254,7 +254,7 @@ export const contactTranslations: TranslationResources = {
       intro:
         "Hai una domanda, un’esigenza tecnica o un progetto? Contatta TSB Tech Group tramite il canale che preferisci.",
       backHome: "Torna alla home",
-      quote: "Richiedi un preventivo",
+      quote: "Preventivo servizi",
       productEyebrow: "PRODOTTO SELEZIONATO",
       productTitle: "La tua richiesta riguarda",
       productReference: "Riferimento",
@@ -281,10 +281,10 @@ export const contactTranslations: TranslationResources = {
       areaText:
         "TSB Tech Group sviluppa le proprie attività dal Belgio verso l’Europa e i mercati internazionali.",
       areaValue: "Belgio • Europa • Internazionale",
-      ctaTitle: "Sai già di cosa hai bisogno?",
+      ctaTitle: "Un progetto, un’innovazione o una partnership?",
       ctaText:
-        "Utilizza il nostro modulo di preventivo per inviarci direttamente la tua esigenza, il servizio interessato e le informazioni utili.",
-      ctaButton: "Avvia la mia richiesta",
+        "Per una proposta Business, Innovazione o Partner, utilizzate il nostro modulo dedicato all’Ecosistema.",
+      ctaButton: "Presentare la proposta",
       emailSubject: "Richiesta prodotto TSB Store",
       emailBody:
         "Buongiorno TSB Tech Group,\n\nVorrei ricevere informazioni su questo prodotto:",
@@ -303,7 +303,7 @@ export const contactTranslations: TranslationResources = {
       intro:
         "Tem uma questão, necessidade técnica ou projeto? Contacte a TSB Tech Group pelo canal que lhe for mais conveniente.",
       backHome: "Voltar ao início",
-      quote: "Pedir orçamento",
+      quote: "Orçamento de serviço",
       productEyebrow: "PRODUTO SELECIONADO",
       productTitle: "O seu pedido refere-se a",
       productReference: "Referência",
@@ -330,10 +330,10 @@ export const contactTranslations: TranslationResources = {
       areaText:
         "A TSB Tech Group desenvolve as suas atividades a partir da Bélgica para a Europa e mercados internacionais.",
       areaValue: "Bélgica • Europa • Internacional",
-      ctaTitle: "Já sabe do que precisa?",
+      ctaTitle: "Um projeto, uma inovação ou uma parceria?",
       ctaText:
-        "Utilize o nosso formulário de orçamento para nos enviar diretamente a sua necessidade, o serviço em causa e as informações úteis.",
-      ctaButton: "Iniciar o meu pedido",
+        "Para uma proposta Business, Inovação ou Parceiros, utilize o nosso formulário dedicado ao Ecossistema.",
+      ctaButton: "Apresentar a proposta",
       emailSubject: "Pedido de produto TSB Store",
       emailBody:
         "Olá TSB Tech Group,\n\nGostaria de obter informações sobre este produto:",
@@ -352,7 +352,7 @@ export const contactTranslations: TranslationResources = {
       intro:
         "لديك سؤال أو حاجة تقنية أو مشروع؟ تواصل مع TSB Tech Group عبر الوسيلة الأنسب لك.",
       backHome: "العودة إلى الرئيسية",
-      quote: "طلب عرض سعر",
+      quote: "عرض سعر للخدمة",
       productEyebrow: "المنتج المحدد",
       productTitle: "طلبك يتعلق بـ",
       productReference: "المرجع",
@@ -379,10 +379,10 @@ export const contactTranslations: TranslationResources = {
       areaText:
         "تطور TSB Tech Group أنشطتها انطلاقًا من بلجيكا نحو أوروبا والأسواق الدولية.",
       areaValue: "بلجيكا • أوروبا • دولي",
-      ctaTitle: "هل تعرف بالفعل ما تحتاجه؟",
+      ctaTitle: "لديكم مشروع أو ابتكار أو شراكة؟",
       ctaText:
-        "استخدم نموذج عرض السعر لإرسال احتياجك والخدمة المعنية والمعلومات المفيدة مباشرة إلينا.",
-      ctaButton: "بدء طلبي",
+        "لمقترحات الأعمال أو الابتكار أو الشراكات، استخدموا نموذج المنظومة المخصص.",
+      ctaButton: "تقديم مقترحي",
       emailSubject: "طلب منتج من TSB Store",
       emailBody:
         "مرحبًا TSB Tech Group،\n\nأرغب في الحصول على معلومات حول هذا المنتج:",
@@ -401,7 +401,7 @@ export const contactTranslations: TranslationResources = {
       intro:
         "Bir sorunuz, teknik ihtiyacınız veya projeniz mi var? Size en uygun kanaldan TSB Tech Group ile iletişime geçin.",
       backHome: "Ana sayfaya dön",
-      quote: "Teklif iste",
+      quote: "Hizmet teklifi",
       productEyebrow: "SEÇİLEN ÜRÜN",
       productTitle: "Talebiniz şu ürünle ilgili",
       productReference: "Referans",
@@ -428,10 +428,10 @@ export const contactTranslations: TranslationResources = {
       areaText:
         "TSB Tech Group faaliyetlerini Belçika’dan Avrupa’ya ve uluslararası pazarlara doğru geliştirmektedir.",
       areaValue: "Belçika • Avrupa • Uluslararası",
-      ctaTitle: "Neye ihtiyacınız olduğunu biliyor musunuz?",
+      ctaTitle: "Bir proje, inovasyon veya ortaklık mı?",
       ctaText:
-        "İhtiyacınızı, ilgili hizmeti ve gerekli bilgileri doğrudan göndermek için teklif formumuzu kullanın.",
-      ctaButton: "Talebimi başlat",
+        "Business, İnovasyon veya Ortaklık teklifiniz için özel Ekosistem formumuzu kullanın.",
+      ctaButton: "Teklifimi sun",
       emailSubject: "TSB Store ürün talebi",
       emailBody:
         "Merhaba TSB Tech Group,\n\nBu ürün hakkında bilgi almak istiyorum:",
@@ -450,7 +450,7 @@ export const contactTranslations: TranslationResources = {
       intro:
         "有问题、技术需求或项目需要开发？请通过最适合您的方式联系 TSB Tech Group。",
       backHome: "返回首页",
-      quote: "申请报价",
+      quote: "服务报价",
       productEyebrow: "已选择产品",
       productTitle: "您的请求涉及",
       productReference: "参考编号",
@@ -477,10 +477,10 @@ export const contactTranslations: TranslationResources = {
       areaText:
         "TSB Tech Group 正从比利时向欧洲及国际市场拓展业务。",
       areaValue: "比利时 • 欧洲 • 国际",
-      ctaTitle: "已经知道您需要什么了吗？",
+      ctaTitle: "有项目、创新方案或合作提案？",
       ctaText:
-        "使用我们的报价表单，直接发送您的需求、相关服务和有用信息。",
-      ctaButton: "开始我的请求",
+        "如需提交商务、创新或合作伙伴提案，请使用我们的生态系统专用表单。",
+      ctaButton: "提交我的提案",
       emailSubject: "TSB Store 产品咨询",
       emailBody:
         "您好 TSB Tech Group，\n\n我想了解以下产品的信息：",

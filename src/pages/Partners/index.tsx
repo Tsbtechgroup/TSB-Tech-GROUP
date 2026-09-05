@@ -416,7 +416,7 @@ function Partners() {
               </p>
 
               <a
-                href="/contact"
+                href="/ecosystem-request?type=strategic"
                 className="button button--primary"
                 style={{
                   marginTop: "22px",
