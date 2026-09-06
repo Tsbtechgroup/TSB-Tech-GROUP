@@ -133,6 +133,7 @@ function Navbar() {
         !headerRef.current.contains(target)
       ) {
         closeDropdowns();
+        closeMobile();
       }
     };
 
@@ -148,6 +149,52 @@ function Navbar() {
       );
     };
   }, []);
+
+  useEffect(() => {
+    if (!mobileOpen) {
+      return;
+    }
+
+    const previousBodyOverflow =
+      document.body.style.overflow;
+
+    const handleEscape = (
+      event: KeyboardEvent
+    ) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+      }
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth >= 900) {
+        setMobileOpen(false);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener(
+      "keydown",
+      handleEscape
+    );
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
+
+    return () => {
+      document.body.style.overflow =
+        previousBodyOverflow;
+      document.removeEventListener(
+        "keydown",
+        handleEscape
+      );
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+    };
+  }, [mobileOpen]);
 
   return (
     <header
@@ -521,6 +568,43 @@ function Navbar() {
           }
         }
 
+        @media (max-width: 899px) {
+          .tsb-mobile-menu {
+            position: absolute;
+            top: 100%;
+            left: 14px;
+            right: 14px;
+            z-index: 10040;
+            width: auto !important;
+            max-height: calc(100vh - 90px);
+            max-height: calc(100dvh - 90px);
+            margin: 0 !important;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: max(
+              16px,
+              env(safe-area-inset-bottom)
+            );
+            scrollbar-width: thin;
+          }
+
+          .tsb-mobile-menu::-webkit-scrollbar {
+            width: 6px;
+          }
+        }
+
+        @media (max-width: 680px) {
+          .tsb-mobile-menu {
+            left: 10px;
+            right: 10px;
+            max-height: calc(100vh - 82px);
+            max-height: calc(100dvh - 82px);
+          }
+        }
+
         @media (prefers-reduced-motion: reduce) {
           .tsb-whatsapp-icon-button,
           .tsb-whatsapp-icon-button::after {
@@ -814,6 +898,7 @@ function Navbar() {
             onClick={toggleMobile}
             aria-label={navT("menu")}
             aria-expanded={mobileOpen}
+            aria-controls="tsb-mobile-navigation"
           >
             <span />
             <span />
@@ -823,7 +908,12 @@ function Navbar() {
       </div>
 
       {mobileOpen && (
-        <div className="tsb-mobile-menu">
+        <div
+          id="tsb-mobile-navigation"
+          className="tsb-mobile-menu"
+          role="navigation"
+          aria-label={navT("navigation")}
+        >
           <a href="/#top" onClick={closeMobile}>
             {navT("home")}
           </a>
