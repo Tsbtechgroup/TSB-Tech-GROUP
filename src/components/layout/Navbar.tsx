@@ -155,8 +155,18 @@ function Navbar() {
       return;
     }
 
+    const rootElement =
+      document.documentElement;
+    const bodyElement = document.body;
+
+    const previousRootOverflow =
+      rootElement.style.overflow;
+    const previousRootOverscroll =
+      rootElement.style.overscrollBehavior;
     const previousBodyOverflow =
-      document.body.style.overflow;
+      bodyElement.style.overflow;
+    const previousBodyOverscroll =
+      bodyElement.style.overscrollBehavior;
 
     const handleEscape = (
       event: KeyboardEvent
@@ -172,10 +182,38 @@ function Navbar() {
       }
     };
 
-    document.body.style.overflow = "hidden";
+    const preventBackgroundTouch = (
+      event: TouchEvent
+    ) => {
+      const menuElement =
+        document.getElementById(
+          "tsb-mobile-navigation"
+        );
+
+      if (
+        menuElement &&
+        !menuElement.contains(
+          event.target as Node
+        )
+      ) {
+        event.preventDefault();
+      }
+    };
+
+    rootElement.style.overflow = "hidden";
+    rootElement.style.overscrollBehavior =
+      "none";
+    bodyElement.style.overflow = "hidden";
+    bodyElement.style.overscrollBehavior =
+      "none";
     document.addEventListener(
       "keydown",
       handleEscape
+    );
+    document.addEventListener(
+      "touchmove",
+      preventBackgroundTouch,
+      { passive: false }
     );
     window.addEventListener(
       "resize",
@@ -183,11 +221,21 @@ function Navbar() {
     );
 
     return () => {
-      document.body.style.overflow =
+      rootElement.style.overflow =
+        previousRootOverflow;
+      rootElement.style.overscrollBehavior =
+        previousRootOverscroll;
+      bodyElement.style.overflow =
         previousBodyOverflow;
+      bodyElement.style.overscrollBehavior =
+        previousBodyOverscroll;
       document.removeEventListener(
         "keydown",
         handleEscape
+      );
+      document.removeEventListener(
+        "touchmove",
+        preventBackgroundTouch
       );
       window.removeEventListener(
         "resize",
@@ -583,6 +631,7 @@ function Navbar() {
             overflow-x: hidden;
             overflow-y: auto;
             overscroll-behavior: contain;
+            touch-action: pan-y;
             -webkit-overflow-scrolling: touch;
             padding-bottom: max(
               16px,
